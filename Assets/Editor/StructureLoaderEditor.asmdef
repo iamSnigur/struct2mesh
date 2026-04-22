@@ -1,0 +1,18 @@
+{
+    "name": "StructureLoaderEditor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:df7bcd00d4a859240b3496fadeea0416"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,66 @@
+{
+  "dynamic": {
+    "foliage": [
+      "minecraft:oak_leaves",
+      "minecraft:jungle_leaves",
+      "minecraft:acacia_leaves",
+      "minecraft:dark_oak_leaves",
+      "minecraft:mangrove_leaves",
+      "minecraft:vine",
+      "minecraft:oak_log",
+      "minecraft:jungle_log"
+    ],
+    "grass": [
+      "minecraft:grass_block",
+      "minecraft:grass",
+      "minecraft:tall_grass",
+      "minecraft:fern",
+      "minecraft:large_fern",
+      "minecraft:potted_fern",
+      "minecraft:sugar_cane"
+    ],
+    "water": [
+      "minecraft:water",
+      "minecraft:bubble_column",
+      "minecraft:kelp",
+      "minecraft:kelp_plant",
+      "minecraft:seagrass",
+      "minecraft:tall_seagrass"
+    ],
+    "redstone": [
+      "minecraft:redstone_wire"
+    ]
+  },
+  "fixed": {
+    "minecraft:birch_leaves":        [128, 167,  85],
+    "minecraft:spruce_leaves":       [ 97, 153,  97],
+    "minecraft:azalea_leaves":       [122, 165,  59],
+    "minecraft:flowering_azalea_leaves": [122, 165,  59],
+    "minecraft:cherry_leaves":       [255, 183, 195],
+
+    "minecraft:attached_melon_stem": [229, 144,  60],
+    "minecraft:attached_pumpkin_stem":[229, 144,  60],
+    "minecraft:melon_stem":          [229, 144,  60],
+    "minecraft:pumpkin_stem":        [229, 144,  60],
+
+    "minecraft:lily_pad":            [ 32, 128,  64],
+
+    "minecraft:mycelium":            [127, 127, 127],
+    "minecraft:soul_sand":           [ 80,  58,  45],
+    "minecraft:crimson_nylium":      [188,  62,  52],
+    "minecraft:warped_nylium":       [ 58, 148, 138],
+
+    "minecraft:dried_kelp_block":    [ 74,  78,  49],
+    "minecraft:moss_block":          [ 90, 119,  46],
+    "minecraft:moss_carpet":         [ 90, 119,  46],
+    "minecraft:sculk":               [ 14,  46,  50],
+
+    "minecraft:lava":                [232,  89,  23],
+
+    "minecraft:spawner":             [ 22,  55,  80],
+    "minecraft:trial_spawner":       [ 22,  55,  80],
+
+    "minecraft:nether_portal":       [100,   0, 200],
+    "minecraft:end_portal":          [ 10,  20,  30]
+  }
+}
