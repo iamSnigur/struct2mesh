@@ -35,9 +35,12 @@ public class BlockStatePaletteAdapter : BlockStatePalette
         _groupsRegistry[blockStateId].Add(newBlockState);
     }
 
-    public void ClearInjectedEntries() =>
+    public void ClearInjectedEntries()
+    {
+        _groupsRegistry.Clear();
         ClearEntries();
-    
+    }
+
     public void InjectEntries()
     {
         UnfreezeEntries();
