@@ -52,7 +52,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Build
-          path: artifacts
+          path: build
 
       #- name: Deploy to Cloudflare Pages
       #  uses: cloudflare/wrangler-action@v3
