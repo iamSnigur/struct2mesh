@@ -44,6 +44,7 @@ public class TextureExtractorTool : EditorWindow
         }
         finally
         {
+            AssetDatabase.SaveAssets();
             _isRunning = false;
         }
     }
@@ -114,6 +115,7 @@ public class TextureExtractorTool : EditorWindow
             Path.Combine(
                 Path.GetFullPath(Path.Combine(Application.dataPath, "..")),
                 savePath)));
+        
         
         Debug.Log("Textures extracted");
     }
@@ -205,18 +207,12 @@ public class TextureExtractorTool : EditorWindow
     // ── Post-import settings ─────────────────────────────────────────────────
     private void ApplyImportSettings(string absOutputRoot)
     {
-        // We need to iterate all imported PNGs and adjust their TextureImporter.
-        // Because AssetDatabase.Refresh() hasn't been called yet we build the
-        // asset paths manually.
         string projectRoot = Path.GetFullPath(
             Path.Combine(Application.dataPath, "..")) + Path.DirectorySeparatorChar;
  
         string[] files = Directory.GetFiles(absOutputRoot, "*.png",
             SearchOption.AllDirectories);
  
-        //Log($"Applying import settings to {files.Length} assets…");
- 
-        // We must refresh first so Unity knows about the new files
         AssetDatabase.Refresh();
 
         foreach (string f in files)
@@ -231,29 +227,37 @@ public class TextureExtractorTool : EditorWindow
  
             bool dirty = false;
  
-            // Sprite vs Default
             const TextureImporterType targetType = TextureImporterType.Sprite;
-            
+
             if (importer.textureType != targetType)
-            { importer.textureType = targetType; dirty = true; }
- 
-            // Point filter — Minecraft textures are pixel-art, so this is
-            // almost always what you want; user can change per-texture later.
+            {
+                importer.textureType = targetType;
+                dirty = true;
+            }
+
             if (importer.filterMode != FilterMode.Point)
-            { importer.filterMode = FilterMode.Point; dirty = true; }
- 
-            // Disable compression artifacts on small pixel-art textures
-            importer.textureCompression = TextureImporterCompression.Uncompressed;
+            {
+                importer.filterMode = FilterMode.Point;
+                dirty = true;
+            }
             
             importer.isReadable = true;
- 
+            TextureImporterPlatformSettings importerPlatformSettings = new()
+            {
+                maxTextureSize = 512,
+                format = TextureImporterFormat.RGBA32,
+                textureCompression = TextureImporterCompression.Uncompressed,
+                overridden = true
+            };
+
+            importer.SetPlatformTextureSettings(importerPlatformSettings);
+
+            
             if (dirty)
             {
                 importer.SaveAndReimport();
             }
         }
- 
-        //Log($"Import settings applied to {changed} texture(s).");
     }
     
     /// <summary>Returns the default OS-specific .minecraft versions folder.</summary>
