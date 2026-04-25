@@ -10,6 +10,7 @@
   <body style="overflow: hidden;">
     <div id="unity-container" style="width: 100%; height: 100%;">
       <canvas id="unity-canvas" width="auto" height="auto"></canvas>
+      <div id="unity-warning"></div>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -41,10 +42,7 @@
 
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}?v={{{ PRODUCT_VERSION }}}";
-      var config = {        
-        cacheControl: function (url) {
-          return "no-store";
-        },
+      var config = {
         dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}?v={{{ PRODUCT_VERSION }}}",
         frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}?v={{{ PRODUCT_VERSION }}}",
         codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}?v={{{ PRODUCT_VERSION }}}",
@@ -98,12 +96,19 @@
     <div id="uploadOverlay">
       <div id="uploadPanel">
         <div id="dropZone">
-          <div class="drop-content">
+          
+          <div id="dropContent" class="drop-content">
             <div class="main">📁 Drag & drop file here</div>
             <div class="sub">or click to browse</div>
           </div>
-        </div>
-        <div id="fileInfo"></div>
+
+          <div id="uploadContent">
+            <div id="progressContainer">
+              <div id="progressBar"></div>
+            </div>
+            <div id="fileInfo"></div>
+          </div>
+          
       </div>
     </div>
   </body>
