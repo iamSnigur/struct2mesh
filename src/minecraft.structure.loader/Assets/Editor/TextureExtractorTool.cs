@@ -4,7 +4,10 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.U2D;
 using UnityEngine;
+using UnityEngine.U2D;
+using Object = UnityEngine.Object;
 
 public class TextureExtractorTool : EditorWindow
 {
@@ -27,6 +30,9 @@ public class TextureExtractorTool : EditorWindow
         
         if (GUILayout.Button("Extract Json Models", GUILayout.Height(30))) 
             StartExtraction(ExtractModels);
+
+        if (GUILayout.Button("Pack Textures into Atlas", GUILayout.Height(30)))
+            BuildAtlas();
     }
 
     private void StartExtraction(Action extractorCallback)
@@ -225,7 +231,7 @@ public class TextureExtractorTool : EditorWindow
             if (importer is null)
                 continue;
  
-            bool dirty = false;
+            bool dirty = true;
  
             const TextureImporterType targetType = TextureImporterType.Sprite;
 
@@ -240,7 +246,8 @@ public class TextureExtractorTool : EditorWindow
                 importer.filterMode = FilterMode.Point;
                 dirty = true;
             }
-            
+
+            importer.spriteImportMode = SpriteImportMode.Single;
             importer.isReadable = true;
             TextureImporterPlatformSettings importerPlatformSettings = new()
             {
@@ -258,6 +265,54 @@ public class TextureExtractorTool : EditorWindow
                 importer.SaveAndReimport();
             }
         }
+    }
+
+    private static void BuildAtlas()
+    {
+        string folderPath = "Assets/Resources/vanilla/minecraft/textures/block";
+        string atlasPath = "Assets/Resources/vanilla/minecraft/textures/block_atlas.spriteatlas";
+
+        // Create atlas
+        SpriteAtlas atlas = new();
+
+        // Optional settings
+        SpriteAtlasPackingSettings packingSettings = new()
+        {
+            enableRotation = false,
+            enableTightPacking = false,
+            padding = 0
+        };
+        atlas.SetPackingSettings(packingSettings);
+
+        SpriteAtlasTextureSettings textureSettings = new()
+        {
+            readable = true,
+            generateMipMaps = false,
+            sRGB = true,
+            filterMode = FilterMode.Point,
+        };
+        atlas.SetTextureSettings(textureSettings);
+
+        // Get all textures in folder
+        string[] guids = AssetDatabase.FindAssets("t:Texture2D", new[] { folderPath });
+
+        Object[] textures = guids
+            .Select(guid => AssetDatabase.LoadAssetAtPath<Texture2D>(AssetDatabase.GUIDToAssetPath(guid)))
+            .Where(tex => tex is not null)
+            .Cast<Object>()
+            .ToArray();
+
+        // Add to atlas
+        atlas.Add(textures);
+
+        // Save atlas
+        AssetDatabase.CreateAsset(atlas, atlasPath);
+        AssetDatabase.SaveAssets();
+
+        // Force packing
+        SpriteAtlasUtility.PackAtlases(new[] { atlas }, EditorUserBuildSettings.activeBuildTarget);
+
+        Debug.Log($"Atlas created with {textures.Length} textures at {atlasPath}");
     }
     
     /// <summary>Returns the default OS-specific .minecraft versions folder.</summary>
