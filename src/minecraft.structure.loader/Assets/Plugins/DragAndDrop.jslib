@@ -71,7 +71,7 @@ mergeInto(LibraryManager.library, {
 
         const fakeInterval = setInterval(() => {
           if (fakeProgress < 90) {
-            fakeProgress += 0.6;
+            fakeProgress += 0.3;
             progressBar.style.width = fakeProgress + "%";
           }
         }, 30);
@@ -79,7 +79,7 @@ mergeInto(LibraryManager.library, {
         setTimeout(() => {
           minTimePassed = true;
           if (fileLoaded) finish();
-        }, 800);
+        }, 700);
 
         const finish = () => {
           clearInterval(fakeInterval);
@@ -90,7 +90,7 @@ mergeInto(LibraryManager.library, {
               window.unityInstance.SendMessage("FileReceiver", "OnFileLoaded", pendingPayload);
               pendingPayload = null;
             }
-          }, 100);
+          }, 50);
         }; 
 
         const reader = new FileReader();

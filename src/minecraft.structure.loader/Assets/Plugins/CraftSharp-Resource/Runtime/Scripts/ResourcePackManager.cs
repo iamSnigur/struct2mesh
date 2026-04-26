@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine.Assertions;
 
 namespace CraftSharp.Resource
@@ -96,6 +97,8 @@ namespace CraftSharp.Resource
 
         public static readonly ResourcePackManager Instance = new();
 
+        private readonly AtlasLoader AtlasLoader; 
+        
         private ResourcePackManager()
         {
             // Block model loaders
@@ -104,6 +107,8 @@ namespace CraftSharp.Resource
 
             // Item model loader
             ItemModelLoader = new ItemModelLoader(this);
+
+            AtlasLoader = new AtlasLoader();
         }
 
         public void AddPack(ResourcePack pack) => packs.Add(pack);
@@ -145,30 +150,19 @@ namespace CraftSharp.Resource
 
         public async UniTask LoadPacks_Mod(DataLoadFlag flag, Action<string, string> updateStatus, bool preloadEntityTextures = false)
         {
-            // Gather all textures and model files
             updateStatus("resource.info.gather_resource", string.Empty);
             foreach (var pack in packs) pack.GatherResources(this);
 
             var textureFlag = new DataLoadFlag();
-
-            // Generate texture atlas (on main thread)...
+            
             updateStatus("resource.info.create_texture", string.Empty);
-            await GenerateAtlas(textureFlag);
-            
-            /*Loom.QueueOnMainThread(() => {
-                Loom.Current.StartCoroutine(GenerateAtlas(textureFlag));
-            });
-            
-            while (!textureFlag.Finished) { Thread.Sleep(100); }*/
+            //await GenerateAtlas(textureFlag);
+            await LoadAtlas();
             
             // Load block models...
             updateStatus("resource.info.load_block_model", string.Empty);
-            foreach (var blockModelId in BlockModelFileTable.Keys)
-            {
-                // This model loader will load this model, its parent model(if not yet loaded),
-                // and then add them to the manager's model dictionary
+            foreach (var blockModelId in BlockModelFileTable.Keys) 
                 BlockModelLoader.LoadBlockModel(blockModelId);
-            }
 
             if (preloadEntityTextures)
             {
@@ -189,9 +183,10 @@ namespace CraftSharp.Resource
             flag.Finished = true;
 
             Loaded = true;
-
         }
-        
+
+#region ignore
+
         public void LoadPacks(DataLoadFlag flag, Action<string, string> updateStatus, bool loadParticles = false, bool preloadEntityTextures = false)
         {
             // Gather all textures and model files
@@ -400,138 +395,12 @@ namespace CraftSharp.Resource
                 progressUpdate(i++, numIds.Length);
             }
         }
-
-        /// <summary>
-        /// Build atlas and geometries for injected block states.
-        /// <br/>
-        /// This should be used for debugging purposes only, where actual block data is not present.
-        /// <br/>
-        /// Should be called from Unity thread.
-        /// </summary>
-        public void BuildAtlasAndGeometriesForInjectedBlockStates()
-        {
-            if (Loaded)
-            {
-                throw new InvalidOperationException("Dummy geometries cannot be built when actual data is loaded!");
-            }
-            
-            StateModelTable.Clear();
-
-            var palette = BlockStatePalette.INSTANCE;
-            
-            var elementObj = new Dictionary<string, object>
-            {
-                ["from"] = new[]{ 0, 0, 0 },
-                ["to"] = new[]{ 16, 16, 16 },
-                ["faces"] = new Dictionary<string, object>
-                {
-                    ["down"] = new Dictionary<string, object>
-                    {
-                        ["texture"] = "#all",
-                        ["cullface"] = "down",
-                    },
-                    ["up"] = new Dictionary<string, object>
-                    {
-                        ["texture"] = "#all",
-                        ["cullface"] = "up",
-                    },
-                    ["south"] = new Dictionary<string, object>
-                    {
-                        ["texture"] = "#all",
-                        ["cullface"] = "south",
-                    },
-                    ["north"] = new Dictionary<string, object>
-                    {
-                        ["texture"] = "#all",
-                        ["cullface"] = "north",
-                    },
-                    ["west"] = new Dictionary<string, object>
-                    {
-                        ["texture"] = "#all",
-                        ["cullface"] = "west",
-                    },
-                    ["east"] = new Dictionary<string, object>
-                    {
-                        ["texture"] = "#all",
-                        ["cullface"] = "east",
-                    }
-                }
-            };
-            var elementJsonData = Json.Object2JSONData(elementObj);
-            var blockModels = new Dictionary<int, JsonModel>();
-            var textureIdSet = new List<ResourceLocation>();
-            
-            // Create models for each injected block
-            foreach (var stateId in palette.GetAllNumIds())
-            {
-                var state = palette.GetByNumId(stateId);
-                
-                if (state.NoSolidMesh) continue;
-                
-                var blockModel = new JsonModel();
-                // Set texture path for each model
-                var textureId = new ResourceLocation(state.BlockId.Namespace, "block/" + state.BlockId.Path);
-                blockModel.Textures["all"] = new TextureReference(false, textureId.ToString());
-                blockModel.Textures["particle"] = new TextureReference(false, textureId.ToString());
-                
-                textureIdSet.Add(textureId);
-                blockModel.Elements.Add(JsonModelElement.FromJson(elementJsonData));
-                
-                blockModels.Add(stateId, blockModel);
-            }
-            
-            // Generate texture atlas for textures used by these model
-            var totalCount = 3 + blockModels.Count;
-            var atlasGenerationFlag = new DataLoadFlag();
-            var textureInfos = new (Texture2D, TextureAnimationInfo?)[totalCount];
-            var ids = new ResourceLocation[totalCount];
-
-            var count = 0;
-            
-            // Blank texture
-            ids[count] = BLANK_TEXTURE;
-            textureInfos[count] = (GetBlankTexture(), null);
-            count++;
-
-            // Empty texture
-            ids[count] = EMPTY_TEXTURE;
-            textureInfos[count] = (GetEmptyTexture(), null);
-            count++;
-
-            // Missing texture
-            ids[count] = ResourceLocation.INVALID;
-            textureInfos[count] = (GetMissingTexture(), null);
-            count++;
-
-            foreach (var textureId in textureIdSet) // Create texture files...
-            {
-                ids[count] = textureId;
-                Color32 solidColor = Color.HSVToRGB((count - 3) % 8 / 8F, 0.5F, 1);
-                textureInfos[count++] = (GetSolidTexture(solidColor), null);
-            }
-            
-            // Call GenerateAtlas_Internal directly as an IEnumerator instead of using it as a coroutine
-            var it = GenerateAtlas_Internal(atlasGenerationFlag, textureInfos, ids);
-            while (it.MoveNext());
-
-            // Build geometries from block models, and store them in state model table
-            foreach (var stateId in blockModels.Keys)
-            {
-                var state = palette.GetByNumId(stateId);
-                
-                var wrapper = new BlockModelWrapper(blockModels[stateId], int2.zero, false, state.BlockId);
-                var geometry = new BlockGeometryBuilder(wrapper).Build();
-
-                StateModelTable[stateId] = new BlockStateModel(new List<BlockGeometry> { geometry },
-                    RenderType.SOLID, OffsetType.NONE, ResourceLocation.INVALID);
-            }
-        }
         
         public Texture2D GetParticleAtlas()
         {
             return particleAtlas!;
         }
-
+#endregion
         private IEnumerator GenerateParticleAtlasAndBuildMeshes(DataLoadFlag atlasGenFlag)
         {
             ParticleMeshesTable.Clear(); // Clear previously loaded table...
@@ -618,7 +487,7 @@ namespace CraftSharp.Resource
 
             atlasGenFlag.Finished = true;
         }
-
+        
         private readonly Dictionary<ResourceLocation, TextureInfo> texAtlasTable = new();
 
         public float3[] GetParticleUVs(int stateId, Vector4 part)
@@ -635,7 +504,7 @@ namespace CraftSharp.Resource
             }
             return GetUVsAt(info.bounds, info.index, info.bounds.width, info.bounds.height, part, 0);
         }
-
+        
         /// <summary>
         /// Get texture uvs (x, y, depth in atlas array) and texture animation info (frame count, frame interval, frame size, frame per row)
         /// </summary>
@@ -672,7 +541,7 @@ namespace CraftSharp.Resource
                 _ => new[]{ new float3(       u1, oneV - v1, 0F) + o, new float3(       u2, oneV - v1, 0F) + o, new float3(       u1, oneV - v2, 0F) + o, new float3(       u2, oneV - v2, 0F) + o }  // Default
             };
         }
-
+        
         private TextureInfo GetTextureInfo(ResourceLocation identifier)
         {
             if (texAtlasTable.TryGetValue(identifier, out var info))
@@ -881,6 +750,21 @@ namespace CraftSharp.Resource
             return tex;
         }
 
+        private async UniTask LoadAtlas()
+        {
+            texAtlasTable.Clear();
+            AtlasTableHelper.LoadAtlasTable(texAtlasTable);
+            ResourceRequest request0 = Resources.LoadAsync<Texture2DArray>("vanilla/minecraft/textures/block_atlas");
+            ResourceRequest request1 = Resources.LoadAsync<Texture2DArray>("vanilla/minecraft/textures/block_atlas_mip");
+
+            await UniTask.WhenAll(request0.ToUniTask(), request1.ToUniTask());
+
+            atlasArrays[0] = request0.asset as Texture2DArray;
+            atlasArrays[1] = request1.asset as Texture2DArray;
+            //atlasArrays[0] = Resources.Load<Texture2DArray>("vanilla/minecraft/textures/block_atlas");
+            //atlasArrays[1] = Resources.Load<Texture2DArray>("vanilla/minecraft/textures/block_atlas_mip");
+        }
+        
         private async UniTask GenerateAtlas(DataLoadFlag atlasGenFlag)
         {
             var textureIdSet = new HashSet<ResourceLocation>();
@@ -1044,9 +928,9 @@ namespace CraftSharp.Resource
                     var curAnimInfo = textureInfos[curTexIndex + i].Item2;
                     
                     if (curAnimInfo is null)
-                        texAtlasTable.Add(ids[curTexIndex + i], new(rects[i], curAtlasIndex));
+                        texAtlasTable.Add(ids[curTexIndex + i], new TextureInfo(rects[i], curAtlasIndex));
                     else
-                        texAtlasTable.Add(ids[curTexIndex + i], new(rects[i], curAtlasIndex, curAnimInfo.frameCount,
+                        texAtlasTable.Add(ids[curTexIndex + i], new TextureInfo(rects[i], curAtlasIndex, curAnimInfo.frameCount,
                                 rects[i].width / curAnimInfo.framePerRow, curAnimInfo.framePerRow, curAnimInfo.interpolate, curAnimInfo.frameInterval));
                 }
 
@@ -1057,6 +941,9 @@ namespace CraftSharp.Resource
             }
             while (curTexIndex < totalCount);
 
+            // save table
+            
+            
             // mipCount 1 means no mipmapping, mipCount 0 means use maximum level of mipmaps
             // A mipCount of ((int) math.log2(MIN_MIPMAP_SIZE)) + 1 makes sure that all
             // MIN_MIPMAP_SIZE * MIN_MIPMAP_SIZE mipmap chunks are sampled from a single tile
@@ -1136,76 +1023,23 @@ namespace CraftSharp.Resource
             atlasArray0.Apply(false, false);
             atlasArray1.Apply(false, false);
 
+            AtlasTableHelper.SaveAtlasTable(texAtlasTable);
+            Save(atlasArray1, "Assets/Resources/vanilla/minecraft/textures/block_atlas.asset");
+            Save(atlasArray0, "Assets/Resources/vanilla/minecraft/textures/block_atlas_mip.asset");
+            
             atlasArrays[0] = atlasArray0;
             atlasArrays[1] = atlasArray1;
-
-            // Read biome colormaps from resource pack
-            /*if (TextureFileTable.TryGetValue(FOLIAGE_COLORMAP, out var path))
-            {
-                //Debug.Log($"Loading foliage colormap from {texDict[FOLIAGE_COLORMAP]}");
-                var mapTex = new Texture2D(2, 2);
-                mapTex.LoadImage(File.ReadAllBytes(path));
-                
-                World.ColormapSize = mapTex.width;
-                if (mapTex.height != World.ColormapSize)
-                    Debug.LogWarning($"Colormap size inconsistency: expected {World.ColormapSize}, got {mapTex.height}");
-
-                World.FoliageColormapPixels = mapTex.GetPixels32();
-            }
             
-            if (TextureFileTable.TryGetValue(GRASS_COLORMAP, out path))
-            {
-                //Debug.Log($"Loading grass colormap from {texDict[GRASS_COLORMAP]}");
-                var mapTex = new Texture2D(2, 2);
-                mapTex.LoadImage(File.ReadAllBytes(path));
-                
-                if (mapTex.width != World.ColormapSize)
-                    Debug.LogWarning($"Colormap size inconsistency: expected {World.ColormapSize}, got {mapTex.width}");
-                if (mapTex.height != World.ColormapSize)
-                    Debug.LogWarning($"Colormap size inconsistency: expected {World.ColormapSize}, got {mapTex.height}");
-
-                World.GrassColormapPixels = mapTex.GetPixels32();
-            }
-
-            if (TextureFileTable.TryGetValue(DESTROY_TEXTURES[0], out var texPath))
-            {
-                var texture = new Texture2D(2, 2);
-                texture.LoadImage(File.ReadAllBytes(texPath));
-
-                // mipCount 0 means maximum mip level, mipCount 1 means no mipmap
-                var textureArray = new Texture2DArray(texture.width, texture.height,
-                    DESTROY_TEXTURES.Length, TextureFormat.RGBA32, 1, false)
-                {
-                    filterMode = FilterMode.Point
-                };
-                textureArray.SetPixels32(texture.GetPixels32(), 0, 0);
-
-                for (int i = 1; i < DESTROY_TEXTURES.Length; i++)
-                {
-                    if (TextureFileTable.TryGetValue(DESTROY_TEXTURES[i], out texPath))
-                    {
-                        texture.LoadImage(File.ReadAllBytes(texPath));
-                        textureArray.SetPixels32(texture.GetPixels32(), i, 0);
-                    }
-                    else
-                    {
-                        Debug.LogWarning($"Destroy texture {i} is not present!");
-                        break;
-                    }
-                }
-
-                textureArray.Apply(false, false);
-                
-                destroyTextureArray = textureArray;
-            }
-            else
-            {
-                Debug.LogWarning("Destroy texture 0 is not present!");
-            }*/
-
             atlasGenFlag.Finished = true;
         }
 
+        private static void Save(Texture2DArray array, string path)
+        {
+            /*AssetDatabase.CreateAsset(array, path);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();*/
+        }
+        
         /// <summary>
         /// Preload any texture whose id starts with "entity" into the entity texture table.
         /// </summary>

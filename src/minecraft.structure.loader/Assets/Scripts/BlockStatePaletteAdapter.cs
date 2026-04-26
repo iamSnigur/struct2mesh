@@ -37,8 +37,8 @@ public class BlockStatePaletteAdapter : BlockStatePalette
 
     public void ClearInjectedEntries()
     {
-        _groupsRegistry.Clear();
         ClearEntries();
+        _groupsRegistry.Clear();
     }
 
     public void InjectEntries()
@@ -51,7 +51,7 @@ public class BlockStatePaletteAdapter : BlockStatePalette
         {
             int groupId = stateId;
 
-            Dictionary<int, BlockState> blockStates = group.Value.ToDictionary(state => stateId++);
+            Dictionary<int, BlockState> blockStates = group.Value.ToDictionary(_ => stateId++);
 
             AddEntry(new ResourceLocation(group.Key), groupId, blockStates);
         }

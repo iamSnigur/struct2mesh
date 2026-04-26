@@ -20,14 +20,20 @@ public class NbtReader : MonoBehaviour
     {
         while (!AssetProvider.Loaded)
             yield return null;
-        
+
+        LoadNbtStructure();
+    }
+#endif
+
+    [ContextMenu("LoadNbtStructure")]
+    public void LoadNbtStructure()
+    {
         NbtFile nbtFile = new();
         nbtFile.LoadFromFile(StructureNbtFilePath);
 
         LoadStructure(nbtFile);
     }
-#endif
-
+    
     public void LoadStructure(NbtFile nbtFile)
     {
         if (!IsFileNbtStructure(nbtFile))

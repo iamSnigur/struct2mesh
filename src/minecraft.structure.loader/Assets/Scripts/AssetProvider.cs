@@ -12,26 +12,25 @@ public static class AssetProvider
     private static ResourcePackManager _resourcePackManager;
     private static BlockStateLoader _blockStateLoader;
     private static World _world;
-    
+
     public static bool Loaded { get; private set; }
-    
+
     public static async UniTaskVoid Init()
     {
-        if (Loaded) 
+        if (Loaded)
             return;
-        
+
         _world = new World();
         _resourcePackManager = ResourcePackManager.Instance;
         _blockStateLoader = new BlockStateLoader(_resourcePackManager);
 
-        GatherResources(_resourcePackManager);
-
+        await GatherResources(_resourcePackManager);
         await PreloadResources();
     }
 
     private static void UpdateStatus(string status, string progress) =>
-        Debug.Log($"<color=yellow>{status}: {progress}</color>");
-    
+        Debug.Log($"{status}: {progress}");
+
     private static async UniTask PreloadResources()
     {
         try
@@ -45,8 +44,8 @@ public static class AssetProvider
         finally
         {
             Loaded = true;
-            Debug.Log("<color=green>Resources Loaded</color>");
-        }        
+        }
+
     }
 
     public static GameObject LoadModel(string blockStateId, Dictionary<string, string> prop)
@@ -59,12 +58,12 @@ public static class AssetProvider
 
         _blockStateLoader
             .LoadBlockStateModel(location, blockstateJson, renderType, offsetType);
-        
+
         BlockState[] blockStates = BlockStatePaletteAdapter.Instance.GetAll(location);
         BlockStatePredicate predicate = new(prop);
 
         BlockState currentState = blockStates[0];
-        
+
         foreach (BlockState state in blockStates)
         {
             if (predicate.Check(state))
@@ -83,37 +82,37 @@ public static class AssetProvider
     private static void LoadTextures(ResourcePackManager manager, string packPath, string subFolder)
     {
         string path = $"{packPath}/{subFolder}";
-        
+
         foreach (Texture2D texture in Resources.LoadAll<Texture2D>(path))
         {
             ResourceLocation identifier = new(subFolder + '/' + texture.name);
             manager.TextureFileTable[identifier] = path + '/' + texture.name;
         }
     }
-    
+
     private static void LoadModels(ResourcePackManager manager, string packPath, string subFolder)
     {
         string path = $"{packPath}/{subFolder}";
-        
+
         foreach (TextAsset json in Resources.LoadAll<TextAsset>(path))
         {
             ResourceLocation identifier = new(subFolder + '/' + json.name);
             manager.BlockModelFileTable[identifier] = path + '/' + json.name;
         }
     }
-    
+
     private static void LoadBlockstates(ResourcePackManager manager, string packPath, string subFolder)
     {
         string path = $"{packPath}/{subFolder}";
-        
+
         foreach (TextAsset json in Resources.LoadAll<TextAsset>(path))
         {
             ResourceLocation identifier = new(json.name);
             manager.BlockStateFileTable[identifier] = path + json.name;
         }
     }
-    
-    private static void GatherResources(ResourcePackManager manager)
+
+    private static async UniTask GatherResources(ResourcePackManager manager)
     {
         string texturesPath = "vanilla/minecraft/textures";
         LoadTextures(manager, texturesPath, "block");
@@ -121,9 +120,11 @@ public static class AssetProvider
 
         string modelsPath = "vanilla/minecraft/models";
         LoadModels(manager, modelsPath, "block");
-        
+
         string blockstatesPath = "vanilla/minecraft/blockstates";
         LoadBlockstates(manager, blockstatesPath, "");
+
+        await Resources.UnloadUnusedAssets().ToUniTask();
     }
 
     public static void UpdateBlockStatePalette(List<NbtReader.PaletteEntry> structurePalette)
@@ -133,13 +134,16 @@ public static class AssetProvider
             BlockStatePaletteAdapter.Instance
                 .RegisterBlockState(paletteEntry.Name, paletteEntry.Properties);
         }
-        
+
         BlockStatePaletteAdapter.Instance.InjectEntries();
     }
 
     public static void UpdateColorRules(TextAsset colorRules) =>
         BlockStatePaletteAdapter.Instance.UpdateColorRules(colorRules);
-
-    public static void ClearBlockStatePalette() =>
+    
+    public static void ClearBlockStatePalette()
+    {
+        _resourcePackManager.StateModelTable.Clear();
         BlockStatePaletteAdapter.Instance.ClearInjectedEntries();
+    }
 }

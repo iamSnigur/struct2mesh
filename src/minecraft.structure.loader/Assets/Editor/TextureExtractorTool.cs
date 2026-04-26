@@ -248,12 +248,12 @@ public class TextureExtractorTool : EditorWindow
             }
 
             importer.spriteImportMode = SpriteImportMode.Single;
-            importer.isReadable = true;
+            importer.isReadable = false;
             TextureImporterPlatformSettings importerPlatformSettings = new()
             {
                 maxTextureSize = 512,
                 format = TextureImporterFormat.RGBA32,
-                textureCompression = TextureImporterCompression.Uncompressed,
+                textureCompression = TextureImporterCompression.CompressedHQ,
                 overridden = true
             };
 

@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace CraftSharp.Resource
 {
+    [Serializable]
     public struct TextureInfo
     {
         public Rect bounds;

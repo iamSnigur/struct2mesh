@@ -2,7 +2,12 @@
     "name": "StructureLoaderEditor",
     "rootNamespace": "",
     "references": [
-        "GUID:df7bcd00d4a859240b3496fadeea0416"
+        "GUID:df7bcd00d4a859240b3496fadeea0416",
+        "GUID:4129704b5a1a13841ba16f230bf24a57",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:9b1c7c27e7709524ba61724f46a1ae53",
+        "GUID:35221d0dd57f3f043a31179a0855b5d1",
+        "GUID:d8b63aba1907145bea998dd612889d6b"
     ],
     "includePlatforms": [
         "Editor"
