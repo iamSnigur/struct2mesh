@@ -48,7 +48,7 @@ public static class AssetProvider
 
     }
 
-    public static GameObject LoadModel(string blockStateId, Dictionary<string, string> prop)
+    public static GameObject LoadModel(string blockStateId, Dictionary<string, string> prop, byte cullFlags)
     {
         ResourceLocation location = new(blockStateId);
         string blockstateJson = _resourcePackManager.BlockStateFileTable[location];
@@ -74,7 +74,7 @@ public static class AssetProvider
         }
 
         GameObject gameObject = new(currentState.ToString());
-        BlockMeshBuilder.BuildBlockGameObject(gameObject, currentState, _world);
+        BlockMeshBuilder.BuildBlockGameObject(gameObject, currentState, cullFlags, _world);
 
         return gameObject;
     }

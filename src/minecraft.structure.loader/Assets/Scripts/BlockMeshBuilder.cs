@@ -44,7 +44,7 @@ public static class BlockMeshBuilder
     /// <summary>
     /// Build item object from item stack. Returns true if item is not empty and successfully built
     /// </summary>
-    public static void BuildBlockGameObject(GameObject modelObject, BlockState blockState, World world)
+    public static void BuildBlockGameObject(GameObject modelObject, BlockState blockState, byte cullFlags, World world)
     {
         ClearBlockVisual(modelObject);
             
@@ -75,8 +75,8 @@ public static class BlockMeshBuilder
         
         int color = BlockStatePaletteAdapter.Instance.GetBlockColor(stateId, world, BlockLoc.Zero);
         int waterColor = world.GetWaterColor(BlockLoc.Zero);
-            
-        Mesh mesh = BuildBlockMesh_Internal(blockState, blockGeometry, float3.zero, 0b111111, color, waterColor, 0, true);
+
+        Mesh mesh = BuildBlockMesh_Internal(blockState, blockGeometry, float3.zero, cullFlags, color, waterColor, 0, true);
             
         meshFilter.sharedMesh = mesh;
 

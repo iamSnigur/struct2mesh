@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using CraftSharp;
 using UnityEngine;
 using fNbt;
 
@@ -7,12 +8,14 @@ public class NbtReader : MonoBehaviour
 {
     public string StructureNbtFilePath;
     public TextAsset ColorRules;
-
+    
     private GameObject _parent;
+    private StructureVolume _structureVolume;
     
     private void Awake()
     {
         _parent = new GameObject("Structure");
+        _structureVolume = new StructureVolume();
     }
 
 #if UNITY_EDITOR
@@ -42,8 +45,9 @@ public class NbtReader : MonoBehaviour
             return;
         }
 
-        AssetProvider.ClearBlockStatePalette();
         Structure structure = ParseNbtStructure(nbtFile);
+        UpdateStructureVolume(structure);
+        AssetProvider.ClearBlockStatePalette();
         AssetProvider.UpdateBlockStatePalette(structure.Palette);
         AssetProvider.UpdateColorRules(ColorRules);
         Construct(structure);
@@ -63,6 +67,77 @@ public class NbtReader : MonoBehaviour
         return structure;
     }
 
+    private class StructureVolume
+    {
+        private const byte CULL_NONE = 0b111111;
+        private const byte CULL_UP = 0b111110;
+        private const byte CULL_DOWN = 0b111101;
+        private const byte CULL_FORWARD = 0b101111;
+        private const byte CULL_BACK = 0b011111;
+        private const byte CULL_LEFT = 0b110111;
+        private const byte CULL_RIGHT = 0b111011;
+        
+        private readonly Dictionary<Vector3, string> _volumeData = new();
+
+        public string this[Vector3 index]
+        {
+            get => _volumeData[index];
+            set => _volumeData[index] = value;
+        }
+
+        public void Reset() => 
+            _volumeData.Clear();
+
+        public byte GetCullFlagsFor(Vector3 pos)
+        {
+            if (!IsBlockSolidAt(pos))
+                return CULL_NONE;
+            
+            byte cullFlags = CULL_NONE;
+
+            if (IsBlockSolidAt(pos.Up()))
+                cullFlags &= CULL_UP;
+            
+            if (IsBlockSolidAt(pos.Down()))
+                cullFlags &= CULL_DOWN;
+            
+            if (IsBlockSolidAt(pos.Left()))
+                cullFlags &= CULL_LEFT;
+            
+            if (IsBlockSolidAt(pos.Right()))
+                cullFlags &= CULL_RIGHT;
+            
+            if (IsBlockSolidAt(pos.Forward()))
+                cullFlags &= CULL_FORWARD;
+            
+            if (IsBlockSolidAt(pos.Back()))
+                cullFlags &= CULL_BACK;
+            
+            return cullFlags;
+        }
+
+        private bool IsBlockSolidAt(Vector3 pos)
+        {
+            if (!_volumeData.TryGetValue(pos, out string blockStateId))
+                return false;
+
+            RenderType renderType = BlockStateHelper.GetRenderTypeFor(blockStateId);
+            
+            if (renderType is not RenderType.SOLID)
+                return false;
+            
+            return !BlockStateHelper.IsSemiSolid(blockStateId);
+        }
+    }
+
+    private void UpdateStructureVolume(Structure structure)
+    {
+        _structureVolume.Reset();
+        
+        foreach (Block block in structure.Blocks) 
+            _structureVolume[block.Pos] = structure.Palette[block.State].Name;
+    }
+    
     private List<Block> ParseNbtBlocks(NbtList blocksTagList)
     {
         List<Block> blocks = new List<Block>();
@@ -145,7 +220,9 @@ public class NbtReader : MonoBehaviour
             if (paletteEntry.Name.Equals("air"))
                 continue;
 
-            GameObject blockView = AssetProvider.LoadModel(paletteEntry.Name, paletteEntry.Properties);
+            byte cullFlags = _structureVolume.GetCullFlagsFor(block.Pos);
+            
+            GameObject blockView = AssetProvider.LoadModel(paletteEntry.Name, paletteEntry.Properties, cullFlags);
             Transform cachedTransform = blockView.transform;
             cachedTransform.parent = _parent.transform;
             cachedTransform.position = block.Pos;
