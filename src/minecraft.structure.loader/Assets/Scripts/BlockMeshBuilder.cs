@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using System.Linq;
 using CraftSharp;
 using CraftSharp.Resource;
@@ -6,12 +7,13 @@ using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Object = UnityEngine.Object;
 
 public static class BlockMeshBuilder
 {
     private static readonly Mesh EMPTY_BLOCK_MESH = new();
         
-    private static readonly byte[] FULL_CORNER_LIGHTS = Enumerable.Repeat((byte) 15, 8).ToArray();
+    private static readonly byte[] FULL_CORNER_LIGHTS = Enumerable.Repeat((byte) 8, 8).ToArray();
     private static readonly float[] FULL_LIQUID_HEIGHTS = { 1F, 1F, 1F, 1F };
         
     private static readonly LegacyRandomSource randomSource = new(0L);
@@ -44,7 +46,7 @@ public static class BlockMeshBuilder
     /// <summary>
     /// Build item object from item stack. Returns true if item is not empty and successfully built
     /// </summary>
-    public static void BuildBlockGameObject(GameObject modelObject, BlockState blockState, byte cullFlags, World world)
+    public static void BuildBlockGameObject(GameObject modelObject, BlockState blockState, Vector3 pos, byte cullFlags, World world)
     {
         ClearBlockVisual(modelObject);
             
@@ -76,7 +78,7 @@ public static class BlockMeshBuilder
         int color = BlockStatePaletteAdapter.Instance.GetBlockColor(stateId, world, BlockLoc.Zero);
         int waterColor = world.GetWaterColor(BlockLoc.Zero);
 
-        Mesh mesh = BuildBlockMesh_Internal(blockState, blockGeometry, float3.zero, cullFlags, color, waterColor, 0, true);
+        Mesh mesh = BuildBlockMesh_Internal(blockState, blockGeometry, pos,float3.zero, cullFlags, color, waterColor, 0, true);
             
         meshFilter.sharedMesh = mesh;
 
@@ -91,40 +93,32 @@ public static class BlockMeshBuilder
             meshRenderer.sharedMaterial = s_materialManager.GetAtlasMaterial(stateModel.RenderType);
         }
     }
-
-    /// <summary>
-    /// Build block mesh.
-    /// </summary>
-    public static (Mesh, RenderType) BuildBlockMesh(BlockState blockState, float3 posOffset, long randomSeed, int cullFlags, int colorInt, byte blockLight, int waterColorInt, bool includeLiquidMesh)
-    {
-        var packManager = ResourcePackManager.Instance;
-        var stateId = BlockStatePalette.INSTANCE.GetNumIdByObject(blockState);
-
-        packManager.StateModelTable.TryGetValue(stateId, out var stateModel);
-
-        if (stateModel is null) return (EMPTY_BLOCK_MESH, RenderType.SOLID);
-
-        // Get and build chosen variant
-        var models = stateModel.Geometries;
-        randomSource.SetSeed(randomSeed);
-        var chosen = ModuloUtil.Modulo(Mathf.Abs((int) randomSource.NextLong()), models.Length);
-        var blockGeometry = models[chosen];
-
-        var mesh = BuildBlockMesh_Internal(blockState, blockGeometry, posOffset, cullFlags, colorInt, waterColorInt, blockLight, includeLiquidMesh);
-
-        return (mesh, stateModel.RenderType);
-    }
         
-    private static Mesh BuildBlockMesh_Internal(BlockState state, BlockGeometry geometry, float3 posOffset, int cullFlags, int colorInt, int waterColorInt, byte blockLight, bool includeLiquidMesh)
+    private static Mesh BuildBlockMesh_Internal(BlockState state, BlockGeometry geometry, Vector3 blockPos, float3 posOffset, int cullFlags, int colorInt, int waterColorInt, byte blockLight, bool includeLiquidMesh)
     {
-        var vertexCount = geometry.GetVertexCount(cullFlags);
-        var fluidVertexCount = 0;
+        int vertexCount = geometry.GetVertexCount(cullFlags);
+        int fluidVertexCount = 0;
+        int layerMask = 0;
+        
+        if (state.InLiquid) // Build liquid here
+        {
+            var liquidNeighborCheck = state.InWater ? BlockNeighborChecks.WATER_SURFACE : BlockNeighborChecks.LAVA_SURFACE;
+            var liquidCullFlags = cullFlags;//getCullFlags(x, y, z, state, liquidNeighborCheck);
 
-        if (includeLiquidMesh && state.InLiquid)
+            if (liquidCullFlags != 0)
+            {
+                var liquidLayerIndex = state.InWater ? WATER_LAYER_INDEX : LAVA_LAYER_INDEX;
+                fluidVertexCount = FluidGeometry.GetVertexCount(liquidCullFlags);
+                vertexCount += fluidVertexCount;
+                layerMask |= 1 << liquidLayerIndex;
+            }
+        }
+        
+        /*if (includeLiquidMesh && state.InLiquid)
         {
             fluidVertexCount = FluidGeometry.GetVertexCount(cullFlags);
             vertexCount += fluidVertexCount;
-        }
+        }*/
             
         // Make and set mesh...
         var visualBuffer = new VertexBuffer(vertexCount);
@@ -132,7 +126,103 @@ public static class BlockMeshBuilder
         uint vertexOffset = 0;
         var blockVertLight = Enumerable.Repeat(blockLight, 8).ToArray();
 
-        if (includeLiquidMesh)
+        if (state.InLiquid) // Build liquid here
+        {
+            BlockNeighborCheck? liquidNeighborCheck = state.InWater ? BlockNeighborChecks.WATER_SURFACE : BlockNeighborChecks.LAVA_SURFACE;
+            int liquidCullFlags = getCullFlags((int)blockPos.x, (int)blockPos.y, (int)blockPos.z, state, liquidNeighborCheck);
+
+            if (liquidCullFlags != 0)
+            {
+                Span<float> liquidHeights = stackalloc float[4];
+                getLiquidCornerHeights(state, blockPos, liquidHeights);
+
+                int liquidLayerIndex = state.InWater ? WATER_LAYER_INDEX : LAVA_LAYER_INDEX;
+                ResourceLocation liquidTextureStill = FluidGeometry.LiquidTextures[state.InWater ? 0 : 1];
+                ResourceLocation liquidTextureFlow  = FluidGeometry.LiquidTextures[state.InWater ? 2 : 3];
+
+                colorInt = state.InWater ? waterColorInt : 0xFFFFFF;
+
+                FluidGeometry.Build(visualBuffer, ref vertexOffset, float3.zero,
+                    liquidTextureStill, liquidTextureFlow, liquidHeights, liquidCullFlags, blockVertLight, colorInt);
+                
+                /*FluidGeometry.Build(visualBuffer[liquidLayerIndex], ref vertOffset[liquidLayerIndex], new float3(blocZ, blocY, blocX),
+                    liquidTextureStill, liquidTextureFlow, liquidHeights, liquidCullFlags, lights, colorInt);*/
+            }
+        }
+        
+        int getCullFlags(int x, int y, int z, BlockState self, BlockNeighborCheck check)
+        {
+            var cullFlags = 0;
+
+            if (check(self, NbtReader.StructureVolume[x, y + 1, z], Direction.Up)) // Up
+                cullFlags |= 1 << 0;
+
+            if (check(self, NbtReader.StructureVolume[x, y - 1, z], Direction.Down)) // Down
+                cullFlags |= 1 << 1;
+                    
+            if (check(self, NbtReader.StructureVolume[x + 1, y, z], Direction.South)) // South
+                cullFlags |= 1 << 2;
+
+            if (check(self, NbtReader.StructureVolume[x - 1, y, z], Direction.North)) // North
+                cullFlags |= 1 << 3;
+                    
+            if (check(self, NbtReader.StructureVolume[x, y, z + 1], Direction.East)) // East
+                cullFlags |= 1 << 4;
+
+            if (check(self, NbtReader.StructureVolume[x, y, z - 1], Direction.West)) // West
+                cullFlags |= 1 << 5;
+                    
+            return cullFlags;
+        }
+        
+        void getLiquidCornerHeights(BlockState self, Vector3 pos, Span<float> heights)
+        {
+            heights[0] = getLiquidCornerHeight(self, pos, -1, 0);  // NE
+            heights[1] = getLiquidCornerHeight(self, pos, 0, 0);   // SE
+            heights[2] = getLiquidCornerHeight(self, pos, -1, -1); // NW
+            heights[3] = getLiquidCornerHeight(self, pos, 0, -1);  // SW
+        }
+
+        float getLiquidCornerHeight(BlockState self, Vector3 pos, int offsetX, int offsetZ)
+        {
+            for (var ox = offsetX; ox <= offsetX + 1; ox++)
+                for (var oz = offsetZ; oz <= offsetZ + 1; oz++)
+                    if (IsSameLiquid(self, NbtReader.StructureVolume[pos + new Vector3(ox, 1f, oz)]))
+                        return 1f;
+
+            float sumHeight = 0F;
+            int count = 0;
+
+            for (var ox = offsetX; ox <= offsetX + 1; ox++)
+                for (var oz = offsetZ; oz <= offsetZ + 1; oz++)
+                {
+                    BlockState? neighbor = NbtReader.StructureVolume[pos + new Vector3(ox, 0f, oz)];
+
+                    if (IsSameLiquid(self, neighbor))
+                    {
+                        var level = neighbor.LiquidLevel;
+                        if (level == 0) return 14F / 16F;
+
+                        sumHeight += GetLiquidBaseHeight(level);
+                        count++;
+                    }
+                    else if (!isLiquidBlockingBlock(neighbor))
+                    {
+                        count++;
+                    }
+                }
+
+            if (sumHeight == 0F || count == 0) return 3F / 16F;
+
+            return sumHeight / count;
+        }
+        
+        bool isLiquidBlockingBlock(BlockState state)
+        {
+            return state is { FullShape: true, NoCollision: false };
+        }
+        
+        /*if (includeLiquidMesh)
         {
             if (state.InWater)
             {
@@ -142,7 +232,7 @@ public static class BlockMeshBuilder
             else if (state.IsLava)
                 FluidGeometry.Build(visualBuffer, ref vertexOffset, float3.zero, FluidGeometry.LiquidTextures[1], FluidGeometry.LiquidTextures[3], FULL_LIQUID_HEIGHTS,
                     cullFlags, blockVertLight, 0xFFFFFF);
-        }
+        }*/
 
         geometry.Build(visualBuffer, ref vertexOffset, posOffset, cullFlags, 0, 0F, blockVertLight, colorInt);
 
@@ -192,7 +282,7 @@ public static class BlockMeshBuilder
 
         var bounds = new Bounds(new Vector3(0.5F, 0.5F, 0.5F), new Vector3(1F, 1F, 1F));
 
-        if (includeLiquidMesh && state.IsLiquid)
+        if (includeLiquidMesh && state.InLiquid && !state.IsLava)
         {
             var fluidTriIdxCount = fluidVertexCount / 2 * 3;
 
@@ -226,6 +316,23 @@ public static class BlockMeshBuilder
 
         return mesh;
     }
+    
+    private static bool IsSameLiquid(BlockState self, BlockState neighbor)
+    {
+        if (!self.InLiquid || !neighbor.InLiquid) return false;
+        if (self.InWater) return neighbor.InWater;
+        if (self.IsLava) return neighbor.IsLava;
+
+        return self.FluidStateId == neighbor.FluidStateId;
+    }
+    
+    private static float GetLiquidBaseHeight(byte level)
+    {
+        return level >= 8 ? 1F : (14F - level * 1.9F) / 16F;
+    }
+
+    private const int LAVA_LAYER_INDEX = 1;
+    private const int WATER_LAYER_INDEX = 0;
 
     /// <summary>
     /// Build break block mesh.

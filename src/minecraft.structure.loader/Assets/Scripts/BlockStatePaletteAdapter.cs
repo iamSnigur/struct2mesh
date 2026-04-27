@@ -14,6 +14,14 @@ public class BlockStatePaletteAdapter : BlockStatePalette
     private readonly Dictionary<int, Func<World, BlockLoc, BlockState, int>> _blockColorRules = new();
     private const int ORIGINAL_BLOCK_COLOR = 0x00FFFFFF;
 
+    public void RegisterBlockState(string blockStateId, BlockState state)
+    {
+        if (!_groupsRegistry.TryGetValue(blockStateId, out _))
+            _groupsRegistry[blockStateId] = new List<BlockState>();
+
+        _groupsRegistry[blockStateId].Add(state);
+    }
+    
     public void RegisterBlockState(string blockStateId, Dictionary<string, string> properties)
     {
         ResourceLocation? fluidState = blockStateId switch
