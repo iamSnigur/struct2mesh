@@ -16,6 +16,13 @@ public class BlockStatePaletteAdapter : BlockStatePalette
 
     public void RegisterBlockState(string blockStateId, Dictionary<string, string> properties)
     {
+        ResourceLocation? fluidState = blockStateId switch
+        {
+            "water" => BlockState.WATER_ID,
+            "lava" => BlockState.LAVA_ID,
+            _ => null
+        };
+
         BlockState newBlockState = new(
             new ResourceLocation(blockStateId),
             1,
@@ -26,7 +33,7 @@ public class BlockStatePaletteAdapter : BlockStatePalette
             false,
             15,
             0,
-            null,
+            fluidState,
             properties);
 
         if (!_groupsRegistry.TryGetValue(blockStateId, out _))

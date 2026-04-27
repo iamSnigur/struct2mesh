@@ -66,12 +66,12 @@ public class TextureExtractorTool : EditorWindow
  
         using (ZipArchive zip = ZipFile.OpenRead(jarPath))
         {
-            List<ZipArchiveEntry> pngEntries = 
+            List<ZipArchiveEntry> texturesInfos = 
                 zip.Entries
-                .Where(archiveEntry => IsAssetTexture(archiveEntry, filter))
+                .Where(archiveEntry => IsAssetTexture(archiveEntry, filter) || IsAssetMcMeta(archiveEntry, filter))
                 .ToList();
  
-            if (pngEntries.Count == 0)
+            if (texturesInfos.Count == 0)
             {
                 Debug.Log("Nothing to export. Check your JAR path filter.");
                 return;
@@ -84,20 +84,19 @@ public class TextureExtractorTool : EditorWindow
             string absOutputRoot = Path.GetFullPath(
                 Path.Combine(projectRoot, savePath));
 
-            foreach (var entry in pngEntries)
+            foreach (ZipArchiveEntry entry in texturesInfos)
             {
                 // Build destination path: strip the filter prefix so the Unity
                 // folder mirrors whatever remains of the JAR path.
-                string relativePath = entry.FullName.Replace('\\', '/');
-                if (!string.IsNullOrEmpty(filter) &&
-                    relativePath.ToLowerInvariant().StartsWith(filter))
-                    relativePath = relativePath.Substring(filter.Length);
+                string relativePath = entry.FullName.Replace('\\', '/').Replace(".mcmeta", ".json");
+                
+                if (!string.IsNullOrEmpty(filter) && relativePath.ToLowerInvariant().StartsWith(filter))
+                    relativePath = relativePath[filter.Length..];
  
                 // Safety: strip any leading slashes
                 relativePath = relativePath.TrimStart('/', '\\');
  
-                string destPath = Path.Combine(absOutputRoot, 
-                    relativePath.Replace('/', Path.DirectorySeparatorChar));
+                string destPath = Path.Combine(absOutputRoot, relativePath.Replace('/', Path.DirectorySeparatorChar));
  
                 /*// Skip if exists and not overwriting
                 if (!_overwriteExisting && File.Exists(destPath))
@@ -201,6 +200,15 @@ public class TextureExtractorTool : EditorWindow
                        .StartsWith(filter));
     }
     
+    private static bool IsAssetMcMeta(ZipArchiveEntry e, string filter)
+    {
+        return e.FullName.EndsWith(".mcmeta", StringComparison.OrdinalIgnoreCase)
+               && (string.IsNullOrEmpty(filter)
+                   || e.FullName.Replace('\\', '/')
+                       .ToLowerInvariant()
+                       .StartsWith(filter));
+    }
+    
     private static bool IsAssetJsonModel(ZipArchiveEntry e, string filter)
     {
         return e.FullName.EndsWith(".json", StringComparison.OrdinalIgnoreCase)
@@ -248,7 +256,7 @@ public class TextureExtractorTool : EditorWindow
             }
 
             importer.spriteImportMode = SpriteImportMode.Single;
-            importer.isReadable = false;
+            importer.isReadable = true;
             TextureImporterPlatformSettings importerPlatformSettings = new()
             {
                 maxTextureSize = 512,

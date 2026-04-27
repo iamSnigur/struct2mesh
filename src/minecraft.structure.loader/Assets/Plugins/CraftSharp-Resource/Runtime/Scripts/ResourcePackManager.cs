@@ -581,11 +581,63 @@ namespace CraftSharp.Resource
         private static (Texture2D, TextureAnimationInfo?) LoadSingleTexture_Mod(string texFilePath)
         {
             Texture2D tex = Resources.Load<Texture2D>(texFilePath);
+            TextAsset metaAsset = Resources.Load<TextAsset>($"{texFilePath}.png");
             
-            if (!tex.isReadable)
-                Debug.Log(tex.name);
+            if (metaAsset is null) 
+                return (tex, null);
             
-            return (tex, null);
+            int spriteCount = tex.height / tex.width;
+
+            Json.JSONData? metaJson = Json.ParseJson(metaAsset.text);
+
+            if (!metaJson.Properties.TryGetValue("animation", out var animJson))
+                return (tex, null);
+
+            int[] frames;
+                
+            if (animJson.Properties.TryGetValue("frames", out var frameArray)) // Place the frames in specified order
+            {
+                frames = frameArray.DataArray.Select(x => int.Parse(x.StringValue)).ToArray();
+            }
+            else // Place the frames in ordinal order, from top to bottom
+            {
+                frames = Enumerable.Range(0, spriteCount).ToArray();
+            }
+                
+            int frameCount = frames.Length;
+
+            if (frameCount <= 1) 
+                return (tex, null);
+            
+            float frameInterval;
+
+            if (animJson.Properties.TryGetValue("frametime", out var frameTime))
+                frameInterval = float.Parse(frameTime.StringValue, CultureInfo.InvariantCulture.NumberFormat) * 0.05F;
+            else // Use default frame interval
+                frameInterval = 0.05F;
+
+            var interpolate = animJson.Properties.TryGetValue("interpolate", out var interpolation)
+                              && interpolation.StringValue.ToLower().Equals("true");
+
+            int frameSize = tex.width;
+                    
+            int framePerRow = Mathf.CeilToInt(math.sqrt(frameCount));
+            int framePerCol = Mathf.CeilToInt((float) frameCount / framePerRow);
+
+            // Re-arrange the texture
+            Texture2D rearranged = new(framePerRow * frameSize, framePerCol * frameSize);
+
+            for (int fi = 0;fi < frameCount;fi++)
+            {
+                int framePos = frames[fi];
+
+                // Copy pixel data
+                Graphics.CopyTexture(tex, 0, 0, 0, (spriteCount - 1 - framePos) * frameSize, frameSize, frameSize,
+                    rearranged, 0, 0, (fi % framePerRow) * frameSize, (framePerCol - 1 - fi / framePerRow) * frameSize);
+                        
+            }
+
+            return (rearranged, new TextureAnimationInfo(frameCount, framePerRow, frameInterval, interpolate));
         }
         
         private static (Texture2D, TextureAnimationInfo?) LoadSingleTexture(string texFilePath)
@@ -758,11 +810,9 @@ namespace CraftSharp.Resource
             ResourceRequest request1 = Resources.LoadAsync<Texture2DArray>("vanilla/minecraft/textures/block_atlas_mip");
 
             await UniTask.WhenAll(request0.ToUniTask(), request1.ToUniTask());
-
-            atlasArrays[0] = request0.asset as Texture2DArray;
-            atlasArrays[1] = request1.asset as Texture2DArray;
-            //atlasArrays[0] = Resources.Load<Texture2DArray>("vanilla/minecraft/textures/block_atlas");
-            //atlasArrays[1] = Resources.Load<Texture2DArray>("vanilla/minecraft/textures/block_atlas_mip");
+            
+            atlasArrays[0] = request0.asset as Texture2DArray ?? throw new NullReferenceException("Can't load baked atlas vanilla/minecraft/textures/block_atlas");
+            atlasArrays[1] = request1.asset as Texture2DArray ?? throw new NullReferenceException("Can't load baked atlas vanilla/minecraft/textures/block_atlas_mip");
         }
         
         private async UniTask GenerateAtlas(DataLoadFlag atlasGenFlag)
@@ -1035,9 +1085,11 @@ namespace CraftSharp.Resource
 
         private static void Save(Texture2DArray array, string path)
         {
-            /*AssetDatabase.CreateAsset(array, path);
+#if UNITY_EDITOR
+            AssetDatabase.CreateAsset(array, path);
             AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();*/
+            AssetDatabase.Refresh();
+#endif
         }
         
         /// <summary>

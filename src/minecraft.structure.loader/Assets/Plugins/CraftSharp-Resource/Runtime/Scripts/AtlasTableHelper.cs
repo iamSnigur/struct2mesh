@@ -37,7 +37,9 @@ namespace CraftSharp.Resource
 
             string json = JsonUtility.ToJson(wrapper, true);
             File.WriteAllText("Assets/Resources/vanilla/minecraft/textures/texture_atlas_table.json", json);
-            //AssetDatabase.Refresh();
+#if UNITY_EDITOR
+            AssetDatabase.Refresh();
+#endif
         }
 
         public static void LoadAtlasTable(Dictionary<ResourceLocation, TextureInfo> atlasTable)

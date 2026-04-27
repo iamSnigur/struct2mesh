@@ -183,6 +183,7 @@ public static class BlockStateHelper
         "minecraft:small_dripleaf", "minecraft:big_dripleaf", "minecraft:big_dripleaf_stem",
         "minecraft:sculk_vein",
         "minecraft:brewing_stand",
+        "minecraft:copper_grate",
 
         // Candles
         "minecraft:candle",
@@ -195,6 +196,8 @@ public static class BlockStateHelper
         "minecraft:brown_candle", "minecraft:green_candle",
         "minecraft:red_candle", "minecraft:black_candle",
 
+        "minecraft:fire", "minecraft:soul_fire",
+        
         // Signs (text cutout)
         "minecraft:oak_sign", "minecraft:spruce_sign",
         "minecraft:birch_sign", "minecraft:jungle_sign",
@@ -668,14 +671,17 @@ public static class BlockStateHelper
         "minecraft:scaffolding",
         "minecraft:honey_block",
         "minecraft:mud",
-        "minecraft:soul_sand",                 // slightly shorter than full block
+        "minecraft:soul_sand",
         "minecraft:pointed_dripstone",
         "minecraft:pink_petals",
         "minecraft:decorated_pot",
         "minecraft:chiseled_bookshelf",
         "minecraft:trial_spawner",
         "minecraft:vault",
-        "minecraft:crafter",
+        //"minecraft:crafter",
+        "minecraft:sculk_sensor",
+        "minecraft:calibrated_sculk_sensor",
+        "minecraft:sculk_shrieker",
         "minecraft:white_wall_banner", // TODO check all blocks
     };
     

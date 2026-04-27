@@ -2570,7 +2570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344685372120438b876eb15625f443fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: StructureLoader::NbtReader
-  StructureNbtFilePath: Assets/Structures/pillager_outpost.nbt
+  StructureNbtFilePath: Assets/Structures/water_test.nbt
   ColorRules: {fileID: 4900000, guid: a119eb2380cc60441889947577fcc2f6, type: 3}
 --- !u!4 &1188278965
 Transform:
