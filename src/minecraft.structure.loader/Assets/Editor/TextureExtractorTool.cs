@@ -30,9 +30,6 @@ public class TextureExtractorTool : EditorWindow
         
         if (GUILayout.Button("Extract Json Models", GUILayout.Height(30))) 
             StartExtraction(ExtractModels);
-
-        if (GUILayout.Button("Pack Textures into Atlas", GUILayout.Height(30)))
-            BuildAtlas();
     }
 
     private void StartExtraction(Action extractorCallback)
@@ -257,15 +254,17 @@ public class TextureExtractorTool : EditorWindow
 
             importer.spriteImportMode = SpriteImportMode.Single;
             importer.isReadable = true;
-            TextureImporterPlatformSettings importerPlatformSettings = new()
+            int maxTextureSize = GetTextureMaxSize(f);
+            
+            TextureImporterPlatformSettings platformSettings = new()
             {
-                maxTextureSize = 512,
+                maxTextureSize = maxTextureSize,
                 format = TextureImporterFormat.RGBA32,
                 textureCompression = TextureImporterCompression.CompressedHQ,
                 overridden = true
             };
 
-            importer.SetPlatformTextureSettings(importerPlatformSettings);
+            importer.SetPlatformTextureSettings(platformSettings);
 
             
             if (dirty)
@@ -275,52 +274,26 @@ public class TextureExtractorTool : EditorWindow
         }
     }
 
-    private static void BuildAtlas()
+    private int GetTextureMaxSize(string path)
     {
-        string folderPath = "Assets/Resources/vanilla/minecraft/textures/block";
-        string atlasPath = "Assets/Resources/vanilla/minecraft/textures/block_atlas.spriteatlas";
+        byte[] fileData = File.ReadAllBytes(path);
+        Texture2D tex = new(2, 2);
 
-        // Create atlas
-        SpriteAtlas atlas = new();
+        tex.LoadImage(fileData);
 
-        // Optional settings
-        SpriteAtlasPackingSettings packingSettings = new()
+        int maxDim = Mathf.Max(tex.width, tex.height);
+
+        DestroyImmediate(tex);
+
+        int[] validSizes = { 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192 };
+
+        foreach (int size in validSizes)
         {
-            enableRotation = false,
-            enableTightPacking = false,
-            padding = 0
-        };
-        atlas.SetPackingSettings(packingSettings);
+            if (maxDim <= size)
+                return size;
+        }
 
-        SpriteAtlasTextureSettings textureSettings = new()
-        {
-            readable = true,
-            generateMipMaps = false,
-            sRGB = true,
-            filterMode = FilterMode.Point,
-        };
-        atlas.SetTextureSettings(textureSettings);
-
-        // Get all textures in folder
-        string[] guids = AssetDatabase.FindAssets("t:Texture2D", new[] { folderPath });
-
-        Object[] textures = guids
-            .Select(guid => AssetDatabase.LoadAssetAtPath<Texture2D>(AssetDatabase.GUIDToAssetPath(guid)))
-            .Where(tex => tex is not null)
-            .Cast<Object>()
-            .ToArray();
-
-        // Add to atlas
-        atlas.Add(textures);
-
-        // Save atlas
-        AssetDatabase.CreateAsset(atlas, atlasPath);
-        AssetDatabase.SaveAssets();
-
-        // Force packing
-        SpriteAtlasUtility.PackAtlases(new[] { atlas }, EditorUserBuildSettings.activeBuildTarget);
-
-        Debug.Log($"Atlas created with {textures.Length} textures at {atlasPath}");
+        return 2048;
     }
     
     /// <summary>Returns the default OS-specific .minecraft versions folder.</summary>
