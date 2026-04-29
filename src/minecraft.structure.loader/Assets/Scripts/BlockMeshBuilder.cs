@@ -1,7 +1,9 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using CraftSharp;
+using CraftSharp.Rendering;
 using CraftSharp.Resource;
 using Unity.Collections;
 using Unity.Mathematics;
@@ -13,13 +15,9 @@ public static class BlockMeshBuilder
 {
     private static readonly Mesh EMPTY_BLOCK_MESH = new();
         
-    private static readonly byte[] FULL_CORNER_LIGHTS = Enumerable.Repeat((byte) 8, 8).ToArray();
-    private static readonly float[] FULL_LIQUID_HEIGHTS = { 1F, 1F, 1F, 1F };
-        
     private static readonly LegacyRandomSource randomSource = new(0L);
 
     private static readonly MaterialManager s_materialManager;
-
 
     static BlockMeshBuilder()
     {
@@ -70,10 +68,10 @@ public static class BlockMeshBuilder
             
         BlockGeometry? blockGeometry = stateModel.Geometries[0];
 
-        /*if (BlockEntityTypePalette.INSTANCE.GetBlockEntityForBlock(blockId, out var blockEntityType)) // Use embedded entity render
+        if (BlockEntityTypePalette.INSTANCE.GetBlockEntityForBlock(blockId, out var blockEntityType))
         {
-            client.ChunkRenderManager.CreateBlockEntityRenderForItemModel(modelObject.transform, blockState, blockEntityType);
-        }*/
+            //client.ChunkRenderManager.CreateBlockEntityRenderForItemModel(modelObject.transform, blockState, blockEntityType);
+        }
         
         int color = BlockStatePaletteAdapter.Instance.GetBlockColor(stateId, world, BlockLoc.Zero);
         int waterColor = world.GetWaterColor(BlockLoc.Zero);
@@ -103,7 +101,7 @@ public static class BlockMeshBuilder
         if (state.InLiquid) // Build liquid here
         {
             var liquidNeighborCheck = state.InWater ? BlockNeighborChecks.WATER_SURFACE : BlockNeighborChecks.LAVA_SURFACE;
-            var liquidCullFlags = cullFlags;//getCullFlags(x, y, z, state, liquidNeighborCheck);
+            int liquidCullFlags = getCullFlags((int)blockPos.x, (int)blockPos.y, (int)blockPos.z, state, liquidNeighborCheck);
 
             if (liquidCullFlags != 0)
             {
@@ -114,12 +112,6 @@ public static class BlockMeshBuilder
             }
         }
         
-        /*if (includeLiquidMesh && state.InLiquid)
-        {
-            fluidVertexCount = FluidGeometry.GetVertexCount(cullFlags);
-            vertexCount += fluidVertexCount;
-        }*/
-            
         // Make and set mesh...
         var visualBuffer = new VertexBuffer(vertexCount);
 
@@ -142,11 +134,13 @@ public static class BlockMeshBuilder
 
                 colorInt = state.InWater ? waterColorInt : 0xFFFFFF;
 
-                FluidGeometry.Build(visualBuffer, ref vertexOffset, float3.zero,
-                    liquidTextureStill, liquidTextureFlow, liquidHeights, liquidCullFlags, blockVertLight, colorInt);
+                bool isWat = state.BlockId.Path.Equals("copper_grate");
                 
-                /*FluidGeometry.Build(visualBuffer[liquidLayerIndex], ref vertOffset[liquidLayerIndex], new float3(blocZ, blocY, blocX),
-                    liquidTextureStill, liquidTextureFlow, liquidHeights, liquidCullFlags, lights, colorInt);*/
+                float3 offset = isWat ? new float3(0.005f) : float3.zero;
+                float3 scale = isWat ? new float3(0.99f) : new float3(1f);
+                
+                FluidGeometry.Build(visualBuffer, ref vertexOffset, offset, scale,
+                    liquidTextureStill, liquidTextureFlow, liquidHeights, liquidCullFlags, blockVertLight, colorInt);
             }
         }
         
@@ -222,18 +216,6 @@ public static class BlockMeshBuilder
             return state is { FullShape: true, NoCollision: false };
         }
         
-        /*if (includeLiquidMesh)
-        {
-            if (state.InWater)
-            {
-                FluidGeometry.Build(visualBuffer, ref vertexOffset, float3.zero, FluidGeometry.LiquidTextures[0], FluidGeometry.LiquidTextures[2], FULL_LIQUID_HEIGHTS,
-                    cullFlags, blockVertLight, waterColorInt);
-            }
-            else if (state.IsLava)
-                FluidGeometry.Build(visualBuffer, ref vertexOffset, float3.zero, FluidGeometry.LiquidTextures[1], FluidGeometry.LiquidTextures[3], FULL_LIQUID_HEIGHTS,
-                    cullFlags, blockVertLight, 0xFFFFFF);
-        }*/
-
         geometry.Build(visualBuffer, ref vertexOffset, posOffset, cullFlags, 0, 0F, blockVertLight, colorInt);
 
         var triIdxCount = vertexCount / 2 * 3;
@@ -334,98 +316,33 @@ public static class BlockMeshBuilder
     private const int LAVA_LAYER_INDEX = 1;
     private const int WATER_LAYER_INDEX = 0;
 
-    /// <summary>
-    /// Build break block mesh.
-    /// </summary>
-    public static Mesh BuildBlockBreakMesh(BlockState blockState, float3 posOffset, int cullFlags)
+    public static BlockEntityRender CreateBlockEntityRenderForItemModel(Transform parent, BlockState blockState, BlockEntityType blockEntityType)
     {
-        var packManager = ResourcePackManager.Instance;
-        var stateId = BlockStatePalette.INSTANCE.GetNumIdByObject(blockState);
+        GameObject blockEntityPrefab = GetPrefabForType(blockEntityType.TypeId);
+        var blockEntityObj = Object.Instantiate(blockEntityPrefab, parent);
+        var blockEntityRender = blockEntityObj!.GetComponent<BlockEntityRender>();
 
-        packManager.StateModelTable.TryGetValue(stateId, out var stateModel);
+        blockEntityObj.name = $"[Item Model] {blockEntityType}";
+        blockEntityObj.transform.localPosition = Vector3.zero;
+        blockEntityObj.transform.localEulerAngles = Vector3.zero;
 
-        if (stateModel is null) return EMPTY_BLOCK_MESH;
-
-        // Get and build the first geometry
-        var blockGeometry = stateModel.Geometries[0];
-
-        var mesh = BuildBlockBreakMesh_Internal(blockGeometry, posOffset, cullFlags);
-
-        return mesh;
+        blockEntityRender.Initialize(null, blockState, blockEntityType, new());
+                
+        return blockEntityRender;
     }
-
-    /// <summary>
-    /// Build block break mesh directly from block geometry.
-    /// </summary>
-    private static Mesh BuildBlockBreakMesh_Internal(BlockGeometry blockGeometry, float3 posOffset, int cullFlags)
+    
+    [SerializeField] private static GameObject defaultPrefab;
+        
+    [SerializeField] private static GameObject chestPrefab;
+    [SerializeField] private static GameObject shulkerBoxPrefab;
+    [SerializeField] private static GameObject bannerPrefab;
+    [SerializeField] private static GameObject signPrefab;
+    [SerializeField] private static GameObject hangingSignPrefab;
+    
+    private static readonly Dictionary<ResourceLocation, GameObject> s_blockEntityPrefabs = new();
+    
+    private static GameObject GetPrefabForType(ResourceLocation type)
     {
-        var vertexCount = blockGeometry.GetVertexCount(cullFlags);
-        var visualBuffer = new VertexBuffer(vertexCount);
-        uint vertexOffset = 0;
-        blockGeometry.Build(visualBuffer, ref vertexOffset, posOffset, cullFlags, 0, 0F, FULL_CORNER_LIGHTS,
-            0, BlockGeometry.VertexDataFormat.ExtraUV_Light);
-
-        var triIdxCount = vertexCount / 2 * 3;
-
-        var meshDataArr = Mesh.AllocateWritableMeshData(1);
-        var meshData = meshDataArr[0];
-
-        var vertAttrs = new NativeArray<VertexAttributeDescriptor>(3, Allocator.Temp, NativeArrayOptions.UninitializedMemory);
-        vertAttrs[0] = new(VertexAttribute.Position,  dimension: 3, stream: 0);
-        vertAttrs[1] = new(VertexAttribute.TexCoord0, dimension: 3, stream: 1);
-        vertAttrs[2] = new(VertexAttribute.Color,     dimension: 4, stream: 2);
-
-        // Set mesh params
-        meshData.SetVertexBufferParams(vertexCount, vertAttrs);
-        vertAttrs.Dispose();
-
-        meshData.SetIndexBufferParams(triIdxCount, IndexFormat.UInt32);
-
-        // Set vertex data
-        // Positions
-        var positions = meshData.GetVertexData<float3>(0);
-        positions.CopyFrom(visualBuffer.vert);
-        // Tex Coordinates
-        var texCoords = meshData.GetVertexData<float3>(1);
-        texCoords.CopyFrom(visualBuffer.txuv);
-        // Vertex colors
-        var vertColors = meshData.GetVertexData<float4>(2);
-        vertColors.CopyFrom(visualBuffer.tint);
-
-        // Set face data
-        var triIndices = meshData.GetIndexData<uint>();
-        uint vi = 0; var ti = 0;
-        for (;vi < vertexCount;vi += 4U, ti += 6)
-        {
-            triIndices[ti]     = vi;
-            triIndices[ti + 1] = vi + 3U;
-            triIndices[ti + 2] = vi + 2U;
-            triIndices[ti + 3] = vi;
-            triIndices[ti + 4] = vi + 1U;
-            triIndices[ti + 5] = vi + 3U;
-        }
-
-        var bounds = new Bounds(new Vector3(0.5F, 0.5F, 0.5F), new Vector3(1F, 1F, 1F));
-
-        meshData.subMeshCount = 1;
-        meshData.SetSubMesh(0, new SubMeshDescriptor(0, triIdxCount)
-        {
-            bounds = bounds,
-            vertexCount = vertexCount
-        }, MeshUpdateFlags.DontRecalculateBounds);
-
-        var mesh = new Mesh
-        {
-            bounds = bounds,
-            name = "Proc Mesh"
-        };
-
-        Mesh.ApplyAndDisposeWritableMeshData(meshDataArr, mesh);
-
-        // Recalculate mesh bounds and normals
-        mesh.RecalculateBounds();
-        mesh.RecalculateNormals();
-
-        return mesh;
+        return s_blockEntityPrefabs.GetValueOrDefault(type, defaultPrefab);
     }
 }

@@ -108,7 +108,7 @@ namespace CraftSharp.Resource
             return (true, angleDegrees);
         }
 
-        public static void Build(VertexBuffer buffer, ref uint vertOffset, float3 posOffset, ResourceLocation liquidStill,
+        public static void Build(VertexBuffer buffer, ref uint vertOffset, float3 posOffset, float3 scale, ResourceLocation liquidStill,
                 ResourceLocation liquidFlow, ReadOnlySpan<float> cornerHeights, int cullFlags, byte[] blockLights, int fluidColorInt)
         {
             var startOffset = vertOffset;
@@ -121,15 +121,15 @@ namespace CraftSharp.Resource
             
             var full = (cullFlags & (1 << 0)) == 0;
 
-            var hne = full ? 1F : math.clamp(cornerHeights[0], 0F, 1F);
-            var hse = full ? 1F : math.clamp(cornerHeights[1], 0F, 1F);
-            var hnw = full ? 1F : math.clamp(cornerHeights[2], 0F, 1F);
-            var hsw = full ? 1F : math.clamp(cornerHeights[3], 0F, 1F);
+            float hne = full ? 1F : math.clamp(cornerHeights[0], 0F, 1F);
+            float hse = full ? 1F : math.clamp(cornerHeights[1], 0F, 1F);
+            float hnw = full ? 1F : math.clamp(cornerHeights[2], 0F, 1F);
+            float hsw = full ? 1F : math.clamp(cornerHeights[3], 0F, 1F);
 
-            var verts = buffer.vert;
-            var txuvs = buffer.txuv;
-            var uvans = buffer.uvan;
-            var tints = buffer.tint;
+            float3[] verts = buffer.vert;
+            float3[] txuvs = buffer.txuv;
+            float4[] uvans = buffer.uvan;
+            float4[] tints = buffer.tint;
 
             var (stillFullUVs, stillAnim) = ResourcePackManager.Instance.GetUVs(liquidStill, FULL_STILL, 0);
             var (flowFullUVs, flowAnim) = ResourcePackManager.Instance.GetUVs(liquidFlow, FULL_FLOW, 0);
@@ -222,7 +222,8 @@ namespace CraftSharp.Resource
                 // Calculate vertex lighting
                 tints[i] = new float4(fluidColor, packedVal);
                 // Offset vertices
-                verts[i] = verts[i] + posOffset;
+                verts[i] *= scale;
+                verts[i] += posOffset;
             }
         }
 

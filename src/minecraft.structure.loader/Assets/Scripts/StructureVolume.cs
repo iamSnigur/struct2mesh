@@ -64,7 +64,7 @@ public class StructureVolume
 
         RenderType renderType = BlockStateHelper.GetRenderTypeFor(state.BlockId.Path);
 
-        if (renderType is not RenderType.SOLID)
+        if (renderType is not RenderType.SOLID || state.IsLava)
             return false;
 
         return !BlockStateHelper.IsSemiSolid(state.BlockId.Path);

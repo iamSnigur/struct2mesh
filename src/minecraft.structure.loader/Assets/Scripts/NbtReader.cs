@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using CraftSharp;
 using UnityEngine;
@@ -45,6 +46,11 @@ public class NbtReader : MonoBehaviour
             return;
         }
 
+        Resources.UnloadUnusedAssets();
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        
         Structure structure = ParseNbtStructure(nbtFile);
         UpdateStructureVolume(structure);
         AssetProvider.ClearBlockStatePalette();
@@ -82,7 +88,12 @@ public class NbtReader : MonoBehaviour
         
         ResourceLocation? fluidState = entry.Name switch
         {
+            "kelp" => BlockState.WATER_ID,
+            "kelp_plant" => BlockState.WATER_ID,
+            "seagrass" => BlockState.WATER_ID,
+            "tall_seagrass" => BlockState.WATER_ID,
             "water" => BlockState.WATER_ID,
+            "bubble_column" => BlockState.WATER_ID,
             "lava" => BlockState.LAVA_ID,
             _ => null
         };
@@ -197,7 +208,8 @@ public class NbtReader : MonoBehaviour
 
         MeshCombiner meshCombiner = _parent.AddComponent<MeshCombiner>();
         meshCombiner.CreateMultiMaterialMesh = true;
-        //meshCombiner.CombineMeshes(true);
+        meshCombiner.DestroyCombinedChildren = true;
+        meshCombiner.CombineMeshes(true);
 
         Renderer component = _parent.GetComponent<Renderer>();
         FindFirstObjectByType<CameraController>().SetPivot(component.bounds.center);

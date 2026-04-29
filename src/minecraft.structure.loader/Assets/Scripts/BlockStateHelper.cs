@@ -77,10 +77,13 @@ public static class BlockStateHelper
         "minecraft:open_eyeblossom", "minecraft:closed_eyeblossom",
 
         // Tall grass / ferns
-        "minecraft:grass", "minecraft:fern",
-        "minecraft:large_fern", "minecraft:tall_grass",
+        "minecraft:grass", 
+        "minecraft:bush",
+        "minecraft:fern", "minecraft:large_fern",
+        "minecraft:short_grass","minecraft:tall_grass",
         "minecraft:dead_bush",
         "minecraft:seagrass", "minecraft:tall_seagrass",
+        "minecraft:short_dry_grass", "minecraft:tall_dry_grass",
 
         // Crops & Food Plants
         "minecraft:wheat", "minecraft:carrots",
@@ -130,6 +133,8 @@ public static class BlockStateHelper
         "minecraft:rail", "minecraft:powered_rail",
         "minecraft:detector_rail", "minecraft:activator_rail",
 
+        "minecraft:stonecutter",
+        
         // Redstone & Mechanisms
         "minecraft:redstone_wire", "minecraft:repeater",
         "minecraft:comparator", "minecraft:lever",
@@ -159,7 +164,7 @@ public static class BlockStateHelper
         "minecraft:polished_blackstone_button",
 
         // Iron bars / Chain
-        "minecraft:iron_bars", "minecraft:chain",
+        "minecraft:iron_bars", "minecraft:iron_chain",
 
         // Ladder & Scaffolding
         "minecraft:ladder", "minecraft:scaffolding",
@@ -170,6 +175,7 @@ public static class BlockStateHelper
         // Cactus, Sugar Cane, Kelp
         "minecraft:cactus", "minecraft:sugar_cane",
         "minecraft:kelp", "minecraft:kelp_plant",
+        "minecraft:cactus_flower",
 
         // Misc cross/cutout models
         "minecraft:lily_pad",
@@ -197,6 +203,7 @@ public static class BlockStateHelper
         "minecraft:red_candle", "minecraft:black_candle",
 
         "minecraft:fire", "minecraft:soul_fire",
+        "minecraft:campfire", "minecraft:soul_campfire",
         
         // Signs (text cutout)
         "minecraft:oak_sign", "minecraft:spruce_sign",
@@ -234,6 +241,73 @@ public static class BlockStateHelper
         "minecraft:oak_door", "minecraft:spruce_door", "minecraft:birch_door",
         "minecraft:jungle_door", "minecraft:acacia_door", "minecraft:dark_oak_door",
         "minecraft:mangrove_door", "minecraft:bamboo_door", "minecraft:iron_door",
+        
+        "minecraft:soul_lantern",
+        "minecraft:lantern",
+        "minecraft:copper_lantern",
+        "minecraft:waxed_copper_lantern",
+        "minecraft:exposed_copper_lantern",
+        "minecraft:waxed_exposed_copper_lantern",
+        "minecraft:weathered_copper_lantern",
+        "minecraft:waxed_weathered_copper_lantern",
+        "minecraft:oxidized_copper_lantern",
+        "minecraft:waxed_oxidized_copper_lantern",
+        
+        "minecraft:copper_chain",
+        "minecraft:waxed_copper_chain",
+        "minecraft:exposed_copper_chain",
+        "minecraft:waxed_exposed_copper_chain",
+        "minecraft:weathered_copper_chain",
+        "minecraft:waxed_weathered_copper_chain",
+        "minecraft:oxidized_copper_chain",
+        "minecraft:waxed_oxidized_copper_chain",
+        
+        "minecraft:copper_bars",
+        "minecraft:waxed_copper_bars",
+        // add
+        
+        "minecraft:copper_trapdoor",
+        "minecraft:waxed_copper_trapdoor",
+        // add
+        
+        "minecraft:firefly_bush",
+        "minecraft:azalea",
+        // TODO raname "minecraft:azalea",
+        "minecraft:pink_petals",
+        "minecraft:wildflowers",
+        "minecraft:leaf_litter",
+        "minecraft:pale_hanging_moss",
+        "minecraft:mangrove_roots",
+        "minecraft:potted_mangrove_propagule",
+        "minecraft:potted_spruce_sapling",
+        "minecraft:potted_oak_sapling",
+        "minecraft:potted_dark_oak_sapling",
+        "minecraft:potted_acacia_sapling",
+        "minecraft:potted_jungle_sapling",
+        "minecraft:potted_birch_sapling",
+        "minecraft:potted_brown_mushroom",
+        "minecraft:potted_red_mushroom",
+        "minecraft:potted_crimson_fungus",
+        "minecraft:potted_closed_eyeblossom",
+        "minecraft:potted_open_eyeblossom",
+        "minecraft:potted_warped_fungus",
+        "minecraft:potted_oxeye_daisy",
+        "minecraft:potted_pink_tulip",
+        "minecraft:potted_allium",
+        "minecraft:potted_torchflower",
+        "minecraft:potted_wither_rose",
+        "minecraft:potted_cactus",
+        
+        "minecraft:grass_block",
+        
+        "minecraft:sculk_sensor",
+        "minecraft:calibrated_sculk_sensor",
+        "minecraft:sculk_shrieker",
+        
+        "minecraft:small_amethyst_bud",
+        "minecraft:medium_amethyst_bud",
+        "minecraft:large_amethyst_bud",
+        "minecraft:amethyst_cluster",
     };
 
     public static RenderType GetRenderTypeFor(string blockId)
@@ -267,7 +341,9 @@ public static class BlockStateHelper
         "minecraft:oxeye_daisy",
         "minecraft:cornflower",
         "minecraft:lily_of_the_valley",
-        "minecraft:wither_rose"
+        "minecraft:wither_rose",
+        "minecraft:tall_seagrass",
+        "minecraft:seagrass",
     };
 
     private static readonly HashSet<string> XYZOffsetBlocks = new()
@@ -534,7 +610,7 @@ public static class BlockStateHelper
         "minecraft:soul_lantern",
 
         // Chains
-        "minecraft:chain",
+        "minecraft:iron_chain",
 
         // Carpets
         "minecraft:white_carpet",
