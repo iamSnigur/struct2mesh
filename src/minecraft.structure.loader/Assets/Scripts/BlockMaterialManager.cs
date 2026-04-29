@@ -5,7 +5,7 @@ using CraftSharp;
 using CraftSharp.Resource;
 using UnityEngine;
 
-public class MaterialManager : MonoBehaviour
+public class BlockMaterialManager : MonoBehaviour
 {
     [SerializeField] public Material? AtlasSolid;
     [SerializeField] public Material? AtlasCutout;

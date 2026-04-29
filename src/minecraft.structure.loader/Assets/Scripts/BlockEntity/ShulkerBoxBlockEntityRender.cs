@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using CraftSharp.Event;
 using UnityEngine;
 
 namespace CraftSharp.Rendering
@@ -12,37 +11,12 @@ namespace CraftSharp.Rendering
 
 #nullable enable
 
-        private Action<BlockActionEvent>? blockActionCallback;
-
         public Transform? lidTransform;
 
         private bool isOpened = false;
         private float openness = 0F;
 
 #nullable disable
-
-        public override void Initialize(BlockLoc? blockLoc, BlockState blockState, BlockEntityType blockEntityType, Dictionary<string, object> tags)
-        {
-            blockActionCallback = e =>
-            {
-                if (Location is not null && e.BlockLoc == Location)
-                {
-                    isOpened = e.ActionParam > 0;
-                }
-            };
-            
-            EventManager.Instance.Register(blockActionCallback);
-
-            base.Initialize(blockLoc, blockState, blockEntityType, tags);
-        }
-
-        private void OnDestroy()
-        {
-            if (blockActionCallback is not null)
-            {
-                EventManager.Instance.Unregister(blockActionCallback);
-            }
-        }
 
         public override void UpdateBlockState(BlockState blockState, bool isItemPreview)
         {

@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
-using CraftSharp.Event;
 using CraftSharp.Protocol.Handlers.StructuredComponents.Components;
 using CraftSharp.Protocol.Handlers.StructuredComponents.Core;
-using CraftSharp.UI;
 using UnityEngine;
 
 namespace CraftSharp.Rendering
@@ -91,8 +88,7 @@ namespace CraftSharp.Rendering
 
         private void UpdateBannerFaceTexture()
         {
-            var client = CornApp.CurrentClient;
-            if (!client || !faceTransform || textureUpdateCooldown > 0F) return;
+            if (!faceTransform || textureUpdateCooldown > 0F) return;
             
             textureUpdateCooldown = 0.5F;
             isDirty = false;
@@ -103,52 +99,6 @@ namespace CraftSharp.Rendering
                 new(BannerPatternType.BASE_ID, baseColor)
             };
 
-            if (isItem) // Get pattern data from item slot or item entity
-            {
-                ItemEntityRender itemEntityRender;
-                InventoryItemSlot inventoryItemSlot;
-                ItemStack itemStack = null;
-                
-                if (itemEntityRender = GetComponentInParent<ItemEntityRender>())
-                {
-                    itemStack = itemEntityRender.GetItemStack();
-                }
-                if (inventoryItemSlot = GetComponentInParent<InventoryItemSlot>())
-                {
-                    itemStack = inventoryItemSlot.GetItemStack();
-                }
-
-                if (itemStack is not null && itemStack.TryGetComponent<BannerPatternsComponent>(
-                        StructuredComponentIds.BANNER_PATTERNS_ID, out var bannerPatternsComp))
-                {
-                    foreach (var patternData in bannerPatternsComp.Layers)
-                    {
-                        // Encoded as enum int (probably as a string)
-                        var color = patternData.DyeColor;
-                        ResourceLocation patternId;
-                        
-                        if (patternData.PatternType > 0) // Given as an id
-                        {
-                            patternId = BannerPatternType.GetIdFromIndex(patternData.PatternType);
-                        }
-                        else if (patternData.PatternType == 0) // Given as an inline definition
-                        {
-                            patternId = patternData.AssetId!.Value;
-                            var translationKey = patternData.TranslationKey!;
-                            var newEntry = new BannerPatternType(patternId, translationKey);
-                            BannerPatternPalette.INSTANCE.AddOrUpdateEntry(patternId, newEntry);
-                        }
-                        else
-                        {
-                            patternId = ResourceLocation.INVALID;
-                            Debug.LogWarning("Unexpected pattern type: " + patternData.PatternType);
-                        }
-                            
-                        patternRecords.Add(new(patternId, color));
-                    }
-                }
-            }
-            else // Get pattern data from block entity
             {
                 if (BlockEntityNBT is not null)
                 {
@@ -206,9 +156,7 @@ namespace CraftSharp.Rendering
             var patternSeq = new BannerPatternSequence(patternRecords.ToArray());
             //Debug.Log($"Pattern sequence at {Location} {patternSeq}");
 
-            var matManager = client.EntityMaterialManager;
-            
-            matManager.ApplyBannerTexture(patternSeq, bannerFaceTexture =>
+            _materialManager.ApplyBannerTexture(patternSeq, bannerFaceTexture =>
             {
                 var faceRenderer = faceTransform.GetComponent<MeshRenderer>();
                 

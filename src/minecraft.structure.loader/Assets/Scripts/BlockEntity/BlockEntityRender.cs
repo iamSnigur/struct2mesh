@@ -39,6 +39,8 @@ namespace CraftSharp.Rendering
         /// </summary>
         protected float pseudoRandomOffset = 0F;
 
+        protected EntityMaterialManager _materialManager;
+        
         public void Unload()
         {
             if (this)
@@ -52,6 +54,7 @@ namespace CraftSharp.Rendering
             Location = blockLoc;
             Type = blockEntityType;
             BlockEntityNBT = tags;
+            _materialManager = FindFirstObjectByType<EntityMaterialManager>();
             
             UpdateBlockState(blockState, blockLoc is null);
         }
@@ -74,8 +77,6 @@ namespace CraftSharp.Rendering
         {
             var entityResManager = BedrockEntityResourceManager.Instance;
             
-            var entityMaterialManager = client.EntityMaterialManager;
-
             if (entityResManager.EntityRenderDefinitions.TryGetValue(blockEntityModelId, out var blockEntityDef))
             {
                 var visualObj = new GameObject("Visual")
@@ -91,7 +92,7 @@ namespace CraftSharp.Rendering
                 try
                 {
                     blockEntityRender.SetDefinitionData(blockEntityDef);
-                    blockEntityRender.BuildEntityModel(entityResManager, entityMaterialManager);
+                    blockEntityRender.BuildEntityModel(entityResManager, _materialManager);
                     
                     return blockEntityRender;
                 }

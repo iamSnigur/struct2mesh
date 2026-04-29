@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-using CraftSharp.Event;
 using CraftSharp.Protocol.Message;
 using CraftSharp.Resource;
 
@@ -436,24 +435,6 @@ namespace CraftSharp.Rendering
             return transform;
         }
 
-        public ShapeAABB GetAABB()
-        {
-            // AABBs should use Minecraft coordinate system
-            var minX = transform.position.z - Type.Width / 2F;
-            var maxX = transform.position.z + Type.Width / 2F;
-            var minZ = transform.position.x - Type.Width / 2F;
-            var maxZ = transform.position.x + Type.Width / 2F;
-            var minY = transform.position.y;
-            var maxY = transform.position.y + Type.Height;
-
-            return new ShapeAABB(minX, minY, minZ, maxX, maxY, maxZ);
-        }
-        
-        public virtual void HandleAimingModeChange(CameraAimingEvent e)
-        {
-            
-        }
-
         private Transform SetupCameraRef(Vector3 pos)
         {
             var cameraRefObj = new GameObject("Camera Ref Obj");
@@ -481,132 +462,9 @@ namespace CraftSharp.Rendering
         {
             UpdateTransform(tickMilSec, cameraTransform);
             
-            // Check on fire flag and update billboard
-            var onFire = (SharedFlags.Value & 0x01) != 0;
-            UpdateFireBillboard(onFire, cameraTransform);
-
             UpdateAnimation(tickMilSec);
             
             UpdateDeath();
-        }
-        
-        public void UpdateFireBillboard(bool enable, Transform cameraTransform)
-        {
-            if (enable)
-            {
-                if (!_fireBillboardTransform)
-                {
-                    CreateFireBillboard();
-                }
-
-                UpdateFireBillboardFacing(cameraTransform);
-            }
-            else
-            {
-                if (_fireBillboardTransform)
-                {
-                    Destroy(_fireBillboardTransform.gameObject);
-                    _fireBillboardTransform = null;
-                }
-            }
-        }
-
-        private void CreateFireBillboard()
-        {
-            var client = CornApp.CurrentClient;
-            if (!client) return;
-
-            var chunkMaterial = client.ChunkMaterialManager.GetAtlasMaterial(RenderType.UNLIT);
-            var billboardObj = new GameObject("Fire Billboard");
-
-            billboardObj.transform.SetParent(transform, false);
-            billboardObj.transform.localPosition = Vector3.zero;
-
-            var meshFilter = billboardObj.AddComponent<MeshFilter>();
-            meshFilter.sharedMesh = GetFireBillboardMesh();
-
-            var meshRenderer = billboardObj.AddComponent<MeshRenderer>();
-            meshRenderer.shadowCastingMode = ShadowCastingMode.Off;
-            meshRenderer.receiveShadows = false;
-            meshRenderer.sharedMaterial = chunkMaterial;
-
-            // Scale roughly to entity dimensions
-            billboardObj.transform.localScale = new Vector3(
-                Mathf.Max(0.6F, Type.Width), Mathf.Max(0.6F, Type.Height), 1F);
-
-            _fireBillboardTransform = billboardObj.transform;
-        }
-
-        private static Mesh GetFireBillboardMesh()
-        {
-            if (FIRE_BILLBOARD_MESH)
-            {
-                return FIRE_BILLBOARD_MESH;
-            }
-
-            var mesh = new Mesh
-            {
-                name = "Fire Billboard Quad Stack"
-            };
-
-            var (uvs0, anim0) = ResourcePackManager.Instance.GetUVs(FIRE_0_ID, new Vector4(0, 0, 1, 1), 0);
-            var baseUv0 = uvs0.Select(x => (Vector3) x).ToArray();
-            var baseUv1 = Enumerable.Repeat((Vector4) anim0, 4).ToArray();
-            
-            var (uvs1, anim1) = ResourcePackManager.Instance.GetUVs(FIRE_1_ID, new Vector4(0, 0, 1, 1), 0);
-            var baseUv2 = uvs1.Select(x => (Vector3) x).ToArray();
-            var baseUv3 = Enumerable.Repeat((Vector4) anim1, 4).ToArray();
-
-            // Multiple quads with decreasing height; lower quads sit slightly closer (negative Z)
-            var heights = new[] { 1.5F, 1.0F, 0.5F };
-
-            var vertices = new List<Vector3>(heights.Length * 4);
-            var uv0 = new List<Vector3>(heights.Length * 4);
-            var uv1 = new List<Vector4>(heights.Length * 4);
-            var triangles = new List<int>(heights.Length * 6);
-
-            for (int i = 0; i < heights.Length; i++)
-            {
-                var h = heights[i];
-                var zOffset = -0.0625F * i;
-                int vStart = vertices.Count;
-
-                vertices.Add(new Vector3(-0.5F, h, zOffset));
-                vertices.Add(new Vector3( 0.5F, h, zOffset));
-                vertices.Add(new Vector3(-0.5F, 0F, zOffset));
-                vertices.Add(new Vector3( 0.5F, 0F, zOffset));
-
-                uv0.AddRange(i % 2 == 0 ? baseUv0 : baseUv2);
-                uv1.AddRange(i % 2 == 0 ? baseUv1 : baseUv3);
-
-                triangles.AddRange(new[] { vStart + 0, vStart + 1, vStart + 2, vStart + 2, vStart + 1, vStart + 3 });
-            }
-
-            mesh.SetVertices(vertices);
-            mesh.SetUVs(0, uv0);
-            mesh.SetUVs(1, uv1);
-            mesh.SetTriangles(triangles, 0);
-            mesh.RecalculateNormals();
-
-            FIRE_BILLBOARD_MESH = mesh;
-            return mesh;
-        }
-
-        private void UpdateFireBillboardFacing(Transform cameraTransform)
-        {
-            if (!_fireBillboardTransform)
-            {
-                return;
-            }
-
-            var directionToTarget = _fireBillboardTransform.position - cameraTransform.position;
-            // Ignore vertical distance
-            directionToTarget.y = 0;
-            
-            if (directionToTarget != Vector3.zero)
-            {
-                _fireBillboardTransform.localRotation = Quaternion.LookRotation(directionToTarget);
-            }
         }
 
         public virtual Vector2 GetDimensions()

@@ -54,8 +54,7 @@ namespace CraftSharp.Rendering
         
         protected void UpdateSignText()
         {
-            var client = CornApp.CurrentClient;
-            if (!client || textUpdateCooldown > 0F) return;
+            if (textUpdateCooldown > 0F) return;
             
             textUpdateCooldown = 0.5F;
             isDirty = false;

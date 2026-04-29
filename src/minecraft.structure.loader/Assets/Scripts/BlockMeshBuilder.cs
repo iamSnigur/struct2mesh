@@ -17,13 +17,13 @@ public static class BlockMeshBuilder
         
     private static readonly LegacyRandomSource randomSource = new(0L);
 
-    private static readonly MaterialManager s_materialManager;
+    private static readonly BlockMaterialManager s_blockMaterialManager;
 
     static BlockMeshBuilder()
     {
-        s_materialManager = GameObject
+        s_blockMaterialManager = GameObject
             .FindGameObjectWithTag("MaterialManager")
-            .GetComponent<MaterialManager>();
+            .GetComponent<BlockMaterialManager>();
     }
     
     private static void ClearBlockVisual(GameObject modelObject)
@@ -83,12 +83,12 @@ public static class BlockMeshBuilder
         if (blockState.InWater)
         {
             meshRenderer.sharedMaterials = new [] {
-                s_materialManager.GetAtlasMaterial(RenderType.WATER),
-                s_materialManager.GetAtlasMaterial(stateModel.RenderType) };
+                s_blockMaterialManager.GetAtlasMaterial(RenderType.WATER),
+                s_blockMaterialManager.GetAtlasMaterial(stateModel.RenderType) };
         }
         else
         {
-            meshRenderer.sharedMaterial = s_materialManager.GetAtlasMaterial(stateModel.RenderType);
+            meshRenderer.sharedMaterial = s_blockMaterialManager.GetAtlasMaterial(stateModel.RenderType);
         }
     }
         

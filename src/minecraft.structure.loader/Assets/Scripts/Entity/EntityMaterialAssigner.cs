@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CraftSharp.Rendering
 {
@@ -106,10 +107,12 @@ namespace CraftSharp.Rendering
         private static readonly int BASE_COLOR = Shader.PropertyToID("_BaseColor");
         private readonly Dictionary<Renderer, Color> m_OriginalColors = new();
         private MaterialPropertyBlock m_PropertyBlock;
-
+        private EntityMaterialManager _materialManager;
+        
         private void Awake()
         {
             m_PropertyBlock = new MaterialPropertyBlock();
+            _materialManager = FindFirstObjectByType<EntityMaterialManager>();
         }
 
         private void Update()
@@ -280,12 +283,6 @@ namespace CraftSharp.Rendering
         /// </summary>
         public void UpdateMaterials(EntityType entityType, HashSet<string>? updatedVars, HashSet<int>? updatedMeta, Dictionary<string, string>? variables, Dictionary<int, object?>? metadata)
         {
-            var client = CornApp.CurrentClient!;
-            var matManager = client.EntityMaterialManager;
-
-            //var info = updatedMeta.Select(x => entityType.MetaEntries[x].Name + ": [" + metadata?[x] + "],");
-            //Debug.Log($"Updating meta ({gameObject.name}):\n{string.Join("\n", info)}");
-
             for (int i = 0; i < m_MaterialEntries.Length; i++)
             {
                 var entry = m_MaterialEntries[i];
@@ -305,7 +302,7 @@ namespace CraftSharp.Rendering
                     continue;
                 }
 
-                matManager.ApplyMaterial(entry.RenderType, textureId, matInstance =>
+                _materialManager.ApplyMaterial(entry.RenderType, textureId, matInstance =>
                 {
                     AssignMaterialToRenderer(entry.Renderers, matInstance);
                 });
@@ -328,9 +325,6 @@ namespace CraftSharp.Rendering
 
         public void InitializeMaterials(EntityType entityType, Dictionary<string, string>? variables, Action<EntityMaterialManager, ResourceLocation, Material> callbackForEach)
         {
-            var client = CornApp.CurrentClient!;
-            var matManager = client.EntityMaterialManager;
-
             for (int i = 0; i < m_MaterialEntries.Length; i++)
             {
                 var entry = m_MaterialEntries[i];
@@ -355,11 +349,11 @@ namespace CraftSharp.Rendering
                     textureId = ResourceLocation.FromString(entry.TextureId);
                 }
                 
-                matManager.ApplyMaterial(entry.RenderType, textureId, matInstance =>
+                _materialManager.ApplyMaterial(entry.RenderType, textureId, matInstance =>
                 {
                     AssignMaterialToRenderer(entry.Renderers, matInstance);
 
-                    callbackForEach.Invoke(matManager, textureId, matInstance);
+                    callbackForEach.Invoke(_materialManager, textureId, matInstance);
                 });
             }
         }
