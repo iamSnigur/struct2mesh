@@ -80,7 +80,7 @@ namespace CraftSharp.Rendering
             if (!entityResManager.EntityRenderDefinitions.TryGetValue(blockEntityModelId, out var blockEntityDef))
                 return null;
             
-            var visualObj = new GameObject("Visual")
+            GameObject visualObj = new("Visual")
             {
                 transform =
                 {

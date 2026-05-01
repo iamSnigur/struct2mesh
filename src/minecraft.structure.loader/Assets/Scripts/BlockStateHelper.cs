@@ -37,7 +37,6 @@ public static class BlockStateHelper
 
         // Misc
         "minecraft:tinted_glass",
-        "minecraft:beacon",
         "minecraft:end_gateway", // portal effect
         "minecraft:nether_portal",
         "minecraft:end_portal",
@@ -178,6 +177,7 @@ public static class BlockStateHelper
         "minecraft:cactus_flower",
 
         // Misc cross/cutout models
+        "minecraft:beacon",
         "minecraft:lily_pad",
         "minecraft:flower_pot",
         "minecraft:cobweb",

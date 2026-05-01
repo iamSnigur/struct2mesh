@@ -137,7 +137,7 @@ namespace CraftSharp.Rendering
 
         public void SetTexture(int index)
         {
-            /*if (index >= 0 && index < TextureNames.Length &&
+            if (index >= 0 && index < TextureNames.Length &&
                 geometry is not null && materialManager && renderers.Any())
             {
                 foreach (MeshRenderer meshRenderer in renderers)
@@ -151,7 +151,7 @@ namespace CraftSharp.Rendering
             else
             {
                 throw new System.Exception($"Invalid texture index: {index}");
-            }*/
+            }
         }
 
         public EntityAnimation SetAnimation(int index, float initialTime)

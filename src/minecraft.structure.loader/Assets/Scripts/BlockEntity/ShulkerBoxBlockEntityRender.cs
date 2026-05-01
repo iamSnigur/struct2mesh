@@ -40,7 +40,7 @@ namespace CraftSharp.Rendering
 
                 var textureName = blockState.BlockId.Path switch
                 {
-                    "shulker_box"            => "undyed",
+                    "shulker_box"            => "default",
                     "white_shulker_box"      => "white",
                     "orange_shulker_box"     => "orange",
                     "magenta_shulker_box"    => "magenta",
@@ -49,7 +49,7 @@ namespace CraftSharp.Rendering
                     "lime_shulker_box"       => "lime",
                     "pink_shulker_box"       => "pink",
                     "gray_shulker_box"       => "gray",
-                    "light_gray_shulker_box" => "silver",
+                    "light_gray_shulker_box" => "light_gray",
                     "cyan_shulker_box"       => "cyan",
                     "purple_shulker_box"     => "purple",
                     "blue_shulker_box"       => "blue",
