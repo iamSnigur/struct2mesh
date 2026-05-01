@@ -38,7 +38,7 @@ namespace CraftSharp.Rendering
                 faceTransform = null;
                 ClearBedrockBlockEntityRender();
 
-                var render = BuildBedrockBlockEntityRender(isWall ? WALL_BANNER_ID : BANNER_ID);
+                BedrockModelEntityRender render = BuildBedrockBlockEntityRender(isWall ? WALL_BANNER_ID : BANNER_ID);
                 
                 render.transform.localScale = Vector3.one * 0.75F;
                 render.transform.localPosition = BEDROCK_BLOCK_ENTITY_OFFSET;
@@ -67,7 +67,7 @@ namespace CraftSharp.Rendering
                     render.transform.localEulerAngles = new(0F, rotationDeg, 0F);
                 }
                 
-                var entityName = isWall ? "wall_banner" : "banner";
+                string entityName = isWall ? "wall_banner" : "banner";
                 SetBedrockBlockEntityRenderTexture(render, $"{entityName}/banner_base");
             }
             

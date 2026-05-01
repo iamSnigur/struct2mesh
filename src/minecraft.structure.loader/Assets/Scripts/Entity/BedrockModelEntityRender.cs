@@ -137,21 +137,21 @@ namespace CraftSharp.Rendering
 
         public void SetTexture(int index)
         {
-            if (index >= 0 && index < TextureNames.Length &&
+            /*if (index >= 0 && index < TextureNames.Length &&
                 geometry is not null && materialManager && renderers.Any())
             {
-                foreach (var _renderer in renderers)
+                foreach (MeshRenderer meshRenderer in renderers)
                 {
                     materialManager.ApplyBedrockMaterial(RenderType, TextureNames[index], mat =>
                     {
-                        _renderer.sharedMaterial = mat;
+                        meshRenderer.sharedMaterial = mat;
                     }, geometry.TextureWidth, geometry.TextureHeight);
                 }
             }
             else
             {
                 throw new System.Exception($"Invalid texture index: {index}");
-            }
+            }*/
         }
 
         public EntityAnimation SetAnimation(int index, float initialTime)

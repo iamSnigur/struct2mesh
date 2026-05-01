@@ -15,6 +15,7 @@ public class NbtReader : MonoBehaviour
     
     private void Awake()
     {
+        Debug.Log(Application.persistentDataPath);
         _parent = new GameObject("Structure");
         StructureVolume = new StructureVolume();
     }
@@ -208,8 +209,8 @@ public class NbtReader : MonoBehaviour
 
         MeshCombiner meshCombiner = _parent.AddComponent<MeshCombiner>();
         meshCombiner.CreateMultiMaterialMesh = true;
-        meshCombiner.DestroyCombinedChildren = true;
-        meshCombiner.CombineMeshes(true);
+        //meshCombiner.DestroyCombinedChildren = true;
+        //meshCombiner.CombineMeshes(true);
 
         Renderer component = _parent.GetComponent<Renderer>();
         FindFirstObjectByType<CameraController>().SetPivot(component.bounds.center);
@@ -242,5 +243,6 @@ public class NbtReader : MonoBehaviour
     {
         public Vector3 Pos;
         public int State;
+        public string Nbt; //add nbt support
     }
 }

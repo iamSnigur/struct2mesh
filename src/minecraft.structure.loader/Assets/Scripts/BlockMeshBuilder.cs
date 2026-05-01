@@ -13,17 +13,17 @@ using Object = UnityEngine.Object;
 
 public static class BlockMeshBuilder
 {
-    private static readonly Mesh EMPTY_BLOCK_MESH = new();
-        
-    private static readonly LegacyRandomSource randomSource = new(0L);
-
-    private static readonly BlockMaterialManager s_blockMaterialManager;
+    private static readonly MaterialManager s_materialManager;
+    private static BlockEntityPrefabs _blockEntityPrefabs;
 
     static BlockMeshBuilder()
     {
-        s_blockMaterialManager = GameObject
-            .FindGameObjectWithTag("MaterialManager")
-            .GetComponent<BlockMaterialManager>();
+        s_materialManager = Object.FindFirstObjectByType<MaterialManager>();
+    }
+
+    public static void InjectDependencies(BlockEntityPrefabs blockEntityPrefabs)
+    {
+        _blockEntityPrefabs = blockEntityPrefabs;
     }
     
     private static void ClearBlockVisual(GameObject modelObject)
@@ -68,27 +68,25 @@ public static class BlockMeshBuilder
             
         BlockGeometry? blockGeometry = stateModel.Geometries[0];
 
-        if (BlockEntityTypePalette.INSTANCE.GetBlockEntityForBlock(blockId, out var blockEntityType))
-        {
-            //client.ChunkRenderManager.CreateBlockEntityRenderForItemModel(modelObject.transform, blockState, blockEntityType);
-        }
+        if (BlockEntityTypePaletteAdapter.Instance.GetBlockEntityForBlock(blockId, out var blockEntityType))
+            CreateBlockEntityRenderForItemModel(modelObject.transform, blockState, blockEntityType);
         
         int color = BlockStatePaletteAdapter.Instance.GetBlockColor(stateId, world, BlockLoc.Zero);
         int waterColor = world.GetWaterColor(BlockLoc.Zero);
 
-        Mesh mesh = BuildBlockMesh_Internal(blockState, blockGeometry, pos,float3.zero, cullFlags, color, waterColor, 0, true);
+        Mesh mesh = BuildBlockMesh_Internal(blockState, blockGeometry, pos,float3.zero, cullFlags, color, waterColor, 1, true);
             
         meshFilter.sharedMesh = mesh;
 
         if (blockState.InWater)
         {
             meshRenderer.sharedMaterials = new [] {
-                s_blockMaterialManager.GetAtlasMaterial(RenderType.WATER),
-                s_blockMaterialManager.GetAtlasMaterial(stateModel.RenderType) };
+                s_materialManager.GetAtlasMaterial(RenderType.WATER),
+                s_materialManager.GetAtlasMaterial(stateModel.RenderType) };
         }
         else
         {
-            meshRenderer.sharedMaterial = s_blockMaterialManager.GetAtlasMaterial(stateModel.RenderType);
+            meshRenderer.sharedMaterial = s_materialManager.GetAtlasMaterial(stateModel.RenderType);
         }
     }
         
@@ -316,33 +314,18 @@ public static class BlockMeshBuilder
     private const int LAVA_LAYER_INDEX = 1;
     private const int WATER_LAYER_INDEX = 0;
 
-    public static BlockEntityRender CreateBlockEntityRenderForItemModel(Transform parent, BlockState blockState, BlockEntityType blockEntityType)
+    private static BlockEntityRender CreateBlockEntityRenderForItemModel(Transform parent, BlockState blockState, BlockEntityType blockEntityType)
     {
-        GameObject blockEntityPrefab = GetPrefabForType(blockEntityType.TypeId);
-        var blockEntityObj = Object.Instantiate(blockEntityPrefab, parent);
-        var blockEntityRender = blockEntityObj!.GetComponent<BlockEntityRender>();
+        GameObject blockEntityPrefab = _blockEntityPrefabs.GetPrefabForType(blockEntityType.TypeId);
+        GameObject? blockEntityObj = Object.Instantiate(blockEntityPrefab, parent);
+        BlockEntityRender? blockEntityRender = blockEntityObj!.GetComponent<BlockEntityRender>();
 
         blockEntityObj.name = $"[Item Model] {blockEntityType}";
-        blockEntityObj.transform.localPosition = Vector3.zero;
+        blockEntityObj.transform.localPosition = new Vector3(0.5f, 0.5f, 0.5f);
         blockEntityObj.transform.localEulerAngles = Vector3.zero;
 
-        blockEntityRender.Initialize(null, blockState, blockEntityType, new());
+        blockEntityRender.Initialize(BlockLoc.Zero, blockState, blockEntityType, tags: new Dictionary<string, object>());
                 
         return blockEntityRender;
-    }
-    
-    [SerializeField] private static GameObject defaultPrefab;
-        
-    [SerializeField] private static GameObject chestPrefab;
-    [SerializeField] private static GameObject shulkerBoxPrefab;
-    [SerializeField] private static GameObject bannerPrefab;
-    [SerializeField] private static GameObject signPrefab;
-    [SerializeField] private static GameObject hangingSignPrefab;
-    
-    private static readonly Dictionary<ResourceLocation, GameObject> s_blockEntityPrefabs = new();
-    
-    private static GameObject GetPrefabForType(ResourceLocation type)
-    {
-        return s_blockEntityPrefabs.GetValueOrDefault(type, defaultPrefab);
     }
 }

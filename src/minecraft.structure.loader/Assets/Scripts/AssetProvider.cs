@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using CraftSharp;
 using CraftSharp.Resource;
+using CraftSharp.Resource.BedrockEntity;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -24,8 +25,14 @@ public static class AssetProvider
         _resourcePackManager = ResourcePackManager.Instance;
         _blockStateLoader = new BlockStateLoader(_resourcePackManager);
 
+        BlockEntityPrefabs entityPrefabs = Resources.Load<BlockEntityPrefabs>("BlockEntity/Prefabs/BlockEntityPrefabs");
+        BlockMeshBuilder.InjectDependencies(entityPrefabs);
+
         await GatherResources(_resourcePackManager);
         await PreloadResources();
+        
+        //await BedrockEntityResourceManager.Instance.LoadEntityResources(new DataLoadFlag(), (_) => {});
+        BedrockEntityResourceManager.Instance.LoadBlockEntityModelFolder("block_entity");
     }
 
     private static void UpdateStatus(string status, string progress) =>
@@ -136,6 +143,8 @@ public static class AssetProvider
         }
 
         BlockStatePaletteAdapter.Instance.InjectEntries();
+        
+        BlockEntityTypePaletteAdapter.Instance.PrepareData();
     }
 
     public static void UpdateColorRules(TextAsset colorRules) =>

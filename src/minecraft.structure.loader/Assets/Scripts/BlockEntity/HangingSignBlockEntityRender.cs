@@ -3,8 +3,6 @@ using System.Linq;
 using UnityEngine;
 using TMPro;
 
-using CraftSharp.Protocol.Message;
-
 namespace CraftSharp.Rendering
 {
     public class HangingSignBlockEntityRender : BaseSignBlockEntityRender
@@ -84,6 +82,8 @@ namespace CraftSharp.Rendering
                 // Schedule an initial update
                 isDirty = true;
             }
+
+            UpdateSignText();
         }
     }
 }

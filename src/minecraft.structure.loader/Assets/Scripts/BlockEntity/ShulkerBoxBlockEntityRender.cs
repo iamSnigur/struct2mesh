@@ -27,7 +27,7 @@ namespace CraftSharp.Rendering
 
                 // The left part of a double chest doesn't need a visual object, the right part will take care of it
                 // Update entity render
-                var render = BuildBedrockBlockEntityRender(SHULKER_ID);
+                BedrockModelEntityRender render = BuildBedrockBlockEntityRender(SHULKER_ID);
                     
                 render.transform.localScale = Vector3.one;
                 render.transform.localPosition = BEDROCK_BLOCK_ENTITY_OFFSET;
@@ -62,6 +62,8 @@ namespace CraftSharp.Rendering
                     
                 render.name += $" {blockState}";
 
+                Debug.LogWarning("add facing handle logic here");
+                
                 SetBedrockBlockEntityRenderTexture(render, $"shulker/{textureName}");
             }
             

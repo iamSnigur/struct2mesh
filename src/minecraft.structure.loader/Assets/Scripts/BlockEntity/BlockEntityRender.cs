@@ -76,35 +76,33 @@ namespace CraftSharp.Rendering
         protected BedrockModelEntityRender BuildBedrockBlockEntityRender(ResourceLocation blockEntityModelId)
         {
             var entityResManager = BedrockEntityResourceManager.Instance;
-            
-            if (entityResManager.EntityRenderDefinitions.TryGetValue(blockEntityModelId, out var blockEntityDef))
-            {
-                var visualObj = new GameObject("Visual")
-                {
-                    transform =
-                    {
-                        parent = transform,
-                        localPosition = Vector3.zero
-                    }
-                };
-                
-                var blockEntityRender = visualObj.AddComponent<BedrockModelEntityRender>();
-                try
-                {
-                    blockEntityRender.SetDefinitionData(blockEntityDef);
-                    blockEntityRender.BuildEntityModel(entityResManager, _materialManager);
-                    
-                    return blockEntityRender;
-                }
-                catch (System.Exception e)
-                {
-                    Debug.LogWarning($"An exception occurred building model for block entity {blockEntityModelId}: {e}");
-                    
-                    return blockEntityRender;
-                }
-            }
 
-            return null;
+            if (!entityResManager.EntityRenderDefinitions.TryGetValue(blockEntityModelId, out var blockEntityDef))
+                return null;
+            
+            var visualObj = new GameObject("Visual")
+            {
+                transform =
+                {
+                    parent = transform,
+                    localPosition = Vector3.zero
+                }
+            };
+                
+            var blockEntityRender = visualObj.AddComponent<BedrockModelEntityRender>();
+            try
+            {
+                blockEntityRender.SetDefinitionData(blockEntityDef);
+                blockEntityRender.BuildEntityModel(entityResManager, _materialManager);
+                    
+                return blockEntityRender;
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning($"An exception occurred building model for block entity {blockEntityModelId}: {e}");
+                    
+                return blockEntityRender;
+            }
         }
 
         protected static bool SetBedrockBlockEntityRenderTexture(BedrockModelEntityRender render, string textureName)

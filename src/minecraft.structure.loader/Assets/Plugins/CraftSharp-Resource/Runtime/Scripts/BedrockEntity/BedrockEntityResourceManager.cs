@@ -163,6 +163,56 @@ namespace CraftSharp.Resource.BedrockEntity
             return newVer > prevVer;
         }
 
+        public void LoadBlockEntityModelFolder(string geometryNamePrefix)
+        {
+            foreach (TextAsset? textAsset in Resources.LoadAll<TextAsset>("block_entity_models"))
+            {
+                Json.JSONData? data = Json.ParseJson(textAsset.text);
+                string geoName = string.Empty;
+
+                try
+                {
+                    Dictionary<string, EntityGeometry>? geometries = EntityGeometry.TableFromJson(data);
+                    if (geometries.Count > 1) // Only one geometry is expected
+                        Debug.LogWarning($"More than 1 geometries is found in file {textAsset.name}");
+
+                    geoName = $"geometry.{geometryNamePrefix}_{textAsset.name}";
+                    EntityGeometry? geometry = geometries.First().Value;
+
+                    EntityGeometries.Add(geoName, geometry);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning($"An error occurred when parsing {textAsset.name}: {e}");
+                }
+                    
+                Dictionary<string, string> texturePaths;
+                    
+                var dummyEntityIdentifier = new ResourceLocation(textAsset.name);
+                string defaultTexturePath = $"{textAsset.name}{SP}{textAsset.name}"; // extra_models/foo/foo.png
+
+                if (ExtraEntityModelTextures.TryGetValue(textAsset.name, out Dictionary<string, string>? textureList))
+                {
+                    texturePaths = textureList.ToDictionary(x => $"{textAsset.name}/{x.Key}",
+                        x => x.Value);
+                }
+                else
+                {
+                    texturePaths = new Dictionary<string, string> { [ $"{textAsset.name}/default" ] = defaultTexturePath };
+                }
+
+                foreach (var (textureName, texturePath) in texturePaths) 
+                    TextureFileTable[textureName] = texturePath;
+                    
+                EntityRenderDefinitions.Add(dummyEntityIdentifier, new EntityRenderDefinition(
+                    UNSPECIFIED_VERSION, UNSPECIFIED_VERSION, dummyEntityIdentifier, texturePaths,
+                    new Dictionary<string, string> { [ "default" ] = textAsset.name },
+                    new Dictionary<string, string> { [ "default" ] = geoName },
+                    new Dictionary<string, string>()
+                ));
+            }
+        }
+        
         private void LoadExtraEntityModelFolder(string extraModelsPath, string geometryNamePrefix)
         {
             var extraModelFolderDir = new DirectoryInfo(extraModelsPath);

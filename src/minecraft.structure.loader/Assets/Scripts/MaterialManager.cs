@@ -5,7 +5,7 @@ using CraftSharp;
 using CraftSharp.Resource;
 using UnityEngine;
 
-public class BlockMaterialManager : MonoBehaviour
+public class MaterialManager : MonoBehaviour
 {
     [SerializeField] public Material? AtlasSolid;
     [SerializeField] public Material? AtlasCutout;
@@ -40,9 +40,8 @@ public class BlockMaterialManager : MonoBehaviour
         {
             EntityRenderType.SOLID              => EntitySolid!,
             EntityRenderType.CUTOUT             => EntityCutout!,
-            EntityRenderType.CUTOUT_CULLOFF => EntityCutoutDoubleSided!,
+            EntityRenderType.CUTOUT_CULLOFF     => EntityCutoutDoubleSided!,
             EntityRenderType.TRANSLUCENT        => EntityTranslucent!,
-
             _                                   => EntitySolid!
         };
     }

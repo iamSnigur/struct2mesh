@@ -860,10 +860,10 @@ MonoBehaviour:
   AtlasCutout: {fileID: 2100000, guid: 8f36b6691e7cf7c43af3772cc5698310, type: 2}
   AtlasCutoutMipped: {fileID: 2100000, guid: 2fa37afcf7b21d545905d9825dab1bb9, type: 2}
   AtlasTranslucent: {fileID: 2100000, guid: 7f74a553dcb4f124884d8d9f58f526dd, type: 2}
-  EntitySolid: {fileID: 0}
-  EntityCutout: {fileID: 0}
-  EntityCutoutDoubleSided: {fileID: 0}
-  EntityTranslucent: {fileID: 0}
+  EntitySolid: {fileID: 2100000, guid: aca43f86ecfb86649955df35e6e9208c, type: 2}
+  EntityCutout: {fileID: 2100000, guid: aca43f86ecfb86649955df35e6e9208c, type: 2}
+  EntityCutoutDoubleSided: {fileID: 2100000, guid: aca43f86ecfb86649955df35e6e9208c, type: 2}
+  EntityTranslucent: {fileID: 2100000, guid: aca43f86ecfb86649955df35e6e9208c, type: 2}
 --- !u!4 &386554569
 Transform:
   m_ObjectHideFlags: 0
@@ -2570,7 +2570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344685372120438b876eb15625f443fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: StructureLoader::NbtReader
-  StructureNbtFilePath: Assets/Structures/cutout_test.nbt
+  StructureNbtFilePath: Assets/Structures/block_entity_test.nbt
   ColorRules: {fileID: 4900000, guid: a119eb2380cc60441889947577fcc2f6, type: 3}
 --- !u!4 &1188278965
 Transform:
