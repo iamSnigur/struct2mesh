@@ -161,8 +161,19 @@ namespace CraftSharp.Resource
             
             // Load block models...
             updateStatus("resource.info.load_block_model", string.Empty);
-            foreach (var blockModelId in BlockModelFileTable.Keys) 
-                BlockModelLoader.LoadBlockModel(blockModelId);
+            foreach (var blockModelId in BlockModelFileTable.Keys)
+            {
+                try
+                {
+                    BlockModelLoader.LoadBlockModel(blockModelId);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"Failed to load block model: {blockModelId}");
+                    Debug.LogError(e);
+                    throw;
+                }
+            }
 
             if (preloadEntityTextures)
             {

@@ -30,7 +30,13 @@ namespace CraftSharp.Resource.BedrockEntity
                 ["normal"] = "textures/entity/chest/normal",
                 ["trapped"] = "textures/entity/chest/trapped",
                 ["ender"] = "textures/entity/chest/ender",
-                ["christmas"] = "textures/entity/chest/christmas"
+                ["christmas"] = "textures/entity/chest/christmas",
+                
+                ["copper"] = "textures/entity/chest/copper",
+                ["waxed_copper"] = "textures/entity/chest/copper",
+                ["copper_exposed"] = "textures/entity/chest/copper_exposed",
+                ["copper_oxidized"] = "textures/entity/chest/copper_oxidized",
+                ["copper_weathered"] = "textures/entity/chest/copper_weathered",
             },
             ["chest_left"] = new Dictionary<string, string>
             {
@@ -344,8 +350,6 @@ namespace CraftSharp.Resource.BedrockEntity
             }
 
             var fileName = GetFullTexturePath(localTexturePath);
-            
-            Debug.Log($"Expand local texture path {localTexturePath} to full path {fileName}");
             
             // Load texture from file
             texture = Resources.Load<Texture2D>("vanilla/minecraft/" + localTexturePath);

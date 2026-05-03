@@ -43,16 +43,13 @@ public static class AssetProvider
         try
         {
             await _resourcePackManager.LoadPacks_Mod(new DataLoadFlag(), UpdateStatus);
+            Loaded = true;
         }
         catch (Exception e)
         {
+            Loaded = false;
             Debug.LogError($"Error loading resources: {e}");
         }
-        finally
-        {
-            Loaded = true;
-        }
-
     }
 
     public static GameObject LoadModel(string blockStateId, Vector3 blockPos, Dictionary<string, string> prop, byte cullFlags)

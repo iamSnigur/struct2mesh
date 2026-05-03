@@ -57,6 +57,7 @@ public class BlockStateLoader
                 foreach (var wrapperData in variant.Value.DataArray)
                 {
                     var variantWrapper = BlockModelWrapper.FromJson(manager, wrapperData);
+                    Assert.IsNotNull(variantWrapper, $"Variant wrapper should not be null! Check model: {blockId}");
                     particleTexture = variantWrapper.model.ResolveTextureName(PARTICLE_TEXTURE_NAME);
                     geometries.Add(new BlockGeometryBuilder(variantWrapper).Build());
                 }
@@ -64,6 +65,7 @@ public class BlockStateLoader
             else // Only a single item...
             {
                 var variantWrapper = BlockModelWrapper.FromJson(manager, variant.Value);
+                Assert.IsNotNull(variantWrapper, $"Variant wrapper should not be null! Check model: {blockId}");
                 particleTexture = variantWrapper.model.ResolveTextureName(PARTICLE_TEXTURE_NAME);
                 geometries.Add(new BlockGeometryBuilder(variantWrapper).Build());
             }
@@ -107,6 +109,7 @@ public class BlockStateLoader
                     partWrapper = BlockModelWrapper.FromJson(manager, applyData);
                 }
 
+                Assert.IsNotNull(partWrapper, $"Multipart wrapper should not be null! Check model: {blockId}");
                 particleTexture = partWrapper.model.ResolveTextureName(PARTICLE_TEXTURE_NAME);
 
                 if (part.Properties.TryGetValue("when", out var whenData))
