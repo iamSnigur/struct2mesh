@@ -29,6 +29,29 @@ namespace CraftSharp.Resource
                     Quaternion.AngleAxis(eularsXYZ.z, Vector3.forward);
         }
 
+        /// <summary>
+        /// Rotates vertices around a pivot point on multiple axes (X, Y, Z) sequentially.
+        /// Applies non-zero rotations only, in X → Y → Z order.
+        /// </summary>
+        /// <param name="verts">Vertices to rotate in-place</param>
+        /// <param name="pivot">Pivot point in world space (pre-scaled)</param>
+        /// <param name="angles">Rotation angles in degrees for each axis (X, Y, Z)</param>
+        /// <param name="rescale">Whether to rescale vertices after rotation (matches single-axis behavior)</param>
+        public static void RotateVerticesXYZ(ref float3[] verts, float3 pivot, float3 angles, bool rescale)
+        {
+            // Apply each axis independently, matching single-axis RotateVertices behavior.
+            // Order: X → Y → Z (Minecraft's convention for multi-axis element rotation).
+            // Swaped X and Z just because it works that way
+            if (angles.x != 0f)
+                RotateVertices(ref verts, pivot, Axis.Z, angles.x, rescale);
+
+            if (angles.y != 0f)
+                RotateVertices(ref verts, pivot, Axis.Y, angles.y, rescale);
+
+            if (angles.z != 0f)
+                RotateVertices(ref verts, pivot, Axis.X, angles.z, rescale);
+        }
+        
         // For Bedrock Edition Entity models
         public static void RotateVertices(ref float3[] original, float3 pivot, float3 eularsXYZ, float downScale = 1F, int startIndex = 0)
         {
