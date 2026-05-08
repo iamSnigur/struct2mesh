@@ -1,0 +1,6 @@
+{
+	"parent": "block/bed_foot",
+	"textures": {
+		"all": "block/light_blue_bed"
+	}
+}

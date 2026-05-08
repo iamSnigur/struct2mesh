@@ -96,6 +96,13 @@ namespace CraftSharp.Rendering
             DateTime today = DateTime.Today;
 
             if (today is { Month: 12, Day: >= 24 and <= 26 }) return "christmas";
+
+            return blockId.Path switch
+            {
+                "trapped_chest" => "trapped",
+                "waxed_copper_chest" => "copper",
+                _ => "normal"
+            };
             
             return blockId == TRAPPED_CHEST_ID ? "trapped" : "normal";
         }

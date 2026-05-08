@@ -23,6 +23,8 @@ public class BlockEntityPrefabs : ScriptableObject
         _blockEntityPrefabs.Add(BlockEntityType.CHEST_ID,             ChestPrefab);
         _blockEntityPrefabs.Add(BlockEntityType.ENDER_CHEST_ID,       ChestPrefab);
         _blockEntityPrefabs.Add(BlockEntityType.TRAPPED_CHEST_ID,     ChestPrefab);
+        _blockEntityPrefabs.Add(new ResourceLocation("copper_chest"),     ChestPrefab);
+        _blockEntityPrefabs.Add(new ResourceLocation("waxed_copper_chest"),     ChestPrefab);
         _blockEntityPrefabs.Add(BlockEntityType.SHULKER_BOX_ID,       ShulkerBoxPrefab);
         _blockEntityPrefabs.Add(BlockEntityType.BANNER_ID,            BannerPrefab);
         _blockEntityPrefabs.Add(BlockEntityType.SIGN_ID,              SignPrefab);

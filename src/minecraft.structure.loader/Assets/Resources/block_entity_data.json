@@ -384,5 +384,29 @@
     "blocks": [
       "minecraft:vault"
     ]
+  },
+  "minecraft:copper_chest": {
+    "protocol_id": 44,
+    "blocks": [
+      "minecraft:copper_chest"
+    ]
+  },
+  "minecraft:waxed_copper_chest": {
+    "protocol_id": 45,
+    "blocks": [
+      "minecraft:waxed_copper_chest"
+    ]
+  },
+  "minecraft:copper_golem_statue": {
+    "protocol_id": 46,
+    "blocks": [
+      "minecraft:copper_golem_statue"
+    ]
+  },
+  "minecraft:copper_golem_star": {
+    "protocol_id": 47,
+    "blocks": [
+      "minecraft:copper_golem_star"
+    ]
   }
 }

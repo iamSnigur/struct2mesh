@@ -1,5 +1,7 @@
 {
-  "textures": {
-    "particle": "minecraft:item/structure_void"
-  }
+    "parent": "block/cube_all",
+    "textures": {
+        "particle": "block/structure_void",
+        "all": "block/structure_void"
+    }
 }

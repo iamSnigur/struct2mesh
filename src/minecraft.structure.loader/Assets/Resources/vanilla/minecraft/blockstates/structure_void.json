@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "minecraft:block/structure_void"
-    }
-  }
+	"variants": {
+		"": {
+			"model": "minecraft:block/structure_void"
+		}
+	}
 }

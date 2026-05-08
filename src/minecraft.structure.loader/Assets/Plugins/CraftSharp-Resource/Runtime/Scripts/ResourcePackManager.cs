@@ -153,11 +153,11 @@ namespace CraftSharp.Resource
             updateStatus("resource.info.gather_resource", string.Empty);
             foreach (var pack in packs) pack.GatherResources(this);
 
-            var textureFlag = new DataLoadFlag();
+            var textureFlag = new DataLoadFlag(); // remove this flag
             
             updateStatus("resource.info.create_texture", string.Empty);
-            //await GenerateAtlas(textureFlag);
-            await LoadAtlas();
+            await GenerateAtlas(textureFlag);
+            //await LoadAtlas();
             
             // Load block models...
             updateStatus("resource.info.load_block_model", string.Empty);
@@ -592,6 +592,8 @@ namespace CraftSharp.Resource
         private static (Texture2D, TextureAnimationInfo?) LoadSingleTexture_Mod(string texFilePath)
         {
             Texture2D tex = Resources.Load<Texture2D>(texFilePath);
+            Assert.IsNotNull(tex, $"Failed to load texture: {texFilePath}");
+            
             TextAsset metaAsset = Resources.Load<TextAsset>($"{texFilePath}.png");
             
             if (metaAsset is null) 
@@ -837,7 +839,7 @@ namespace CraftSharp.Resource
             await GatherTexturesCoroutine(textureIdSet, modelFilePaths);
             
             // Append liquid textures, which are not referenced in model files, but will be used by fluid mesh
-            foreach (var texId in FluidGeometry.LiquidTextures)
+            foreach (ResourceLocation texId in FluidGeometry.LiquidTextures)
             {
                 if (TextureFileTable.ContainsKey(texId))
                 {
@@ -846,7 +848,7 @@ namespace CraftSharp.Resource
             }
 
             // Array for textures in collection, plus one blank texture, one empty texture and one missing texture
-            var totalCount = 3 + textureIdSet.Count;
+            int totalCount = 3 + textureIdSet.Count;
             var textureInfos = new (Texture2D, TextureAnimationInfo?)[totalCount];
             var ids = new ResourceLocation[totalCount];
 
@@ -881,30 +883,29 @@ namespace CraftSharp.Resource
         
         private IEnumerator GatherTexturesCoroutine(HashSet<ResourceLocation> textureIdSet, List<string> modelFilePaths)
         {
-            foreach (var modelFilePath in modelFilePaths)
+            foreach (string? modelFilePath in modelFilePaths)
             {
                 TextAsset jsonModel = Resources.Load<TextAsset>(modelFilePath);
                 
                 Assert.IsNotNull(jsonModel, "Cannot find json model file: " + modelFilePath);
-                
-                var model = Json.ParseJson(jsonModel.text);
+                Json.JSONData? model = Json.ParseJson(jsonModel.text);
 
                 if (model.Properties.TryGetValue("textures", out var textureObj))
                 {
-                    var texData = textureObj.Properties;
+                    Dictionary<string, Json.JSONData>? texData = textureObj.Properties;
+                    
                     foreach (var texItem in texData)
                     {
-                        if (!texItem.Value.StringValue.StartsWith('#'))
-                        {
-                            var texId = ResourceLocation.FromString(texItem.Value.StringValue);
+                        if (texItem.Value.StringValue.StartsWith('#')) 
+                            continue;
+                        
+                        ResourceLocation texId = ResourceLocation.FromString(texItem.Value.StringValue);
 
-                            if (TextureFileTable.ContainsKey(texId))
-                                textureIdSet.Add(texId);
-                        }
+                        if (TextureFileTable.ContainsKey(texId))
+                            textureIdSet.Add(texId);
                     }
                 }
 
-                // optional: yield to avoid freezing frame if list is large
                 yield return null;
             }
         }
@@ -918,7 +919,7 @@ namespace CraftSharp.Resource
             List<Texture2D> atlases = new();
 
             const int totalVolume = ATLAS_SIZE * ATLAS_SIZE;
-            var maxContentVolume = (int)(totalVolume * 0.97F);
+            const int maxContentVolume = (int)(totalVolume * 0.97F);
 
             do
             {
@@ -928,6 +929,7 @@ namespace CraftSharp.Resource
                 while (lastTexIndex < totalCount - 1)
                 {
                     var (nextTex, _) = textureInfos[lastTexIndex + 1];
+                    Assert.IsNotNull(nextTex, $"Texture {ids[lastTexIndex + 1]} is null");
                     curVolume += nextTex.width * nextTex.height;
 
                     if (curVolume < maxContentVolume)

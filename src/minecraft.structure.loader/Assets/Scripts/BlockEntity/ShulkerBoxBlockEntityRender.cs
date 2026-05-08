@@ -38,6 +38,19 @@ namespace CraftSharp.Rendering
                 var headTransform = render.transform.GetChild(0).GetChild(1); // Get 3rd child, and hide it
                 headTransform.gameObject.SetActive(false);
 
+                if (blockState.Properties.TryGetValue("facing", out var facingVal))
+                {
+                    float rotationDeg = facingVal switch
+                    {
+                        "north" => 0f,
+                        "east"  => 90f,
+                        "south" => 180f,
+                        "west"  => 270f,
+                        _       => 0f
+                    };
+                    render.transform.localEulerAngles = new Vector3(0f, rotationDeg, 0f);
+                }
+                
                 var textureName = blockState.BlockId.Path switch
                 {
                     "shulker_box"            => "default",

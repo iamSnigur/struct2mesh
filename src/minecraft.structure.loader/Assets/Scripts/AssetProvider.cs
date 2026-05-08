@@ -14,6 +14,13 @@ public static class AssetProvider
     private static BlockStateLoader _blockStateLoader;
     private static World _world;
 
+    // asset(resource) path type-json
+    
+    public class ResourcePath
+    {  
+        //public List<string>
+    }
+    
     public static bool Loaded { get; private set; }
 
     public static async UniTaskVoid Init()
@@ -96,6 +103,8 @@ public static class AssetProvider
 
     private static void LoadModels(ResourcePackManager manager, string packPath, string subFolder)
     {
+        // get all paths to models with subfolders included
+        // from prerecorded json file
         string path = $"{packPath}/{subFolder}";
 
         foreach (TextAsset json in Resources.LoadAll<TextAsset>(path))
@@ -120,7 +129,7 @@ public static class AssetProvider
     {
         string texturesPath = "vanilla/minecraft/textures";
         LoadTextures(manager, texturesPath, "block");
-        LoadTextures(manager, texturesPath, "entity");
+        //LoadTextures(manager, texturesPath, "entity");
 
         string modelsPath = "vanilla/minecraft/models";
         LoadModels(manager, modelsPath, "block");

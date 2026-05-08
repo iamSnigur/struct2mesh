@@ -15,7 +15,6 @@ public class NbtReader : MonoBehaviour
     
     private void Awake()
     {
-        Debug.Log(Application.persistentDataPath);
         _parent = new GameObject("Structure");
         StructureVolume = new StructureVolume();
     }
