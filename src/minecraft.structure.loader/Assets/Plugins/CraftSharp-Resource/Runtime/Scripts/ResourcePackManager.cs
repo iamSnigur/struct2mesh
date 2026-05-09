@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Core.AssetManagement.External;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Unity.Mathematics;
@@ -89,15 +90,13 @@ namespace CraftSharp.Resource
         // Block/item atlas
         // atlasArrays[0]: Not mipped
         // atlasArrays[1]: Mipped
-        private readonly Texture2DArray[] atlasArrays = new Texture2DArray[2];
+        private Texture2DArray atlasArray;
 
         private Texture2DArray? destroyTextureArray;
 
         private readonly List<ResourcePack> packs = new();
 
         public static readonly ResourcePackManager Instance = new();
-
-        private readonly AtlasLoader AtlasLoader; 
         
         private ResourcePackManager()
         {
@@ -107,8 +106,6 @@ namespace CraftSharp.Resource
 
             // Item model loader
             ItemModelLoader = new ItemModelLoader(this);
-
-            AtlasLoader = new AtlasLoader();
         }
 
         public void AddPack(ResourcePack pack) => packs.Add(pack);
@@ -153,10 +150,8 @@ namespace CraftSharp.Resource
             updateStatus("resource.info.gather_resource", string.Empty);
             foreach (var pack in packs) pack.GatherResources(this);
 
-            var textureFlag = new DataLoadFlag(); // remove this flag
-            
             updateStatus("resource.info.create_texture", string.Empty);
-            await GenerateAtlas(textureFlag);
+            await GenerateAtlas();
             //await LoadAtlas();
             
             // Load block models...
@@ -175,7 +170,7 @@ namespace CraftSharp.Resource
                 }
             }
 
-            if (preloadEntityTextures)
+            /*if (preloadEntityTextures)
             {
                 textureFlag.Finished = false;
 
@@ -187,7 +182,7 @@ namespace CraftSharp.Resource
                 });
 
                 while (!textureFlag.Finished) { Thread.Sleep(100); }
-            }
+            }*/
 
             updateStatus("resource.info.resource_loaded", string.Empty);
 
@@ -564,10 +559,8 @@ namespace CraftSharp.Resource
             return texAtlasTable[ResourceLocation.INVALID];
         }
 
-        public Texture2DArray GetAtlasArray(bool mipped)
-        {
-            return mipped ? atlasArrays[1] : atlasArrays[0];
-        }
+        public Texture2DArray GetAtlasArray(bool mipped) => 
+            atlasArray;
 
         public Texture2DArray? GetDestroyTextureArray()
         {
@@ -589,12 +582,14 @@ namespace CraftSharp.Resource
             }
         }
 
-        private static (Texture2D, TextureAnimationInfo?) LoadSingleTexture_Mod(string texFilePath)
+        private static async Task<(Texture2D, TextureAnimationInfo?)> LoadSingleTexture_Mod(string texFilePath)
         {
-            Texture2D tex = Resources.Load<Texture2D>(texFilePath);
+            Texture2D tex = await AssetProvider.LoadByReferenceAsync<Texture2D>(texFilePath); 
+            //Resources.Load<Texture2D>(texFilePath);
             Assert.IsNotNull(tex, $"Failed to load texture: {texFilePath}");
-            
-            TextAsset metaAsset = Resources.Load<TextAsset>($"{texFilePath}.png");
+
+            TextAsset metaAsset = await AssetProvider.LoadByReferenceAsync<TextAsset>($"{texFilePath}.png");
+            //TextAsset metaAsset = Resources.Load<TextAsset>($"{texFilePath}.png");
             
             if (metaAsset is null) 
                 return (tex, null);
@@ -820,17 +815,15 @@ namespace CraftSharp.Resource
             texAtlasTable.Clear();
             AtlasTableHelper.LoadAtlasTable(texAtlasTable);
             ResourceRequest request0 = Resources.LoadAsync<Texture2DArray>("vanilla/minecraft/textures/block_atlas");
-            ResourceRequest request1 = Resources.LoadAsync<Texture2DArray>("vanilla/minecraft/textures/block_atlas_mip");
 
-            await UniTask.WhenAll(request0.ToUniTask(), request1.ToUniTask());
+            await request0.ToUniTask();
             
-            atlasArrays[0] = request0.asset as Texture2DArray ?? throw new NullReferenceException("Can't load baked atlas vanilla/minecraft/textures/block_atlas");
-            atlasArrays[1] = request1.asset as Texture2DArray ?? throw new NullReferenceException("Can't load baked atlas vanilla/minecraft/textures/block_atlas_mip");
+            atlasArray = request0.asset as Texture2DArray ?? throw new NullReferenceException("Can't load baked atlas vanilla/minecraft/textures/block_atlas");
         }
         
-        private async UniTask GenerateAtlas(DataLoadFlag atlasGenFlag)
+        private async UniTask GenerateAtlas()
         {
-            var textureIdSet = new HashSet<ResourceLocation>();
+            HashSet<ResourceLocation> textureIdSet = new();
 
             // Collect referenced textures
             List<string> modelFilePaths = BlockModelFileTable.Values.ToList();
@@ -850,7 +843,7 @@ namespace CraftSharp.Resource
             // Array for textures in collection, plus one blank texture, one empty texture and one missing texture
             int totalCount = 3 + textureIdSet.Count;
             var textureInfos = new (Texture2D, TextureAnimationInfo?)[totalCount];
-            var ids = new ResourceLocation[totalCount];
+            ResourceLocation[] ids = new ResourceLocation[totalCount];
 
             int count = 0;
 
@@ -873,19 +866,20 @@ namespace CraftSharp.Resource
             {
                 string? texFilePath = TextureFileTable[textureId];
                 ids[count] = textureId;
-                textureInfos[count++] = LoadSingleTexture_Mod(texFilePath);
+                textureInfos[count++] = await LoadSingleTexture_Mod(texFilePath);
 
                 if (count % 5 == 0) await UniTask.NextFrame();
             }
             
-            await GenerateAtlas_Internal(atlasGenFlag, textureInfos, ids);
+            await GenerateAtlas_Internal(textureInfos, ids);
         }
         
-        private IEnumerator GatherTexturesCoroutine(HashSet<ResourceLocation> textureIdSet, List<string> modelFilePaths)
+        private async UniTask GatherTexturesCoroutine(HashSet<ResourceLocation> textureIdSet, List<string> modelFilePaths)
         {
             foreach (string? modelFilePath in modelFilePaths)
             {
-                TextAsset jsonModel = Resources.Load<TextAsset>(modelFilePath);
+                TextAsset? jsonModel = await AssetProvider.LoadByReferenceAsync<TextAsset>(modelFilePath);
+                //TextAsset jsonModel = Resources.Load<TextAsset>(modelFilePath);
                 
                 Assert.IsNotNull(jsonModel, "Cannot find json model file: " + modelFilePath);
                 Json.JSONData? model = Json.ParseJson(jsonModel.text);
@@ -906,11 +900,11 @@ namespace CraftSharp.Resource
                     }
                 }
 
-                yield return null;
+                await UniTask.Yield();
             }
         }
         
-        private IEnumerator GenerateAtlas_Internal(DataLoadFlag atlasGenFlag, (Texture2D, TextureAnimationInfo?)[] textureInfos, ResourceLocation[] ids)
+        private IEnumerator GenerateAtlas_Internal((Texture2D, TextureAnimationInfo?)[] textureInfos, ResourceLocation[] ids)
         {
             texAtlasTable.Clear(); // Clear previously loaded table...
             
@@ -948,7 +942,7 @@ namespace CraftSharp.Resource
                 }
 
                 // Then we go stitch 'em        (inclusive)..(exclusive)
-                var textureInfosConsumed = textureInfos[curTexIndex..(lastTexIndex + 1)];
+                (Texture2D, TextureAnimationInfo?)[] textureInfosConsumed = textureInfos[curTexIndex..(lastTexIndex + 1)];
 
                 // First assign a placeholder
                 var atlas = new Texture2D(ATLAS_SIZE, ATLAS_SIZE)
@@ -956,7 +950,7 @@ namespace CraftSharp.Resource
                     filterMode = FilterMode.Point
                 };
 
-                var rects = atlas.PackTextures(textureInfosConsumed.Select(x => x.Item1).ToArray(), 0, ATLAS_SIZE, false);
+                Rect[]? rects = atlas.PackTextures(textureInfosConsumed.Select(x => x.Item1).ToArray(), 0, ATLAS_SIZE, false);
 
                 if (atlas.width != ATLAS_SIZE || atlas.height != ATLAS_SIZE)
                 {
@@ -1004,9 +998,6 @@ namespace CraftSharp.Resource
             }
             while (curTexIndex < totalCount);
 
-            // save table
-            
-            
             // mipCount 1 means no mipmapping, mipCount 0 means use maximum level of mipmaps
             // A mipCount of ((int) math.log2(MIN_MIPMAP_SIZE)) + 1 makes sure that all
             // MIN_MIPMAP_SIZE * MIN_MIPMAP_SIZE mipmap chunks are sampled from a single tile
@@ -1088,12 +1079,10 @@ namespace CraftSharp.Resource
 
             AtlasTableHelper.SaveAtlasTable(texAtlasTable);
             Save(atlasArray1, "Assets/Resources/vanilla/minecraft/textures/block_atlas.asset");
-            Save(atlasArray0, "Assets/Resources/vanilla/minecraft/textures/block_atlas_mip.asset");
             
-            atlasArrays[0] = atlasArray0;
-            atlasArrays[1] = atlasArray1;
+            atlasArray = atlasArray0;
             
-            atlasGenFlag.Finished = true;
+            AssetProvider.Release();
         }
 
         private static void Save(Texture2DArray array, string path)

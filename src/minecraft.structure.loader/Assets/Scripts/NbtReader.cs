@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core.AssetManagement;
 using CraftSharp;
 using UnityEngine;
 using fNbt;
@@ -22,7 +23,7 @@ public class NbtReader : MonoBehaviour
 #if UNITY_EDITOR
     private IEnumerator Start()
     {
-        while (!AssetProvider.Loaded)
+        while (!MinecraftAssetProvider.Loaded)
             yield return null;
 
         LoadNbtStructure();
@@ -53,9 +54,9 @@ public class NbtReader : MonoBehaviour
         
         Structure structure = ParseNbtStructure(nbtFile);
         UpdateStructureVolume(structure);
-        AssetProvider.ClearBlockStatePalette();
-        AssetProvider.UpdateBlockStatePalette(structure.Palette);
-        AssetProvider.UpdateColorRules(ColorRules);
+        MinecraftAssetProvider.ClearBlockStatePalette();
+        MinecraftAssetProvider.UpdateBlockStatePalette(structure.Palette);
+        MinecraftAssetProvider.UpdateColorRules(ColorRules);
         Construct(structure);
     }
     
@@ -200,7 +201,7 @@ public class NbtReader : MonoBehaviour
 
             byte cullFlags = StructureVolume.GetCullFlagsFor(block.Pos);
             
-            GameObject blockView = AssetProvider.LoadModel(paletteEntry.Name, block.Pos, paletteEntry.Properties, cullFlags);
+            GameObject blockView = MinecraftAssetProvider.LoadModel(paletteEntry.Name, block.Pos, paletteEntry.Properties, cullFlags);
             Transform cachedTransform = blockView.transform;
             cachedTransform.parent = _parent.transform;
             cachedTransform.position = block.Pos;

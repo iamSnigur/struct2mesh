@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 313d9be37ae0412459736a5e5e2e6af6
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: b4d5edf91102516a250ec86c8723ebe3
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -60,8 +60,10 @@ MonoBehaviour:
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
+  - {fileID: 11400000, guid: 09d26c42988a872429fb758860d37f28, type: 2}
   - {fileID: 11400000, guid: 6a53a95f0823b4c4590ee9998eacefd3, type: 2}
   - {fileID: 11400000, guid: e77e93708c8f20749adac9f31d670f8f, type: 2}
+  - {fileID: 11400000, guid: 03b5b236d0d5ebd42a296e230a5d30be, type: 2}
   - {fileID: 11400000, guid: 10de223d37945ab4a9d9337ffcd463fa, type: 2}
   m_BuildSettings:
     m_LogResourceManagerExceptions: 1
@@ -102,6 +104,8 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - block_texture
+    - texture-source
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 6568ce0bd850e604fa3e1979c4a074f0, type: 2}
