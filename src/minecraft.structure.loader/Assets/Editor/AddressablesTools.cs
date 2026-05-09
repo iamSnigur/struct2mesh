@@ -11,7 +11,7 @@ namespace Editor
         public static void LabelGroup()
         {
             AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.Settings;
-            string groupName = "In-Editor Assets";
+            string groupName = "Textures";
             string label = "texture-source";
 
             settings.AddLabel(label);
@@ -24,10 +24,8 @@ namespace Editor
                 return;
             }
 
-            foreach (AddressableAssetEntry entry in group.entries)
-            {
+            foreach (AddressableAssetEntry entry in group.entries) 
                 entry.SetLabel(label, true, true);
-            }
 
             AssetDatabase.SaveAssets();
             Debug.Log($"Labeled {group.entries.Count} entries in '{groupName}' with '{label}'");
@@ -36,7 +34,7 @@ namespace Editor
         [MenuItem("Tools/Addressables/Clean Asset Addresses")]
         public static void CleanAddresses()
         {
-            var settings = AddressableAssetSettingsDefaultObject.Settings;
+            AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.Settings;
             if (settings == null)
             {
                 Debug.LogError("Addressables settings not found.");
@@ -49,7 +47,7 @@ namespace Editor
             {
                 if (group == null) continue;
 
-                foreach (var entry in group.entries)
+                foreach (AddressableAssetEntry entry in group.entries)
                 {
                     string address = entry.address;
 
@@ -58,6 +56,9 @@ namespace Editor
 
                     if (address.EndsWith(".png"))
                         address = address[..^".png".Length];
+                    
+                    if (address.EndsWith(".json"))
+                        address = address[..^".json".Length];
 
                     if (address != entry.address)
                     {

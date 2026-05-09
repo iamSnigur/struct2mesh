@@ -6,6 +6,7 @@ using CraftSharp;
 using CraftSharp.Resource;
 using CraftSharp.Resource.BedrockEntity;
 using Cysharp.Threading.Tasks;
+using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -70,7 +71,7 @@ namespace Core.AssetManagement
         {
             try
             {
-                await _resourcePackManager.LoadPacks_Mod(new DataLoadFlag(), UpdateStatus);
+                await _resourcePackManager.LoadPacks_Mod(UpdateStatus);
                 Loaded = true;
             }
             catch (Exception e)
@@ -111,55 +112,38 @@ namespace Core.AssetManagement
             return gameObject;
         }
 
-        private static async UniTask LoadTextures(ResourcePackManager manager, string packPath, string subFolder)
+        private static async UniTask LoadLocations(Dictionary<ResourceLocation, string> table, string manifestAddress)
         {
-            TextAsset manifest = await AssetProvider.LoadByReferenceAsync<TextAsset>(TEXTURES_MANIFEST_ADDRESS);
+            TextAsset manifest = await AssetProvider.LoadByReferenceAsync<TextAsset>(manifestAddress);
+            var manifestIndexes = JsonConvert.DeserializeObject<Dictionary<string, string>>(manifest.text);
 
-            string path = $"{packPath}/{subFolder}";
-
-            foreach (Texture2D texture in Resources.LoadAll<Texture2D>(path))
+            table.Clear();
+            
+            foreach (var index in manifestIndexes)
             {
-                ResourceLocation identifier = new(subFolder + '/' + texture.name);
-                manager.TextureFileTable[identifier] = path + '/' + texture.name;
+                ResourceLocation identifier = new(index.Key);
+                table[identifier] = index.Value;
             }
         }
+        
+        private static async UniTask LoadTextures(ResourcePackManager manager) => 
+            await LoadLocations(manager.TextureFileTable, TEXTURES_MANIFEST_ADDRESS);
 
-        private static void LoadModels(ResourcePackManager manager, string packPath, string subFolder)
-        {
-            // load from models_index.json
-            string path = $"{packPath}/{subFolder}";
+        private static async UniTask LoadModels(ResourcePackManager manager) => 
+            await LoadLocations(manager.BlockModelFileTable, MODELS_MANIFEST_ADDRESS);
 
-            foreach (TextAsset json in Resources.LoadAll<TextAsset>(path))
-            {
-                ResourceLocation identifier = new(subFolder + '/' + json.name);
-                manager.BlockModelFileTable[identifier] = path + '/' + json.name;
-            }
-        }
-
-        private static void LoadBlockstates(ResourcePackManager manager, string packPath, string subFolder)
-        {
-            // load from blockstates_index.json
-            string path = $"{packPath}/{subFolder}";
-
-            foreach (TextAsset json in Resources.LoadAll<TextAsset>(path))
-            {
-                ResourceLocation identifier = new(json.name);
-                manager.BlockStateFileTable[identifier] = path + json.name;
-            }
-        }
+        private static async UniTask LoadBlockstates(ResourcePackManager manager) => 
+            await LoadLocations(manager.BlockStateFileTable, BLOCKSTATES_MANIFEST_ADDRESS);
 
         private static async UniTask GatherResources(ResourcePackManager manager)
         {
-            string texturesPath = "vanilla/minecraft/textures";
-            LoadTextures(manager, texturesPath, "block");
+            UniTask texturesTask = LoadTextures(manager);
+            UniTask modelsTask = LoadModels(manager);
+            UniTask blockstatesTask = LoadBlockstates(manager);
 
-            string modelsPath = "vanilla/minecraft/models";
-            LoadModels(manager, modelsPath, "block");
-
-            string blockstatesPath = "vanilla/minecraft/blockstates";
-            LoadBlockstates(manager, blockstatesPath, "");
-
-            await Resources.UnloadUnusedAssets().ToUniTask();
+            await UniTask.WhenAll(texturesTask, modelsTask, blockstatesTask);
+            //AssetProvider.Release();
+            //await Resources.UnloadUnusedAssets().ToUniTask();
         }
 
         public static void UpdateBlockStatePalette(List<NbtReader.PaletteEntry> structurePalette)

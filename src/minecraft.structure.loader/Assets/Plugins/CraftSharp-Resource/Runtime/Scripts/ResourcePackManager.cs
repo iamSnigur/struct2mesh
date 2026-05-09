@@ -145,7 +145,7 @@ namespace CraftSharp.Resource
             return $" {Mathf.RoundToInt(curCount / (float) totalCount * 100)}%";
         }
 
-        public async UniTask LoadPacks_Mod(DataLoadFlag flag, Action<string, string> updateStatus, bool preloadEntityTextures = false)
+        public async UniTask LoadPacks_Mod(Action<string, string> updateStatus, bool preloadEntityTextures = false)
         {
             updateStatus("resource.info.gather_resource", string.Empty);
             foreach (var pack in packs) pack.GatherResources(this);
@@ -185,8 +185,6 @@ namespace CraftSharp.Resource
             }*/
 
             updateStatus("resource.info.resource_loaded", string.Empty);
-
-            flag.Finished = true;
 
             Loaded = true;
         }
@@ -878,6 +876,7 @@ namespace CraftSharp.Resource
         {
             foreach (string? modelFilePath in modelFilePaths)
             {
+                Debug.Log(modelFilePath);
                 TextAsset? jsonModel = await AssetProvider.LoadByReferenceAsync<TextAsset>(modelFilePath);
                 //TextAsset jsonModel = Resources.Load<TextAsset>(modelFilePath);
                 

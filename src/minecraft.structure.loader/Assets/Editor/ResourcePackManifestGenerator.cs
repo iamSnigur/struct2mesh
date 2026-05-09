@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Unity.Plastic.Newtonsoft.Json;
 using UnityEditor;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
@@ -10,11 +11,11 @@ namespace Editor
 {
     public static class ResourcePackManifestGenerator
     {
-        private const string TEXTURES_GROUP_NAME   = "Textures";
-        private const string MODELS_GROUP_NAME     = "Models";
+        private const string TEXTURES_GROUP_NAME    = "Textures";
+        private const string MODELS_GROUP_NAME      = "Models";
         private const string BLOCKSTATES_GROUP_NAME = "Blockstates";
 
-        private const string OUTPUT_FOLDER = "Assets/Resources";
+        private const string OUTPUT_FOLDER = "Assets/Resources_moved";
 
         [MenuItem("Tools/ResourcePack/Generate Textures Index")]
         public static void GenerateTexturesIndex() =>
@@ -60,7 +61,7 @@ namespace Editor
                 return;
             }
 
-            var group = settings.FindGroup(groupName);
+            AddressableAssetGroup group = settings.FindGroup(groupName);
             if (group == null)
             {
                 Debug.LogError($"Addressables group '{groupName}' not found.");
@@ -69,44 +70,19 @@ namespace Editor
 
             Dictionary<string, string> dict = new();
 
-            foreach (var entry in group.entries)
+            foreach (AddressableAssetEntry entry in group.entries)
             {
                 if (entry.IsFolder) 
                     continue;
 
                 (string key, string value) = selector(entry);
                 
-                if (!dict.ContainsKey(key))
-                    dict[key] = value;
-                else
+                if (!dict.TryAdd(key, value))
                     Debug.LogWarning($"[{groupName}] Duplicate key '{key}' — skipping '{value}'");
             }
 
-            WriteJson(outputFileName, dict);
-        }
-
-        private static void WriteJson(string fileName, Dictionary<string, string> dict)
-        {
-            Directory.CreateDirectory(OUTPUT_FOLDER);
-
-            // manual serialization keeps insertion order and avoids JsonUtility limitations
-            var sb = new System.Text.StringBuilder();
-            sb.AppendLine("{");
-
-            int i = 0;
-            foreach (KeyValuePair<string, string> kvp in dict)
-            {
-                string comma = ++i < dict.Count ? "," : "";
-                sb.AppendLine($"  \"{kvp.Key}\": \"{kvp.Value}\"{comma}");
-            }
-
-            sb.AppendLine("}");
-
-            string fullPath = Path.Combine(OUTPUT_FOLDER, fileName);
-            File.WriteAllText(fullPath, sb.ToString());
-            AssetDatabase.Refresh();
-
-            Debug.Log($"Written {dict.Count} entries → {fullPath}");
+            string json = JsonConvert.SerializeObject(dict, Formatting.Indented);
+            File.WriteAllText(Path.Combine(OUTPUT_FOLDER, outputFileName), json);
         }
     }
 }

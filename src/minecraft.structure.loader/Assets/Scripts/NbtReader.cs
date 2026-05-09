@@ -26,7 +26,7 @@ public class NbtReader : MonoBehaviour
         while (!MinecraftAssetProvider.Loaded)
             yield return null;
 
-        LoadNbtStructure();
+        //LoadNbtStructure();
     }
 #endif
 

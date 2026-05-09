@@ -6,7 +6,7 @@ public class Bootstrapper : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
-        MinecraftAssetProvider.WarmupAsync().Forget();
-        //MinecraftAssetProvider.Init().Forget();
+        //MinecraftAssetProvider.WarmupAsync().Forget();
+        MinecraftAssetProvider.Init().Forget();
     }
 }
