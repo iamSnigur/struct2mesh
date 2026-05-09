@@ -19,7 +19,8 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "fNbt.dll"
+        "fNbt.dll",
+        "Unity.Plastic.Newtonsoft.Json.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [],
