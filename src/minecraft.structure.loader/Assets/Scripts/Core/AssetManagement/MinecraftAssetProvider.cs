@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Core.AssetManagement.External;
 using CraftSharp;
 using CraftSharp.Resource;
-using CraftSharp.Resource.BedrockEntity;
 using Cysharp.Threading.Tasks;
-using Unity.Plastic.Newtonsoft.Json;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -42,7 +40,7 @@ namespace Core.AssetManagement
             await PreloadResources();
         
             //await BedrockEntityResourceManager.Instance.LoadEntityResources(new DataLoadFlag(), (_) => {});
-            BedrockEntityResourceManager.Instance.LoadBlockEntityModelFolder("block_entity");
+            //BedrockEntityResourceManager.Instance.LoadBlockEntityModelFolder("block_entity");
         }
 
         public static async UniTaskVoid WarmupAsync()
@@ -78,10 +76,11 @@ namespace Core.AssetManagement
             {
                 Loaded = false;
                 Debug.LogError($"Error loading resources: {e}");
+                AssetProvider.Release();
             }
         }
 
-        public static GameObject LoadModel(string blockStateId, Vector3 blockPos, Dictionary<string, string> prop, byte cullFlags)
+        public static async UniTask WarmupBlockGeometriesAsync(string blockStateId)
         {
             ResourceLocation location = new(blockStateId);
             string blockstateJson = _resourcePackManager.BlockStateFileTable[location];
@@ -89,9 +88,12 @@ namespace Core.AssetManagement
             RenderType renderType = BlockStateHelper.GetRenderTypeFor(blockStateId);
             OffsetType offsetType = BlockStateHelper.GetOffsetType(blockStateId);
 
-            _blockStateLoader
-                .LoadBlockStateModel(location, blockstateJson, renderType, offsetType);
-
+            await _blockStateLoader.LoadBlockStateModel(location, blockstateJson, renderType, offsetType);
+        }
+        
+        public static GameObject LoadModel(string blockStateId, Vector3 blockPos, Dictionary<string, string> prop, byte cullFlags)
+        {
+            ResourceLocation location = new(blockStateId);
             BlockState[] blockStates = BlockStatePaletteAdapter.Instance.GetAll(location);
             BlockStatePredicate predicate = new(prop);
 
@@ -114,7 +116,7 @@ namespace Core.AssetManagement
 
         private static async UniTask LoadLocations(Dictionary<ResourceLocation, string> table, string manifestAddress)
         {
-            TextAsset manifest = await AssetProvider.LoadByReferenceAsync<TextAsset>(manifestAddress);
+            TextAsset manifest = await AssetProvider.LoadByAddressAsync<TextAsset>(manifestAddress);
             var manifestIndexes = JsonConvert.DeserializeObject<Dictionary<string, string>>(manifest.text);
 
             table.Clear();

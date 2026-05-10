@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using Core.AssetManagement.External;
 using CraftSharp;
 using CraftSharp.Resource;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -16,9 +17,9 @@ public class BlockStateLoader
         _manager = manager;
     }
 
-    public void LoadBlockStateModel(ResourceLocation blockId, string path, RenderType renderType, OffsetType offsetType)
+    public async UniTask LoadBlockStateModel(ResourceLocation blockId, string path, RenderType renderType, OffsetType offsetType)
     {
-        TextAsset blockstateModelJson = Resources.Load<TextAsset>(path);
+        TextAsset blockstateModelJson = await AssetProvider.LoadByAddressAsync<TextAsset>(path);
             
         Assert.IsNotNull(blockstateModelJson, "Cannot find block state model file: " + path);
             

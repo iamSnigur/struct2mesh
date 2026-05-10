@@ -1,4 +1,5 @@
-using System.IO;
+using Core.AssetManagement.External;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace CraftSharp.Resource
@@ -19,7 +20,7 @@ namespace CraftSharp.Resource
         /// <br/>
         /// Model file table should be loaded before calling this.
         /// </summary>
-        public JsonModel LoadBlockModel(ResourceLocation identifier)
+        public async UniTask<JsonModel> LoadBlockModel(ResourceLocation identifier)
         {
             // Check if this model is loaded already...
             if (manager.BlockModelTable.TryGetValue(identifier, out var blockModel))
@@ -28,8 +29,8 @@ namespace CraftSharp.Resource
             if (manager.BlockModelFileTable.TryGetValue(identifier, out string modelFilePath))
             {
                 JsonModel model = new();
-                string modelText = Resources.Load<TextAsset>(modelFilePath).text;
-                Json.JSONData modelData = Json.ParseJson(modelText);
+                TextAsset textAsset = await AssetProvider.LoadByAddressAsync<TextAsset>(modelFilePath);
+                Json.JSONData modelData = Json.ParseJson(textAsset.text);
 
                 bool containsTextures = modelData.Properties.ContainsKey("textures");
                 bool containsElements = modelData.Properties.ContainsKey("elements");
@@ -46,7 +47,7 @@ namespace CraftSharp.Resource
                     else
                     {
                         // This parent is not yet loaded, load it...
-                        parentModel = LoadBlockModel(parentIdentifier);
+                        parentModel = await LoadBlockModel(parentIdentifier);
                     }
 
                     // Inherit parent textures...

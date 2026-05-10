@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Core.AssetManagement;
 using CraftSharp;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using fNbt;
 
@@ -26,7 +27,7 @@ public class NbtReader : MonoBehaviour
         while (!MinecraftAssetProvider.Loaded)
             yield return null;
 
-        //LoadNbtStructure();
+        LoadNbtStructure();
     }
 #endif
 
@@ -47,8 +48,6 @@ public class NbtReader : MonoBehaviour
             return;
         }
 
-        Resources.UnloadUnusedAssets();
-        GC.Collect();
         GC.WaitForPendingFinalizers();
         GC.Collect();
         
@@ -57,7 +56,7 @@ public class NbtReader : MonoBehaviour
         MinecraftAssetProvider.ClearBlockStatePalette();
         MinecraftAssetProvider.UpdateBlockStatePalette(structure.Palette);
         MinecraftAssetProvider.UpdateColorRules(ColorRules);
-        Construct(structure);
+        Construct(structure).Forget();
     }
     
     private Structure ParseNbtStructure(NbtFile nbtFile)
@@ -188,10 +187,17 @@ public class NbtReader : MonoBehaviour
         }
     }
     
-    private void Construct(Structure structure)
+    private async UniTaskVoid Construct(Structure structure)
     {
         ClearBlockVisual(_parent);
 
+        List<UniTask> warmupTasks = new(structure.Palette.Count);
+
+        foreach (PaletteEntry entry in structure.Palette) 
+            warmupTasks.Add(MinecraftAssetProvider.WarmupBlockGeometriesAsync(entry.Name));
+
+        await UniTask.WhenAll(warmupTasks);
+        
         foreach (Block block in structure.Blocks)
         {
             PaletteEntry paletteEntry = structure.Palette[block.State];
@@ -209,8 +215,8 @@ public class NbtReader : MonoBehaviour
 
         MeshCombiner meshCombiner = _parent.AddComponent<MeshCombiner>();
         meshCombiner.CreateMultiMaterialMesh = true;
-        //meshCombiner.DestroyCombinedChildren = true;
-        //meshCombiner.CombineMeshes(true);
+        meshCombiner.DestroyCombinedChildren = true;
+        meshCombiner.CombineMeshes(true);
 
         Renderer component = _parent.GetComponent<Renderer>();
         FindFirstObjectByType<CameraController>().SetPivot(component.bounds.center);

@@ -308,6 +308,10 @@ public static class BlockStateHelper
         "minecraft:medium_amethyst_bud",
         "minecraft:large_amethyst_bud",
         "minecraft:amethyst_cluster",
+        
+        "minecraft:spawner",
+        "minecraft:trial_spawner",
+        "minecraft:vault",
     };
 
     public static RenderType GetRenderTypeFor(string blockId)

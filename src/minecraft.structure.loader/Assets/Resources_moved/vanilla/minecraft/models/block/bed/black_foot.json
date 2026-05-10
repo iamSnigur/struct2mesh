@@ -1,5 +1,5 @@
 {
-	"parent": "block/bed_foot",
+	"parent": "block/bed/bed_foot",
 	"textures": {
 		"all": "block/bed/black"
 	}

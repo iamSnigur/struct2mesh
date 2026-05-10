@@ -21,17 +21,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1b240fbd4a0a7b64e800bbbbbfc20414
-    m_Address: vanilla/minecraft/textures/texture_atlas_table.json
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1fb9b830652b0f148b1ce3c5eb380368
-    m_Address: vanilla/minecraft
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4e096f43c071c5541a3cb20f7ab1fd3f
-    m_Address: vanilla/minecraft/textures/block/conduit/wind_vertical.png.mcmeta
+    m_Address: vanilla/minecraft/textures/texture_atlas_table
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -40,18 +30,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 68d9b9d492efa6c4abc6b2de642a49df
+    m_Address: texture_atlas_manifest
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a119eb2380cc60441889947577fcc2f6
     m_Address: block_color_rules
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a145f89b0dc58a14091eec0e598e1f98
-    m_Address: vanilla/minecraft/textures/block/signs/hanging
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ba9d780e17645ff4dab1d8fc17449285
-    m_Address: vanilla/minecraft/textures/block_atlas.asset
+    m_Address: block_atlas
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -60,18 +50,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c2b7f54f9d7fc63498fe797acee5ee86
-    m_Address: vanilla/minecraft/textures/block/conduit/wind.png.mcmeta
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: db365e62a3ebc7944b216a3ba9d33da6
     m_Address: vanilla/minecraft/textures/block_atlas_mip.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f4cd5e52bd1ddad459644dfb8edbaceb
-    m_Address: vanilla
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

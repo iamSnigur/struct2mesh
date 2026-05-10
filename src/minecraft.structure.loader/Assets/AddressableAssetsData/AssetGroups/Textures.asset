@@ -58,7 +58,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 022d40d80f230a348b3cc63c1ce6cc46
-    m_Address: vanilla/minecraft/textures/block/blue_orchid.png.json
+    m_Address: vanilla/minecraft/textures/block/blue_orchid.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -316,7 +316,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0a49164fa2086184e90b219c2ed2e001
-    m_Address: vanilla/minecraft/textures/block/chain_command_block_front.png.json
+    m_Address: vanilla/minecraft/textures/block/chain_command_block_front.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -388,7 +388,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0c100ca08b9c4474eb22f31b0c067fe5
-    m_Address: vanilla/minecraft/textures/block/pink_tulip.png.json
+    m_Address: vanilla/minecraft/textures/block/pink_tulip.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -442,7 +442,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0cf9335c4b445a1448f531a15e4ce2b9
-    m_Address: vanilla/minecraft/textures/block/orange_tulip.png.json
+    m_Address: vanilla/minecraft/textures/block/orange_tulip.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -538,7 +538,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0f572fc259de32841a5a8eff2b74498c
-    m_Address: vanilla/minecraft/textures/block/kelp_plant.png.json
+    m_Address: vanilla/minecraft/textures/block/kelp_plant.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -616,7 +616,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 10d9bb14d900d074292ee5acd35a3501
-    m_Address: vanilla/minecraft/textures/block/cornflower.png.json
+    m_Address: vanilla/minecraft/textures/block/cornflower.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -790,7 +790,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 166df99820947ec41b3612882f46697a
-    m_Address: vanilla/minecraft/textures/block/sweet_berry_bush_stage0.png.json
+    m_Address: vanilla/minecraft/textures/block/sweet_berry_bush_stage0.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -904,7 +904,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1b8a4a189d2bc7443b2a9b5fec2de575
-    m_Address: vanilla/minecraft/textures/block/weathered_copper_lantern.png.json
+    m_Address: vanilla/minecraft/textures/block/weathered_copper_lantern.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -994,13 +994,13 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1e0840614c6da4043a78cfae111f6f17
-    m_Address: vanilla/minecraft/textures/block/copper_lantern.png.json
+    m_Address: vanilla/minecraft/textures/block/copper_lantern.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1e40376281923144f909fe743d8e3497
-    m_Address: vanilla/minecraft/textures/block/chain_command_block_conditional.png.json
+    m_Address: vanilla/minecraft/textures/block/chain_command_block_conditional.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -1060,7 +1060,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1ff393f504a6cd242920242642ddf7f4
-    m_Address: vanilla/minecraft/textures/block/nether_portal.png.json
+    m_Address: vanilla/minecraft/textures/block/nether_portal.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -1120,13 +1120,13 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2333f87f5db9121448bd65ab7e647bda
-    m_Address: vanilla/minecraft/textures/block/chain_command_block_side.png.json
+    m_Address: vanilla/minecraft/textures/block/chain_command_block_side.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 234c4fe45199b8a4bb8206c7d7b457f6
-    m_Address: vanilla/minecraft/textures/block/command_block_back.png.json
+    m_Address: vanilla/minecraft/textures/block/command_block_back.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -1162,7 +1162,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 24594ccbbbbd635408bf71ab6f47d5a9
-    m_Address: vanilla/minecraft/textures/block/lily_of_the_valley.png.json
+    m_Address: vanilla/minecraft/textures/block/lily_of_the_valley.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -1180,7 +1180,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2545301912c8f2345bbeac6cc646c2ad
-    m_Address: vanilla/minecraft/textures/block/crimson_stem.png.json
+    m_Address: vanilla/minecraft/textures/block/crimson_stem.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -1198,7 +1198,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2644f9933792b994698204b3f106dc63
-    m_Address: vanilla/minecraft/textures/block/sculk_sensor_tendril_active.png.json
+    m_Address: vanilla/minecraft/textures/block/sculk_sensor_tendril_active.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -1330,7 +1330,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2a24f126a6abc994c8941ad82fc61fdd
-    m_Address: vanilla/minecraft/textures/block/warped_stem.png.json
+    m_Address: vanilla/minecraft/textures/block/warped_stem.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -1600,7 +1600,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 30eccc6c03d1bd145959efce9dd3b589
-    m_Address: vanilla/minecraft/textures/block/oxeye_daisy.png.json
+    m_Address: vanilla/minecraft/textures/block/oxeye_daisy.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -1709,7 +1709,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 343291eebdf75014eb9a1546b48bcf8b
-    m_Address: vanilla/minecraft/textures/block/acacia_leaves.png.json
+    m_Address: vanilla/minecraft/textures/block/acacia_leaves.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -1979,7 +1979,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3ff4317550e11e742ae73f9c84d159e2
-    m_Address: vanilla/minecraft/textures/block/fire_1.png.json
+    m_Address: vanilla/minecraft/textures/block/fire_1.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -1997,7 +1997,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 407b2f64d53eb5a43aa2ecfb2cab76a6
-    m_Address: vanilla/minecraft/textures/block/water_flow.png.json
+    m_Address: vanilla/minecraft/textures/block/water_flow.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -2045,7 +2045,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 41dfd0a405d08f34d9d0334d72fc41e0
-    m_Address: vanilla/minecraft/textures/block/prismarine.png.json
+    m_Address: vanilla/minecraft/textures/block/prismarine.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -2093,7 +2093,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 42c383afb024a9141b27ef58f1ef1d10
-    m_Address: vanilla/minecraft/textures/block/sculk_vein.png.json
+    m_Address: vanilla/minecraft/textures/block/sculk_vein.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -2111,7 +2111,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 432f8783b869b4f49b7a5fad842c0d97
-    m_Address: vanilla/minecraft/textures/block/redstone_dust_overlay.png.json
+    m_Address: vanilla/minecraft/textures/block/redstone_dust_overlay.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -2321,7 +2321,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 49ddeb54c08fb24478cae3dd0213eb83
-    m_Address: vanilla/minecraft/textures/block/chain_command_block_back.png.json
+    m_Address: vanilla/minecraft/textures/block/chain_command_block_back.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -2399,7 +2399,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4c0a1eede47cf664e93739b720fec7a8
-    m_Address: vanilla/minecraft/textures/block/tall_seagrass_bottom.png.json
+    m_Address: vanilla/minecraft/textures/block/tall_seagrass_bottom.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -2417,7 +2417,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4c90ca592c9ce2045bce18ee91be5236
-    m_Address: vanilla/minecraft/textures/block/redstone_dust_line1.png.json
+    m_Address: vanilla/minecraft/textures/block/redstone_dust_line1.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -2506,6 +2506,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f2e04af0c23c1a4d92e71c5e9246afa
+    m_Address: vanilla/minecraft/textures/block/conduit/wind.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - texture-source
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4f688f10e376a61489b3775b34cbdcdd
     m_Address: vanilla/minecraft/textures/block/tube_coral_block
     m_ReadOnly: 0
@@ -2585,7 +2591,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 518af4459f228774d8c4f2656e97b2b2
-    m_Address: vanilla/minecraft/textures/block/lantern.png.json
+    m_Address: vanilla/minecraft/textures/block/lantern.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -2645,7 +2651,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 529172ccd2e1bf8449e7e26589402c95
-    m_Address: vanilla/minecraft/textures/block/mangrove_roots_top.png.json
+    m_Address: vanilla/minecraft/textures/block/mangrove_roots_top.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -2657,7 +2663,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 533e854c17c3e814fae108e4c237ef54
-    m_Address: vanilla/minecraft/textures/block/redstone_dust_line0.png.json
+    m_Address: vanilla/minecraft/textures/block/redstone_dust_line0.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -2705,7 +2711,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 550ddba58a3e64a46a330b10a3a491c3
-    m_Address: vanilla/minecraft/textures/block/repeating_command_block_front.png.json
+    m_Address: vanilla/minecraft/textures/block/repeating_command_block_front.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -2717,7 +2723,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 55436ef98ecb297478776ec558731bc5
-    m_Address: vanilla/minecraft/textures/block/repeating_command_block_side.png.json
+    m_Address: vanilla/minecraft/textures/block/repeating_command_block_side.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -3047,7 +3053,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5f98820e35d7edc4e83a6bea14cb6a5e
-    m_Address: vanilla/minecraft/textures/block/oxidized_copper_lantern.png.json
+    m_Address: vanilla/minecraft/textures/block/oxidized_copper_lantern.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -3113,7 +3119,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 610e239a9b8a7d84db202c132d445dba
-    m_Address: vanilla/minecraft/textures/block/closed_eyeblossom.png.json
+    m_Address: vanilla/minecraft/textures/block/closed_eyeblossom.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -3371,7 +3377,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 67c81aba86c678f448dd167480fa5fbf
-    m_Address: vanilla/minecraft/textures/block/smoker_front_on.png.json
+    m_Address: vanilla/minecraft/textures/block/smoker_front_on.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -3389,7 +3395,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6866613658d6c7d4587da85f832d2773
-    m_Address: vanilla/minecraft/textures/block/soul_fire_0.png.json
+    m_Address: vanilla/minecraft/textures/block/soul_fire_0.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -3401,7 +3407,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 69052ea2fc82c6545b15f08eb2fdfc9e
-    m_Address: vanilla/minecraft/textures/block/blast_furnace_front_on.png.json
+    m_Address: vanilla/minecraft/textures/block/blast_furnace_front_on.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -3425,7 +3431,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6a434e0d6b81d7546ad52c0990485e45
-    m_Address: vanilla/minecraft/textures/block/brown_mushroom.png.json
+    m_Address: vanilla/minecraft/textures/block/brown_mushroom.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -3461,7 +3467,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6b3c27ccf8e0e3945969bd2a1cc59161
-    m_Address: vanilla/minecraft/textures/block/oak_leaves.png.json
+    m_Address: vanilla/minecraft/textures/block/oak_leaves.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -3521,7 +3527,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6e0c617b921f8cb46b52453dc14938d7
-    m_Address: vanilla/minecraft/textures/block/seagrass.png.json
+    m_Address: vanilla/minecraft/textures/block/seagrass.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -3575,7 +3581,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6f59bf6df980704409b99c1fa33d57be
-    m_Address: vanilla/minecraft/textures/block/fire_0.png.json
+    m_Address: vanilla/minecraft/textures/block/fire_0.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -3605,7 +3611,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7042abc910be4fa44adf20cfc7d28ae2
-    m_Address: vanilla/minecraft/textures/block/sculk.png.json
+    m_Address: vanilla/minecraft/textures/block/sculk.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -3636,12 +3642,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 71440420dc7b88a4a9c0c9a748dbfa1c
     m_Address: vanilla/minecraft/textures/block/birch_shelf
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - texture-source
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 71cf5b4214304421a2ffae1c363696f7
-    m_Address: vanilla/minecraft/textures/entity
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -3755,7 +3755,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 75233ec0f7db23e4ab8bb98d2d814397
-    m_Address: vanilla/minecraft/textures/block/soul_campfire_log_lit.png.json
+    m_Address: vanilla/minecraft/textures/block/soul_campfire_log_lit.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -3773,7 +3773,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 762f5eb3b17583b41bede84cea7143bf
-    m_Address: vanilla/minecraft/textures/block/command_block_front.png.json
+    m_Address: vanilla/minecraft/textures/block/command_block_front.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -3857,7 +3857,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 77873c3165044324a93d0cf8fafce910
-    m_Address: vanilla/minecraft/textures/block/sculk_shrieker_can_summon_inner_top.png.json
+    m_Address: vanilla/minecraft/textures/block/sculk_shrieker_can_summon_inner_top.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -4013,7 +4013,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7c8fa25328719c5429786996d950bfb4
-    m_Address: vanilla/minecraft/textures/block/sculk_catalyst_top_bloom.png.json
+    m_Address: vanilla/minecraft/textures/block/sculk_catalyst_top_bloom.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -4187,7 +4187,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 811ccf264cb78a34bb1cb8160476413d
-    m_Address: vanilla/minecraft/textures/block/lava_still.png.json
+    m_Address: vanilla/minecraft/textures/block/lava_still.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -4223,7 +4223,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 81bd5c9bcccb56e48a05188b426e35fb
-    m_Address: vanilla/minecraft/textures/block/jungle_leaves.png.json
+    m_Address: vanilla/minecraft/textures/block/jungle_leaves.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -4253,7 +4253,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 82efaea3617e4544a9392c8804884449
-    m_Address: vanilla/minecraft/textures/block/sculk_catalyst_side_bloom.png.json
+    m_Address: vanilla/minecraft/textures/block/sculk_catalyst_side_bloom.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -4355,13 +4355,13 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 857533efa507a184ca73f0cecd833b17
-    m_Address: vanilla/minecraft/textures/block/tripwire.png.json
+    m_Address: vanilla/minecraft/textures/block/tripwire.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 85a70e2588f8a9a4e9544ccb386c7d6e
-    m_Address: vanilla/minecraft/textures/block/lava_flow.png.json
+    m_Address: vanilla/minecraft/textures/block/lava_flow.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -4457,7 +4457,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 891928a7296f50e46bb3b44c04704885
-    m_Address: vanilla/minecraft/textures/block/azure_bluet.png.json
+    m_Address: vanilla/minecraft/textures/block/azure_bluet.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -4709,7 +4709,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 91992ea6e87bff5488434731c53a930c
-    m_Address: vanilla/minecraft/textures/block/sculk_sensor_tendril_inactive.png.json
+    m_Address: vanilla/minecraft/textures/block/sculk_sensor_tendril_inactive.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -4721,7 +4721,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 919e39be56a342747b59391c94b8c8bc
-    m_Address: vanilla/minecraft/textures/block/exposed_copper_lantern.png.json
+    m_Address: vanilla/minecraft/textures/block/exposed_copper_lantern.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -4925,7 +4925,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 98214a579c84b1e4281738101f6b16f0
-    m_Address: vanilla/minecraft/textures/block/water_still.png.json
+    m_Address: vanilla/minecraft/textures/block/water_still.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -4937,7 +4937,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 986abbe6dc1c68e429261bd382b03012
-    m_Address: vanilla/minecraft/textures/block/cherry_leaves.png.json
+    m_Address: vanilla/minecraft/textures/block/cherry_leaves.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -5099,7 +5099,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9e889f6aee6757e4ea3b53b9b643a59a
-    m_Address: vanilla/minecraft/textures/block/spruce_leaves.png.json
+    m_Address: vanilla/minecraft/textures/block/spruce_leaves.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -5135,7 +5135,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9f9187773d123894cb13f4c01d1a1491
-    m_Address: vanilla/minecraft/textures/block/repeating_command_block_back.png.json
+    m_Address: vanilla/minecraft/textures/block/repeating_command_block_back.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -5165,7 +5165,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a011898d74e6ea54681de6dd44281ceb
-    m_Address: vanilla/minecraft/textures/block/mangrove_roots_side.png.json
+    m_Address: vanilla/minecraft/textures/block/mangrove_roots_side.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -5224,8 +5224,13 @@ MonoBehaviour:
     m_SerializedLabels:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a145f89b0dc58a14091eec0e598e1f98
+    m_Address: vanilla/minecraft/textures/block/signs/hanging
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a151f87256715314da3ddff54e5c2650
-    m_Address: vanilla/minecraft/textures/block/soul_lantern.png.json
+    m_Address: vanilla/minecraft/textures/block/soul_lantern.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -5243,7 +5248,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a272e63f1d6949b409f9d64e8547f83a
-    m_Address: vanilla/minecraft/textures/block/birch_leaves.png.json
+    m_Address: vanilla/minecraft/textures/block/birch_leaves.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -5274,6 +5279,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a34879e4f889de640ad5c0ad098e29ce
     m_Address: vanilla/minecraft/textures/block/cartography_table_side3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - texture-source
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a367dbd1eddc2c744bfa9f801dbab8d2
+    m_Address: vanilla/minecraft/textures/block/conduit/wind_vertical.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -5309,7 +5320,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a47ea310ce07f0b44b97fb1bbd75d2f6
-    m_Address: vanilla/minecraft/textures/block/red_mushroom.png.json
+    m_Address: vanilla/minecraft/textures/block/red_mushroom.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -5351,7 +5362,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a61935c59605c3841a8ce312c1e1ce4f
-    m_Address: vanilla/minecraft/textures/block/crimson_fungus.png.json
+    m_Address: vanilla/minecraft/textures/block/crimson_fungus.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -5447,7 +5458,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a8c9fc7fb0fba2249bcac911516dcfb3
-    m_Address: vanilla/minecraft/textures/block/allium.png.json
+    m_Address: vanilla/minecraft/textures/block/allium.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -5507,7 +5518,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aab2cb54b56d16b48a8432a69ee7fc75
-    m_Address: vanilla/minecraft/textures/block/tall_seagrass_top.png.json
+    m_Address: vanilla/minecraft/textures/block/tall_seagrass_top.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -5687,7 +5698,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: af879397170b2584bb0d4f7a11da0fef
-    m_Address: vanilla/minecraft/textures/block/soul_campfire_fire.png.json
+    m_Address: vanilla/minecraft/textures/block/soul_campfire_fire.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -5759,7 +5770,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b190b2300ff743546a3fd643483e8f71
-    m_Address: vanilla/minecraft/textures/block/soul_fire_1.png.json
+    m_Address: vanilla/minecraft/textures/block/soul_fire_1.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -5861,7 +5872,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b4888810041796542a0f8ad52c350ed9
-    m_Address: vanilla/minecraft/textures/block/medium_amethyst_bud.png.json
+    m_Address: vanilla/minecraft/textures/block/medium_amethyst_bud.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -6011,19 +6022,13 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b96dbea747ecdd943b3bdc8dbb58fb79
-    m_Address: vanilla/minecraft/textures/block/azalea_leaves.png.json
+    m_Address: vanilla/minecraft/textures/block/azalea_leaves.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b9712f14f31e22e4ca2ab95ffded64c4
     m_Address: vanilla/minecraft/textures/block/crafting_table_side
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - texture-source
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b9b681b66731d67468f1657be7724ab0
-    m_Address: vanilla/minecraft/textures
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -6035,7 +6040,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ba0a75dd82178a34995ffb1d1b0a7e1b
-    m_Address: vanilla/minecraft/textures/block/command_block_conditional.png.json
+    m_Address: vanilla/minecraft/textures/block/command_block_conditional.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -6059,7 +6064,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: baad7ca8904f58444bef4888ee155dfc
-    m_Address: vanilla/minecraft/textures/block/command_block_side.png.json
+    m_Address: vanilla/minecraft/textures/block/command_block_side.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -6173,7 +6178,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bdd1326412d9b444db9af4698fc473f7
-    m_Address: vanilla/minecraft/textures/block/dark_oak_leaves.png.json
+    m_Address: vanilla/minecraft/textures/block/dark_oak_leaves.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -6239,7 +6244,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bebaf0a726845f449ade70cb3254927a
-    m_Address: vanilla/minecraft/textures/block/warped_fungus.png.json
+    m_Address: vanilla/minecraft/textures/block/warped_fungus.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -6311,7 +6316,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c0f1770c80a92e240b985dd6e1de4ed0
-    m_Address: vanilla/minecraft/textures/block/cactus_top.png.json
+    m_Address: vanilla/minecraft/textures/block/cactus_top.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -6341,7 +6346,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c1d428765ba98ef49b981d7b5b883ce1
-    m_Address: vanilla/minecraft/textures/block/open_eyeblossom.png.json
+    m_Address: vanilla/minecraft/textures/block/open_eyeblossom.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -6419,7 +6424,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c54df92aa6dcc6744ba9ea8a424a272b
-    m_Address: vanilla/minecraft/textures/block/redstone_dust_dot.png.json
+    m_Address: vanilla/minecraft/textures/block/redstone_dust_dot.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -6443,7 +6448,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c65e55ad027d07740b80cce51d5a44f3
-    m_Address: vanilla/minecraft/textures/block/mangrove_leaves.png.json
+    m_Address: vanilla/minecraft/textures/block/mangrove_leaves.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -6461,7 +6466,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c71b27ea825d191419e7eeb958ab15b7
-    m_Address: vanilla/minecraft/textures/block/wither_rose.png.json
+    m_Address: vanilla/minecraft/textures/block/wither_rose.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -6605,19 +6610,19 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cbfaaedd02be3904f9bdeb2d3b543aed
-    m_Address: vanilla/minecraft/textures/block/white_tulip.png.json
+    m_Address: vanilla/minecraft/textures/block/white_tulip.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cc568abbad8f94f4390ff1e532cd7b46
-    m_Address: vanilla/minecraft/textures/block/campfire_log_lit.png.json
+    m_Address: vanilla/minecraft/textures/block/campfire_log_lit.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cc660e9eac0880445a2351c0a0adc3d1
-    m_Address: vanilla/minecraft/textures/block/nether_sprouts.png.json
+    m_Address: vanilla/minecraft/textures/block/nether_sprouts.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -6689,7 +6694,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cf32f7c9596a89045a1abe4ddc4516a1
-    m_Address: vanilla/minecraft/textures/block/cactus_side.png.json
+    m_Address: vanilla/minecraft/textures/block/cactus_side.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -6743,7 +6748,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d0306d9a530c7e84cacb3496e9c29200
-    m_Address: vanilla/minecraft/textures/block/kelp.png.json
+    m_Address: vanilla/minecraft/textures/block/kelp.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -6833,7 +6838,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d3022e01e236a9e41ae78c475eed69cc
-    m_Address: vanilla/minecraft/textures/block/campfire_fire.png.json
+    m_Address: vanilla/minecraft/textures/block/campfire_fire.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -6917,7 +6922,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d4f8bee6f2803ea4c826ad481744108e
-    m_Address: vanilla/minecraft/textures/block/poppy.png.json
+    m_Address: vanilla/minecraft/textures/block/poppy.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -7139,7 +7144,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dbd2a5febf9c1834b849712f7933bd4d
-    m_Address: vanilla/minecraft/textures/block/torchflower.png.json
+    m_Address: vanilla/minecraft/textures/block/torchflower.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -7241,7 +7246,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: df0c0cf1fe58b4c49a547e90ea5853b2
-    m_Address: vanilla/minecraft/textures/block/pale_oak_leaves.png.json
+    m_Address: vanilla/minecraft/textures/block/pale_oak_leaves.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -7301,7 +7306,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e121167e46453a143a4dc35c06b67944
-    m_Address: vanilla/minecraft/textures/block/repeating_command_block_conditional.png.json
+    m_Address: vanilla/minecraft/textures/block/repeating_command_block_conditional.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -7343,7 +7348,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e1e50d1680ba32a4f88507abb9d1c707
-    m_Address: vanilla/minecraft/textures/block/sea_lantern.png.json
+    m_Address: vanilla/minecraft/textures/block/sea_lantern.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -7384,6 +7389,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3624230d808c06498effec373d88ce2
+    m_Address: vanilla/minecraft/textures/block/bed/light_blue
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e3f6253fe39a6944d86b854b6cf39726
     m_Address: vanilla/minecraft/textures/block/campfire_log
     m_ReadOnly: 0
@@ -7415,7 +7425,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e49201aeb96291841a96095ba77e5830
-    m_Address: vanilla/minecraft/textures/block/cactus_flower.png.json
+    m_Address: vanilla/minecraft/textures/block/cactus_flower.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -7481,7 +7491,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e649ba31249ab15429e18bee5312765a
-    m_Address: vanilla/minecraft/textures/block/firefly_bush_emissive.png.json
+    m_Address: vanilla/minecraft/textures/block/firefly_bush_emissive.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -7499,7 +7509,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e692be3d83fb846418fa34ab7f274ad2
-    m_Address: vanilla/minecraft/textures/block/large_amethyst_bud.png.json
+    m_Address: vanilla/minecraft/textures/block/large_amethyst_bud.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -7613,7 +7623,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e906c06a46d9ffb44880361f4795e52c
-    m_Address: vanilla/minecraft/textures/block/small_amethyst_bud.png.json
+    m_Address: vanilla/minecraft/textures/block/small_amethyst_bud.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -7643,7 +7653,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e9e38c937140f95458b2f431e50a9431
-    m_Address: vanilla/minecraft/textures/block/stonecutter_saw.png.json
+    m_Address: vanilla/minecraft/textures/block/stonecutter_saw.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -7721,7 +7731,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ed9ddb11051ce194691d9ce668899d8a
-    m_Address: vanilla/minecraft/textures/block/glass.png.json
+    m_Address: vanilla/minecraft/textures/block/glass.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -7781,7 +7791,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f023d42089ca434478f8e04d21f0d7ee
-    m_Address: vanilla/minecraft/textures/block/dandelion.png.json
+    m_Address: vanilla/minecraft/textures/block/dandelion.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -7961,7 +7971,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f52709bd95ad54647a5c3f01c3c5f3f4
-    m_Address: vanilla/minecraft/textures/block/respawn_anchor_top.png.json
+    m_Address: vanilla/minecraft/textures/block/respawn_anchor_top.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -7997,7 +8007,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f5f1a8274b5b8c0488828d9e63a72043
-    m_Address: vanilla/minecraft/textures/block/amethyst_cluster.png.json
+    m_Address: vanilla/minecraft/textures/block/amethyst_cluster.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -8063,7 +8073,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f81db0d20a273a0498536712e4c2b1d5
-    m_Address: vanilla/minecraft/textures/block/red_tulip.png.json
+    m_Address: vanilla/minecraft/textures/block/red_tulip.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -8189,7 +8199,13 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fbc7805a1bb914446b04b8d962f78163
-    m_Address: vanilla/minecraft/textures/block/sculk_shrieker_inner_top.png.json
+    m_Address: vanilla/minecraft/textures/block/sculk_shrieker_inner_top.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - texture-source
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fbfbb12c713282a4b97825c5cd32c854
+    m_Address: vanilla/minecraft/textures/block/bed/yellow
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -8225,7 +8241,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fce0e86251654d949baaeaba4fdefcca
-    m_Address: vanilla/minecraft/textures/block/magma.png.json
+    m_Address: vanilla/minecraft/textures/block/magma.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source
@@ -8237,7 +8253,7 @@ MonoBehaviour:
     - texture-source
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fdbd31d98c24fe1488f54604dabd3989
-    m_Address: vanilla/minecraft/textures/block/flowering_azalea_leaves.png.json
+    m_Address: vanilla/minecraft/textures/block/flowering_azalea_leaves.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - texture-source

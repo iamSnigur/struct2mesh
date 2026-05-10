@@ -20,7 +20,7 @@
     "overrideReferences": true,
     "precompiledReferences": [
         "fNbt.dll",
-        "Unity.Plastic.Newtonsoft.Json.dll"
+        "Newtonsoft.Json.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [],

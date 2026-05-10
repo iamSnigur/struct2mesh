@@ -1,6 +1,6 @@
 {
-	"parent": "block/bed_head",
+	"parent": "block/bed/bed_head",
 	"textures": {
-		"all": "entity/bed/green"
+		"all": "block/bed/green"
 	}
 }

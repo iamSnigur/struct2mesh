@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceLocations;
 
 namespace Core.AssetManagement.External
 {
@@ -15,6 +17,16 @@ namespace Core.AssetManagement.External
             Addressables.InitializeAsync();
         }
 
+        public static async UniTask<bool> KeyExistsAsync<T>(string key)
+        {
+            AsyncOperationHandle<IList<IResourceLocation>> handle = Addressables.LoadResourceLocationsAsync(key, typeof(T));
+            await handle.Task;
+
+            bool exists = handle.Status == AsyncOperationStatus.Succeeded && handle.Result.Count > 0;
+            Addressables.Release(handle);
+            return exists;
+        }
+        
         public static void Release()
         {
             foreach (List<AsyncOperationHandle> loadedHandle in _loadedHandles.Values)
@@ -23,16 +35,17 @@ namespace Core.AssetManagement.External
             
             _cachedHandles.Clear();
             _loadedHandles.Clear();
+            Debug.Log("Asset handles released");
         }
         
-        public static async UniTask<T> LoadByReferenceAsync<T>(string referenceKey) where T : class
+        public static async UniTask<T> LoadByAddressAsync<T>(string key) where T : class
         {
-            if (_cachedHandles.TryGetValue(referenceKey, out AsyncOperationHandle cachedHandle))
+            if (_cachedHandles.TryGetValue(key, out AsyncOperationHandle cachedHandle))
                 return cachedHandle.Result as T;
             
-            AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(referenceKey);
+            AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(key);
 
-            return await LoadAndCacheHandle(referenceKey, handle);
+            return await LoadAndCacheHandle(key, handle);
         }
 
         private static async UniTask<T> LoadAndCacheHandle<T>(string reference, AsyncOperationHandle<T> handle) where T : class
