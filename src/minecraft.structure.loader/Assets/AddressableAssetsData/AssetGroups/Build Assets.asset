@@ -20,11 +20,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1b240fbd4a0a7b64e800bbbbbfc20414
-    m_Address: vanilla/minecraft/textures/texture_atlas_table
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 55bc4cb04ed8e1e448e0f3553a3fe695
     m_Address: blockstates_manifest_index
     m_ReadOnly: 0
@@ -47,11 +42,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bd617faf44bc8df4e93ffc0f389f8717
     m_Address: models_manifest_index
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: db365e62a3ebc7944b216a3ba9d33da6
-    m_Address: vanilla/minecraft/textures/block_atlas_mip.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

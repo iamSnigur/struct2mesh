@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 313d9be37ae0412459736a5e5e2e6af6
   m_currentHash:
     serializedVersion: 2
-    Hash: b4d5edf91102516a250ec86c8723ebe3
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -35,7 +35,7 @@ MonoBehaviour:
   m_NonRecursiveBuilding: 1
   m_AllowNestedBundleFolders: 0
   m_CCDEnabled: 0
-  m_maxConcurrentWebRequests: 3
+  m_maxConcurrentWebRequests: 5
   m_UseUWRForLocalBundles: 0
   m_BundleTimeout: 0
   m_BundleRetryCount: 0
@@ -104,8 +104,6 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
-    - block_texture
-    - texture-source
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 6568ce0bd850e604fa3e1979c4a074f0, type: 2}

@@ -2,7 +2,7 @@
   "format_version": "1.21.11",
   "texture_size": [64, 64],
   "textures": {
-    "0": "block/copper_golem"
+    "0": "block/copper_golem/copper_golem"
   },
   "elements": [
     {
