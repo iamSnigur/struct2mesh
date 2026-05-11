@@ -17,13 +17,12 @@ public class BlockStateLoader
         _manager = manager;
     }
 
-    public async UniTask LoadBlockStateModel(ResourceLocation blockId, string path, RenderType renderType, OffsetType offsetType)
+    public async UniTask<AssetHandle<TextAsset>> LoadBlockStateModel(ResourceLocation blockId, string path, RenderType renderType, OffsetType offsetType)
     {
-        TextAsset blockstateModelJson = await AssetProvider.LoadByAddressAsync<TextAsset>(path);
-            
-        Assert.IsNotNull(blockstateModelJson, "Cannot find block state model file: " + path);
-            
-        Json.JSONData stateData = Json.ParseJson(blockstateModelJson.text);
+        AssetHandle<TextAsset> handle = await AssetProvider.LoadAssetHandleAsync<TextAsset>(path);
+        
+        Assert.IsNotNull(handle.Asset, "Cannot find block state model file: " + path);
+        Json.JSONData stateData = Json.ParseJson(handle.Asset.text);
 
         if (stateData.Properties.TryGetValue("variants", out var val))
         {
@@ -35,6 +34,8 @@ public class BlockStateLoader
         }
         else
             Debug.LogWarning("Invalid state model file: " + path);
+
+        return handle;
     }
 
     private static void LoadVariantsFormat(

@@ -10,7 +10,6 @@ using fNbt;
 public class NbtReader : MonoBehaviour
 {
     public string StructureNbtFilePath;
-    public TextAsset ColorRules;
     
     private GameObject _parent;
     public static StructureVolume StructureVolume;
@@ -55,7 +54,7 @@ public class NbtReader : MonoBehaviour
         UpdateStructureVolume(structure);
         MinecraftAssetProvider.ClearBlockStatePalette();
         MinecraftAssetProvider.UpdateBlockStatePalette(structure.Palette);
-        MinecraftAssetProvider.UpdateColorRules(ColorRules);
+        MinecraftAssetProvider.UpdateColorRules();
         Construct(structure).Forget();
     }
     
@@ -191,6 +190,8 @@ public class NbtReader : MonoBehaviour
     {
         ClearBlockVisual(_parent);
 
+        MinecraftAssetProvider.ReleaseBlockStateHandles();
+        
         List<UniTask> warmupTasks = new(structure.Palette.Count);
 
         foreach (PaletteEntry entry in structure.Palette) 

@@ -17,10 +17,12 @@ namespace Core.AssetManagement
         private const string TEXTURES_MANIFEST_ADDRESS = "textures_manifest_index";
         private const string MODELS_MANIFEST_ADDRESS = "models_manifest_index";
         private const string BLOCKSTATES_MANIFEST_ADDRESS = "blockstates_manifest_index";
+        private const string COLOR_RULES_ADDRESS = "block_color_rules";
         
         private static ResourcePackManager _resourcePackManager;
         private static BlockStateLoader _blockStateLoader;
         private static World _world;
+        private static TextAsset _colorRules;
 
         public static bool Loaded { get; private set; }
 
@@ -33,33 +35,16 @@ namespace Core.AssetManagement
             _resourcePackManager = ResourcePackManager.Instance;
             _blockStateLoader = new BlockStateLoader(_resourcePackManager);
 
-            BlockEntityPrefabs entityPrefabs = Resources.Load<BlockEntityPrefabs>("BlockEntity/Prefabs/BlockEntityPrefabs");
-            BlockMeshBuilder.InjectDependencies(entityPrefabs);
+            //BlockEntityPrefabs entityPrefabs = Resources.Load<BlockEntityPrefabs>("BlockEntity/Prefabs/BlockEntityPrefabs");
+            //BlockMeshBuilder.InjectDependencies(entityPrefabs);
 
+            _colorRules = await AssetProvider.LoadByAddressAsync<TextAsset>(COLOR_RULES_ADDRESS);
+            
             await GatherResources(_resourcePackManager);
             await PreloadResources();
         
             //await BedrockEntityResourceManager.Instance.LoadEntityResources(new DataLoadFlag(), (_) => {});
             //BedrockEntityResourceManager.Instance.LoadBlockEntityModelFolder("block_entity");
-        }
-
-        public static async UniTaskVoid WarmupAsync()
-        {
-            string key = "texture-source"; // "Assets/Resources_moved/vanilla/minecraft/textures/block"
-            
-            AsyncOperationHandle<IList<IResourceLocation>> handle = 
-                Addressables.LoadResourceLocationsAsync(key, typeof(Texture2D));
-
-            Debug.Log("Start location loading...");
-            
-            await handle.ToUniTask();
-            
-            Debug.Log($"Finished location loading with {handle.Result.Count} results");
-
-            foreach (IResourceLocation location in handle.Result) 
-                Debug.Log(location.PrimaryKey);
-            
-            Addressables.Release(handle);
         }
 
         private static void UpdateStatus(string status, string progress) =>
@@ -80,6 +65,16 @@ namespace Core.AssetManagement
             }
         }
 
+        private static readonly List<AssetHandle<TextAsset>> s_blockstateHandles = new();
+
+        public static void ReleaseBlockStateHandles()
+        {
+            foreach (AssetHandle<TextAsset> handle in s_blockstateHandles) 
+                handle.Release();
+            
+            s_blockstateHandles.Clear();
+        }
+        
         public static async UniTask WarmupBlockGeometriesAsync(string blockStateId)
         {
             ResourceLocation location = new(blockStateId);
@@ -88,7 +83,7 @@ namespace Core.AssetManagement
             RenderType renderType = BlockStateHelper.GetRenderTypeFor(blockStateId);
             OffsetType offsetType = BlockStateHelper.GetOffsetType(blockStateId);
 
-            await _blockStateLoader.LoadBlockStateModel(location, blockstateJson, renderType, offsetType);
+            s_blockstateHandles.Add(await _blockStateLoader.LoadBlockStateModel(location, blockstateJson, renderType, offsetType));
         }
         
         public static GameObject LoadModel(string blockStateId, Vector3 blockPos, Dictionary<string, string> prop, byte cullFlags)
@@ -144,8 +139,6 @@ namespace Core.AssetManagement
             UniTask blockstatesTask = LoadBlockstates(manager);
 
             await UniTask.WhenAll(texturesTask, modelsTask, blockstatesTask);
-            //AssetProvider.Release();
-            //await Resources.UnloadUnusedAssets().ToUniTask();
         }
 
         public static void UpdateBlockStatePalette(List<NbtReader.PaletteEntry> structurePalette)
@@ -158,12 +151,12 @@ namespace Core.AssetManagement
 
             BlockStatePaletteAdapter.Instance.InjectEntries();
         
-            BlockEntityTypePaletteAdapter.Instance.PrepareData();
+            //BlockEntityTypePaletteAdapter.Instance.PrepareData();
         }
 
-        public static void UpdateColorRules(TextAsset colorRules) =>
-            BlockStatePaletteAdapter.Instance.UpdateColorRules(colorRules);
-    
+        public static void UpdateColorRules() => 
+            BlockStatePaletteAdapter.Instance.UpdateColorRules(_colorRules);
+
         public static void ClearBlockStatePalette()
         {
             _resourcePackManager.StateModelTable.Clear();

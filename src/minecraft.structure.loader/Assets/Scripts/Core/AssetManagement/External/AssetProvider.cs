@@ -38,6 +38,22 @@ namespace Core.AssetManagement.External
             Debug.Log("Asset handles released");
         }
         
+        public static async UniTask<AssetHandle<T>> LoadAssetHandleAsync<T>(string key) where T : class
+        {
+            /*if (_cachedHandles.TryGetValue(key, out AsyncOperationHandle cachedHandle))
+                return cachedHandle.Result as T;*/
+            
+            AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(key);
+
+            AssetHandle<T> assetHandle = new()
+            {
+                Handle = handle,
+                Asset = await handle,
+            };
+            
+            return assetHandle;
+        }
+        
         public static async UniTask<T> LoadByAddressAsync<T>(string key) where T : class
         {
             if (_cachedHandles.TryGetValue(key, out AsyncOperationHandle cachedHandle))

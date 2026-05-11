@@ -87,9 +87,6 @@ namespace CraftSharp.Resource
 
         public bool Loaded { get; private set; } = false;
 
-        // Block/item atlas
-        // atlasArrays[0]: Not mipped
-        // atlasArrays[1]: Mipped
         private Texture2DArray atlasArray;
 
         private Texture2DArray? destroyTextureArray;
@@ -145,7 +142,7 @@ namespace CraftSharp.Resource
             return $" {Mathf.RoundToInt(curCount / (float) totalCount * 100)}%";
         }
 
-        public async UniTask LoadPacks_Mod(Action<string, string> updateStatus, bool preloadEntityTextures = false)
+        public async UniTask LoadPacks_Mod(Action<string, string> updateStatus)
         {
             updateStatus("resource.info.gather_resource", string.Empty);
             foreach (var pack in packs) pack.GatherResources(this);
@@ -175,116 +172,14 @@ namespace CraftSharp.Resource
 
             await UniTask.WhenAll(loadModelTasks);
 
-            /*if (preloadEntityTextures)
-            {
-                textureFlag.Finished = false;
-
-                // Load entity textures (on main thread)...
-                updateStatus("resource.info.preload_entity_texture", string.Empty);
-                Loom.QueueOnMainThread(() =>
-                {
-                    Loom.Current.StartCoroutine(PreloadEntityTextures(textureFlag));
-                });
-
-                while (!textureFlag.Finished) { Thread.Sleep(100); }
-            }*/
-
+            await Resources.UnloadUnusedAssets();
+            
             updateStatus("resource.info.resource_loaded", string.Empty);
-
-            AssetProvider.Release();
             
             Loaded = true;
         }
 
 #region ignore
-
-        public void LoadPacks(DataLoadFlag flag, Action<string, string> updateStatus, bool loadParticles = false, bool preloadEntityTextures = false)
-        {
-            // Gather all textures and model files
-            updateStatus("resource.info.gather_resource", string.Empty);
-            foreach (var pack in packs) pack.GatherResources(this);
-
-            var textureFlag = new DataLoadFlag();
-
-            // Generate texture atlas (on main thread)...
-            /*updateStatus("resource.info.create_texture", string.Empty);
-            Loom.QueueOnMainThread(() => {
-                Loom.Current.StartCoroutine(GenerateAtlas(textureFlag));
-            });*/
-            
-            while (!textureFlag.Finished) { Thread.Sleep(100); }
-            
-            // Load block models...
-            updateStatus("resource.info.load_block_model", string.Empty);
-            foreach (var blockModelId in BlockModelFileTable.Keys)
-            {
-                // This model loader will load this model, its parent model(if not yet loaded),
-                // and then add them to the manager's model dictionary
-                BlockModelLoader.LoadBlockModel(blockModelId);
-            }
-
-            // Load item models...
-            // NOTE: Some resource packs, like this one https://modrinth.com/resourcepack/3d-default
-            // overrides the 'item/generated' model and doesn't use 'builtin/generated', so we add a
-            // line here to handle this.
-            /*GeneratedItemModels.Add(new ResourceLocation("item/generated"));
-            foreach (var itemModelId in ItemModelFileTable.Keys)
-            {
-                // This model loader will load this model, its parent model(if not yet loaded),
-                // and then add them to the manager's model dictionary
-                ItemModelLoader.LoadItemModel(itemModelId);
-            }*/
-
-            /*updateStatus("resource.info.build_blockstate_geometry", string.Empty);
-            BuildStateGeometries((cur, total) =>
-                updateStatus("resource.info.build_blockstate_geometry", GetProgressString(cur, total)));
-
-            updateStatus("resource.info.build_item_geometry", string.Empty);
-            BuildItemGeometries((cur, total) =>
-                updateStatus("resource.info.build_item_geometry", GetProgressString(cur, total)));*/
-
-            if (loadParticles)
-            {
-                textureFlag.Finished = false;
-
-                // Generate particle texture atlas and build meshes (on main thread)...
-                updateStatus("resource.info.build_particle_mesh", string.Empty);
-                Loom.QueueOnMainThread(() => {
-                    Loom.Current.StartCoroutine(GenerateParticleAtlasAndBuildMeshes(textureFlag));
-                });
-
-                while (!textureFlag.Finished) { Thread.Sleep(100); }
-            }
-
-            /*
-            var statePalette = BlockStatePalette.INSTANCE;
-
-            foreach (var stateModel in StateModelTable)
-            {
-                Debug.Log($"Particle texture for {statePalette.GetByNumId(stateModel.Key)}: {stateModel.Value.ParticleTexture}");
-            }
-            */
-
-            if (preloadEntityTextures) // Preload entity textures (Optional)
-            {
-                textureFlag.Finished = false; // Reset this flag for reuse
-
-                // Load entity textures (on main thread)...
-                updateStatus("resource.info.preload_entity_texture", string.Empty);
-                Loom.QueueOnMainThread(() =>
-                {
-                    Loom.Current.StartCoroutine(PreloadEntityTextures(textureFlag));
-                });
-
-                while (!textureFlag.Finished) { Thread.Sleep(100); }
-            }
-
-            updateStatus("resource.info.resource_loaded", string.Empty);
-
-            flag.Finished = true;
-
-            Loaded = true;
-        }
 
         private void BuildStateGeometries(Action<int, int> progressUpdate)
         {
