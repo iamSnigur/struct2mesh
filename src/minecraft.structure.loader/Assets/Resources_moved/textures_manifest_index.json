@@ -1157,6 +1157,7 @@
   "block/vault_top_ejecting": "vanilla/minecraft/textures/block/vault_top_ejecting",
   "block/cherry_door_bottom": "vanilla/minecraft/textures/block/cherry_door_bottom",
   "block/turtle_egg_very_cracked": "vanilla/minecraft/textures/block/turtle_egg_very_cracked",
+  "block/player/steve": "vanilla/minecraft/textures/block/player/steve",
   "block/purpur_pillar": "vanilla/minecraft/textures/block/purpur_pillar",
   "block/pink_stained_glass_pane_top": "vanilla/minecraft/textures/block/pink_stained_glass_pane_top",
   "block/composter_side": "vanilla/minecraft/textures/block/composter_side",
@@ -1383,6 +1384,5 @@
   "block/purple_shulker_box": "vanilla/minecraft/textures/block/purple_shulker_box",
   "block/creaking_heart_top_awake": "vanilla/minecraft/textures/block/creaking_heart_top_awake",
   "block/loom_side": "vanilla/minecraft/textures/block/loom_side",
-  "block/deepslate_gold_ore": "vanilla/minecraft/textures/block/deepslate_gold_ore",
-  "block/player/steve": "vanilla/minecraft/textures/block/player/steve"
+  "block/deepslate_gold_ore": "vanilla/minecraft/textures/block/deepslate_gold_ore"
 }

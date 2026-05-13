@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Core.AssetManagement.External;
 using Cysharp.Threading.Tasks;
@@ -87,8 +86,10 @@ namespace CraftSharp.Resource
 
         public bool Loaded { get; private set; } = false;
 
+#nullable disable
         private Texture2DArray atlasArray;
-
+#nullable enable
+        
         private Texture2DArray? destroyTextureArray;
 
         private readonly List<ResourcePack> packs = new();
@@ -771,21 +772,11 @@ namespace CraftSharp.Resource
             await GenerateAtlas_Internal(textureInfos, ids);
         }
         
-        private async UniTask GatherTexturesCoroutine(HashSet<ResourceLocation> textureIdSet, List<string> modelFilePaths)
+        private async UniTask GatherTexturesCoroutine(HashSet<ResourceLocation> textureIdSet, List<string> modelFiles)
         {
-            var loadTasks = new UniTask<TextAsset>[modelFilePaths.Count];
-            
-            for (int i = 0; i < modelFilePaths.Count; i++)
-                loadTasks[i] = AssetProvider.LoadByAddressAsync<TextAsset>(modelFilePaths[i]);
-
-            TextAsset[] jsonModels = await UniTask.WhenAll(loadTasks);
-
-            for (int i = 0; i < jsonModels.Length; i++)
+            for (int i = 0; i < modelFiles.Count; i++)
             {
-                TextAsset jsonModel = jsonModels[i];
-                Assert.IsNotNull(jsonModel, "Cannot find json model file: " + modelFilePaths[i]);
-
-                Json.JSONData model = Json.ParseJson(jsonModel.text);
+                Json.JSONData model = Json.ParseJson(modelFiles[i]);
 
                 if (!model.Properties.TryGetValue("textures", out var textureObj))
                     continue;
@@ -800,6 +791,9 @@ namespace CraftSharp.Resource
                     if (TextureFileTable.ContainsKey(texId))
                         textureIdSet.Add(texId);
                 }
+
+                if (i % 10 == 0)
+                    await UniTask.Yield();
             }
         }
         

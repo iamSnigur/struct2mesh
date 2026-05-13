@@ -325,6 +325,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 07d1a276882621f498ca930e1246315b
+    m_Address: vanilla/minecraft/models/block/copper_golem/oxidized_copper_golem_statue_running
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 07d6a1274a784f84f825a6114ce5b931
     m_Address: vanilla/minecraft/models/block/blackstone_slab_top
     m_ReadOnly: 0
@@ -1941,7 +1946,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 27cb4814cf0014c418a78d28b14bf339
-    m_Address: vanilla/minecraft/models/block/copper_golem_statue
+    m_Address: vanilla/minecraft/models/block/copper_golem/copper_golem_statue
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2242,11 +2247,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2d3a08319c84ffa41b3e8408c6532e4a
     m_Address: vanilla/minecraft/models/block/birch_button_inventory
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2d5045e6bc9559f4e8fc7f88214220be
-    m_Address: vanilla/minecraft/models
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -3535,6 +3535,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4863b112dae0b464e8193b3b11843782
+    m_Address: vanilla/minecraft/models/block/copper_golem/weathered_copper_golem_statue
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4865ed041b4e720449e47158b8444871
     m_Address: vanilla/minecraft/models/block/cracked_polished_blackstone_bricks
     m_ReadOnly: 0
@@ -3557,6 +3562,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 48dc5de6069d3704f8da0fad73b2ef5a
     m_Address: vanilla/minecraft/models/block/polished_blackstone_button_pressed
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4917b2cf41c5468db9f42605a3bacd92
+    m_Address: vanilla/minecraft/models/block/copper_golem/copper_golem_statue_star
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -3892,11 +3902,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4fdd2cc3641c1fa438676f54e4d0bc39
     m_Address: vanilla/minecraft/models/block/spruce_shelf
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4fdefe614ba0e294fb0d472b7590e578
-    m_Address: vanilla/minecraft/models/block
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4505,6 +4510,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5d5dd66263bdfb848af2424d8f18f02d
+    m_Address: vanilla/minecraft/models/block/copper_golem/exposed_copper_golem_statue_star
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5d6582fb920e02f45aeb529a0431b966
     m_Address: vanilla/minecraft/models/block/light_blue_candle_cake_lit
     m_ReadOnly: 0
@@ -4762,6 +4772,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 62d11dfc8e61ad840ad48b8553d5ff71
     m_Address: vanilla/minecraft/models/block/cyan_candle_four_candles_lit
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62ebf63ff7f1ff14fb816f7b5edbfa8b
+    m_Address: vanilla/minecraft/models/block/copper_golem/oxidized_copper_golem_statue_sitting
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5530,6 +5545,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 71ae5c61a607f614ca012a7d9c7e4ce1
+    m_Address: vanilla/minecraft/models/block/copper_golem/exposed_copper_golem_statue_running
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 71eea1f56a71a064589d7e4c7ce8be54
+    m_Address: vanilla/minecraft/models/block/copper_golem/oxidized_copper_golem_statue
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7204e1fb437ab36448597ab7a3f134e2
     m_Address: vanilla/minecraft/models/block/mangrove_fence_gate
     m_ReadOnly: 0
@@ -6255,11 +6280,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8317382d938c6d1489303502d56d0953
-    m_Address: vanilla/minecraft/models/block/light
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8324e537905d8f4418d3ce051fd2e677
     m_Address: vanilla/minecraft/models/block/purple_carpet
     m_ReadOnly: 0
@@ -6332,6 +6352,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 846aebe08114e1645a907000426e0fa1
     m_Address: vanilla/minecraft/models/block/oak_door_bottom_right_open
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8475b0ecef3647fe871a0213592ab6b0
+    m_Address: vanilla/minecraft/models/block/copper_golem/exposed_copper_golem_statue
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6941,7 +6966,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8f790692a3014b5680a50677cdbc037c
-    m_Address: vanilla/minecraft/models/block/copper_golem_statue_sitting
+    m_Address: vanilla/minecraft/models/block/copper_golem/copper_golem_statue_sitting
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -7975,11 +8000,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a2fd6061613f65f4ba79c8e46aeff649
-    m_Address: vanilla/minecraft/models/block/bed
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a30086d15de234047b73ddc08dac45fc
     m_Address: vanilla/minecraft/models/block/exposed_cut_copper
     m_ReadOnly: 0
@@ -8805,6 +8825,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3fd10b15881bd1408e77a99792e51d9
+    m_Address: vanilla/minecraft/models/block/copper_golem/exposed_copper_golem_statue_sitting
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b408d2464699f424497b0b68e8ff356f
     m_Address: vanilla/minecraft/models/block/chiseled_stone_bricks
     m_ReadOnly: 0
@@ -8937,6 +8962,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b70cc630e43121f4db1457bff884d719
     m_Address: vanilla/minecraft/models/block/wheat_stage1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b714fe78a74f56c4a8fae4a12a081c30
+    m_Address: vanilla/minecraft/models/block/copper_golem/weathered_copper_golem_statue
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -9670,6 +9700,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c7306d643393aa749ac9448585e0cfb5
+    m_Address: vanilla/minecraft/models/block/copper_golem/weathered_copper_golem_statue_running
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c73847b09253fcb41940dee30cc35c6e
     m_Address: vanilla/minecraft/models/block/amethyst_block
     m_ReadOnly: 0
@@ -10046,7 +10081,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cecfc4576c0e468aaf1db46310ae3fce
-    m_Address: vanilla/minecraft/models/block/copper_golem_statue_running
+    m_Address: vanilla/minecraft/models/block/copper_golem/copper_golem_statue_running
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -10077,6 +10112,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cf8e5b7c219b7dc4cb702eefb230a0c6
     m_Address: vanilla/minecraft/models/block/acacia_button_inventory
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cfb7bb0c1db50744f8457a7fc83e450e
+    m_Address: vanilla/minecraft/models/block/copper_golem/oxidized_copper_golem_statue_star
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -10862,6 +10902,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e0c4bbde16de7d244a48713a832eac77
     m_Address: vanilla/minecraft/models/block/cobblestone_wall_post
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0e3f128b8fc81247830916a1398c2fa
+    m_Address: vanilla/minecraft/models/block/copper_golem/weathered_copper_golem_statue_star
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

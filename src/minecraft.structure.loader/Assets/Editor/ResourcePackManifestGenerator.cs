@@ -26,13 +26,13 @@ namespace Editor
                     value: entry.address            
                 ));
 
-        [MenuItem("Tools/ResourcePack/Generate Models Index")]
+        /*[MenuItem("Tools/ResourcePack/Generate Models Index")]
         public static void GenerateModelsIndex() =>
             GenerateIndex(MODELS_GROUP_NAME, "models_manifest_index.json",
                 entry => (
                     key:   entry.address[entry.address.IndexOf("block/", StringComparison.Ordinal)..],
                     value: entry.address
-                ));
+                ));*/
 
         [MenuItem("Tools/ResourcePack/Generate Blockstates Index")]
         public static void GenerateBlockstatesIndex() =>
@@ -46,7 +46,7 @@ namespace Editor
         public static void GenerateAllIndexes()
         {
             GenerateTexturesIndex();
-            GenerateModelsIndex();
+            GenerateModelsIndexWithJson();
             GenerateBlockstatesIndex();
         }
 
@@ -84,6 +84,8 @@ namespace Editor
 
             string json = JsonConvert.SerializeObject(dict, Formatting.Indented);
             File.WriteAllText(Path.Combine(OUTPUT_FOLDER, outputFileName), json);
+            
+            AssetDatabase.Refresh();
         }
         
         [MenuItem("Tools/ResourcePack/Generate Models Index With Json")]
@@ -136,6 +138,8 @@ namespace Editor
 
             string json = JsonConvert.SerializeObject(dict, Formatting.Indented);
             File.WriteAllText(Path.Combine(OUTPUT_FOLDER, outputFileName), json);
+            
+            AssetDatabase.Refresh();
         }
     }
 }

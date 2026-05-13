@@ -763,6 +763,15 @@ public static class BlockStateHelper
         "minecraft:calibrated_sculk_sensor",
         "minecraft:sculk_shrieker",
         "minecraft:white_wall_banner", // TODO check all blocks
+        
+        "minecraft:copper_golem_statue",
+        "minecraft:waxed_copper_golem_statue",
+        "minecraft:exposed_copper_golem_statue",
+        "minecraft:waxed_exposed_copper_golem_statue",
+        "minecraft:oxidized_copper_golem_statue",
+        "minecraft:waxed_oxidized_copper_golem_statue",
+        "minecraft:weathered_copper_golem_statue",
+        "minecraft:waxed_weathered_copper_golem_statue",
     };
     
     public static bool IsSemiSolid(string blockId)
