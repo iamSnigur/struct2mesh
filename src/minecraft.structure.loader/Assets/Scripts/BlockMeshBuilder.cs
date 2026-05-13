@@ -68,8 +68,8 @@ public static class BlockMeshBuilder
             
         BlockGeometry? blockGeometry = stateModel.Geometries[0];
 
-        if (BlockEntityTypePaletteAdapter.Instance.GetBlockEntityForBlock(blockId, out var blockEntityType))
-            CreateBlockEntityRenderForItemModel(modelObject.transform, blockState, blockEntityType);
+        /*if (BlockEntityTypePaletteAdapter.Instance.GetBlockEntityForBlock(blockId, out var blockEntityType))
+            CreateBlockEntityRenderForItemModel(modelObject.transform, blockState, blockEntityType);*/
         
         int color = BlockStatePaletteAdapter.Instance.GetBlockColor(stateId, world, BlockLoc.Zero);
         int waterColor = world.GetWaterColor(BlockLoc.Zero);

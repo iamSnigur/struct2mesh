@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core.AssetManagement;
 using CraftSharp;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using fNbt;
 
 public class NbtReader : MonoBehaviour
 {
     public string StructureNbtFilePath;
-    public TextAsset ColorRules;
     
     private GameObject _parent;
     public static StructureVolume StructureVolume;
@@ -22,7 +23,7 @@ public class NbtReader : MonoBehaviour
 #if UNITY_EDITOR
     private IEnumerator Start()
     {
-        while (!AssetProvider.Loaded)
+        while (!MinecraftAssetProvider.Loaded)
             yield return null;
 
         LoadNbtStructure();
@@ -45,18 +46,16 @@ public class NbtReader : MonoBehaviour
             Debug.Log("File is not a nbt structure!");
             return;
         }
-
-        Resources.UnloadUnusedAssets();
-        GC.Collect();
-        GC.WaitForPendingFinalizers();
-        GC.Collect();
         
         Structure structure = ParseNbtStructure(nbtFile);
         UpdateStructureVolume(structure);
-        AssetProvider.ClearBlockStatePalette();
-        AssetProvider.UpdateBlockStatePalette(structure.Palette);
-        AssetProvider.UpdateColorRules(ColorRules);
-        Construct(structure);
+        MinecraftAssetProvider.ClearBlockStatePalette();
+        MinecraftAssetProvider.UpdateBlockStatePalette(structure.Palette);
+        MinecraftAssetProvider.UpdateColorRules();
+        Construct(structure).Forget();
+        
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
     }
     
     private Structure ParseNbtStructure(NbtFile nbtFile)
@@ -187,10 +186,19 @@ public class NbtReader : MonoBehaviour
         }
     }
     
-    private void Construct(Structure structure)
+    private async UniTaskVoid Construct(Structure structure)
     {
         ClearBlockVisual(_parent);
 
+        MinecraftAssetProvider.ReleaseBlockStateHandles();
+        
+        List<UniTask> warmupTasks = new(structure.Palette.Count);
+
+        foreach (PaletteEntry entry in structure.Palette) 
+            warmupTasks.Add(MinecraftAssetProvider.WarmupBlockGeometriesAsync(entry.Name));
+
+        await UniTask.WhenAll(warmupTasks);
+        
         foreach (Block block in structure.Blocks)
         {
             PaletteEntry paletteEntry = structure.Palette[block.State];
@@ -200,7 +208,7 @@ public class NbtReader : MonoBehaviour
 
             byte cullFlags = StructureVolume.GetCullFlagsFor(block.Pos);
             
-            GameObject blockView = AssetProvider.LoadModel(paletteEntry.Name, block.Pos, paletteEntry.Properties, cullFlags);
+            GameObject blockView = MinecraftAssetProvider.LoadModel(paletteEntry.Name, block.Pos, paletteEntry.Properties, cullFlags);
             Transform cachedTransform = blockView.transform;
             cachedTransform.parent = _parent.transform;
             cachedTransform.position = block.Pos;
@@ -208,8 +216,8 @@ public class NbtReader : MonoBehaviour
 
         MeshCombiner meshCombiner = _parent.AddComponent<MeshCombiner>();
         meshCombiner.CreateMultiMaterialMesh = true;
-        //meshCombiner.DestroyCombinedChildren = true;
-        //meshCombiner.CombineMeshes(true);
+        meshCombiner.DestroyCombinedChildren = true;
+        meshCombiner.CombineMeshes(true);
 
         Renderer component = _parent.GetComponent<Renderer>();
         FindFirstObjectByType<CameraController>().SetPivot(component.bounds.center);

@@ -1,6 +1,0 @@
-{
-	"parent": "block/bed_head",
-	"textures": {
-		"all": "block/yellow_bed"
-	}
-}

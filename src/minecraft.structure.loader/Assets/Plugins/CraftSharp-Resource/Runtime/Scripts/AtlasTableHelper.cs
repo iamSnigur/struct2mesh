@@ -2,24 +2,21 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Core.AssetManagement.External;
+using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 
 namespace CraftSharp.Resource
 {
-    public class AtlasTableHelper
+    public static class AtlasTableHelper
     {
         [Serializable]
         private record TextureInfoEntry
         {
             public string PathKey;
             public TextureInfo InfoValue;
-        }
-
-        [Serializable]
-        private record EntriesWrapper
-        {
-            public TextureInfoEntry[] Entries;
         }
     
         public static void SaveAtlasTable(Dictionary<ResourceLocation, TextureInfo> atlasTable)
@@ -30,26 +27,25 @@ namespace CraftSharp.Resource
                 InfoValue = pair.Value
             }).ToArray();
 
-            EntriesWrapper wrapper = new()
+            var settings = new JsonSerializerSettings
             {
-                Entries = entries
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
-
-            string json = JsonUtility.ToJson(wrapper, true);
-            File.WriteAllText("Assets/Resources/vanilla/minecraft/textures/texture_atlas_table.json", json);
+            string json = JsonConvert.SerializeObject(entries, Formatting.Indented, settings);
+            
+            File.WriteAllText("Assets/Resources_moved/vanilla/minecraft/textures/texture_atlas_manifest.json", json);
 #if UNITY_EDITOR
             AssetDatabase.Refresh();
 #endif
         }
 
-        public static void LoadAtlasTable(Dictionary<ResourceLocation, TextureInfo> atlasTable)
+        public static async UniTask LoadAtlasTable(Dictionary<ResourceLocation, TextureInfo> atlasTable)
         {
-            TextAsset jsonAsset = Resources.Load<TextAsset>("vanilla/minecraft/textures/texture_atlas_table");
-            EntriesWrapper wrapper = JsonUtility.FromJson<EntriesWrapper>(jsonAsset.text);
+            TextAsset jsonAsset = await AssetProvider.LoadByAddressAsync<TextAsset>("texture_atlas_manifest");
+            TextureInfoEntry[] manifestEntries = JsonConvert.DeserializeObject<TextureInfoEntry[]>(jsonAsset.text);
 
-            foreach (TextureInfoEntry entry in wrapper.Entries) 
+            foreach (TextureInfoEntry entry in manifestEntries) 
                 atlasTable.Add(new ResourceLocation(entry.PathKey), entry.InfoValue);
-            
         }
     }
 }
