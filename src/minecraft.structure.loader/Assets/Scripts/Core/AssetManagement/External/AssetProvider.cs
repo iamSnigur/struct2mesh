@@ -12,11 +12,6 @@ namespace Core.AssetManagement.External
         private static readonly Dictionary<string, AsyncOperationHandle> _cachedHandles = new();
         private static readonly Dictionary<string, List<AsyncOperationHandle>> _loadedHandles = new();
 
-        public static void Init()
-        {
-            Addressables.InitializeAsync();
-        }
-
         public static async UniTask<bool> KeyExistsAsync<T>(string key)
         {
             AsyncOperationHandle<IList<IResourceLocation>> handle = Addressables.LoadResourceLocationsAsync(key, typeof(T));
@@ -40,9 +35,6 @@ namespace Core.AssetManagement.External
         
         public static async UniTask<AssetHandle<T>> LoadAssetHandleAsync<T>(string key) where T : class
         {
-            /*if (_cachedHandles.TryGetValue(key, out AsyncOperationHandle cachedHandle))
-                return cachedHandle.Result as T;*/
-            
             AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(key);
 
             AssetHandle<T> assetHandle = new()
@@ -79,7 +71,7 @@ namespace Core.AssetManagement.External
             
             loaded.Add(handle);
             
-            return await handle.ToUniTask();
+            return await handle;
         }
     }
 }

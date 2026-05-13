@@ -23,41 +23,19 @@ namespace CraftSharp.Resource
         /// <br/>
         /// Model file table should be loaded before calling this.
         /// </summary>
-        public async UniTask<JsonModel> LoadBlockModel(ResourceLocation identifier)
+        public JsonModel LoadBlockModel(ResourceLocation identifier)
         {
             if (manager.BlockModelTable.TryGetValue(identifier, out var blockModel))
                 return blockModel;
 
-            if (_activeTasks.TryGetValue(identifier, out UniTaskCompletionSource<JsonModel> activeTask))
-                return await activeTask.Task;
-
-            UniTaskCompletionSource<JsonModel> tcs = new();
-            _activeTasks[identifier] = tcs;
-
-            try
-            {
-                JsonModel model = await LoadBlockModel_Internal(identifier);
-                tcs.TrySetResult(model);
-                return model;
-            }
-            finally
-            {
-                _activeTasks.Remove(identifier);
-            }
-        }
-
-        private async UniTask<JsonModel> LoadBlockModel_Internal(ResourceLocation identifier)
-        {
-            if (!manager.BlockModelFileTable.TryGetValue(identifier, out string modelFilePath))
+            if (!manager.BlockModelFileTable.TryGetValue(identifier, out string modelJson))
             {
                 Debug.LogWarning($"Block model file not found: {identifier}");
                 return INVALID_MODEL;
             }
 
             JsonModel model = new();
-            AssetHandle<TextAsset> assetHandle = await AssetProvider.LoadAssetHandleAsync<TextAsset>(modelFilePath);
-            Json.JSONData modelData = Json.ParseJson(assetHandle.Asset.text);
-            assetHandle.Release();
+            Json.JSONData modelData = Json.ParseJson(modelJson);
                 
             bool containsTextures = modelData.Properties.ContainsKey("textures");
             bool containsElements = modelData.Properties.ContainsKey("elements");
@@ -74,7 +52,7 @@ namespace CraftSharp.Resource
                 else
                 {
                     // This parent is not yet loaded, load it...
-                    parentModel = await LoadBlockModel(parentIdentifier);
+                    parentModel = LoadBlockModel(parentIdentifier);
                 }
 
                 // Inherit parent textures...

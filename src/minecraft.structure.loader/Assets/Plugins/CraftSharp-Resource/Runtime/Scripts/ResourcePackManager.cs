@@ -154,13 +154,11 @@ namespace CraftSharp.Resource
             // Load block models...
             updateStatus("resource.info.load_block_model", string.Empty);
             
-            var loadModelTasks = new List<UniTask<JsonModel>>(BlockModelFileTable.Keys.Count);
-            
-            foreach (var blockModelId in BlockModelFileTable.Keys)
+            foreach (ResourceLocation blockModelId in BlockModelFileTable.Keys)
             {
                 try
                 {
-                    loadModelTasks.Add(BlockModelLoader.LoadBlockModel(blockModelId));
+                    BlockModelLoader.LoadBlockModel(blockModelId);
                 }
                 catch (Exception e)
                 {
@@ -169,11 +167,7 @@ namespace CraftSharp.Resource
                     throw;
                 }
             }
-
-            await UniTask.WhenAll(loadModelTasks);
-
-            await Resources.UnloadUnusedAssets();
-            
+                
             updateStatus("resource.info.resource_loaded", string.Empty);
             
             Loaded = true;

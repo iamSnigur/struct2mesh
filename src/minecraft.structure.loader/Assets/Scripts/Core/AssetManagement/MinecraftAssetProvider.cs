@@ -35,16 +35,10 @@ namespace Core.AssetManagement
             _resourcePackManager = ResourcePackManager.Instance;
             _blockStateLoader = new BlockStateLoader(_resourcePackManager);
 
-            //BlockEntityPrefabs entityPrefabs = Resources.Load<BlockEntityPrefabs>("BlockEntity/Prefabs/BlockEntityPrefabs");
-            //BlockMeshBuilder.InjectDependencies(entityPrefabs);
-
             _colorRules = await AssetProvider.LoadByAddressAsync<TextAsset>(COLOR_RULES_ADDRESS);
             
             await GatherResources(_resourcePackManager);
             await PreloadResources();
-        
-            //await BedrockEntityResourceManager.Instance.LoadEntityResources(new DataLoadFlag(), (_) => {});
-            //BedrockEntityResourceManager.Instance.LoadBlockEntityModelFolder("block_entity");
         }
 
         private static void UpdateStatus(string status, string progress) =>

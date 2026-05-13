@@ -46,9 +46,6 @@ public class NbtReader : MonoBehaviour
             Debug.Log("File is not a nbt structure!");
             return;
         }
-
-        GC.WaitForPendingFinalizers();
-        GC.Collect();
         
         Structure structure = ParseNbtStructure(nbtFile);
         UpdateStructureVolume(structure);
@@ -56,6 +53,9 @@ public class NbtReader : MonoBehaviour
         MinecraftAssetProvider.UpdateBlockStatePalette(structure.Palette);
         MinecraftAssetProvider.UpdateColorRules();
         Construct(structure).Forget();
+        
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
     }
     
     private Structure ParseNbtStructure(NbtFile nbtFile)
