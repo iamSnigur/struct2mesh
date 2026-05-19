@@ -1915,11 +1915,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 26d03e99096c7814493ff04ac75316dd
-    m_Address: vanilla/minecraft/models/block/exposed_copper_golem_statue
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 27066659ed260c64f9ecb54e4d0c006d
     m_Address: vanilla/minecraft/models/block/pale_oak_door_top_right
     m_ReadOnly: 0
@@ -6690,11 +6685,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 89ce3692ce4e6084e9b408cc420fd7d5
-    m_Address: vanilla/minecraft/models/block/oxidized_copper_golem_statue
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 89e89f7cc2eae9140a7e458908db4ace
     m_Address: vanilla/minecraft/models/block/brown_concrete
     m_ReadOnly: 0
@@ -7857,11 +7847,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a02673c6d5f0f8b4483d26da322dd968
     m_Address: vanilla/minecraft/models/block/template_fence_gate_open
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a02e2485d9a599e4fbf457f33099e13f
-    m_Address: vanilla/minecraft/models/block/weathered_copper_golem_statue
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

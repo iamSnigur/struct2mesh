@@ -1,0 +1,217 @@
+:root {
+    --col-sidebar-bg:       rgba(0, 0, 0, 0.5);
+    --col-export-btn:       rgb(82, 175, 45);
+    --col-export-hover:     rgb(82, 175, 45);
+    --col-export-active:    rgb(50, 120, 25);
+    --col-load-btn:         rgb(253 155 7);
+    --col-camera-bg:        rgb(220, 220, 220);
+    --col-camera-hover:     rgb(255, 255, 255);
+    --col-text-bright:      rgb(255, 255, 255);
+    --col-text-label:       rgb(255, 255, 255);
+    --col-chevron:          rgb(255, 255, 255);
+
+    --sidebar-width:        220px;
+    --btn-height:           52px;
+    --btn-outline-height:   56px;
+    --btn-margin:           8px;
+    --panel-padding:        14px;
+
+    --font-troika:          url("project://database/Assets/Fonts/troika.otf");
+    --font-consolas:          url("project://database/Assets/Fonts/Consolas-Regular.ttf");
+    
+    --img-btn:              url("Icons/button.png");
+    --img-btn-flat:         url("Icons/button_flat.png");
+}
+
+.root {
+    width: 100%;
+    height: 100%;
+}
+
+.file-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: var(--col-text-label);
+    font-size: 15px;
+    letter-spacing: 1px;
+    -unity-font-definition: var(--font-troika);
+    -unity-text-align: middle-center;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.sidebar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    background-color: var(--col-sidebar-bg);
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.export-section {
+    flex-direction: column;
+    padding: 18px var(--panel-padding);
+}
+
+.export-title {
+    color: var(--col-text-label);
+    font-size: 26px;
+    -unity-font-definition: var(--font-troika);
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+}
+
+.btn-export-root {
+    width: 100%;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.btn-load-new-root {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-outline {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    
+    background-color: transparent;
+    background-image: var(--img-btn-flat);
+    -unity-background-image-tint-color: rgb(0, 0, 0);
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 5px;
+}
+
+.btn-export {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    
+    color: var(--col-text-bright);
+    font-size: 24px;
+    -unity-font-definition: var(--font-troika);
+    letter-spacing: 2px;
+    text-shadow: 0 3px 0 rgba(0, 0, 0, 0.5);
+    background-color: transparent;
+
+    background-image: var(--img-btn);
+    -unity-background-image-tint-color: var(--col-export-btn);
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 5px;
+    border-color: transparent;
+    
+    -unity-text-align: middle-left;
+    padding-left: 20px;
+    padding-right: 48px;
+}
+
+.btn-export-root:hover .btn-outline {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
+
+.btn-load-new {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+
+    color: rgb(143, 31, 11);
+    font-size: 28px;
+    -unity-font-definition: var(--font-troika);
+    letter-spacing: 2px;
+    text-shadow: 0 3px 0 rgb(255, 169, 31);
+
+    background-image: var(--img-btn);
+    -unity-background-image-tint-color: var(--col-load-btn);
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 5px;
+    border-color: transparent;
+
+    -unity-text-align: middle-center;
+}
+
+.btn-load-new-root:hover .btn-outline {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
+
+.chevron-icon {
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    translate: 0 -50%;
+    background-image: url("Icons/chevron.svg");
+    -unity-background-image-tint-color: var(--col-chevron);
+    -unity-background-scale-mode: scale-to-fit;    
+}
+
+.bottom-bar {
+    position: absolute;
+    bottom: 18px;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px var(--panel-padding);
+    padding-bottom: 2px;
+}
+
+.bottom-bar > * {
+    margin-top: 4px;
+}
+
+.btn-camera-reset {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    
+    margin: 0;
+    bottom: 20px;
+    left: -75px;
+
+    background-image: url("Icons/button_flat_outline.png");
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    -unity-background-scale-mode: stretch-to-fill;   
+    -unity-slice-scale: 5px;
+    border-color: transparent;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: transparent;
+    padding: 0;
+}
+
+.camera-icon {
+    width: 80%;
+    height: 80%;
+    background-image: url("Icons/camera_reset.png");
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.version-label {
+    position: absolute;
+    bottom: 0;
+    left: 4px;
+    color: rgba(255, 255, 255, 0.3);
+    -unity-font-definition: var(--font-consolas);
+    font-size: 10px;
+    -unity-text-align: middle-center;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+    align-self: flex-start;
+}

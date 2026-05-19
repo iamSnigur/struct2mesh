@@ -412,7 +412,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &201373178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1167,6 +1167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 512578760}
   - component: {fileID: 512578759}
+  - component: {fileID: 512578761}
   m_Layer: 5
   m_Name: UIRoot
   m_TagString: Untagged
@@ -1188,7 +1189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
   m_PanelSettings: {fileID: 11400000, guid: e868e455647ba134d90f86779c313177, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: d731455f09a0c5c48b51ff9e78453553, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: fe74c55092c99b7438c033d717614c28, type: 3}
   m_SortingOrder: 0
   m_Position: 0
   m_WorldSpaceSizeMode: 1
@@ -1212,6 +1213,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &512578761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512578758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408117451741414bbb55e5c84c7a13cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: StructureLoader::StructureViewerUI
+  CameraController: {fileID: 330585548}
+  FileReceiver: {fileID: 1493336153}
 --- !u!1 &616978741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1250,10 +1265,10 @@ RectTransform:
   - {fileID: 1569381129}
   m_Father: {fileID: 2002691279}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 50}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 102.625, y: -185}
+  m_SizeDelta: {x: 205.25, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &616978743
 MonoBehaviour:
@@ -2151,10 +2166,10 @@ RectTransform:
   - {fileID: 790594623}
   m_Father: {fileID: 2002691279}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 50}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 102.625, y: -105}
+  m_SizeDelta: {x: 205.25, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1107947963
 MonoBehaviour:
@@ -2640,7 +2655,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: StructureLoader::NbtReader
   StructureNbtFilePath: Assets/Structures/block_entity_test.nbt
-  ColorRules: {fileID: 4900000, guid: a119eb2380cc60441889947577fcc2f6, type: 3}
 --- !u!4 &1188278965
 Transform:
   m_ObjectHideFlags: 0
@@ -2993,10 +3007,10 @@ RectTransform:
   - {fileID: 300196787}
   m_Father: {fileID: 2002691279}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 50}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 102.625, y: -25}
+  m_SizeDelta: {x: 205.25, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1413946834
 MonoBehaviour:
@@ -3694,10 +3708,10 @@ RectTransform:
   - {fileID: 1399625158}
   m_Father: {fileID: 2002691279}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 50}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 102.625, y: -265}
+  m_SizeDelta: {x: 205.25, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1786755393
 MonoBehaviour:
@@ -4001,7 +4015,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -60}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 290}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2002691280
 MonoBehaviour:

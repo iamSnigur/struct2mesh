@@ -1,0 +1,42 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/StructureViewer.uss?fileID=7433441132597879392&amp;guid=9eb4ff6fa0e9e8a4fa56834dfac8fd37&amp;type=3#StructureViewer"/>
+    <ui:VisualElement name="root" class="root">
+        <ui:Label name="version-label" text="v1.0.1-e128f56" class="version-label"/>
+        <ui:Label name="file-label" text="STRUCTURE.NBT" class="file-label"/>
+        <ui:VisualElement name="sidebar" class="sidebar">
+            <ui:VisualElement name="export-section" class="export-section">
+                <ui:Label name="export-title" text="EXPORT AS:" class="export-title"/>
+                
+                <ui:VisualElement class="btn-export-root">
+                    <ui:VisualElement class="btn-outline"/>
+                    <ui:Button name="btn-fbx-1" text="FBX" class="btn-export"/>
+                    <ui:VisualElement class="chevron-icon"/>
+                </ui:VisualElement>
+                
+                <ui:VisualElement class="btn-export-root">
+                    <ui:VisualElement class="btn-outline"/>
+                    <ui:Button name="btn-fbx-1" text="FBX 1" class="btn-export"/>
+                    <ui:VisualElement class="chevron-icon"/>
+                </ui:VisualElement>
+                
+                <ui:VisualElement class="btn-export-root">
+                    <ui:VisualElement class="btn-outline"/>
+                    <ui:Button name="btn-fbx-1" text="FBX 2" class="btn-export"/>
+                    <ui:VisualElement class="chevron-icon"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            
+            <ui:VisualElement name="bottom-bar" class="bottom-bar">
+                <ui:VisualElement class="btn-load-new-root">
+                    <ui:VisualElement class="btn-outline"/>
+                    <ui:Button name="btn-load-new" text="LOAD NEW" class="btn-load-new"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            
+            <ui:Button name="btn-camera-reset" class="btn-camera-reset">
+                <ui:VisualElement name="camera-icon" class="camera-icon"/>
+            </ui:Button>
+            
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
