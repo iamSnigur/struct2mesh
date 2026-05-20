@@ -10,7 +10,7 @@ namespace Core
         {
             DontDestroyOnLoad(this);
             
-            BuildInfo.Init().Forget();
+            BuildInfo.Init();
             MinecraftAssetProvider.Init().Forget();
         }
 

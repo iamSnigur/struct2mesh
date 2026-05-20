@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Core.AssetManagement.External;
-using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -15,11 +13,12 @@ namespace Core
         public static string BranchName { get; private set; }
         public static string CommitHash { get; private set; }
 
-        public static async UniTaskVoid Init()
+        public static void Init()
         {
-            TextAsset textAsset = await AssetProvider.LoadByAddressAsync<TextAsset>("build_info");
+            TextAsset textAsset = Resources.Load<TextAsset>("build_info");
             Dictionary<string, string> info = JsonConvert.DeserializeObject<Dictionary<string, string>>(textAsset.text);
-
+            Resources.UnloadAsset(textAsset);
+            
             Version = info["version"];
             BranchName = info["branch"];
             CommitHash = info["commit"];

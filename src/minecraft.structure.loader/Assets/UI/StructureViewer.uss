@@ -194,12 +194,26 @@
     
     background-color: transparent;
     padding: 0;
+
+    transition-property: scale;
+    transition-duration: 0.08s;
+    transition-timing-function: ease-out;
+    scale: 1 1;
+}
+
+.btn-camera-reset:hover {
+    scale: 0.93 0.93;       
+}
+
+.btn-camera-reset:active {
+    transition-duration: 0.05s;
+    scale: 1.08 0.82;
 }
 
 .camera-icon {
-    width: 80%;
-    height: 80%;
-    background-image: url("Icons/camera_reset.png");
+    width: 60%;
+    height: 60%;
+    background-image: url("Icons/camera_reset.svg");
     -unity-background-image-tint-color: rgb(255, 255, 255);
     -unity-background-scale-mode: scale-to-fit;
 }

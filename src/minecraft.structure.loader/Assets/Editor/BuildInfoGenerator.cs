@@ -29,7 +29,7 @@ namespace Editor
             };
 
             string json = JsonConvert.SerializeObject(info);
-            File.WriteAllText("Assets/Resources_moved/build_info.json", json);
+            File.WriteAllText("Assets/Resources/build_info.json", json);
         }
 
         private static string GetIncrementedVersion()
