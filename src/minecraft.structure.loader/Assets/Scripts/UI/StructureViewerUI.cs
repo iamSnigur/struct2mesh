@@ -2,6 +2,9 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Collections;
+using UnityEngine.Rendering;
+using Core;
 
 namespace UI
 {
@@ -24,6 +27,7 @@ namespace UI
         {
             _doc = GetComponent<UIDocument>();
             _root = _doc.rootVisualElement;
+            BuildInfo.OnBuildInfoLoaded += SetVersion;
         }
 
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -93,7 +97,7 @@ namespace UI
         public void SetVersion(string version)
         {
             Label lbl = _root.Q<Label>("version-label");
-            if (lbl != null) lbl.text = version.ToUpper();
+            if (lbl != null) lbl.text = version;
         }
     }
 }
