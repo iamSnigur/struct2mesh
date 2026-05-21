@@ -16,8 +16,8 @@
     --btn-margin:           8px;
     --panel-padding:        14px;
 
-    --font-troika:          url("project://database/Assets/Fonts/troika.otf");
-    --font-consolas:          url("project://database/Assets/Fonts/Consolas-Regular.ttf");
+    --font-troika:          url("Fonts/troika.otf");
+    --font-consolas:        url("Fonts/Consolas-Regular.ttf");
     
     --img-btn:              url("Icons/button.png");
     --img-btn-flat:         url("Icons/button_flat.png");
