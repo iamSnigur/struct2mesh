@@ -13,6 +13,13 @@ public class FileReceiver : MonoBehaviour
     public void Open() => 
         OpenUploadPanel();
 
+    private NbtReader _nbtReader;
+
+    private void Awake()
+    {
+        _nbtReader = FindFirstObjectByType<NbtReader>();
+    }
+
     public void OnFileLoaded(string jsonPayload)
     {
         Payload payload = JsonUtility.FromJson<Payload>(jsonPayload);
@@ -20,21 +27,12 @@ public class FileReceiver : MonoBehaviour
         
         Debug.Log($"Received file: {payload.FileName}, size: {payload.FileContent.Length}");
 
-        byte[] data = System.Convert.FromBase64String(payload.FileContent);
+        byte[] data = Convert.FromBase64String(payload.FileContent);
 
         NbtFile nbtFile = new();
         nbtFile.LoadFromBuffer(data, 0, data.Length, NbtCompression.AutoDetect);
         
         _nbtReader.LoadStructure(nbtFile);
-        
-        //Debug.Log(nbtFile.RootTag);
-    }
-
-    private NbtReader _nbtReader;
-    
-    private void Awake()
-    {
-        _nbtReader = FindFirstObjectByType<NbtReader>();
     }
 
     private record Payload
