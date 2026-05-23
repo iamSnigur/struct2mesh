@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Core.AssetManagement;
 using CraftSharp;
 using Cysharp.Threading.Tasks;
@@ -61,7 +62,8 @@ public class NbtReader : MonoBehaviour
     private Structure ParseNbtStructure(NbtFile nbtFile)
     {
         NbtList blocksTagList = nbtFile.RootTag.Get<NbtList>("blocks");
-        NbtList paletteTagList = nbtFile.RootTag.Get<NbtList>("palette");
+        NbtList paletteTagList = nbtFile.RootTag.Get<NbtList>("palette") 
+                                 ?? nbtFile.RootTag.Get<NbtList>("palettes").Get<NbtList>(0);
         
         Structure structure = new()
         {
@@ -227,7 +229,13 @@ public class NbtReader : MonoBehaviour
     {
         NbtTag sizeTag = file.RootTag.Get("size");
         NbtTag blocksTag = file.RootTag.Get("blocks");
-        NbtTag paletteTag = file.RootTag.Get("palette"); // can be list of palettes, add support for them
+        NbtTag paletteTag = file.RootTag.Get("palette");
+
+        if (paletteTag is null)
+        {
+            NbtList palettesTag = file.RootTag.Get<NbtList>("palettes");
+            paletteTag = palettesTag[0];
+        }
         
         return sizeTag is not null 
                && blocksTag is not null
