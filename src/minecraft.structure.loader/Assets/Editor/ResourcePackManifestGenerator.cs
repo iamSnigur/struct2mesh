@@ -20,19 +20,19 @@ namespace Editor
 
         [MenuItem("Tools/ResourcePack/Generate Textures Index")]
         public static void GenerateTexturesIndex() =>
-            GenerateIndex(TEXTURES_GROUP_NAME, "textures_manifest_index.json",
-                entry => (
-                    key:   entry.address[entry.address.IndexOf("block/", StringComparison.Ordinal)..],
-                    value: entry.address            
-                ));
-
-        /*[MenuItem("Tools/ResourcePack/Generate Models Index")]
-        public static void GenerateModelsIndex() =>
-            GenerateIndex(MODELS_GROUP_NAME, "models_manifest_index.json",
-                entry => (
-                    key:   entry.address[entry.address.IndexOf("block/", StringComparison.Ordinal)..],
-                    value: entry.address
-                ));*/
+            GenerateIndex(TEXTURES_GROUP_NAME, "textures_manifest_index.json", entry =>
+            {
+                try
+                {
+                    var key = entry.address[entry.address.IndexOf("block/", StringComparison.Ordinal)..];
+                    return (key, entry.address);
+                }
+                catch
+                {
+                    Debug.Log($"Invalid asset in group: {entry.address}");
+                    throw;
+                }
+            });
 
         [MenuItem("Tools/ResourcePack/Generate Blockstates Index")]
         public static void GenerateBlockstatesIndex() =>

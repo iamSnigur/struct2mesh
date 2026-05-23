@@ -1080,11 +1080,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 290dcd1e3dc1f3946bc344a539c18931
-    m_Address: vanilla/minecraft/textures/block/decorated_pot
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 291563da97d012245ae8a652ddd7df56
     m_Address: vanilla/minecraft/textures/block/sniffer_egg_very_cracked_west
     m_ReadOnly: 0
@@ -1127,11 +1122,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2a9164e2b0f65b04eab6f893f367f025
     m_Address: vanilla/minecraft/textures/block/cake_bottom
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2aa9c01650ab9fe4395eda707e2ecf22
-    m_Address: vanilla/minecraft/textures/block/shulker
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1342,11 +1332,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 30f2a7da8e2a4cd40b3222dec260edd2
     m_Address: vanilla/minecraft/textures/block/spore_blossom_base
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3139590dedf99344ab316442bfeafb3c
-    m_Address: vanilla/minecraft/textures/block
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1672,11 +1657,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 40ded505ccff9c94a8bcc4123d8bc869
     m_Address: vanilla/minecraft/textures/block/oxidized_copper_bulb
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 40f151fb47a4e574caf0dde21ac1744e
-    m_Address: vanilla/minecraft/textures/block/copper_golem
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2855,6 +2835,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6943fdd7938d1bd49a020964260be286
+    m_Address: vanilla/minecraft/textures/block/piglin/piglin
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 69687fc38240fc14e8d82201e1c3e34a
     m_Address: vanilla/minecraft/textures/block/water_overlay
     m_ReadOnly: 0
@@ -3032,11 +3017,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 70cb87c6a2200404dabb9159effcaabe
     m_Address: vanilla/minecraft/textures/block/vault_bottom_ominous
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 70d799fa1b992fe49b96e31c3787468e
-    m_Address: vanilla/minecraft/textures/block/signs
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -3540,18 +3520,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8291d64ed26af0a41b3d00f95b97ba65
-    m_Address: vanilla/minecraft/textures/block/bed
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8294d2793e98a4f42975b3052da8104b
     m_Address: vanilla/minecraft/textures/block/light_gray_shulker_box
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 82c233c38362b77448dbc33a3614de90
-    m_Address: vanilla/minecraft/textures/block/chest
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4362,11 +4332,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a136885eb85cba9489b2472ea44e1206
     m_Address: vanilla/minecraft/textures/block/cartography_table_side1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a145f89b0dc58a14091eec0e598e1f98
-    m_Address: vanilla/minecraft/textures/block/signs/hanging
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6905,11 +6870,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fdb757c14209c4e4580fa8751c98819d
-    m_Address: vanilla/minecraft/textures/block/conduit
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fdbd31d98c24fe1488f54604dabd3989
     m_Address: vanilla/minecraft/textures/block/flowering_azalea_leaves.png
     m_ReadOnly: 0
@@ -6962,11 +6922,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fec4f6bbd7c5c4e48ad9acdc63da5330
     m_Address: vanilla/minecraft/textures/block/heavy_core
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ff44b5d87e43db04a9d86abc0bbb543f
-    m_Address: vanilla/minecraft/textures/block/banner
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
