@@ -1,5 +1,6 @@
 {
+  "parent": "block/shulker_box",
   "textures": {
-    "particle": "minecraft:block/light_gray_shulker_box"
+    "0": "block/shulker/shulker_light_gray"
   }
 }

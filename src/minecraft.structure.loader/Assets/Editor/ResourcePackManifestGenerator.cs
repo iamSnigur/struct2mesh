@@ -19,7 +19,8 @@ namespace Editor
         private const string OUTPUT_FOLDER = "Assets/Resources_moved";
 
         [MenuItem("Tools/ResourcePack/Generate Textures Index")]
-        public static void GenerateTexturesIndex() =>
+        public static void GenerateTexturesIndex()
+        {
             GenerateIndex(TEXTURES_GROUP_NAME, "textures_manifest_index.json", entry =>
             {
                 try
@@ -33,14 +34,21 @@ namespace Editor
                     throw;
                 }
             });
+            
+            Debug.Log("Textures Index generated");
+        }
 
         [MenuItem("Tools/ResourcePack/Generate Blockstates Index")]
-        public static void GenerateBlockstatesIndex() =>
+        public static void GenerateBlockstatesIndex()
+        {
             GenerateIndex(BLOCKSTATES_GROUP_NAME, "blockstates_manifest_index.json",
                 entry => (
-                    key:   Path.GetFileName(entry.address),
+                    key: Path.GetFileName(entry.address),
                     value: entry.address
                 ));
+            
+            Debug.Log("Blockstates Index generated");
+        }
 
         [MenuItem("Tools/ResourcePack/Generate All Indexes")]
         public static void GenerateAllIndexes()
@@ -89,12 +97,16 @@ namespace Editor
         }
         
         [MenuItem("Tools/ResourcePack/Generate Models Index With Json")]
-        public static void GenerateModelsIndexWithJson() =>
+        public static void GenerateModelsIndexWithJson()
+        {
             GenerateModelsIndex(MODELS_GROUP_NAME, "models_manifest_index.json",
                 entry => (
-                    key:  entry.address[entry.address.IndexOf("block/", StringComparison.Ordinal)..],
+                    key: entry.address[entry.address.IndexOf("block/", StringComparison.Ordinal)..],
                     path: entry.AssetPath
                 ));
+            
+            Debug.Log("Models Index generated");
+        }
 
         private static void GenerateModelsIndex(
             string groupName,
