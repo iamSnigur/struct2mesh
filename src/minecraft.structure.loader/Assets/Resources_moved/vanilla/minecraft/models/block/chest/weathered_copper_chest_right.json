@@ -1,0 +1,6 @@
+{
+  "parent": "block/chest/chest_right",
+  "textures": {
+    "0": "block/chest/copper_weathered_right"
+  }
+}

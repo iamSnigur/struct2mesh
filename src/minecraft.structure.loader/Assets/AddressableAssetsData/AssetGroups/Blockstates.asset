@@ -5300,11 +5300,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e9caf113a2fc30a43802407ae0e7fa77
-    m_Address: vanilla/minecraft/blockstates
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e9d5d0d1a6ac6b542b1c1b38ea1f33b8
     m_Address: vanilla/minecraft/blockstates/oxeye_daisy
     m_ReadOnly: 0

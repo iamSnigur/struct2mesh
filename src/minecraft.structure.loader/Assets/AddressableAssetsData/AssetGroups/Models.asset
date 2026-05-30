@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0065675491737b54fb8d02437302b5bd
+    m_Address: vanilla/minecraft/models/block/chest/weathered_copper_chest_right
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 006d0adb4e4e9334d978c733c025153e
     m_Address: vanilla/minecraft/models/block/orange_tulip
     m_ReadOnly: 0
@@ -566,7 +571,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0c740e5534cc1be46917e364b3b914d7
-    m_Address: vanilla/minecraft/models/block/weathered_copper_chest
+    m_Address: vanilla/minecraft/models/block/chest/weathered_copper_chest
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1720,6 +1725,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 239aa3d2798512a46b02f1bfb8b0595c
+    m_Address: vanilla/minecraft/models/block/chest/exposed_copper_chest_right
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 239dcd4a278aeeb4f8f2917e45c6fad3
     m_Address: vanilla/minecraft/models/block/purple_candle_three_candles_lit
     m_ReadOnly: 0
@@ -1947,6 +1957,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 27f3f79cc2077a84b8f4b3f8fa74b5f5
     m_Address: vanilla/minecraft/models/block/flower_pot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27f3ffc7dd0947629e2c0e6be881e1da
+    m_Address: vanilla/minecraft/models/block/chest/chest_left
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -3082,6 +3097,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3ed40ca1e30a5054388858b9d0038edc
     m_Address: vanilla/minecraft/models/block/polished_deepslate_stairs_outer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f185c95026968b4cba241e8a8d73c5f
+    m_Address: vanilla/minecraft/models/block/chest/copper_chest_right
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4656,7 +4676,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 60710598d8cba464c8048b73649c8243
-    m_Address: vanilla/minecraft/models/block/exposed_copper_chest
+    m_Address: vanilla/minecraft/models/block/chest/exposed_copper_chest
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5266,7 +5286,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6bbe8b77610172c44864582742ee589c
-    m_Address: vanilla/minecraft/models/block/ender_chest
+    m_Address: vanilla/minecraft/models/block/chest/ender_chest
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5426,7 +5446,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6f2575e32dbe321469221af1407cf9c0
-    m_Address: vanilla/minecraft/models/block/chest
+    m_Address: vanilla/minecraft/models/block/chest/chest
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5497,6 +5517,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 70046c7ce225658449e05fbc694d6986
     m_Address: vanilla/minecraft/models/block/template_cake_with_candle
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 701f3e7f820541a48b1817703bafb1cb
+    m_Address: vanilla/minecraft/models/block/chest/weathered_copper_chest_left
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5731,7 +5756,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7643f1f09f73600488cba616b09a54e1
-    m_Address: vanilla/minecraft/models/block/copper_chest
+    m_Address: vanilla/minecraft/models/block/chest/copper_chest
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6497,6 +6522,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 85c1eb3e59901f740b769b44a85679c6
     m_Address: vanilla/minecraft/models/block/acacia_leaves
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85e8e54c5f9d28a45bf6790f3e496d0e
+    m_Address: vanilla/minecraft/models/block/chest/trapped_chest_left
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -7522,6 +7552,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 98ebd85effb52ee4698cb564c4d83ed3
     m_Address: vanilla/minecraft/models/block/lime_wool
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 991e2bb6d1674efaa1674cbb9d822143
+    m_Address: vanilla/minecraft/models/block/chest/chest_right
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -9605,6 +9640,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c54d9c7ff6e53df4d89c8a603ec6b437
+    m_Address: vanilla/minecraft/models/block/chest/exposed_copper_chest_left
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c55c0b3924f327b4c929aa23d76eb0b3
     m_Address: vanilla/minecraft/models/block/cyan_candle_one_candle_lit
     m_ReadOnly: 0
@@ -9801,7 +9841,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c868c957bd042bb4fae0dce361810224
-    m_Address: vanilla/minecraft/models/block/oxidized_copper_chest
+    m_Address: vanilla/minecraft/models/block/chest/oxidized_copper_chest
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -10156,7 +10196,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d02d5d30250217b4d86079ff32d270bb
-    m_Address: vanilla/minecraft/models/block/trapped_chest
+    m_Address: vanilla/minecraft/models/block/chest/trapped_chest
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -10535,6 +10575,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d844d47f08e31b7419e7d03d590908cd
+    m_Address: vanilla/minecraft/models/block/chest/oxidized_copper_chest_left
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d847e27bac646d14eb944ca102f85efa
     m_Address: vanilla/minecraft/models/block/polished_granite_stairs_inner
     m_ReadOnly: 0
@@ -10737,6 +10782,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dd4922f0c5744954faaa554bb144d6ac
     m_Address: vanilla/minecraft/models/block/mangrove_slab_top
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd5b204358b46dc48874dde549cbca1a
+    m_Address: vanilla/minecraft/models/block/chest/copper_chest_left
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -11400,6 +11450,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e9dd85b999b144344a9e2512cee7e5e5
+    m_Address: vanilla/minecraft/models/block/chest/oxidized_copper_chest_right
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e9f7ae0030aaf594db43fc432610fce0
     m_Address: vanilla/minecraft/models/block/smooth_red_sandstone_stairs
     m_ReadOnly: 0
@@ -11652,6 +11707,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ee98cf4d67e319e4090f5185934e3bf6
     m_Address: vanilla/minecraft/models/block/potted_fern
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eeaedea69297e9c44be2f611453219f1
+    m_Address: vanilla/minecraft/models/block/chest/trapped_chest_right
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
