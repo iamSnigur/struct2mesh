@@ -119,7 +119,7 @@ namespace CraftSharp.Resource
         public static void RotateWrapper(ref float3[] original, int2 zyRot)
         {
             // Set up rotation quaternion...
-            Quaternion rot = Quaternion.Euler(0F, zyRot.y * 90F, zyRot.x * 90F);
+            Quaternion rot = Quaternion.Euler(0F, zyRot.y * 22.5F, zyRot.x * 90F);
 
             // And rotate vertices...
             for (int i = 0;i < original.Length;i++)

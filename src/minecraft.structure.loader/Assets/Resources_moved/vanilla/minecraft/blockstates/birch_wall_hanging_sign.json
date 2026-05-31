@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/birch_hanging_sign"
+      "model": "minecraft:block/signs/hanging/birch_hanging_sign"
     }
   }
 }

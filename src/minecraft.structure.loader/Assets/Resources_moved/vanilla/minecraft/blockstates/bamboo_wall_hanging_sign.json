@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/bamboo_hanging_sign"
+      "model": "minecraft:block/signs/hanging/bamboo_hanging_sign"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/jungle_hanging_sign"
+      "model": "minecraft:block/signs/hanging/jungle_hanging_sign"
     }
   }
 }

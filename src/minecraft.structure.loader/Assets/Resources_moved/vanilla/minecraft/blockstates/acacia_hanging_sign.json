@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/acacia_hanging_sign"
+      "model": "minecraft:block/signs/hanging/acacia_hanging_sign"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/oak_hanging_sign"
+      "model": "minecraft:block/signs/hanging/oak_hanging_sign"
     }
   }
 }

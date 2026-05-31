@@ -1,7 +1,11 @@
 {
   "variants": {
-    "": {
-      "model": "minecraft:block/oak_sign"
+    "rotation=8": {
+      "model": "minecraft:block/signs/oak_sign",
+      "y": 180
+    },
+    "rotation=0": {
+      "model": "minecraft:block/signs/oak_sign"
     }
   }
 }

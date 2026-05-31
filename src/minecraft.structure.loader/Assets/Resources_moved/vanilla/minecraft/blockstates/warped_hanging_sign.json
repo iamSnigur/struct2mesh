@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/warped_hanging_sign"
+      "model": "minecraft:block/signs/hanging/warped_hanging_sign"
     }
   }
 }

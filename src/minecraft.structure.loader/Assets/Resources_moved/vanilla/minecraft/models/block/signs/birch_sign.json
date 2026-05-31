@@ -1,0 +1,6 @@
+{
+  "parent": "block/signs/sign",
+  "textures": {
+    "0": "block/signs/birch"
+  }
+}

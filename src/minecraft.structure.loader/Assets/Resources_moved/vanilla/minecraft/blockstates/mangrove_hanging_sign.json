@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/mangrove_hanging_sign"
+      "model": "minecraft:block/signs/hanging/mangrove_hanging_sign"
     }
   }
 }

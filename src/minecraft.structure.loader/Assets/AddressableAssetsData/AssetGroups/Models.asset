@@ -671,7 +671,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0f1773afb72e4c249b60f4b09e0bb20e
-    m_Address: vanilla/minecraft/models/block/birch_hanging_sign
+    m_Address: vanilla/minecraft/models/block/signs/hanging/birch_hanging_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -966,7 +966,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1456ded3a8222644cb9b8aa94e4bd416
-    m_Address: vanilla/minecraft/models/block/mangrove_sign
+    m_Address: vanilla/minecraft/models/block/signs/mangrove_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1776,7 +1776,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 24191e95c1ad6c544a0c93c6858e4363
-    m_Address: vanilla/minecraft/models/block/warped_hanging_sign
+    m_Address: vanilla/minecraft/models/block/signs/hanging/warped_hanging_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1846,7 +1846,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2557d28a88cea884aa07754623f4bdfb
-    m_Address: vanilla/minecraft/models/block/warped_sign
+    m_Address: vanilla/minecraft/models/block/signs/warped_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1991,7 +1991,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 286ab539e4cb19f4783fee74eb5c13ef
-    m_Address: vanilla/minecraft/models/block/bamboo_hanging_sign
+    m_Address: vanilla/minecraft/models/block/signs/hanging/bamboo_hanging_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -3851,7 +3851,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4e903349de419704dbbe3f7e0fabb3bf
-    m_Address: vanilla/minecraft/models/block/dark_oak_hanging_sign
+    m_Address: vanilla/minecraft/models/block/signs/hanging/dark_oak_hanging_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4101,7 +4101,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 53ca1b0291bbaa84d80223c83743993f
-    m_Address: vanilla/minecraft/models/block/oak_sign
+    m_Address: vanilla/minecraft/models/block/signs/oak_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4651,7 +4651,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5fb57269d37cf664a9556d06a4ce9623
-    m_Address: vanilla/minecraft/models/block/mangrove_hanging_sign
+    m_Address: vanilla/minecraft/models/block/signs/hanging/mangrove_hanging_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5486,7 +5486,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6f9d9774f8cc8ec4db4e6b6893f6a6c2
-    m_Address: vanilla/minecraft/models/block/spruce_hanging_sign
+    m_Address: vanilla/minecraft/models/block/signs/hanging/spruce_hanging_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5746,7 +5746,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 75d866dfd05f71e4296225b8a8a615e9
-    m_Address: vanilla/minecraft/models/block/birch_sign
+    m_Address: vanilla/minecraft/models/block/signs/birch_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6486,7 +6486,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8584bca833c858f4ab7bdef3285df06e
-    m_Address: vanilla/minecraft/models/block/acacia_sign
+    m_Address: vanilla/minecraft/models/block/signs/acacia_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6801,7 +6801,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8b5b0c95b05a7464d9d2951fc3355f6c
-    m_Address: vanilla/minecraft/models/block/pale_oak_sign
+    m_Address: vanilla/minecraft/models/block/signs/pale_oak_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6816,7 +6816,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8ba22b5a677e88c48a7ca5cf1c602c04
-    m_Address: vanilla/minecraft/models/block/bamboo_sign
+    m_Address: vanilla/minecraft/models/block/signs/bamboo_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6896,7 +6896,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8d4cf343108acfb48bc87fd4c889f777
-    m_Address: vanilla/minecraft/models/block/jungle_sign
+    m_Address: vanilla/minecraft/models/block/signs/jungle_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -7406,7 +7406,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 963d671bc73b25045a19683dace82fe2
-    m_Address: vanilla/minecraft/models/block/oak_hanging_sign
+    m_Address: vanilla/minecraft/models/block/signs/hanging/oak_hanging_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -8041,7 +8041,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a308c5d78443a624cb0f1b28236cd8ce
-    m_Address: vanilla/minecraft/models/block/crimson_hanging_sign
+    m_Address: vanilla/minecraft/models/block/signs/hanging/crimson_hanging_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -8256,7 +8256,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a6280dc7f1dbaab4c9377c25272a7df9
-    m_Address: vanilla/minecraft/models/block/cherry_sign
+    m_Address: vanilla/minecraft/models/block/signs/cherry_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -8966,7 +8966,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b6592f32ade15634caeda7ec77061339
-    m_Address: vanilla/minecraft/models/block/acacia_hanging_sign
+    m_Address: vanilla/minecraft/models/block/signs/hanging/acacia_hanging_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -9146,7 +9146,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b9b9b0acb7914ed4b8bb764e7b6f10bf
-    m_Address: vanilla/minecraft/models/block/spruce_sign
+    m_Address: vanilla/minecraft/models/block/signs/spruce_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -9181,7 +9181,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ba208d2f06119ff4ea6a510e6ac37eec
-    m_Address: vanilla/minecraft/models/block/cherry_hanging_sign
+    m_Address: vanilla/minecraft/models/block/signs/hanging/cherry_hanging_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -9276,7 +9276,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bb9335106ce903441b4758864d3e76af
-    m_Address: vanilla/minecraft/models/block/pale_oak_hanging_sign
+    m_Address: vanilla/minecraft/models/block/signs/hanging/pale_oak_hanging_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -9481,7 +9481,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c1d591d12c4a64c4193356c42b161e6f
-    m_Address: vanilla/minecraft/models/block/dark_oak_sign
+    m_Address: vanilla/minecraft/models/block/signs/dark_oak_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -9937,6 +9937,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ca90f24d91a3d514790dbbc8009d5331
     m_Address: vanilla/minecraft/models/block/template_bars_side_alt
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca9bc075c41b42c2aed51b39f6441f78
+    m_Address: vanilla/minecraft/models/block/signs/sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -10396,7 +10401,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d5264a14b48cad540bac38d2ef182c18
-    m_Address: vanilla/minecraft/models/block/jungle_hanging_sign
+    m_Address: vanilla/minecraft/models/block/signs/hanging/jungle_hanging_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -12551,7 +12556,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ff9ad41f6048e2f4a95cdaadeb9f4ddb
-    m_Address: vanilla/minecraft/models/block/crimson_sign
+    m_Address: vanilla/minecraft/models/block/signs/crimson_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

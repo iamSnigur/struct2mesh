@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/cherry_sign"
+      "model": "minecraft:block/signs/cherry_sign"
     }
   }
 }

@@ -1,7 +1,11 @@
 {
   "variants": {
-    "": {
-      "model": "minecraft:block/spruce_sign"
+    "rotation=7": {
+      "model": "minecraft:block/signs/spruce_sign",
+      "y": 157.5
+    },
+    "rotation=0": {
+      "model": "minecraft:block/signs/spruce_sign"
     }
   }
 }

@@ -1,7 +1,11 @@
 {
   "variants": {
-    "": {
-      "model": "minecraft:block/warped_sign"
+    "rotation=9": {
+      "model": "minecraft:block/signs/warped_sign",
+      "y": 202.5
+    },
+    "rotation=0": {
+      "model": "minecraft:block/signs/warped_sign"
     }
   }
 }
