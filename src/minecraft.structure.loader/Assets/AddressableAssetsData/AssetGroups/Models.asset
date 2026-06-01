@@ -1160,6 +1160,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 183a198500b2436a8b872ff57e099634
+    m_Address: vanilla/minecraft/models/block/signs/mangrove_wall_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 185125be57b07fe40994751fd207b00b
     m_Address: vanilla/minecraft/models/block/loom
     m_ReadOnly: 0
@@ -1382,6 +1387,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1c42ebf2fb35c174ba6ad37d2a472ab6
     m_Address: vanilla/minecraft/models/block/barrier
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1c4ccd7e168142dd9918c1edbbfa82d3
+    m_Address: vanilla/minecraft/models/block/signs/warped_wall_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2132,6 +2142,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2b2ae877dc2c6aa4fa0626231884f48e
     m_Address: vanilla/minecraft/models/block/gravel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2b2ef64050534b1bb625a870cb1d89e2
+    m_Address: vanilla/minecraft/models/block/signs/pale_oak_wall_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -3255,6 +3270,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 42270f1efd51493195d1c74901272f92
+    m_Address: vanilla/minecraft/models/block/signs/jungle_wall_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4267767c885cb094e87f5f84319e6dbe
     m_Address: vanilla/minecraft/models/block/resin_brick_slab_top
     m_ReadOnly: 0
@@ -3522,6 +3542,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4761c917fc7d62d4ca63121e69329ee3
     m_Address: vanilla/minecraft/models/block/black_candle_one_candle_lit
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 47657c1d8b6d400f919d7a6eabb7721c
+    m_Address: vanilla/minecraft/models/block/signs/crimson_wall_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4495,6 +4520,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c13b2553cc54f4f87c5967c764603b3
+    m_Address: vanilla/minecraft/models/block/signs/bamboo_wall_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5c4613e5808529f498ef78db6af3a8e6
     m_Address: vanilla/minecraft/models/block/powder_snow_cauldron_full
     m_ReadOnly: 0
@@ -5225,6 +5255,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a8a7ddd866d4091955d14d18ed43ede
+    m_Address: vanilla/minecraft/models/block/signs/wall_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6a8bc466fed5cd54088ffae9e50d64cf
     m_Address: vanilla/minecraft/models/block/wither_rose
     m_ReadOnly: 0
@@ -5367,6 +5402,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6dead40e07cb56743825d137c369ba49
     m_Address: vanilla/minecraft/models/block/copper_bars_post
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6df7e6ba56164135b9786cb23c3d9843
+    m_Address: vanilla/minecraft/models/block/signs/birch_wall_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6077,6 +6117,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7d766385a6fa4bd4fb6965068375f72b
     m_Address: vanilla/minecraft/models/block/door_top_right
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d7665f06bcb497e99d2bf962c86c06a
+    m_Address: vanilla/minecraft/models/block/signs/acacia_wall_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -8330,6 +8375,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a82a544ffb7e4fe6be4c8123b957a8cb
+    m_Address: vanilla/minecraft/models/block/signs/dark_oak_wall_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a8328ff69fd72374b80aec6dacde260e
     m_Address: vanilla/minecraft/models/block/mossy_cobblestone_stairs_inner
     m_ReadOnly: 0
@@ -9287,6 +9337,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bc425b6a70de89f4a9ff91be87d3b3ab
     m_Address: vanilla/minecraft/models/block/beacon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bc45e59b2acc456ba71f4090945dc5cb
+    m_Address: vanilla/minecraft/models/block/signs/oak_wall_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -11115,6 +11170,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e36593bfde784691b1bca9f8205f3074
+    m_Address: vanilla/minecraft/models/block/signs/cherry_wall_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e367909b26b84c446b6c8472938d1e11
     m_Address: vanilla/minecraft/models/block/crimson_stairs_inner
     m_ReadOnly: 0
@@ -11877,6 +11937,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f1c2cd6a344c8c3469e039a5c9654092
     m_Address: vanilla/minecraft/models/block/mangrove_door_bottom_left_open
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f2044cb321fa484085862806064a52b3
+    m_Address: vanilla/minecraft/models/block/signs/spruce_wall_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

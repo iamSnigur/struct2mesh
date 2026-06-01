@@ -96,6 +96,9 @@ namespace CraftSharp.Resource
             if (stateRotated) // Apply state rotation...
                 Rotations.RotateWrapper(ref elemVerts, zyRot);
 
+            // Since signs can have more than 4 rotations, so clamp value to 0-3 as it was before
+            zyRot.y /= 4;
+            
             foreach (var facePair in elem.faces)
             {
                 // Select the current face
