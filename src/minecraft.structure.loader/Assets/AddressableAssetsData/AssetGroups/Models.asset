@@ -210,6 +210,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 043d9fd40e344859a7b95ce3ea4691c4
+    m_Address: vanilla/minecraft/models/block/signs/hanging/acacia_hanging_wall_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 04abf007189b8ae48b5a97ce5574c570
     m_Address: vanilla/minecraft/models/block/orientable_vertical
     m_ReadOnly: 0
@@ -2035,6 +2040,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 290f23d7887246ab8aad08e01b7e049f
+    m_Address: vanilla/minecraft/models/block/signs/hanging/pale_oak_hanging_wall_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 29257cc6d43d36848ad04536b8ff2208
     m_Address: vanilla/minecraft/models/block/bed/lime_foot
     m_ReadOnly: 0
@@ -2062,6 +2072,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 297da62c4666fbe44b0d0973c5b7c18a
     m_Address: vanilla/minecraft/models/block/bamboo_fence_inventory
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29872e138f4d4c0a870aca1d9cb7e181
+    m_Address: vanilla/minecraft/models/block/signs/hanging/oak_hanging_wall_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2347,6 +2362,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2f041c3de4b8bb14faec093c15c1fe5a
     m_Address: vanilla/minecraft/models/block/sticky_piston
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f244ded80d14574811ed7f588d7f864
+    m_Address: vanilla/minecraft/models/block/signs/hanging/hanging_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4705,6 +4725,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 605065993d154c808066d8ccf70b7a7e
+    m_Address: vanilla/minecraft/models/block/signs/hanging/jungle_hanging_wall_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 60710598d8cba464c8048b73649c8243
     m_Address: vanilla/minecraft/models/block/chest/exposed_copper_chest
     m_ReadOnly: 0
@@ -6810,6 +6835,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a8ece9bd3df47e9840da2d41bbb8cfb
+    m_Address: vanilla/minecraft/models/block/signs/hanging/birch_hanging_wall_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8a99c01f392a42344bf2b4ac99777baf
     m_Address: vanilla/minecraft/models/block/oxidized_copper_door_bottom_right
     m_ReadOnly: 0
@@ -7485,6 +7515,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 97360a0d89404cf28bf86f2da14226bf
+    m_Address: vanilla/minecraft/models/block/signs/hanging/dark_oak_hanging_wall_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 974b0425f12a5b84a82db748c8e44ee0
     m_Address: vanilla/minecraft/models/block/pale_oak_pressure_plate_down
     m_ReadOnly: 0
@@ -7897,6 +7932,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9f4648aee33feee4681dabea93d9e601
     m_Address: vanilla/minecraft/models/block/oak_shelf_inventory
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f5f989f1d294ecbb54885e7c77aff0f
+    m_Address: vanilla/minecraft/models/block/signs/hanging/spruce_hanging_wall_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -8725,6 +8765,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af23f0791a4d49728e53c96b951518d6
+    m_Address: vanilla/minecraft/models/block/signs/hanging/warped_hanging_wall_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: af2515531b009174685c68e7e10dda08
     m_Address: vanilla/minecraft/models/block/template_chiseled_bookshelf_slot_bottom_mid
     m_ReadOnly: 0
@@ -9327,6 +9372,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bb9335106ce903441b4758864d3e76af
     m_Address: vanilla/minecraft/models/block/signs/hanging/pale_oak_hanging_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bbcab95b7df84002aee028f5a9fd6d0e
+    m_Address: vanilla/minecraft/models/block/signs/hanging/bamboo_hanging_wall_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -10445,6 +10495,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d457817ccb8542c9b4f87491432d4fb5
+    m_Address: vanilla/minecraft/models/block/signs/hanging/crimson_hanging_wall_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d486acb7818ee6a47b98d84b5020008f
     m_Address: vanilla/minecraft/models/block/light_blue_terracotta
     m_ReadOnly: 0
@@ -11550,6 +11605,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ea3f2c81cae1461889c5abeef92a0ab4
+    m_Address: vanilla/minecraft/models/block/signs/hanging/mangrove_hanging_wall_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ea505dc6b73cde246a8c7244505b0df4
     m_Address: vanilla/minecraft/models/block/chiseled_bookshelf_empty_slot_top_mid
     m_ReadOnly: 0
@@ -11715,6 +11775,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed8723cd53d14464996cc7a1e298adc1
+    m_Address: vanilla/minecraft/models/block/signs/hanging/cherry_hanging_wall_sign
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ed8bcecb2c313dc4187847a4dc19129e
     m_Address: vanilla/minecraft/models/block/bubble_coral_block
     m_ReadOnly: 0
@@ -11862,6 +11927,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f0403a8a2e5efbd4ab93aa4849e7ee6b
     m_Address: vanilla/minecraft/models/block/comparator
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f0568b88d50240589e387c9a80b1f484
+    m_Address: vanilla/minecraft/models/block/signs/hanging/hanging_wall_sign
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

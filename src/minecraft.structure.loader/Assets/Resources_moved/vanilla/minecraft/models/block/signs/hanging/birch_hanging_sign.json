@@ -1,5 +1,6 @@
 {
+  "parent": "block/signs/hanging/hanging_sign",
   "textures": {
-    "particle": "minecraft:block/stripped_birch_log"
+    "0": "block/signs/hanging/birch"
   }
 }

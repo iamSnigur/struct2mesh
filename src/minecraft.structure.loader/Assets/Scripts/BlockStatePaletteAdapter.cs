@@ -26,7 +26,12 @@ public class BlockStatePaletteAdapter : BlockStatePalette
     {
         ResourceLocation? fluidState = blockStateId switch
         {
+            "kelp" => BlockState.WATER_ID,
+            "kelp_plant" => BlockState.WATER_ID,
+            "seagrass" => BlockState.WATER_ID,
+            "tall_seagrass" => BlockState.WATER_ID,
             "water" => BlockState.WATER_ID,
+            "bubble_column" => BlockState.WATER_ID,
             "lava" => BlockState.LAVA_ID,
             _ => null
         };

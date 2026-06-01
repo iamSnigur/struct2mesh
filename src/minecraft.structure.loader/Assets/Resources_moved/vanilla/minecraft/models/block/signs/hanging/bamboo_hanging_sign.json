@@ -1,5 +1,6 @@
 {
+  "parent": "block/signs/hanging/hanging_sign",
   "textures": {
-    "particle": "minecraft:block/bamboo_planks"
+    "0": "block/signs/hanging/bamboo"
   }
 }

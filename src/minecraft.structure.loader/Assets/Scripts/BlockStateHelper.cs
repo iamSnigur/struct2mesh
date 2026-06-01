@@ -211,13 +211,13 @@ public static class BlockStateHelper
         "minecraft:acacia_sign", "minecraft:dark_oak_sign",
         "minecraft:mangrove_sign", "minecraft:cherry_sign",
         "minecraft:bamboo_sign", "minecraft:crimson_sign",
-        "minecraft:warped_sign",
+        "minecraft:warped_sign", "minecraft:pale_oak_sign",
         "minecraft:oak_wall_sign", "minecraft:spruce_wall_sign",
         "minecraft:birch_wall_sign", "minecraft:jungle_wall_sign",
         "minecraft:acacia_wall_sign", "minecraft:dark_oak_wall_sign",
         "minecraft:mangrove_wall_sign", "minecraft:cherry_wall_sign",
         "minecraft:bamboo_wall_sign", "minecraft:crimson_wall_sign",
-        "minecraft:warped_wall_sign",
+        "minecraft:warped_wall_sign", "minecraft:pale_oak_wall_sign",
 
         // Hanging signs
         "minecraft:oak_hanging_sign", "minecraft:spruce_hanging_sign",
@@ -225,13 +225,13 @@ public static class BlockStateHelper
         "minecraft:acacia_hanging_sign", "minecraft:dark_oak_hanging_sign",
         "minecraft:mangrove_hanging_sign", "minecraft:cherry_hanging_sign",
         "minecraft:bamboo_hanging_sign", "minecraft:crimson_hanging_sign",
-        "minecraft:warped_hanging_sign",
+        "minecraft:warped_hanging_sign", "minecraft:pale_oak_hanging_sign",
         "minecraft:oak_wall_hanging_sign", "minecraft:spruce_wall_hanging_sign",
         "minecraft:birch_wall_hanging_sign", "minecraft:jungle_wall_hanging_sign",
         "minecraft:acacia_wall_hanging_sign", "minecraft:dark_oak_wall_hanging_sign",
         "minecraft:mangrove_wall_hanging_sign", "minecraft:cherry_wall_hanging_sign",
         "minecraft:bamboo_wall_hanging_sign", "minecraft:crimson_wall_hanging_sign",
-        "minecraft:warped_wall_hanging_sign",
+        "minecraft:warped_wall_hanging_sign", "minecraft:pale_oak_wall_hanging_sign",
         
         // doors & trapdoors
         "minecraft:oak_trapdoor", "minecraft:spruce_trapdoor", "minecraft:birch_trapdoor",
@@ -403,6 +403,7 @@ public static class BlockStateHelper
         "minecraft:bamboo_mosaic_slab",
         "minecraft:crimson_slab",
         "minecraft:warped_slab",
+        "minecraft:pale_oak_slab",
         "minecraft:stone_slab",
         "minecraft:smooth_stone_slab",
         "minecraft:cobblestone_slab",
@@ -465,6 +466,7 @@ public static class BlockStateHelper
         "minecraft:bamboo_mosaic_stairs",
         "minecraft:crimson_stairs",
         "minecraft:warped_stairs",
+        "minecraft:pale_oak_stairs",
         "minecraft:cobblestone_stairs",
         "minecraft:mossy_cobblestone_stairs",
         "minecraft:stone_stairs",
@@ -522,6 +524,7 @@ public static class BlockStateHelper
         "minecraft:bamboo_fence",
         "minecraft:crimson_fence",
         "minecraft:warped_fence",
+        "minecraft:pale_oak_fence",
         "minecraft:nether_brick_fence",
 
         // Fence Gates
@@ -536,6 +539,7 @@ public static class BlockStateHelper
         "minecraft:bamboo_fence_gate",
         "minecraft:crimson_fence_gate",
         "minecraft:warped_fence_gate",
+        "minecraft:pale_oak_fence_gate",
 
         // Walls
         "minecraft:cobblestone_wall",
@@ -596,6 +600,7 @@ public static class BlockStateHelper
         "minecraft:bamboo_door",
         "minecraft:crimson_door",
         "minecraft:warped_door",
+        "minecraft:pale_oak_door",
         "minecraft:iron_door",
         "minecraft:copper_door",
         "minecraft:exposed_copper_door",
@@ -618,6 +623,7 @@ public static class BlockStateHelper
         "minecraft:bamboo_trapdoor",
         "minecraft:crimson_trapdoor",
         "minecraft:warped_trapdoor",
+        "minecraft:pale_oak_trapdoor",
         "minecraft:iron_trapdoor",
         "minecraft:copper_trapdoor",
         "minecraft:exposed_copper_trapdoor",
@@ -699,6 +705,7 @@ public static class BlockStateHelper
         "minecraft:bamboo_button",
         "minecraft:crimson_button",
         "minecraft:warped_button",
+        "minecraft:pale_oak_button",
         "minecraft:stone_button",
         "minecraft:polished_blackstone_button",
 
@@ -791,6 +798,15 @@ public static class BlockStateHelper
         "minecraft:waxed_oxidized_copper_golem_statue",
         "minecraft:weathered_copper_golem_statue",
         "minecraft:waxed_weathered_copper_golem_statue",
+        
+        "minecraft:copper_chest",
+        "minecraft:waxed_copper_chest",
+        "minecraft:exposed_copper_chest",
+        "minecraft:waxed_exposed_copper_chest",
+        "minecraft:oxidized_copper_chest",
+        "minecraft:waxed_oxidized_copper_chest",
+        "minecraft:weathered_copper_chest",
+        "minecraft:waxed_weathered_copper_chest",
     };
     
     public static bool IsSemiSolid(string blockId)
