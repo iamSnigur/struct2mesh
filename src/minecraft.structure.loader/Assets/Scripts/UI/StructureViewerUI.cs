@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 using System.Collections;
 using UnityEngine.Rendering;
 using Core;
+using UnityGLTF;
 
 namespace UI
 {
@@ -79,6 +80,13 @@ namespace UI
 
         private void OnExportClicked()
         {
+            /*var settings = new GLTFSettings();
+            var exporter = new GLTFSceneExporter(
+                new[] { rootGameObject.transform },
+                settings
+            );
+
+            exporter.SaveGLB("output.glb");*/
             Debug.Log("[StructureViewerUI] Export button clicked.");
         }
 
