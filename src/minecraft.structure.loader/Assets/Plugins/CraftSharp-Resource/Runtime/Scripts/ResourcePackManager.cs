@@ -87,7 +87,7 @@ namespace CraftSharp.Resource
         public bool Loaded { get; private set; } = false;
 
 #nullable disable
-        private Texture2DArray atlasArray;
+        private Texture2D blockAtlas;
 #nullable enable
         
         private Texture2DArray? destroyTextureArray;
@@ -454,8 +454,8 @@ namespace CraftSharp.Resource
             return texAtlasTable[ResourceLocation.INVALID];
         }
 
-        public Texture2DArray GetAtlasArray(bool mipped) => 
-            atlasArray;
+        public Texture2D GetAtlasArray(bool mipped) => 
+            blockAtlas;
 
         public Texture2DArray? GetDestroyTextureArray()
         {
@@ -710,8 +710,8 @@ namespace CraftSharp.Resource
             texAtlasTable.Clear();
             await AtlasTableHelper.LoadAtlasTable(texAtlasTable);
             
-            Texture2DArray atlas = await AssetProvider.LoadByAddressAsync<Texture2DArray>("block_atlas");
-            atlasArray = atlas ?? throw new NullReferenceException("Can't load baked atlas: block_atlas");
+            Texture2D atlas = await AssetProvider.LoadByAddressAsync<Texture2D>("block_atlas");
+            blockAtlas = atlas ?? throw new NullReferenceException("Can't load baked atlas: block_atlas");
         }
         
         private async UniTask GenerateAtlas()
@@ -973,7 +973,7 @@ namespace CraftSharp.Resource
             AtlasTableHelper.SaveAtlasTable(texAtlasTable);
             Save(atlasArray1, "Assets/Resources_moved/vanilla/minecraft/textures/block_atlas.asset");
             
-            atlasArray = atlasArray0;
+            //blockAtlas = atlasArray0;
         }
 
         private static void Save(Texture2DArray array, string path)

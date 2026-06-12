@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 using System.Collections;
 using UnityEngine.Rendering;
 using Core;
+using Core.Exporter;
 using UnityGLTF;
 
 namespace UI
@@ -20,6 +21,7 @@ namespace UI
 
         public CameraController CameraController;
         public FileReceiver FileReceiver;
+        public NbtReader NbtReader;
         
         private UIDocument _doc;
         private VisualElement _root;
@@ -80,13 +82,8 @@ namespace UI
 
         private void OnExportClicked()
         {
-            /*var settings = new GLTFSettings();
-            var exporter = new GLTFSceneExporter(
-                new[] { rootGameObject.transform },
-                settings
-            );
-
-            exporter.SaveGLB("output.glb");*/
+            StructureExporter.ExportToZip(NbtReader.Root, new GltfExporter());
+            
             Debug.Log("[StructureViewerUI] Export button clicked.");
         }
 

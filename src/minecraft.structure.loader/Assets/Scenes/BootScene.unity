@@ -616,6 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: StructureLoader::StructureViewerUI
   CameraController: {fileID: 330585548}
   FileReceiver: {fileID: 1493336153}
+  NbtReader: {fileID: 1188278964}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

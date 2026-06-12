@@ -12,12 +12,12 @@ public class NbtReader : MonoBehaviour
 {
     public string StructureNbtFilePath;
     
-    private GameObject _parent;
+    public GameObject Root { get; private set; }
     public static StructureVolume StructureVolume;
     
     private void Awake()
     {
-        _parent = new GameObject("Structure");
+        Root = new GameObject("Structure");
         StructureVolume = new StructureVolume();
     }
 
@@ -190,7 +190,7 @@ public class NbtReader : MonoBehaviour
     
     private async UniTaskVoid Construct(Structure structure)
     {
-        ClearBlockVisual(_parent);
+        ClearBlockVisual(Root);
 
         MinecraftAssetProvider.ReleaseBlockStateHandles();
         
@@ -212,16 +212,16 @@ public class NbtReader : MonoBehaviour
             
             GameObject blockView = MinecraftAssetProvider.LoadModel(paletteEntry.Name, block.Pos, paletteEntry.Properties, cullFlags);
             Transform cachedTransform = blockView.transform;
-            cachedTransform.parent = _parent.transform;
+            cachedTransform.parent = Root.transform;
             cachedTransform.position = block.Pos;
         }
 
-        MeshCombiner meshCombiner = _parent.AddComponent<MeshCombiner>();
+        MeshCombiner meshCombiner = Root.AddComponent<MeshCombiner>();
         meshCombiner.CreateMultiMaterialMesh = true;
         meshCombiner.DestroyCombinedChildren = true;
         meshCombiner.CombineMeshes(true);
 
-        Renderer component = _parent.GetComponent<Renderer>();
+        Renderer component = Root.GetComponent<Renderer>();
         FindFirstObjectByType<CameraController>().SetPivot(component.bounds.center);
     }
     
