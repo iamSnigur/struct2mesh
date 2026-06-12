@@ -6,9 +6,6 @@ using CraftSharp.Resource;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceLocations;
 
 namespace Core.AssetManagement
 {
@@ -144,8 +141,6 @@ namespace Core.AssetManagement
             }
 
             BlockStatePaletteAdapter.Instance.InjectEntries();
-        
-            //BlockEntityTypePaletteAdapter.Instance.PrepareData();
         }
 
         public static void UpdateColorRules() => 

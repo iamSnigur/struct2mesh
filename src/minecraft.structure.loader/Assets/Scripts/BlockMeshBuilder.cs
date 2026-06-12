@@ -1,9 +1,7 @@
 ﻿#nullable enable
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using CraftSharp;
-using CraftSharp.Rendering;
 using CraftSharp.Resource;
 using Unity.Collections;
 using Unity.Mathematics;
@@ -14,16 +12,10 @@ using Object = UnityEngine.Object;
 public static class BlockMeshBuilder
 {
     private static readonly MaterialManager s_materialManager;
-    private static BlockEntityPrefabs _blockEntityPrefabs;
 
     static BlockMeshBuilder()
     {
         s_materialManager = Object.FindFirstObjectByType<MaterialManager>();
-    }
-
-    public static void InjectDependencies(BlockEntityPrefabs blockEntityPrefabs)
-    {
-        _blockEntityPrefabs = blockEntityPrefabs;
     }
     
     private static void ClearBlockVisual(GameObject modelObject)
@@ -313,19 +305,4 @@ public static class BlockMeshBuilder
 
     private const int LAVA_LAYER_INDEX = 1;
     private const int WATER_LAYER_INDEX = 0;
-
-    private static BlockEntityRender CreateBlockEntityRenderForItemModel(Transform parent, BlockState blockState, BlockEntityType blockEntityType)
-    {
-        GameObject blockEntityPrefab = _blockEntityPrefabs.GetPrefabForType(blockEntityType.TypeId);
-        GameObject? blockEntityObj = Object.Instantiate(blockEntityPrefab, parent);
-        BlockEntityRender? blockEntityRender = blockEntityObj!.GetComponent<BlockEntityRender>();
-
-        blockEntityObj.name = $"[Item Model] {blockEntityType}";
-        blockEntityObj.transform.localPosition = new Vector3(0.5f, 0.5f, 0.5f);
-        blockEntityObj.transform.localEulerAngles = Vector3.zero;
-
-        blockEntityRender.Initialize(BlockLoc.Zero, blockState, blockEntityType, tags: new Dictionary<string, object>());
-                
-        return blockEntityRender;
-    }
 }
