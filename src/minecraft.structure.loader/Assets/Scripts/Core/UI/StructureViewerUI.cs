@@ -1,14 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Core.Exporter;
 using UnityEngine;
 using UnityEngine.UIElements;
-using System.Collections;
-using UnityEngine.Rendering;
-using Core;
-using Core.Exporter;
-using UnityGLTF;
 
-namespace UI
+namespace Core.UI
 {
     [RequireComponent(typeof(UIDocument))]
     public class StructureViewerUI : MonoBehaviour
@@ -21,7 +17,7 @@ namespace UI
 
         public CameraController CameraController;
         public FileReceiver FileReceiver;
-        public NbtReader NbtReader;
+        public NbtStructureParser NbtStructureParser;
         
         private UIDocument _doc;
         private VisualElement _root;
@@ -82,7 +78,8 @@ namespace UI
 
         private void OnExportClicked()
         {
-            StructureExporter.ExportToZip(NbtReader.Root, new GltfExporter());
+            Label lbl = _root.Q<Label>("file-label");
+            StructureExporter.ExportToZip(lbl.text, NbtStructureParser.Root, new GlbExporter());
             
             Debug.Log("[StructureViewerUI] Export button clicked.");
         }

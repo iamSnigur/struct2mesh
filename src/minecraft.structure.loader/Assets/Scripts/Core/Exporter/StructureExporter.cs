@@ -8,10 +8,45 @@ namespace Core.Exporter
 {
     public interface IExportStrategy
     {
-        byte[] GetMeshBytes(GameObject structure);
+        byte[] GetMeshBytes(GameObject root);
     }
     
     public class GltfExporter : IExportStrategy
+    {
+        public byte[] GetMeshBytes(GameObject root)
+        {
+            using var stream = new MemoryStream();
+
+            var exporter = new GLTFSceneExporter(
+                new[] { root.transform },
+                new ExportContext()
+            );
+
+            //exporter.SaveGLTFandBin(); create adapter for this method and make it write to stream
+            exporter.SaveGLBToStream(stream, string.Empty);
+
+            return stream.ToArray();
+        }
+    }
+    
+    public class GlbExporter : IExportStrategy
+    {
+        public byte[] GetMeshBytes(GameObject root)
+        {
+            using MemoryStream stream = new();
+
+            var exporter = new GLTFSceneExporter(
+                new[] { root.transform },
+                new ExportContext()
+            );
+
+            exporter.SaveGLBToStream(stream, string.Empty);
+
+            return stream.ToArray();
+        }
+    }
+    
+    public class ObjExporter : IExportStrategy
     {
         public byte[] GetMeshBytes(GameObject root)
         {
@@ -26,20 +61,6 @@ namespace Core.Exporter
 
             return stream.ToArray();
         }
-        
-        public static byte[] ExportGlb(GameObject root)
-        {
-            using var stream = new MemoryStream();
-
-            var exporter = new GLTFSceneExporter(
-                new[] { root.transform },
-                new ExportContext()
-            );
-
-            exporter.SaveGLBToStream(stream, "model");
-
-            return stream.ToArray();
-        }
     }
     
     public static class StructureExporter
@@ -50,19 +71,19 @@ namespace Core.Exporter
             byte[] data,
             int length);
         
-        public static void ExportToZip(GameObject structure, IExportStrategy exportStrategy)
+        public static void ExportToZip(string structureName, GameObject root, IExportStrategy exportStrategy)
         {
             using MemoryStream zipMemory = new();
 
             using (ZipArchive archive = new(zipMemory, ZipArchiveMode.Create, true))
             {
                 ZipArchiveEntry modelEntry = archive.CreateEntry(
-                    "model.glb",
+                    $"{structureName}.glb",
                     System.IO.Compression.CompressionLevel.Optimal);
 
                 using (Stream entryStream = modelEntry.Open())
                 {
-                    byte[] modelBytes = exportStrategy.GetMeshBytes(structure);
+                    byte[] modelBytes = exportStrategy.GetMeshBytes(root);
 
                     entryStream.Write(
                         modelBytes,
@@ -76,7 +97,7 @@ namespace Core.Exporter
 
                 using (Stream stream = pngEntry.Open())
                 {
-                    Material material = structure.GetComponent<Renderer>().materials[0];
+                    Material material = root.GetComponent<Renderer>().materials[0];
                     Texture2D atlas = material.mainTexture as Texture2D;
                     stream.Write(atlas.EncodeToPNG());
                 }
@@ -86,12 +107,12 @@ namespace Core.Exporter
             
 #if UNITY_WEBGL && !UNITY_EDITOR
             DownloadFile(
-                "minecraft_structure.zip",
+                $"{structureName}.zip",
                 zipBytes,
                 zipBytes.Length);
 #elif UNITY_EDITOR && UNITY_EDITOR_WIN
             File.WriteAllBytes(
-                Path.Combine(Application.dataPath, "../model.zip"), 
+                Path.Combine(Application.dataPath, $"../{structureName}.zip"), 
                 zipBytes);
 #endif
         }

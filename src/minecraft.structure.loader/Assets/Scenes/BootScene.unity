@@ -529,7 +529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: StructureLoader::StructureViewerUI
   CameraController: {fileID: 330585548}
   FileReceiver: {fileID: 1493336153}
-  NbtReader: {fileID: 1188278964}
+  NbtStructureParser: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +590,7 @@ GameObject:
   - component: {fileID: 1188278965}
   - component: {fileID: 1188278964}
   m_Layer: 0
-  m_Name: NbtReader
+  m_Name: NbtStructureParser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -608,7 +608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344685372120438b876eb15625f443fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: StructureLoader::NbtReader
-  StructureNbtFilePath: Assets/Structures/block_entity_test.nbt
+  StructureNbtFilePath: Assets/Structures/max_size.nbt
 --- !u!4 &1188278965
 Transform:
   m_ObjectHideFlags: 0
