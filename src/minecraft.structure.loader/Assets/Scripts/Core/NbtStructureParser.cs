@@ -12,7 +12,9 @@ namespace Core
 {
     public class NbtStructureParser : MonoBehaviour
     {
+        public LoaderCurtain LoaderCurtain;
         public string StructureNbtFilePath;
+        public CameraController CameraController;
     
         public GameObject Root { get; private set; }
         public static StructureVolume StructureVolume;
@@ -39,49 +41,116 @@ namespace Core
             NbtFile nbtFile = new();
             nbtFile.LoadFromFile(StructureNbtFilePath);
 
-            Parse(nbtFile);
+            Parse(nbtFile).Forget();
         }
     
-        public void Parse(NbtFile nbtFile)
+        public async UniTaskVoid Parse(NbtFile nbtFile)
         {
             if (!IsFileNbtStructure(nbtFile))
             {
                 Debug.Log("File is not a nbt structure!");
                 return;
             }
-        
-            Structure structure = ParseNbtStructure(nbtFile);
-            UpdateStructureVolume(structure);
+
+            CameraController.InputDisabled = true;
+            Root.SetActive(false);
+            LoaderCurtain.UpdateProgressLabel("Looking at your structure...");
+            LoaderCurtain.Show();
+            
+            UniTask delay1 = UniTask.Delay(750);
+            UniTask<Structure> parseTask = ParseNbtStructure(nbtFile).Preserve();
+
+            await UniTask.WhenAll(delay1, parseTask);
+            Structure structure = await parseTask;
+            
+            LoaderCurtain.UpdateProgressLabel("Gathering resources...");
+            
+            UniTask delay2 = UniTask.Delay(750);
+            UniTask updateVolumeTask = UpdateStructureVolume(structure);
+
+            await UniTask.WhenAll(delay2, updateVolumeTask);
+            
+            Debug.Log("post structure volume: " + Time.time);
             MinecraftAssetProvider.ClearBlockStatePalette();
-            MinecraftAssetProvider.UpdateBlockStatePalette(structure.Palette);
+            await MinecraftAssetProvider.UpdateBlockStatePalette(structure.Palette);
+            Debug.Log("post block state update: " + Time.time);
             MinecraftAssetProvider.UpdateColorRules();
-            Construct(structure).Forget();
-        
-            GC.WaitForPendingFinalizers();
-            GC.Collect();
+            
+            LoaderCurtain.UpdateProgressLabel("Building...");
+            UniTask delay3 = UniTask.Delay(1500);
+            UniTask constructTask = Construct(structure);
+
+            await UniTask.WhenAll(
+                delay3.ContinueWith(() => 
+                    LoaderCurtain.UpdateProgressLabel("Building a massive structure...")),
+                constructTask);
+            
+            LoaderCurtain.UpdateProgressLabel("Done");
+            
+            //await CleanGarbageAsync();
+
+            await UniTask.Delay(500);
+            
+            Root.SetActive(true);
+            CameraController
+                .Animate(
+                    Root.GetComponent<Renderer>().bounds,
+                    2f,
+                    () => CameraController.InputDisabled = false)
+                .Forget();
+            LoaderCurtain.Hide();
         }
-    
-        private Structure ParseNbtStructure(NbtFile nbtFile)
+
+        private static async UniTask CleanGarbageAsync()
+        {
+            await UniTask.SwitchToMainThread();
+            
+            GC.Collect();
+            await UniTask.Yield();
+            GC.WaitForPendingFinalizers();
+            await UniTask.Yield();
+            GC.Collect();
+            
+            await UniTask.Yield();
+        }
+        
+        private async UniTask<Structure> ParseNbtStructure(NbtFile nbtFile)
         {
             NbtList blocksTagList = nbtFile.RootTag.Get<NbtList>("blocks");
             NbtList paletteTagList = nbtFile.RootTag.Get<NbtList>("palette") 
                                      ?? nbtFile.RootTag.Get<NbtList>("palettes").Get<NbtList>(0);
-        
+
+            await UniTask.Yield();
+            
             Structure structure = new()
             {
-                Blocks = ParseNbtBlocks(blocksTagList),
+                Blocks = await ParseNbtBlocks(blocksTagList),
                 Palette = ParseNbtPalette(paletteTagList)
             };
 
             return structure;
         }
 
-        private void UpdateStructureVolume(Structure structure)
+        private async UniTask UpdateStructureVolume(Structure structure)
         {
+            await UniTask.Yield();
+            
             StructureVolume.Reset();
-        
-            foreach (Block block in structure.Blocks) 
+
+            float yieldTime = 0f;
+            
+            foreach (Block block in structure.Blocks)
+            {
                 StructureVolume[block.Pos] = CreateBlockState(structure.Palette[block.State]);
+                
+                if (yieldTime > 1f)
+                {
+                    await UniTask.Yield();
+                    yieldTime = 0;
+                }
+
+                yieldTime += Time.deltaTime;
+            }
         }
 
         private static BlockState CreateBlockState(PaletteEntry entry)
@@ -119,10 +188,12 @@ namespace Core
             return blockState;
         }
     
-        private List<Block> ParseNbtBlocks(NbtList blocksTagList)
+        private async UniTask<List<Block>> ParseNbtBlocks(NbtList blocksTagList)
         {
             List<Block> blocks = new List<Block>();
-        
+
+            float yieldTime = 0f;
+            
             foreach (NbtTag nbtTag in blocksTagList)
             {
                 var blockTag = (NbtCompound)nbtTag;
@@ -138,6 +209,14 @@ namespace Core
                 block.State = blockTag["state"].IntValue;
             
                 blocks.Add(block);
+                
+                if (yieldTime > 1f)
+                {
+                    await UniTask.Yield();
+                    yieldTime = 0;
+                }
+
+                yieldTime += Time.deltaTime;
             }
 
             return blocks;
@@ -190,19 +269,33 @@ namespace Core
             }
         }
     
-        private async UniTaskVoid Construct(Structure structure)
+        private async UniTask Construct(Structure structure)
         {
+            await UniTask.Yield();
+            
             ClearBlockVisual(Root);
-
+            
             MinecraftAssetProvider.ReleaseBlockStateHandles();
         
             List<UniTask> warmupTasks = new(structure.Palette.Count);
 
-            foreach (PaletteEntry entry in structure.Palette) 
-                warmupTasks.Add(MinecraftAssetProvider.WarmupBlockGeometriesAsync(entry.Name));
+            float yieldTime = 0;
 
+            foreach (PaletteEntry entry in structure.Palette)
+            {
+                warmupTasks.Add(MinecraftAssetProvider.WarmupBlockGeometriesAsync(entry.Name));
+                
+                if (yieldTime > 1f)
+                {
+                    await UniTask.Yield();
+                    yieldTime = 0;
+                }
+
+                yieldTime += Time.deltaTime;
+            }
+            
             await UniTask.WhenAll(warmupTasks);
-        
+            
             foreach (Block block in structure.Blocks)
             {
                 PaletteEntry paletteEntry = structure.Palette[block.State];
@@ -216,15 +309,23 @@ namespace Core
                 Transform cachedTransform = blockView.transform;
                 cachedTransform.parent = Root.transform;
                 cachedTransform.position = block.Pos;
+
+                if (yieldTime > 1f)
+                {
+                    await UniTask.Yield();
+                    yieldTime = 0;
+                }
+
+                yieldTime += Time.deltaTime;
             }
 
             MeshCombiner meshCombiner = Root.AddComponent<MeshCombiner>();
             meshCombiner.CreateMultiMaterialMesh = true;
             meshCombiner.DestroyCombinedChildren = true;
-            meshCombiner.CombineMeshes(true);
+            await meshCombiner.CombineMeshes(true);
 
             Renderer component = Root.GetComponent<Renderer>();
-            FindFirstObjectByType<CameraController>().SetPivot(component.bounds.center);
+            CameraController.SetPivot(component.bounds.center);
         }
     
         private static bool IsFileNbtStructure(NbtFile file)

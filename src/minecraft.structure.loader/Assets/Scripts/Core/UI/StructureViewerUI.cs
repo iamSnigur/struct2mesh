@@ -4,6 +4,11 @@ using Core.Exporter;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+#if UNITY_WEBGL && !UNITY_EDITOR
+using UnityEngine.Rendering;
+using System.Collections;
+#endif
+
 namespace Core.UI
 {
     [RequireComponent(typeof(UIDocument))]

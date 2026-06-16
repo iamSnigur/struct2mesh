@@ -79,7 +79,7 @@ mergeInto(LibraryManager.library, {
         setTimeout(() => {
           minTimePassed = true;
           if (fileLoaded) finish();
-        }, 700);
+        }, 500);
 
         const finish = () => {
           clearInterval(fakeInterval);

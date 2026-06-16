@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Core.Utils
@@ -72,7 +73,7 @@ namespace Core.Utils
 		/// <summary>
 		/// Combine children's Meshes into one Mesh. Set 'showCreatedMeshInfo' to true if want to show info about created Mesh in the console.
 		/// </summary>
-		public void CombineMeshes(bool showCreatedMeshInfo)
+		public async UniTask CombineMeshes(bool showCreatedMeshInfo)
 		{
 			#region Save our parent scale and our Transform and reset it temporarily:
 			// When we are unparenting and get parent again then sometimes scale is a little bit different so save scale before unparenting:
@@ -95,11 +96,11 @@ namespace Core.Utils
 			#region Combine Meshes into one Mesh:
 			if(!createMultiMaterialMesh)
 			{
-				CombineMeshesWithSingleMaterial(showCreatedMeshInfo);
+				await CombineMeshesWithSingleMaterial(showCreatedMeshInfo);
 			}
 			else
 			{
-				CombineMeshesWithMutliMaterial(showCreatedMeshInfo);
+				await CombineMeshesWithMutliMaterial(showCreatedMeshInfo);
 			}
 			#endregion Combine Meshes into one Mesh.
 
@@ -137,7 +138,7 @@ namespace Core.Utils
 			return meshFilters;
 		}
 
-		private void CombineMeshesWithSingleMaterial(bool showCreatedMeshInfo)
+		private async UniTask CombineMeshesWithSingleMaterial(bool showCreatedMeshInfo)
 		{
 			// Get all MeshFilters belongs to this GameObject and its children:
 			MeshFilter[] meshFilters = GetMeshFiltersToCombine();
@@ -148,12 +149,22 @@ namespace Core.Utils
 			// If it will be over 65535 then use the 32 bit index buffer:
 			long verticesLength = 0;
 
+			float yieldTime = 0;
+			
 			for(int i = 0; i < meshFilters.Length-1; i++) // Skip first MeshFilter belongs to this GameObject in this loop.
 			{
 				combineInstances[i].subMeshIndex = 0;
 				combineInstances[i].mesh = meshFilters[i+1].sharedMesh;
 				combineInstances[i].transform = meshFilters[i+1].transform.localToWorldMatrix;
 				verticesLength += combineInstances[i].mesh.vertices.Length;
+				
+				if (yieldTime > 1f)
+				{
+					await UniTask.Yield();
+					yieldTime = 0;
+				}
+
+				yieldTime += Time.deltaTime;
 			}
 
 			// Set Material from child:
@@ -181,7 +192,7 @@ namespace Core.Utils
 			combinedMesh.CombineMeshes(combineInstances);
 			GenerateUV(combinedMesh);
 			meshFilters[0].sharedMesh = combinedMesh;
-			DeactivateCombinedGameObjects(meshFilters);
+			await DeactivateCombinedGameObjects(meshFilters);
 
 			if(showCreatedMeshInfo)
 			{
@@ -218,7 +229,7 @@ namespace Core.Utils
 #endif
 		}
 
-		private void CombineMeshesWithMutliMaterial(bool showCreatedMeshInfo)
+		private async UniTask CombineMeshesWithMutliMaterial(bool showCreatedMeshInfo)
 		{
 			#region Get MeshFilters, MeshRenderers and unique Materials from all children:
 			MeshFilter[] meshFilters = GetMeshFiltersToCombine();
@@ -248,6 +259,7 @@ namespace Core.Utils
 
 			// If it will be over 65535 then use the 32 bit index buffer:
 			long verticesLength = 0;
+			float yieldTime = 0;
 
 			for(int i = 0; i < uniqueMaterialsList.Count; i++) // Create each Mesh (submesh) from Meshes with the same Material.
 			{
@@ -275,6 +287,14 @@ namespace Core.Utils
 							}
 						}
 					}
+					
+					if (yieldTime > 1f)
+					{
+						await UniTask.Yield();
+						yieldTime = 0;
+					}
+
+					yieldTime += Time.deltaTime;
 				}
 
 				// Create new Mesh (submesh) from Meshes with the same Material:
@@ -317,9 +337,10 @@ namespace Core.Utils
 			}
 
 			combinedMesh.CombineMeshes(finalMeshCombineInstancesList.ToArray(), false);
+			combinedMesh.Optimize();
 			GenerateUV(combinedMesh);
 			meshFilters[0].sharedMesh = combinedMesh;
-			DeactivateCombinedGameObjects(meshFilters);
+			await DeactivateCombinedGameObjects(meshFilters);
 
 			if(showCreatedMeshInfo)
 			{
@@ -358,8 +379,10 @@ namespace Core.Utils
 			#endregion Set Materials array & combine submeshes into one multimaterial Mesh.
 		}
 
-		private void DeactivateCombinedGameObjects(MeshFilter[] meshFilters)
+		private async UniTask DeactivateCombinedGameObjects(MeshFilter[] meshFilters)
 		{
+			float yieldTime = 0f;
+			
 			for(int i = 0; i < meshFilters.Length-1; i++) // Skip first MeshFilter belongs to this GameObject in this loop.
 			{
 				if(!destroyCombinedChildren)
@@ -381,6 +404,14 @@ namespace Core.Utils
 				{
 					DestroyImmediate(meshFilters[i+1].gameObject);
 				}
+				
+				if (yieldTime > 1f)
+				{
+					await UniTask.Yield();
+					yieldTime = 0;
+				}
+
+				yieldTime += Time.deltaTime;
 			}
 		}
 

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Core
@@ -30,6 +32,8 @@ namespace Core
         [Tooltip("Set to 0 for instant response.")]
         public float rotationSmoothing = 10f;
 
+        public bool InputDisabled;
+        
         private Vector3  _resetPivotPosition;       
         private Vector3  _pivotPosition;       // world-space centre of orbit
         private float    _yaw;                 // horizontal angle (degrees)
@@ -43,9 +47,13 @@ namespace Core
 
         private Mouse   _mouse;
         private Vector2 _prevMousePos;
+
+        private Camera _camera;
     
         private void Start()
         {
+            _camera = GetComponent<Camera>();
+            
             // Derive initial pivot
             if (Target != null)
             {
@@ -78,9 +86,13 @@ namespace Core
 
         private void LateUpdate()
         {
-            HandleOrbit();
-            HandlePan();
-            HandleZoom();
+            if (!InputDisabled)
+            {
+                HandleOrbit();
+                HandlePan();
+                HandleZoom();
+            }
+            
             ApplyTransform();
         }
 
@@ -178,6 +190,49 @@ namespace Core
             _currentRotation = _targetRotation;
         }
 
+        public AnimationCurve Rotation;
+        public float Angle = 360f;
+        
+        public async UniTaskVoid Animate(Bounds structureBounds, float duration = 1f, Action onComplete = null)
+        {
+            _pitch = 15f;
+            _yaw = 0f;
+            _currentDistance = GetDistanceToFit(_camera, structureBounds);
+            _targetDistance = _currentDistance;
+            _targetRotation = Quaternion.identity;
+
+            await UniTask.Yield();
+            
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                float normalized = elapsed / duration;
+
+                float f = Rotation.Evaluate(normalized) * Angle;
+                _yaw = f;
+                _targetRotation = Quaternion.Euler(_pitch, _yaw, 0f);
+                elapsed += Time.deltaTime;
+                await UniTask.Yield();
+            }
+            
+            onComplete?.Invoke();
+        }
+
+        private static float GetDistanceToFit(Camera camera, Bounds bounds)
+        {
+            float radius = bounds.extents.magnitude;
+
+            float verticalFov = camera.fieldOfView * Mathf.Deg2Rad;
+            float horizontalFov = 2f * Mathf.Atan(
+                Mathf.Tan(verticalFov * 0.5f) * camera.aspect);
+
+            float distanceV = radius / Mathf.Sin(verticalFov * 0.5f);
+            float distanceH = radius / Mathf.Sin(horizontalFov * 0.5f);
+
+            return Mathf.Max(distanceV, distanceH);
+        }
+        
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {

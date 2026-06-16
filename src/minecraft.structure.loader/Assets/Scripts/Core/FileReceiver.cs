@@ -34,7 +34,7 @@ namespace Core
             NbtFile nbtFile = new();
             nbtFile.LoadFromBuffer(data, 0, data.Length, NbtCompression.AutoDetect);
         
-            nbtStructureParser.Parse(nbtFile);
+            nbtStructureParser.Parse(nbtFile).Forget();
         }
 
         private record Payload
