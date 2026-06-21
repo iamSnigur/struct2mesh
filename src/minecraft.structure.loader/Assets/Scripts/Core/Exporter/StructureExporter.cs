@@ -2,67 +2,15 @@
 using System.IO.Compression;
 using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityGLTF;
 
 namespace Core.Exporter
 {
     public interface IExportStrategy
     {
-        byte[] GetMeshBytes(GameObject root);
+        string Extension { get; }
+        byte[] GetMeshBytes(GameObject root, string structureName);
     }
-    
-    public class GltfExporter : IExportStrategy
-    {
-        public byte[] GetMeshBytes(GameObject root)
-        {
-            using var stream = new MemoryStream();
 
-            var exporter = new GLTFSceneExporter(
-                new[] { root.transform },
-                new ExportContext()
-            );
-
-            //exporter.SaveGLTFandBin(); create adapter for this method and make it write to stream
-            exporter.SaveGLBToStream(stream, string.Empty);
-
-            return stream.ToArray();
-        }
-    }
-    
-    public class GlbExporter : IExportStrategy
-    {
-        public byte[] GetMeshBytes(GameObject root)
-        {
-            using MemoryStream stream = new();
-
-            var exporter = new GLTFSceneExporter(
-                new[] { root.transform },
-                new ExportContext()
-            );
-
-            exporter.SaveGLBToStream(stream, string.Empty);
-
-            return stream.ToArray();
-        }
-    }
-    
-    public class ObjExporter : IExportStrategy
-    {
-        public byte[] GetMeshBytes(GameObject root)
-        {
-            using var stream = new MemoryStream();
-
-            var exporter = new GLTFSceneExporter(
-                new[] { root.transform },
-                new ExportContext()
-            );
-
-            exporter.SaveGLBToStream(stream, "test");
-
-            return stream.ToArray();
-        }
-    }
-    
     public static class StructureExporter
     {
         [DllImport("__Internal")]
@@ -78,12 +26,12 @@ namespace Core.Exporter
             using (ZipArchive archive = new(zipMemory, ZipArchiveMode.Create, true))
             {
                 ZipArchiveEntry modelEntry = archive.CreateEntry(
-                    $"{structureName}.glb",
+                    $"{structureName}.{exportStrategy.Extension}",
                     System.IO.Compression.CompressionLevel.Optimal);
 
                 using (Stream entryStream = modelEntry.Open())
                 {
-                    byte[] modelBytes = exportStrategy.GetMeshBytes(root);
+                    byte[] modelBytes = exportStrategy.GetMeshBytes(root, structureName);
 
                     entryStream.Write(
                         modelBytes,
@@ -107,12 +55,12 @@ namespace Core.Exporter
             
 #if UNITY_WEBGL && !UNITY_EDITOR
             DownloadFile(
-                $"{structureName}.zip",
+                $"{exportStrategy.Extension}_{structureName}.zip",
                 zipBytes,
                 zipBytes.Length);
 #elif UNITY_EDITOR && UNITY_EDITOR_WIN
             File.WriteAllBytes(
-                Path.Combine(Application.dataPath, $"../{structureName}.zip"), 
+                Path.Combine(Application.dataPath, $"../{exportStrategy.Extension}_{structureName}.zip"), 
                 zipBytes);
 #endif
         }

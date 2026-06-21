@@ -30,7 +30,7 @@ namespace Core
             _loader.style.display = DisplayStyle.Flex;
             _loader.style.opacity = 1f;
             
-            Animation(0.8f).Forget();
+            Animation(0.9f).Forget();
         }
 
         public void Hide()

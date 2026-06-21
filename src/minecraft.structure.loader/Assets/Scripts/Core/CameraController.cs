@@ -197,11 +197,10 @@ namespace Core
         {
             _pitch = 15f;
             _yaw = 0f;
-            _currentDistance = GetDistanceToFit(_camera, structureBounds);
-            _targetDistance = _currentDistance;
-            _targetRotation = Quaternion.identity;
-
-            await UniTask.Yield();
+            _targetDistance = GetDistanceToFit(_camera, structureBounds);
+            _currentDistance = _targetDistance;
+            _targetRotation = Quaternion.Euler(_pitch, _yaw, 0f);
+            _currentRotation = _targetRotation;
             
             float elapsed = 0f;
 

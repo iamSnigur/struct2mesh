@@ -70,10 +70,8 @@ namespace Core
 
             await UniTask.WhenAll(delay2, updateVolumeTask);
             
-            Debug.Log("post structure volume: " + Time.time);
             MinecraftAssetProvider.ClearBlockStatePalette();
             await MinecraftAssetProvider.UpdateBlockStatePalette(structure.Palette);
-            Debug.Log("post block state update: " + Time.time);
             MinecraftAssetProvider.UpdateColorRules();
             
             LoaderCurtain.UpdateProgressLabel("Building...");

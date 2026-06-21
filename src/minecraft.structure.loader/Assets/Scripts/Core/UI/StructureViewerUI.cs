@@ -53,40 +53,36 @@ namespace Core.UI
 
         private void OnEnable()
         {
-            BuildExportButtons();
+            BindExportButtons();
             BindButtons();
         }
 
-        private void BuildExportButtons()
+        private void BindExportButtons()
         {
-            VisualElement exportSection = _root.Q<VisualElement>("export-section");
-            if (exportSection == null)
-            {
-                Debug.LogWarning("[StructureViewerUI] Could not find 'export-section'.");
-                return;
-            }
-
-            List<Button> existingBtns = exportSection.Query<Button>(className: "btn-export").ToList();
-
-            foreach (Button b in existingBtns)
-                b.clicked += OnExportClicked;
+            // put objects into factory or what
+            Button exportFbx = _root.Q<Button>("btn-export-fbx");
+            exportFbx.clicked += () => OnExportClicked(new FbxExporter());
+            
+            Button exportGlb = _root.Q<Button>("btn-export-glb");
+            exportGlb.clicked += () => OnExportClicked(new GlbExporter());
+            
+            Button exportObj = _root.Q<Button>("btn-export-obj");
+            exportObj.clicked += () => OnExportClicked(new ObjExporter());
         }
 
         private void BindButtons()
         {
             Button btnLoad = _root.Q<Button>("btn-load-new");
+            btnLoad.clicked += OnLoadNewClicked;
+            
             Button btnCamera = _root.Q<Button>("btn-camera-reset");
-
-            if (btnLoad != null) btnLoad.clicked += OnLoadNewClicked;
-            if (btnCamera != null) btnCamera.clicked += OnCameraResetClicked;
+            btnCamera.clicked += OnCameraResetClicked;
         }
 
-        private void OnExportClicked()
+        private void OnExportClicked(IExportStrategy exportStrategy)
         {
             Label lbl = _root.Q<Label>("file-label");
-            StructureExporter.ExportToZip(lbl.text, NbtStructureParser.Root, new GlbExporter());
-            
-            Debug.Log("[StructureViewerUI] Export button clicked.");
+            StructureExporter.ExportToZip(lbl.text, NbtStructureParser.Root, exportStrategy);
         }
 
         private void OnLoadNewClicked() => 

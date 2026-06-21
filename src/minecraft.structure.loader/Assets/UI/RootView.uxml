@@ -9,19 +9,19 @@
                 
                 <ui:VisualElement class="btn-export-root">
                     <ui:VisualElement class="btn-outline"/>
-                    <ui:Button name="btn-fbx-1" text="GLTF" class="btn-export"/>
+                    <ui:Button name="btn-export-fbx" text="FBX" class="btn-export"/>
                     <ui:VisualElement class="chevron-icon"/>
                 </ui:VisualElement>
                 
                 <ui:VisualElement class="btn-export-root">
                     <ui:VisualElement class="btn-outline"/>
-                    <ui:Button name="btn-fbx-1" text="GLTF/GLB" class="btn-export"/>
+                    <ui:Button name="btn-export-glb" text="GLTF/GLB" class="btn-export"/>
                     <ui:VisualElement class="chevron-icon"/>
                 </ui:VisualElement>
                 
                 <ui:VisualElement class="btn-export-root">
                     <ui:VisualElement class="btn-outline"/>
-                    <ui:Button name="btn-fbx-1" text="OBJ" class="btn-export"/>
+                    <ui:Button name="btn-export-obj" text="OBJ" class="btn-export"/>
                     <ui:VisualElement class="chevron-icon"/>
                 </ui:VisualElement>
             </ui:VisualElement>
