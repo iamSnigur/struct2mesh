@@ -138,7 +138,7 @@ namespace Core.Exporter
             if (hasNormals)
             {
                 w.WriteLine("\t\tLayerElementNormal: 0 {");
-                w.WriteLine("\t\t\tVersion: 101");
+                w.WriteLine("\t\t\tVersion: 102");
                 w.WriteLine("\t\t\tName: \"\"");
                 w.WriteLine("\t\t\tMappingInformationType: \"ByPolygonVertex\"");
                 w.WriteLine("\t\t\tReferenceInformationType: \"Direct\"");
@@ -173,7 +173,7 @@ namespace Core.Exporter
             {
                 w.WriteLine("\t\tLayerElementUV: 0 {");
                 w.WriteLine("\t\t\tVersion: 101");
-                w.WriteLine("\t\t\tName: \"map1\"");
+                w.WriteLine("\t\t\tName: \"UVSet0\"");
                 w.WriteLine("\t\t\tMappingInformationType: \"ByPolygonVertex\"");
                 w.WriteLine("\t\t\tReferenceInformationType: \"IndexToDirect\"");
 
@@ -367,13 +367,13 @@ namespace Core.Exporter
 
         private static void WriteHeader(StreamWriter w)
         {
-            w.WriteLine("; FBX 7.4.0 project file");
+            w.WriteLine("; FBX 7.7.0 project file");
             w.WriteLine("; Created by SNIGUR's FBXExporter tool");
             w.WriteLine("; ----------------------------------------------------");
             w.WriteLine();
             w.WriteLine("FBXHeaderExtension:  {");
-            w.WriteLine("\tFBXHeaderVersion: 1003");
-            w.WriteLine("\tFBXVersion: 7400");
+            w.WriteLine("\tFBXHeaderVersion: 1004");
+            w.WriteLine("\tFBXVersion: 7700");
             w.WriteLine($"\tCreationTimeStamp:  {{");
             w.WriteLine($"\t\tVersion: 1000");
             w.WriteLine($"\t\tYear: {DateTime.Now.Year}");
