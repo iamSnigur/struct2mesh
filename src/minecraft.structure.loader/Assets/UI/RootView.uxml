@@ -24,6 +24,12 @@
                     <ui:Button name="btn-export-obj" text="OBJ" class="btn-export"/>
                     <ui:VisualElement class="chevron-icon"/>
                 </ui:VisualElement>
+                
+                <ui:VisualElement class="btn-export-root">
+                    <ui:VisualElement class="btn-outline"/>
+                    <ui:Button name="btn-export-ply" text="PLY" class="btn-export"/>
+                    <ui:VisualElement class="chevron-icon"/>
+                </ui:VisualElement>
             </ui:VisualElement>
             
             <ui:VisualElement name="bottom-bar" class="bottom-bar">

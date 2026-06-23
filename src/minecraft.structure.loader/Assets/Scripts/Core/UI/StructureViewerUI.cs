@@ -68,6 +68,9 @@ namespace Core.UI
             
             Button exportObj = _root.Q<Button>("btn-export-obj");
             exportObj.clicked += () => OnExportClicked(new ObjExporter());
+            
+            Button exportPly = _root.Q<Button>("btn-export-ply");
+            exportPly.clicked += () => OnExportClicked(new PlyExporter());
         }
 
         private void BindButtons()
@@ -82,7 +85,7 @@ namespace Core.UI
         private void OnExportClicked(IExportStrategy exportStrategy)
         {
             Label lbl = _root.Q<Label>("file-label");
-            StructureExporter.ExportToZip(lbl.text, NbtStructureParser.Root, exportStrategy);
+            StructureExporter.ExportToZip(lbl.text.ToLower(), NbtStructureParser.Root, exportStrategy);
         }
 
         private void OnLoadNewClicked() => 
