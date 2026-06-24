@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using Core;
+using Core.Utils;
 using CraftSharp.Resource;
 using Unity.Collections;
 using Unity.Mathematics;
@@ -62,9 +63,6 @@ namespace CraftSharp
             
             BlockGeometry? blockGeometry = stateModel.Geometries[0];
 
-            /*if (BlockEntityTypePaletteAdapter.Instance.GetBlockEntityForBlock(blockId, out var blockEntityType))
-            CreateBlockEntityRenderForItemModel(modelObject.transform, blockState, blockEntityType);*/
-        
             int color = BlockStatePaletteAdapter.Instance.GetBlockColor(stateId, world, BlockLoc.Zero);
             int waterColor = world.GetWaterColor(BlockLoc.Zero);
 
@@ -124,15 +122,24 @@ namespace CraftSharp
                     ResourceLocation liquidTextureStill = FluidGeometry.LiquidTextures[state.InWater ? 0 : 1];
                     ResourceLocation liquidTextureFlow  = FluidGeometry.LiquidTextures[state.InWater ? 2 : 3];
 
-                    colorInt = state.InWater ? waterColorInt : 0xFFFFFF;
+                    int fluidColorInt = state.InWater ? waterColorInt : 0xFFFFFF;
 
-                    bool isWat = state.BlockId.Path.Equals("copper_grate");
+                    bool isWaterloggedCutout = BlockStateHelper.IsWaterloggedCutout(state.BlockId.Path);
                 
-                    float3 offset = isWat ? new float3(0.005f) : float3.zero;
-                    float3 scale = isWat ? new float3(0.99f) : new float3(1f);
+                    float3 offset = isWaterloggedCutout ? new float3(0.005f) : float3.zero;
+                    float3 scale = isWaterloggedCutout ? new float3(0.99f) : new float3(1f);
                 
-                    FluidGeometry.Build(visualBuffer, ref vertexOffset, offset, scale,
-                        liquidTextureStill, liquidTextureFlow, liquidHeights, liquidCullFlags, blockVertLight, colorInt);
+                    FluidGeometry.Build(
+                        visualBuffer, 
+                        ref vertexOffset,
+                        offset,
+                        scale,
+                        liquidTextureStill, 
+                        liquidTextureFlow,
+                        liquidHeights,
+                        liquidCullFlags,
+                        blockVertLight,
+                        fluidColorInt);
                 }
             }
         

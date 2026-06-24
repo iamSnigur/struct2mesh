@@ -193,7 +193,15 @@ namespace Core.Utils
             "minecraft:small_dripleaf", "minecraft:big_dripleaf", "minecraft:big_dripleaf_stem",
             "minecraft:sculk_vein",
             "minecraft:brewing_stand",
+            
             "minecraft:copper_grate",
+            "minecraft:waxed_copper_grate",
+            "minecraft:exposed_copper_grate",
+            "minecraft:waxed_exposed_copper_grate",
+            "minecraft:weathered_copper_grate",
+            "minecraft:waxed_weathered_copper_grate",
+            "minecraft:oxidized_copper_grate",
+            "minecraft:waxed_oxidized_copper_grate",
 
             // Candles
             "minecraft:candle",
@@ -864,7 +872,7 @@ namespace Core.Utils
             return SemiSolidBlocks.Contains(blockId);
         }
 
-        private static HashSet<string> TranslucentCullableBlocks = new()
+        private static readonly HashSet<string> TranslucentCullableBlocks = new()
         {
             "minecraft:ice",
             "minecraft:frosted_ice",
@@ -884,6 +892,33 @@ namespace Core.Utils
         {
             blockId = "minecraft:" + blockId;
             return TranslucentCullableBlocks.Contains(blockId);
+        }
+
+        private static readonly HashSet<string> WaterloggedCutoutBlocks = new()
+        {
+            "minecraft:copper_grate",
+            "minecraft:waxed_copper_grate",
+            "minecraft:exposed_copper_grate",
+            "minecraft:waxed_exposed_copper_grate",
+            "minecraft:weathered_copper_grate",
+            "minecraft:waxed_weathered_copper_grate",
+            "minecraft:oxidized_copper_grate",
+            "minecraft:waxed_oxidized_copper_grate",
+            
+            "minecraft:oak_leaves", "minecraft:spruce_leaves",
+            "minecraft:birch_leaves", "minecraft:jungle_leaves",
+            "minecraft:acacia_leaves", "minecraft:dark_oak_leaves",
+            "minecraft:mangrove_leaves", "minecraft:cherry_leaves",
+            "minecraft:azalea_leaves", "minecraft:flowering_azalea_leaves",
+            "minecraft:pale_oak_leaves",
+            
+            "minecraft:mangrove_roots",
+        };
+
+        public static bool IsWaterloggedCutout(string blockId)
+        {
+            blockId = "minecraft:" + blockId;
+            return WaterloggedCutoutBlocks.Contains(blockId);
         }
     }
 }

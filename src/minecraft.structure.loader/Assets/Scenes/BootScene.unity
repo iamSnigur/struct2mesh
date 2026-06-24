@@ -563,9 +563,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408117451741414bbb55e5c84c7a13cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: StructureLoader::StructureViewerUI
-  CameraController: {fileID: 330585548}
-  FileReceiver: {fileID: 1493336153}
-  NbtStructureParser: {fileID: 1188278964}
 --- !u!114 &512578762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -656,9 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344685372120438b876eb15625f443fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: StructureLoader::NbtReader
-  LoaderCurtain: {fileID: 512578762}
-  StructureNbtFilePath: Assets/Structures/max_size.nbt
-  CameraController: {fileID: 330585548}
+  StructureNbtFilePath: Assets/Structures/liquid_test1.nbt
 --- !u!4 &1188278965
 Transform:
   m_ObjectHideFlags: 0
