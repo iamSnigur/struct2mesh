@@ -34,43 +34,48 @@ namespace Core
 
         public byte GetCullFlagsFor(Vector3 pos)
         {
-            if (!IsBlockSolidAt(pos))
+            if (!IsCullableAt(pos))
                 return CULL_NONE;
 
-            byte cullFlags = CULL_NONE;
+            byte flags = CULL_NONE;
 
-            if (IsBlockSolidAt(pos.Up()))
-                cullFlags &= CULL_UP;
+            AddCullFlag(ref flags, pos, pos.Up(),      CULL_UP);
+            AddCullFlag(ref flags, pos, pos.Down(),    CULL_DOWN);
+            AddCullFlag(ref flags, pos, pos.Left(),    CULL_LEFT);
+            AddCullFlag(ref flags, pos, pos.Right(),   CULL_RIGHT);
+            AddCullFlag(ref flags, pos, pos.Forward(), CULL_FORWARD);
+            AddCullFlag(ref flags, pos, pos.Back(),    CULL_BACK);
 
-            if (IsBlockSolidAt(pos.Down()))
-                cullFlags &= CULL_DOWN;
-
-            if (IsBlockSolidAt(pos.Left()))
-                cullFlags &= CULL_LEFT;
-
-            if (IsBlockSolidAt(pos.Right()))
-                cullFlags &= CULL_RIGHT;
-
-            if (IsBlockSolidAt(pos.Forward()))
-                cullFlags &= CULL_FORWARD;
-
-            if (IsBlockSolidAt(pos.Back()))
-                cullFlags &= CULL_BACK;
-
-            return cullFlags;
+            return flags;
         }
 
-        private bool IsBlockSolidAt(Vector3 pos)
+        private void AddCullFlag(ref byte flags, Vector3 origin, Vector3 neighbor, byte flag)
         {
-            if (!_volumeData.TryGetValue(pos, out BlockState state))
+            if (IsCullableAt(neighbor) && !IsNeighborTranslucent(origin, neighbor))
+                flags &= flag;
+        }
+
+        private bool IsNeighborTranslucent(Vector3 origin, Vector3 neighbor)
+        {
+            return _volumeData.TryGetValue(origin, out var originState)
+                   && _volumeData.TryGetValue(neighbor, out var neighborState)
+                   && BlockStateHelper.GetRenderTypeFor(originState.BlockId.Path) == RenderType.SOLID
+                   && BlockStateHelper.GetRenderTypeFor(neighborState.BlockId.Path) == RenderType.TRANSLUCENT;
+        }
+        
+        private bool IsCullableAt(Vector3 pos)
+        {
+            if (!_volumeData.TryGetValue(pos, out var state))
                 return false;
 
             RenderType renderType = BlockStateHelper.GetRenderTypeFor(state.BlockId.Path);
 
-            if (renderType is not RenderType.SOLID || state.IsLava)
-                return false;
-
-            return !BlockStateHelper.IsSemiSolid(state.BlockId.Path);
+            return renderType switch
+            {
+                RenderType.TRANSLUCENT => BlockStateHelper.IsTranslucentCullable(state.BlockId.Path),
+                RenderType.SOLID => !state.IsLava && !BlockStateHelper.IsSemiSolid(state.BlockId.Path),
+                _ => false
+            };
         }
     }
 }

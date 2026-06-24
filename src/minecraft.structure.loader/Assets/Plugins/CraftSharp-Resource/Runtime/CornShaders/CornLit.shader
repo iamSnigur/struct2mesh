@@ -76,6 +76,8 @@ Shader "CornShader/Lit"
             Cull[_Cull]
             AlphaToMask[_AlphaToMask]
 
+            ZWrite On
+            
             HLSLPROGRAM
             #pragma target 2.0
 
