@@ -55,6 +55,7 @@ namespace Core.Utils
             "minecraft:acacia_leaves", "minecraft:dark_oak_leaves",
             "minecraft:mangrove_leaves", "minecraft:cherry_leaves",
             "minecraft:azalea_leaves", "minecraft:flowering_azalea_leaves",
+            "minecraft:pale_oak_leaves",
 
             // Saplings
             "minecraft:oak_sapling", "minecraft:spruce_sapling",
@@ -62,6 +63,7 @@ namespace Core.Utils
             "minecraft:acacia_sapling", "minecraft:dark_oak_sapling",
             "minecraft:mangrove_propagule", "minecraft:cherry_sapling",
             "minecraft:bamboo_sapling",
+            "minecraft:pale_oak_sapling",
 
             // Flowers & Plants
             "minecraft:dandelion", "minecraft:golden_dandelion", "minecraft:poppy",
@@ -236,13 +238,29 @@ namespace Core.Utils
             "minecraft:warped_wall_hanging_sign", "minecraft:pale_oak_wall_hanging_sign",
         
             // doors & trapdoors
-            "minecraft:oak_trapdoor", "minecraft:spruce_trapdoor", "minecraft:birch_trapdoor",
-            "minecraft:jungle_trapdoor", "minecraft:acacia_trapdoor", "minecraft:dark_oak_trapdoor",
-            "minecraft:mangrove_trapdoor", "minecraft:bamboo_trapdoor", "minecraft:iron_trapdoor",
+            "minecraft:oak_trapdoor", 
+            "minecraft:spruce_trapdoor", 
+            "minecraft:birch_trapdoor",
+            "minecraft:jungle_trapdoor",
+            "minecraft:acacia_trapdoor", 
+            "minecraft:dark_oak_trapdoor",
+            "minecraft:mangrove_trapdoor",
+            "minecraft:bamboo_trapdoor",
+            "minecraft:iron_trapdoor",
+            "minecraft:warped_trapdoor",
+            "minecraft:crimson_trapdoor",
 
-            "minecraft:oak_door", "minecraft:spruce_door", "minecraft:birch_door",
-            "minecraft:jungle_door", "minecraft:acacia_door", "minecraft:dark_oak_door",
-            "minecraft:mangrove_door", "minecraft:bamboo_door", "minecraft:iron_door",
+            "minecraft:oak_door",
+            "minecraft:spruce_door",
+            "minecraft:birch_door",
+            "minecraft:jungle_door",
+            "minecraft:acacia_door",
+            "minecraft:dark_oak_door",
+            "minecraft:mangrove_door",
+            "minecraft:bamboo_door",
+            "minecraft:iron_door",
+            "minecraft:warped_door",
+            "minecraft:crimson_door",
         
             "minecraft:soul_lantern",
             "minecraft:lantern",
@@ -266,15 +284,24 @@ namespace Core.Utils
         
             "minecraft:copper_bars",
             "minecraft:waxed_copper_bars",
-            // add
+            "minecraft:exposed_copper_bars",
+            "minecraft:waxed_exposed_copper_bars",
+            "minecraft:weathered_copper_bars",
+            "minecraft:waxed_weathered_copper_bars",
+            "minecraft:oxidized_copper_bars",
+            "minecraft:waxed_oxidized_copper_bars",
         
             "minecraft:copper_trapdoor",
             "minecraft:waxed_copper_trapdoor",
-            // add
+            "minecraft:exposed_copper_trapdoor",
+            "minecraft:waxed_exposed_copper_trapdoor",
+            "minecraft:weathered_copper_trapdoor",
+            "minecraft:waxed_weathered_copper_trapdoor",
+            "minecraft:oxidized_copper_trapdoor",
+            "minecraft:waxed_oxidized_copper_trapdoor",
         
             "minecraft:firefly_bush",
             "minecraft:azalea",
-            // TODO raname "minecraft:azalea",
             "minecraft:pink_petals",
             "minecraft:wildflowers",
             "minecraft:leaf_litter",
@@ -284,6 +311,7 @@ namespace Core.Utils
             "minecraft:potted_spruce_sapling",
             "minecraft:potted_oak_sapling",
             "minecraft:potted_dark_oak_sapling",
+            "minecraft:potted_pale_oak_sapling",
             "minecraft:potted_acacia_sapling",
             "minecraft:potted_jungle_sapling",
             "minecraft:potted_birch_sapling",
@@ -299,6 +327,7 @@ namespace Core.Utils
             "minecraft:potted_torchflower",
             "minecraft:potted_wither_rose",
             "minecraft:potted_cactus",
+            "minecraft:potted_bamboo",
         
             "minecraft:grass_block",
         
@@ -332,7 +361,6 @@ namespace Core.Utils
             "minecraft:green_shulker_box",
             "minecraft:red_shulker_box",
             "minecraft:black_shulker_box",
-        
         };
 
         public static RenderType GetRenderTypeFor(string blockId)
@@ -721,6 +749,7 @@ namespace Core.Utils
             "minecraft:lever",
             "minecraft:tripwire_hook",
             "minecraft:tripwire",
+            "minecraft:hopper",
 
             // Ladders / Vines
             "minecraft:ladder",
