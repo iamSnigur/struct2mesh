@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using Core.Exporter;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -56,7 +55,7 @@ namespace Core.UI
                 yield return null;
             
             OpenUploadPanel();
-            FileReceiver.OnFileReceived += OnFileReceived;
+            _fileReceiver.OnFileReceived += OnFileReceived;
         }
         
         private void OnFileReceived(string fileName)

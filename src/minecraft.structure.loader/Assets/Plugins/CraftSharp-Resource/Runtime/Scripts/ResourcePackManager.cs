@@ -976,19 +976,16 @@ namespace CraftSharp.Resource
 
         private static Texture2D Save(Texture2DArray array, string path)
         {
-#if UNITY_EDITOR
             int sliceIndex = 0;            
-
             Texture2D tex = new(array.width, array.height, array.format, array.mipmapCount, false);
             Graphics.CopyTexture(array, sliceIndex, tex, 0);
             tex.Apply();
-            
+#if UNITY_EDITOR
             File.WriteAllBytes(path, tex.EncodeToPNG());
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-
-            return tex;
 #endif
+            return tex;
         }
         
         /// <summary>
