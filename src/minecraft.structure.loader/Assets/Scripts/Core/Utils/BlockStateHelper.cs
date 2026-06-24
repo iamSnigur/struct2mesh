@@ -786,7 +786,6 @@ namespace Core.Utils
             "minecraft:chiseled_bookshelf",
             "minecraft:trial_spawner",
             "minecraft:vault",
-            //"minecraft:crafter",
             "minecraft:sculk_sensor",
             "minecraft:calibrated_sculk_sensor",
             "minecraft:sculk_shrieker",
@@ -809,6 +808,25 @@ namespace Core.Utils
             "minecraft:waxed_oxidized_copper_chest",
             "minecraft:weathered_copper_chest",
             "minecraft:waxed_weathered_copper_chest",
+            
+            "minecraft:dragon_egg",
+            
+            "minecraft:white_bed",
+            "minecraft:black_bed",
+            "minecraft:gray_bed",
+            "minecraft:light_gray_bed",
+            "minecraft:red_bed",
+            "minecraft:yellow_bed",
+            "minecraft:green_bed",
+            "minecraft:lime_bed",
+            "minecraft:orange_bed",
+            "minecraft:blue_bed",
+            "minecraft:light_blue_bed",
+            "minecraft:purple_bed",
+            "minecraft:magenta_bed",
+            "minecraft:pink_bed",
+            "minecraft:brown_bed",
+            "minecraft:cyan_bed",
         };
 
         public static bool IsSemiSolid(string blockId)
@@ -817,7 +835,7 @@ namespace Core.Utils
             return SemiSolidBlocks.Contains(blockId);
         }
 
-        public static HashSet<string> TranslucentCullableBlocks = new()
+        private static HashSet<string> TranslucentCullableBlocks = new()
         {
             "minecraft:ice",
             "minecraft:frosted_ice",

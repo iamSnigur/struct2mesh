@@ -971,17 +971,23 @@ namespace CraftSharp.Resource
             atlasArray1.Apply(false, false);
 
             AtlasTableHelper.SaveAtlasTable(texAtlasTable);
-            Save(atlasArray1, "Assets/Resources_moved/vanilla/minecraft/textures/block_atlas.asset");
-            
-            //blockAtlas = atlasArray0;
+            blockAtlas = Save(atlasArray1, "Assets/Resources_moved/vanilla/minecraft/textures/block_atlas.png");
         }
 
-        private static void Save(Texture2DArray array, string path)
+        private static Texture2D Save(Texture2DArray array, string path)
         {
 #if UNITY_EDITOR
-            AssetDatabase.CreateAsset(array, path);
+            int sliceIndex = 0;            
+
+            Texture2D tex = new(array.width, array.height, array.format, array.mipmapCount, false);
+            Graphics.CopyTexture(array, sliceIndex, tex, 0);
+            tex.Apply();
+            
+            File.WriteAllBytes(path, tex.EncodeToPNG());
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+
+            return tex;
 #endif
         }
         

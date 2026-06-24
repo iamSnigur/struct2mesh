@@ -6525,6 +6525,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8518455b4db90db479581cc6d3344934
+    m_Address: vanilla/minecraft/models/block/decorated_pot/decorated_pot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 853bef90630881043a05238b4ed59da6
     m_Address: vanilla/minecraft/models/block/mangrove_fence_side
     m_ReadOnly: 0
