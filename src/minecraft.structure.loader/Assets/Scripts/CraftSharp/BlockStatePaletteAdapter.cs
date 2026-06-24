@@ -90,7 +90,8 @@ namespace CraftSharp
     
         public void UpdateColorRules(TextAsset colorRulesAsset)
         {
-            // Load block color rules...
+            _blockColorRules.Clear();
+            
             Json.JSONData colorRules = Json.ParseJson(colorRulesAsset.text);
 
             if (colorRules.Properties.TryGetValue("dynamic", out var dynamicRulesProperty))
