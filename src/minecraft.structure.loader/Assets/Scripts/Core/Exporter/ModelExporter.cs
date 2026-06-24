@@ -5,13 +5,7 @@ using UnityEngine;
 
 namespace Core.Exporter
 {
-    public interface IExportStrategy
-    {
-        string Extension { get; }
-        byte[] GetMeshBytes(GameObject root, string structureName);
-    }
-
-    public static class StructureExporter
+    public static class ModelExporter
     {
         [DllImport("__Internal")]
         private static extern void DownloadFile(

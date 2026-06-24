@@ -15,12 +15,10 @@ namespace Core
         public void Open() => 
             OpenUploadPanel();
 
-        private NbtStructureParser nbtStructureParser;
+        private NbtStructureParser _nbtStructureParser;
 
-        private void Awake()
-        {
-            nbtStructureParser = FindFirstObjectByType<NbtStructureParser>();
-        }
+        public void InjectDependencies(NbtStructureParser nbtStructureParser) =>
+            _nbtStructureParser = nbtStructureParser;
 
         public void OnFileLoaded(string jsonPayload)
         {
@@ -34,7 +32,7 @@ namespace Core
             NbtFile nbtFile = new();
             nbtFile.LoadFromBuffer(data, 0, data.Length, NbtCompression.AutoDetect);
         
-            nbtStructureParser.Parse(nbtFile).Forget();
+            _nbtStructureParser.Parse(nbtFile).Forget();
         }
 
         private record Payload

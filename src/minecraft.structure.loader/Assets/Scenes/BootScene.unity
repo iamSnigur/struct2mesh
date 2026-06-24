@@ -280,8 +280,7 @@ MonoBehaviour:
   maxZoomDistance: 120
   zoomSmoothing: 8
   rotationSmoothing: 10
-  InputDisabled: 0
-  Rotation:
+  SpinRotationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -314,7 +313,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Angle: 390
+  SpinAngle: 390
+  InputDisabled: 0
 --- !u!1 &386554567
 GameObject:
   m_ObjectHideFlags: 0

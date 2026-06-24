@@ -12,7 +12,6 @@ namespace Core.Exporter
         public byte[] GetMeshBytes(GameObject root, string structureName)
         {
             using var stream = new MemoryStream();
-
             SaveOBJToStream(root, stream, structureName);
 
             return stream.ToArray();
@@ -40,11 +39,9 @@ namespace Core.Exporter
             Vector3[] vertices = mesh.vertices;
             Vector3[] normals = mesh.normals;
             Vector2[] uvs = mesh.uv;
-            Color[] colors = mesh.colors;
 
             bool hasUVs =       uvs != null && uvs.Length > 0;
             bool hasNormals =   normals != null && normals.Length > 0;
-            bool hasColors =    colors != null && colors.Length > 0;
             
             stream.Position = 0;
             using StreamWriter w = new(stream, new UTF8Encoding(false));
@@ -52,16 +49,8 @@ namespace Core.Exporter
             for (int i = 0; i < vertices.Length; i++)
             {
                 Vector3 v = vertices[i];
-                
                 w.WriteLine(string.Format(CultureInfo.InvariantCulture,
                     "v {0} {1} {2}", v.z, v.y, v.x));
-                
-                /*if (hasColors)
-                    w.WriteLine(string.Format(CultureInfo.InvariantCulture,
-                        "v {0} {1} {2} {3} {4} {5}", v.z, v.y, v.x, colors[i].r, colors[i].g, colors[i].b));
-                else
-                    w.WriteLine(string.Format(CultureInfo.InvariantCulture,
-                        "v {0} {1} {2}", v.z, v.y, v.x));*/
             }
 
             if (hasUVs)

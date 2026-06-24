@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Core
+namespace Core.UI
 {
-    public class LoaderCurtain : MonoBehaviour
+    public class LoadingCurtain : MonoBehaviour
     {
         private UIDocument _doc;
         private VisualElement _loader;
@@ -29,14 +29,11 @@ namespace Core
             _isActive = true;
             _loader.style.display = DisplayStyle.Flex;
             _loader.style.opacity = 1f;
-            
-            Animation(0.9f).Forget();
+            DoSpinnerAnimation(0.9f).Forget();
         }
 
-        public void Hide()
-        {
+        public void Hide() => 
             FadeOut(0.3f).Forget();
-        }
 
         private async UniTaskVoid FadeOut(float duration = 1f)
         {
@@ -53,25 +50,11 @@ namespace Core
             }
 
             _loader.style.opacity = 0f;
-            
-            /*float time = 0f;
-            float scale = 1f;
-
-            while (scale > 0f)
-            {
-                scale = f(time);
-                _loaderIcon.style.scale = new StyleScale(Vector2.one * scale);
-                await UniTask.Yield();
-                time += Time.deltaTime;
-            }*/
-            
             _isActive = false;
             _loader.style.display = DisplayStyle.None;
         }
         
-        float f(float t) => 1.5f * (1f + Mathf.Cos(Mathf.PI * Mathf.Clamp01(t))) * 0.5f;
-        
-        private async UniTaskVoid Animation(float duration = 1f)
+        private async UniTaskVoid DoSpinnerAnimation(float cycleDuration = 1f)
         {
             _loaderIcon.style.scale = new StyleScale(Vector2.one);
             _loaderIcon.style.rotate = new StyleRotate(new Rotate(0f));
@@ -79,26 +62,18 @@ namespace Core
             
             while (_isActive)
             {
-                float normalizedTime = time / duration;
+                float normalizedTime = time / cycleDuration;
                 float angle = SpringEase(normalizedTime) * 360f;
                 _loaderIcon.style.rotate = new StyleRotate(new Rotate(angle));
                 await UniTask.Yield();
 
                 time += Time.deltaTime;
 
-                if (time > duration)
+                if (time > cycleDuration)
                     time = 0f;
             }   
         }
         
-        private static float EaseOutBack(float x)
-        {
-            const float c1 = 1.70158f;
-            const float c3 = c1 + 1f;
-
-            return 1 + c3 * Mathf.Pow(x - 1, 3) + c1 * Mathf.Pow(x - 1, 2);
-        }
-
         private static float SpringEase(float t)
         {
             t = Mathf.Clamp01(t);

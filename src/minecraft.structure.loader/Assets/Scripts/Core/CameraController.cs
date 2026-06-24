@@ -32,6 +32,10 @@ namespace Core
         [Tooltip("Set to 0 for instant response.")]
         public float rotationSmoothing = 10f;
 
+        [Header("Orbit animation params")]
+        public AnimationCurve SpinRotationCurve;
+        public float SpinAngle = 360f;
+        
         public bool InputDisabled;
         
         private Vector3  _resetPivotPosition;       
@@ -190,10 +194,7 @@ namespace Core
             _currentRotation = _targetRotation;
         }
 
-        public AnimationCurve Rotation;
-        public float Angle = 360f;
-        
-        public async UniTaskVoid Animate(Bounds structureBounds, float duration = 1f, Action onComplete = null)
+        public async UniTaskVoid DoOrbitAnimation(Bounds structureBounds, float duration = 1f, Action onComplete = null)
         {
             _pitch = 15f;
             _yaw = 0f;
@@ -208,7 +209,7 @@ namespace Core
             {
                 float normalized = elapsed / duration;
 
-                float f = Rotation.Evaluate(normalized) * Angle;
+                float f = SpinRotationCurve.Evaluate(normalized) * SpinAngle;
                 _yaw = f;
                 _targetRotation = Quaternion.Euler(_pitch, _yaw, 0f);
                 elapsed += Time.deltaTime;

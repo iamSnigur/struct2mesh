@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Core.AssetManagement;
+using Core.UI;
 using Core.Utils;
 using CraftSharp;
 using Cysharp.Threading.Tasks;
@@ -12,13 +13,22 @@ namespace Core
 {
     public class NbtStructureParser : MonoBehaviour
     {
-        public LoaderCurtain LoaderCurtain;
         public string StructureNbtFilePath;
-        public CameraController CameraController;
-    
+        
         public GameObject Root { get; private set; }
         public static StructureVolume StructureVolume;
     
+        private CameraController _cameraController;
+        private LoadingCurtain _loadingCurtain;
+
+        public void InjectDependencies(
+            LoadingCurtain loadingCurtain,
+            CameraController cameraController)
+        {
+            _loadingCurtain = loadingCurtain;
+            _cameraController = cameraController;
+        }
+        
         private void Awake()
         {
             Root = new GameObject("Structure");
@@ -52,10 +62,10 @@ namespace Core
                 return;
             }
 
-            CameraController.InputDisabled = true;
+            _cameraController.InputDisabled = true;
             Root.SetActive(false);
-            LoaderCurtain.UpdateProgressLabel("Looking at your structure...");
-            LoaderCurtain.Show();
+            _loadingCurtain.UpdateProgressLabel("Looking at your structure...");
+            _loadingCurtain.Show();
             
             UniTask delay1 = UniTask.Delay(750);
             UniTask<Structure> parseTask = ParseNbtStructure(nbtFile).Preserve();
@@ -63,7 +73,7 @@ namespace Core
             await UniTask.WhenAll(delay1, parseTask);
             Structure structure = await parseTask;
             
-            LoaderCurtain.UpdateProgressLabel("Gathering resources...");
+            _loadingCurtain.UpdateProgressLabel("Collecting resources...");
             
             UniTask delay2 = UniTask.Delay(750);
             UniTask updateVolumeTask = UpdateStructureVolume(structure);
@@ -74,29 +84,29 @@ namespace Core
             await MinecraftAssetProvider.UpdateBlockStatePalette(structure.Palette);
             MinecraftAssetProvider.UpdateColorRules();
             
-            LoaderCurtain.UpdateProgressLabel("Building...");
+            _loadingCurtain.UpdateProgressLabel("Building...");
             UniTask delay3 = UniTask.Delay(1500);
             UniTask constructTask = Construct(structure);
 
             await UniTask.WhenAll(
                 delay3.ContinueWith(() => 
-                    LoaderCurtain.UpdateProgressLabel("Building a massive structure...")),
+                    _loadingCurtain.UpdateProgressLabel("Building a massive structure...")),
                 constructTask);
             
-            LoaderCurtain.UpdateProgressLabel("Done");
+            _loadingCurtain.UpdateProgressLabel("Done");
             
             //await CleanGarbageAsync();
 
             await UniTask.Delay(500);
             
             Root.SetActive(true);
-            CameraController
-                .Animate(
+            _loadingCurtain.Hide();
+            _cameraController
+                .DoOrbitAnimation(
                     Root.GetComponent<Renderer>().bounds,
                     2f,
-                    () => CameraController.InputDisabled = false)
+                    () => _cameraController.InputDisabled = false)
                 .Forget();
-            LoaderCurtain.Hide();
         }
 
         private static async UniTask CleanGarbageAsync()
@@ -323,7 +333,7 @@ namespace Core
             await meshCombiner.CombineMeshes(true);
 
             Renderer component = Root.GetComponent<Renderer>();
-            CameraController.SetPivot(component.bounds.center);
+            _cameraController.SetPivot(component.bounds.center);
         }
     
         private static bool IsFileNbtStructure(NbtFile file)

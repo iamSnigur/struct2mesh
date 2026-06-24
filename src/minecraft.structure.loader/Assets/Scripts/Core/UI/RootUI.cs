@@ -12,7 +12,7 @@ using System.Collections;
 namespace Core.UI
 {
     [RequireComponent(typeof(UIDocument))]
-    public class StructureViewerUI : MonoBehaviour
+    public class RootUI : MonoBehaviour
     {
         [DllImport("__Internal")]
         private static extern void OpenUploadPanel();
@@ -20,18 +20,33 @@ namespace Core.UI
         [DllImport("__Internal")]
         private static extern void CloseUploadPanel();
 
-        public CameraController CameraController;
-        public FileReceiver FileReceiver;
-        public NbtStructureParser NbtStructureParser;
+        private CameraController _cameraController;
+        private FileReceiver _fileReceiver;
+        private NbtStructureParser _nbtStructureParser;
         
         private UIDocument _doc;
         private VisualElement _root;
+
+        public void InjectDependencies(
+            CameraController cameraController,
+            FileReceiver fileReceiver,
+            NbtStructureParser nbtStructureParser)
+        {
+            _cameraController = cameraController;
+            _fileReceiver = fileReceiver;
+            _nbtStructureParser = nbtStructureParser;
+        }
         
         private void Awake()
         {
             _doc = GetComponent<UIDocument>();
             _root = _doc.rootVisualElement;
-            BuildInfo.OnBuildInfoLoaded += SetVersion;
+            
+            BindExportButtons();
+            BindButtons();
+            
+            BuildInfo.Init();
+            SetVersion(BuildInfo.FullInfo);
         }
 
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -50,12 +65,6 @@ namespace Core.UI
             CloseUploadPanel();
         }
 #endif
-
-        private void OnEnable()
-        {
-            BindExportButtons();
-            BindButtons();
-        }
 
         private void BindExportButtons()
         {
@@ -85,14 +94,14 @@ namespace Core.UI
         private void OnExportClicked(IExportStrategy exportStrategy)
         {
             Label lbl = _root.Q<Label>("file-label");
-            StructureExporter.ExportToZip(lbl.text.ToLower(), NbtStructureParser.Root, exportStrategy);
+            ModelExporter.ExportToZip(lbl.text.ToLower(), _nbtStructureParser.Root, exportStrategy);
         }
 
         private void OnLoadNewClicked() => 
             OpenUploadPanel();
 
         private void OnCameraResetClicked() => 
-            CameraController.ResetPivot();
+            _cameraController.ResetPivot();
 
         public void SetFileName(string fileName)
         {
