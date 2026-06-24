@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/StructureViewer.uss?fileID=7433441132597879392&amp;guid=9eb4ff6fa0e9e8a4fa56834dfac8fd37&amp;type=3#StructureViewer"/>
+    <Style src="project://database/Assets/UI/RootView.uss?fileID=7433441132597879392&amp;guid=9eb4ff6fa0e9e8a4fa56834dfac8fd37&amp;type=3#RootView"/>
     <ui:VisualElement name="root" class="root">
         <ui:Label name="version-label" text="v1.0.1-dev-e128f56" class="version-label"/>
         <ui:Label name="file-label" text="STRUCTURE.NBT" class="file-label"/>
@@ -9,19 +9,25 @@
                 
                 <ui:VisualElement class="btn-export-root">
                     <ui:VisualElement class="btn-outline"/>
-                    <ui:Button name="btn-fbx-1" text="FBX" class="btn-export"/>
+                    <ui:Button name="btn-export-fbx" text="ASCII FBX" class="btn-export"/>
                     <ui:VisualElement class="chevron-icon"/>
                 </ui:VisualElement>
                 
                 <ui:VisualElement class="btn-export-root">
                     <ui:VisualElement class="btn-outline"/>
-                    <ui:Button name="btn-fbx-1" text="FBX 1" class="btn-export"/>
+                    <ui:Button name="btn-export-glb" text="GLTF/GLB" class="btn-export"/>
                     <ui:VisualElement class="chevron-icon"/>
                 </ui:VisualElement>
                 
                 <ui:VisualElement class="btn-export-root">
                     <ui:VisualElement class="btn-outline"/>
-                    <ui:Button name="btn-fbx-1" text="FBX 2" class="btn-export"/>
+                    <ui:Button name="btn-export-obj" text="OBJ" class="btn-export"/>
+                    <ui:VisualElement class="chevron-icon"/>
+                </ui:VisualElement>
+                
+                <ui:VisualElement class="btn-export-root">
+                    <ui:VisualElement class="btn-outline"/>
+                    <ui:Button name="btn-export-ply" text="PLY" class="btn-export"/>
                     <ui:VisualElement class="chevron-icon"/>
                 </ui:VisualElement>
             </ui:VisualElement>
@@ -38,5 +44,11 @@
             </ui:Button>
             
         </ui:VisualElement>
+        
+        <ui:VisualElement name="loader" class="loader">
+            <ui:VisualElement name="loader-icon" class="loader-icon"/>
+            <ui:Label name="loader-label" class="loader-label" text="Building ..."/>
+        </ui:VisualElement>
+        
     </ui:VisualElement>
 </ui:UXML>

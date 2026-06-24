@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.AssetManagement.External;
+using Core.Utils;
 using CraftSharp;
 using CraftSharp.Resource;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceLocations;
 
 namespace Core.AssetManagement
 {
@@ -135,17 +133,27 @@ namespace Core.AssetManagement
             await UniTask.WhenAll(texturesTask, modelsTask, blockstatesTask);
         }
 
-        public static void UpdateBlockStatePalette(List<NbtReader.PaletteEntry> structurePalette)
+        public static async UniTask UpdateBlockStatePalette(List<NbtStructureParser.PaletteEntry> structurePalette)
         {
-            foreach (NbtReader.PaletteEntry paletteEntry in structurePalette)
+            await UniTask.Yield();
+            
+            float yieldTime = 0;
+            
+            foreach (NbtStructureParser.PaletteEntry paletteEntry in structurePalette)
             {
                 BlockStatePaletteAdapter.Instance
                     .RegisterBlockState(paletteEntry.Name, paletteEntry.Properties);
+                
+                if (yieldTime > 0.5f)
+                {
+                    await UniTask.Yield();
+                    yieldTime = 0;
+                }
+
+                yieldTime += Time.deltaTime;
             }
 
             BlockStatePaletteAdapter.Instance.InjectEntries();
-        
-            //BlockEntityTypePaletteAdapter.Instance.PrepareData();
         }
 
         public static void UpdateColorRules() => 
