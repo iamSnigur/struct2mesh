@@ -1,0 +1,6 @@
+﻿{
+  "parent": "block/banner/wall_banner/wall_banner",
+  "textures": {
+    "1": "block/banner/color/banner_lime"
+  }
+}

@@ -653,7 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344685372120438b876eb15625f443fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: StructureLoader::NbtReader
-  StructureNbtFilePath: Assets/Structures/liquid_test1.nbt
+  StructureNbtFilePath: Assets/Structures/block_entity_test.nbt
 --- !u!4 &1188278965
 Transform:
   m_ObjectHideFlags: 0

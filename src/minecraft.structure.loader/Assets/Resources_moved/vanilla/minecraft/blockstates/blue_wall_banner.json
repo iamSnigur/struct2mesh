@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
-      "model": "minecraft:block/banner"
+    "facing=north": {
+      "model": "minecraft:block/banner/wall_banner/blue_wall_banner"
+    },
+    "facing=south": {
+      "model": "minecraft:block/banner/wall_banner/blue_wall_banner",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "minecraft:block/banner/wall_banner/blue_wall_banner",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "minecraft:block/banner/wall_banner/blue_wall_banner",
+      "y": 270
     }
   }
 }
