@@ -482,7 +482,7 @@ namespace CraftSharp.Resource
             Texture2D tex = await AssetProvider.LoadByAddressAsync<Texture2D>(texFilePath); 
             Assert.IsNotNull(tex, $"Failed to load texture: {texFilePath}");
 
-            string mcmeta = $"{texFilePath}.png";
+            string mcmeta = $"{texFilePath}.mcmeta";
             
             if (!await AssetProvider.KeyExistsAsync<TextAsset>(mcmeta))
                 return (tex, null);
@@ -977,7 +977,10 @@ namespace CraftSharp.Resource
         private static Texture2D Save(Texture2DArray array, string path)
         {
             int sliceIndex = 0;            
-            Texture2D tex = new(array.width, array.height, array.format, array.mipmapCount, false);
+            Texture2D tex = new(array.width, array.height, array.format, array.mipmapCount, false)
+            {
+                filterMode = FilterMode.Point
+            };
             Graphics.CopyTexture(array, sliceIndex, tex, 0);
             tex.Apply();
 #if UNITY_EDITOR

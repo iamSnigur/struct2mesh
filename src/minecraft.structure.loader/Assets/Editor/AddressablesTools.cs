@@ -7,28 +7,41 @@ namespace Editor
 {
     public static class AddressablesTools
     {
-        [MenuItem("Tools/Addressables/Label Texture Source Group")]
-        public static void LabelGroup()
+        [MenuItem("Tools/Addressables/Update Texture Meta Files Addresses")]
+        public static void UpdateTextureMetaFilesAddress()
         {
             AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.Settings;
-            string groupName = "Textures";
-            string label = "texture-source";
-
-            settings.AddLabel(label);
-
-            AddressableAssetGroup group = settings.FindGroup(groupName);
-
-            if (group == null)
+            if (settings == null)
             {
-                Debug.LogError("Group not found"); 
+                Debug.LogError("Addressables settings not found.");
                 return;
             }
 
-            foreach (AddressableAssetEntry entry in group.entries) 
-                entry.SetLabel(label, true, true);
+            int count = 0;
+
+            foreach (AddressableAssetGroup group in settings.groups)
+            {
+                if (group == null) continue;
+                
+                if (!group.name.Equals("Textures")) continue;
+
+                foreach (AddressableAssetEntry entry in group.entries)
+                {
+                    string address = entry.address;
+
+                    if (address.EndsWith(".png"))
+                        address = address.Replace(".png", ".mcmeta");
+                    
+                    if (address != entry.address)
+                    {
+                        entry.SetAddress(address);
+                        count++;
+                    }
+                }
+            }
 
             AssetDatabase.SaveAssets();
-            Debug.Log($"Labeled {group.entries.Count} entries in '{groupName}' with '{label}'");
+            Debug.Log($"Cleaned {count} Addressable addresses.");
         }
         
         [MenuItem("Tools/Addressables/Clean Asset Addresses")]
