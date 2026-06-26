@@ -13,11 +13,16 @@
     "grass": [
       "minecraft:grass_block",
       "minecraft:grass",
+      "minecraft:short_grass",
       "minecraft:tall_grass",
       "minecraft:fern",
+      "minecraft:bush",
       "minecraft:large_fern",
       "minecraft:potted_fern",
-      "minecraft:sugar_cane"
+      "minecraft:sugar_cane",
+      "minecraft:leaf_litter",
+      "minecraft:pink_petals",
+      "minecraft:wildflowers"      
     ],
     "water": [
       "minecraft:water",

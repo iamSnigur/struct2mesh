@@ -646,6 +646,7 @@
   "nether_brick_slab": "vanilla/minecraft/blockstates/nether_brick_slab",
   "spruce_button": "vanilla/minecraft/blockstates/spruce_button",
   "brown_glazed_terracotta": "vanilla/minecraft/blockstates/brown_glazed_terracotta",
+  "golden_dandelion": "vanilla/minecraft/blockstates/golden_dandelion",
   "waxed_exposed_copper_trapdoor": "vanilla/minecraft/blockstates/waxed_exposed_copper_trapdoor",
   "pumpkin": "vanilla/minecraft/blockstates/pumpkin",
   "packed_ice": "vanilla/minecraft/blockstates/packed_ice",
@@ -1167,5 +1168,6 @@
   "oak_door": "vanilla/minecraft/blockstates/oak_door",
   "flowering_azalea_leaves": "vanilla/minecraft/blockstates/flowering_azalea_leaves",
   "pink_concrete": "vanilla/minecraft/blockstates/pink_concrete",
-  "horn_coral_block": "vanilla/minecraft/blockstates/horn_coral_block"
+  "horn_coral_block": "vanilla/minecraft/blockstates/horn_coral_block",
+  "potted_golden_dandelion": "vanilla/minecraft/blockstates/potted_golden_dandelion"
 }
