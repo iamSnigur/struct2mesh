@@ -1401,5 +1401,6 @@
   "block/purple_shulker_box": "vanilla/minecraft/textures/block/purple_shulker_box",
   "block/creaking_heart_top_awake": "vanilla/minecraft/textures/block/creaking_heart_top_awake",
   "block/loom_side": "vanilla/minecraft/textures/block/loom_side",
-  "block/deepslate_gold_ore": "vanilla/minecraft/textures/block/deepslate_gold_ore"
+  "block/deepslate_gold_ore": "vanilla/minecraft/textures/block/deepslate_gold_ore",
+  "block/end_portal/end_portal": "vanilla/minecraft/textures/block/end_portal/end_portal"
 }

@@ -1,7 +1,18 @@
 {
-    "parent": "block/cube_all",
+    "format_version": "1.21.11",
+    "texture_size": [32, 32],
     "textures": {
-        "particle": "block/end_portal",
-        "all": "block/end_portal"
-    }
+        "0": "block/end_portal/end_portal"
+    },
+    "elements": [
+        {
+            "from": [0, 12, 0],
+            "to": [16, 12, 16],
+            "rotation": {"angle": 0, "axis": "y", "origin": [8, 12, 8]},
+            "faces": {
+                "up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+                "down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+            }
+        }
+    ]
 }

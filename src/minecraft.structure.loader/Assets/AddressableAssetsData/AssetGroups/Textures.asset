@@ -4265,6 +4265,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9db84bbecd336c54f9a917c9d69495f4
+    m_Address: vanilla/minecraft/textures/block/end_portal/end_portal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9dceb8e07dda8c043b65e8b49a3a9f62
     m_Address: vanilla/minecraft/textures/block/detector_rail_on
     m_ReadOnly: 0

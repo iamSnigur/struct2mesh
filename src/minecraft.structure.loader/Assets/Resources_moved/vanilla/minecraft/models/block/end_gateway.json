@@ -1,5 +1,6 @@
 {
-  "textures": {
-    "particle": "minecraft:block/obsidian"
-  }
+    "parent": "block/cube_all",
+    "textures": {
+      "all": "block/end_portal/end_portal"
+    }
 }
