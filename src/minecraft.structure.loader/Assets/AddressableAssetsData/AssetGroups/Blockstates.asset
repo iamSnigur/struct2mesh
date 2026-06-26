@@ -3250,6 +3250,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90b795db374c4dbbbccec0cdabbfaa4c
+    m_Address: vanilla/minecraft/blockstates/golden_dandelion
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 91bb06c4a770bf0449760e44f4f3a376
     m_Address: vanilla/minecraft/blockstates/waxed_exposed_copper_trapdoor
     m_ReadOnly: 0
@@ -4492,6 +4497,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c4d1df348dc115b47897e6d48de53038
     m_Address: vanilla/minecraft/blockstates/kelp
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c502e531ec534f9498fa441b8071585e
+    m_Address: vanilla/minecraft/blockstates/potted_golden_dandelion
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
