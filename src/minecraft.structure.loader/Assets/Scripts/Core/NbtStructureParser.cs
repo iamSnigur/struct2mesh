@@ -41,16 +41,14 @@ namespace Core
             while (!MinecraftAssetProvider.Loaded)
                 yield return null;
 
-            LoadNbtStructure();
+            LoadNbtStructure(StructureNbtFilePath);
         }
 #endif
 
-        [ContextMenu("LoadNbtStructure")]
-        public void LoadNbtStructure()
+        public void LoadNbtStructure(string path)
         {
             NbtFile nbtFile = new();
-            nbtFile.LoadFromFile(StructureNbtFilePath);
-
+            nbtFile.LoadFromFile(path);
             Parse(nbtFile).Forget();
         }
     
