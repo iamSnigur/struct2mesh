@@ -2,11 +2,8 @@
 using Core.Exporter;
 using UnityEngine;
 using UnityEngine.UIElements;
-
-#if UNITY_WEBGL && !UNITY_EDITOR
 using UnityEngine.Rendering;
 using System.Collections;
-#endif
 
 namespace Core.UI
 {
@@ -48,13 +45,16 @@ namespace Core.UI
             SetVersion(BuildInfo.FullInfo);
         }
 
-#if UNITY_WEBGL && !UNITY_EDITOR
         private IEnumerator Start()
         {
             while (!SplashScreen.isFinished)
                 yield return null;
-            
+
+            yield return new WaitForSeconds(5f);
+            FindFirstObjectByType<DisclaimerPopup>().Show();
+#if UNITY_WEBGL && !UNITY_EDITOR
             OpenUploadPanel();
+#endif
             _fileReceiver.OnFileReceived += OnFileReceived;
         }
         
@@ -63,7 +63,6 @@ namespace Core.UI
             SetFileName(fileName);
             CloseUploadPanel();
         }
-#endif
 
         private void BindExportButtons()
         {

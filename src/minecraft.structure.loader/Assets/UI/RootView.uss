@@ -215,7 +215,7 @@
     height: 60%;
     background-image: url("Icons/camera_reset.svg");
     -unity-background-image-tint-color: rgb(255, 255, 255);
-    -unity-background-scale-mode: scale-to-fit;
+    -unity-background-scale-mode: scale-to-fit;    
 }
 
 .version-label {
@@ -231,6 +231,7 @@
 }
 
 .loader {
+    position: absolute;
     display: none;
     
     width: 100%;
@@ -259,4 +260,63 @@
     font-size: 28px;
     -unity-text-align: middle-center;
     text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.disclaimer-root {
+    display: none;
+    width: 450px;
+    height: 180px;
+    margin-top: 20px;
+    align-self: center;
+
+    padding: 8px 10px;
+
+    background-image: var(--img-btn-flat);
+    -unity-background-image-tint-color: rgba(0,0,0,0.7);
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 5px;
+    border-color: transparent;
+}
+
+.disclaimer-label {
+    flex-grow: 1;
+    
+    color: rgba(255, 255, 255, 1);
+    font-size: 13px;
+    letter-spacing: 3px;
+    -unity-font-definition: var(--font-consolas);
+    -unity-text-align: upper-left;
+    
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+.btn-ok {
+    margin-bottom: 10px;
+    align-self: center;
+    width: 25%;
+    height: 40px;
+    color: rgba(0,0,0,0.9);
+    font-size: 22px;
+    -unity-font-definition: var(--font-troika);
+    letter-spacing: 2px;
+    background-color: transparent;
+
+    background-image: var(--img-btn-flat);
+    -unity-background-image-tint-color: white;
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 5px;
+    border-color: transparent;
+
+    transition-property: scale;
+    transition-duration: 0.08s;
+    transition-timing-function: ease;
+    scale: 1 1;
+}
+
+.btn-ok:active {
+    transition-timing-function: ease;
+    transition-duration: 0.03s;
+    scale: 0.85 0.85;
 }

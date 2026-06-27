@@ -40,9 +40,14 @@
             </ui:VisualElement>
             
             <ui:Button name="btn-camera-reset" class="btn-camera-reset">
-                <ui:VisualElement name="camera-icon" class="camera-icon"/>
+                <ui:VisualElement name="camera-icon" class="camera-icon" picking-mode="Ignore"/>
             </ui:Button>
             
+        </ui:VisualElement>
+        
+        <ui:VisualElement name="disclaimer-root" class="disclaimer-root">
+            <ui:Label name="disclaimer-label" class="disclaimer-label" text="This tool is an independent project and is not affiliated with, endorsed by, sponsored by, or approved by Mojang Studios or Microsoft. Minecraft and all related trademarks, names, and assets are the property of their respective owners." />
+            <ui:Button name="btn-ok" text="OK" class="btn-ok"/>
         </ui:VisualElement>
         
         <ui:VisualElement name="loader" class="loader">
