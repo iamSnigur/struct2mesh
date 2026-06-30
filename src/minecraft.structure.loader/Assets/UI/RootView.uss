@@ -18,6 +18,7 @@
 
     --font-troika:          url("Fonts/troika.otf");
     --font-consolas:        url("Fonts/Consolas-Regular.ttf");
+    --font-segoe-ui:        url("Fonts/Segoe UI.ttf");
     
     --img-btn:              url("Icons/button.png");
     --img-btn-flat:         url("Icons/button_flat.png");
@@ -26,6 +27,8 @@
 .root {
     width: 100%;
     height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .file-label {
@@ -319,4 +322,176 @@
     transition-timing-function: ease;
     transition-duration: 0.03s;
     scale: 0.85 0.85;
+}
+
+.popup-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    
+    background-color: rgba(0, 0, 0, 0.7);
+
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-root {
+    align-self: center;
+    width: 50%;
+    height: 80%;
+    background-color: transparent;
+
+    padding: 10px;
+    
+    background-image: var(--img-btn-flat);
+    -unity-background-image-tint-color: rgba(25, 25, 30, 0.99);
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 5px;
+    border-color: transparent;
+}
+
+.popup-border {
+    width: 100%;
+    height: 100%;
+    background-image: url("Icons/fancy_border.png");
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.05);
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 3px;
+    border-color: transparent;
+    padding: 15px;
+}
+
+.popup-header {
+    width: 100%;
+    height: 10%;
+    padding: 8px;
+}
+
+.header-label {
+    font-size: 40px;
+    color: white;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+    -unity-font-definition: var(--font-troika);
+}
+
+.popup-body {
+    width: 100%;
+    height: 80%;
+    padding: 16px;
+}
+
+.info-content {
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+    flex-direction: row;
+}
+
+.info-left-panel {
+    flex: 1 1 0;
+    flex-direction: column;
+}
+
+.info-text {
+    flex: 1 1 0;
+    padding: 8px;
+    margin-bottom: 10px;
+    background-image: url("Icons/button_flat.png");
+    -unity-background-image-tint-color: rgb(65, 65, 65);
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 5px;
+    border-color: transparent;
+}
+
+.info-onboarding {
+    padding: 8px;
+    flex: 1 1 0;
+    background-image: url("Icons/button.png");
+    -unity-background-image-tint-color: rgb(65, 65, 65);
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 5px;
+    border-color: transparent;
+}
+
+.info-title {
+    font-size: 32px;
+    color: rgb(245, 195, 56);
+    -unity-font-definition: var(--font-troika);
+}
+
+.info-onboarding-label {
+    white-space: normal;
+    font-size: 26px;
+    color: rgb(220, 220, 220);
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+    -unity-font-definition: var(--font-segoe-ui);
+}
+
+.btn-info-onboarding-root {
+    width: 150px;
+    height: 60px;
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-info-onboarding-root:hover .btn-outline {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
+
+.btn-info-onboarding {
+    color: var(--col-text-bright);
+    font-size: 24px;
+    -unity-font-definition: var(--font-troika);
+    letter-spacing: 2px;
+    text-shadow: 0 3px 0 rgba(0, 0, 0, 0.5);
+    background-color: transparent;
+
+    background-image: var(--img-btn);
+    -unity-background-image-tint-color: var(--col-export-btn);
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 5px;
+    border-color: transparent;
+    
+    width: 100%;
+    height: 100%;
+}
+
+.info-promo {
+    flex: 1 1 0;
+    background-image: url("Images/Animations/Pool/ezgif-frame-001.jpg");
+    -unity-background-scale-mode: scale-and-crop;
+    border-radius: 24px;
+    overflow: hidden;
+    margin-left: 24px;
+}
+
+.body-label {
+    width: 100%;
+    font-size: 25px;
+    color: white;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);    
+    -unity-font-definition: var(--font-segoe-ui);
+    white-space: normal;
+}
+
+.popup-footer {
+    width: 100%;
+    height: 10%;
+    padding: 8px;
+    background-color: rgba(255,255,255, 0.5);
+}
+
+.popup-info-panel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.popup-onboarding-panel {
+    display: none;
 }
