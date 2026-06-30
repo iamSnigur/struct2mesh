@@ -50,7 +50,7 @@ namespace Core.UI
             while (!SplashScreen.isFinished)
                 yield return null;
 
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(4f);
             FindFirstObjectByType<DisclaimerPopup>().Show();
 #if UNITY_WEBGL && !UNITY_EDITOR
             OpenUploadPanel();

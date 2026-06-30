@@ -270,12 +270,13 @@
     width: 450px;
     height: 180px;
     margin-top: 20px;
+    padding: 8px 10px;
+    top: 0;
+    position: absolute;
     align-self: center;
 
-    padding: 8px 10px;
-
     background-image: var(--img-btn-flat);
-    -unity-background-image-tint-color: rgba(0,0,0,0.7);
+    -unity-background-image-tint-color: rgba(60, 60, 60, 1);
     -unity-background-scale-mode: stretch-to-fill;
     -unity-slice-scale: 5px;
     border-color: transparent;
@@ -287,7 +288,7 @@
     color: rgba(255, 255, 255, 1);
     font-size: 13px;
     letter-spacing: 3px;
-    -unity-font-definition: var(--font-consolas);
+    -unity-font-definition: var(--font-segoe-ui);
     -unity-text-align: upper-left;
     
     white-space: normal;
@@ -300,7 +301,7 @@
     align-self: center;
     width: 25%;
     height: 40px;
-    color: rgba(0,0,0,0.9);
+    color: rgba(60, 60, 60, 1);
     font-size: 22px;
     -unity-font-definition: var(--font-troika);
     letter-spacing: 2px;
@@ -318,13 +319,20 @@
     scale: 1 1;
 }
 
+.btn-ok:hover {
+    transition-timing-function: ease-in-out-sine;
+    transition-duration: 0.08s;
+    scale: 1.2 1.2;
+}
+
 .btn-ok:active {
-    transition-timing-function: ease;
+    transition-timing-function: ease-in-sine;
     transition-duration: 0.03s;
-    scale: 0.85 0.85;
+    scale: 1.1 1.1;
 }
 
 .popup-overlay {
+    display: none;
     position: absolute;
     left: 0;
     top: 0;
@@ -332,6 +340,7 @@
     bottom: 0;
     
     background-color: rgba(0, 0, 0, 0.7);
+    border-color: transparent;
 
     justify-content: center;
     align-items: center;
@@ -430,7 +439,7 @@
 }
 
 .btn-info-onboarding-root {
-    width: 150px;
+    width: 200px;
     height: 60px;
     position: absolute;
     bottom: 16px;
@@ -465,7 +474,7 @@
     flex: 1 1 0;
     background-image: url("Images/Animations/Pool/ezgif-frame-001.jpg");
     -unity-background-scale-mode: scale-and-crop;
-    border-radius: 24px;
+    border-radius: 35px;
     overflow: hidden;
     margin-left: 24px;
 }

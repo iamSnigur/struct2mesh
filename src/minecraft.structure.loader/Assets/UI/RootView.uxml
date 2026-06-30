@@ -51,7 +51,7 @@
         </ui:VisualElement>
         
         <ui:VisualElement class="popup-overlay" name="popup-overlay">
-            <ui:VisualElement class="popup-root" name="root">
+            <ui:VisualElement class="popup-root" name="popup-root">
                 <ui:VisualElement class="popup-border" name="border">
                     <ui:VisualElement class="popup-info-panel" name="info-panel">
                         <ui:VisualElement class="popup-header">
@@ -70,15 +70,15 @@
                                     <ui:VisualElement class="info-onboarding">
                                         <ui:Label class="info-title" text="Onboarding"/>
                                         <ui:Label class="info-onboarding-label" text="Don't know where to start? New to structure blocks?"/>
-                                        <ui:Label class="info-onboarding-label" text="Onboarding made for you!"/>
+                                        <ui:Label class="info-onboarding-label" text="This onboarding just for you!"/>
                                         <ui:VisualElement class="btn-info-onboarding-root">
                                             <ui:VisualElement class="btn-outline"/>
-                                            <ui:Button class="btn-info-onboarding" text="Let's Go!"/>
+                                            <ui:Button class="btn-info-onboarding" text="Let's Start!"/>
                                         </ui:VisualElement>
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                                 
-                                <ui:VisualElement class="info-promo" />
+                                <ui:VisualElement name="pool-animation" class="info-promo" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                         

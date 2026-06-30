@@ -11,30 +11,39 @@ namespace Core.UI
         public AnimationCurve ShowAnimationCurve;
         public AnimationCurve HideAnimationCurve;
 
+        private float _popupHeight;
+        private float _popupHideHeight;
         private VisualElement _popupRoot;
         private UIDocument _doc;
-        private Coroutine _animCoroutine;
 
         private void Awake()
         {
             _doc = GetComponent<UIDocument>();
             _popupRoot = _doc.rootVisualElement.Q<VisualElement>("disclaimer-root");
 
+            _popupRoot.style.display = DisplayStyle.Flex;
+            _popupRoot.RegisterCallbackOnce<GeometryChangedEvent>(_ =>
+            {
+                _popupHeight = _popupRoot.resolvedStyle.height;
+                _popupHideHeight = -_popupHeight - 100f;
+                _popupRoot.style.display = DisplayStyle.None;
+            });
+            
             Button okBtn = _popupRoot.Q<Button>("btn-ok");
             okBtn.clicked += Hide;
 
-            SetTopOffset(-280);
+            SetTopOffset(_popupHideHeight);
         }
 
         public void Show()
         {
             _popupRoot.style.display = DisplayStyle.Flex;
-            Animate(ShowAnimationCurve, -280, 0f).Forget();
+            Animate(ShowAnimationCurve, _popupHideHeight, 0f).Forget();
         }
 
         private void Hide()
         {
-            Animate(HideAnimationCurve, 0f, -280, 0.5f,
+            Animate(HideAnimationCurve, 0f, _popupHideHeight, 0.5f,
                 onComplete: () => { _popupRoot.style.display = DisplayStyle.None; }).Forget();
         }
 
