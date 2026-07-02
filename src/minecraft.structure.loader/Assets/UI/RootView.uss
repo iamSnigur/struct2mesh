@@ -322,13 +322,13 @@
 .btn-ok:hover {
     transition-timing-function: ease-in-out-sine;
     transition-duration: 0.08s;
-    scale: 1.2 1.2;
+    scale: 1.15 1.15;
 }
 
 .btn-ok:active {
-    transition-timing-function: ease-in-sine;
+    transition-timing-function: ease-in-out-sine;
     transition-duration: 0.03s;
-    scale: 1.1 1.1;
+    scale: 1.05 1.05;
 }
 
 .popup-overlay {
@@ -364,10 +364,10 @@
 .popup-border {
     width: 100%;
     height: 100%;
-    background-image: url("Icons/fancy_border.png");
+    background-image: url("Icons/fancy_border0.png");
     -unity-background-image-tint-color: rgba(255, 255, 255, 0.05);
     -unity-background-scale-mode: stretch-to-fill;
-    -unity-slice-scale: 3px;
+    -unity-slice-scale: 5px;
     border-color: transparent;
     padding: 15px;
 }
@@ -405,9 +405,9 @@
 
 .info-text {
     flex: 1 1 0;
-    padding: 8px;
+    padding: 12px;
     margin-bottom: 10px;
-    background-image: url("Icons/button_flat.png");
+    background-image: url("Icons/fancy_border1.png");
     -unity-background-image-tint-color: rgb(65, 65, 65);
     -unity-background-scale-mode: stretch-to-fill;
     -unity-slice-scale: 5px;
@@ -415,8 +415,10 @@
 }
 
 .info-onboarding {
-    padding: 8px;
+    padding: 12px;
     flex: 1 1 0;
+    flex-direction: column;
+    
     background-image: url("Icons/button.png");
     -unity-background-image-tint-color: rgb(65, 65, 65);
     -unity-background-scale-mode: stretch-to-fill;
@@ -439,11 +441,11 @@
 }
 
 .btn-info-onboarding-root {
-    width: 200px;
+    width: 90%;
     height: 60px;
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
+    min-height: 30px;
+    margin-top: auto;
+    align-self: center;
     justify-content: center;
     align-items: center;
 }
@@ -492,7 +494,6 @@
     width: 100%;
     height: 10%;
     padding: 8px;
-    background-color: rgba(255,255,255, 0.5);
 }
 
 .popup-info-panel {
@@ -502,5 +503,176 @@
 }
 
 .popup-onboarding-panel {
+    width: 100%;
+    height: 100%;
     display: none;
+}
+
+.onboarding-body-content {
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+    flex-direction: column;
+}
+
+.onboarding-image {
+    flex: 8 1 0;
+    background-image: url("Images/Onboarding/2025-11-04_11.51.29.png");
+    -unity-background-scale-mode: scale-to-fit;
+    margin-bottom: 16px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.onboarding-title {
+    flex: 1 1 0;
+    -unity-font-definition: var(--font-troika);
+    -unity-font-style: normal;
+    font-size: 26px;
+    color: rgb(245, 195, 56);
+}
+
+.onboarding-text {
+    flex: 1 1 0;
+    -unity-font-definition: var(--font-segoe-ui);
+    font-size: 20px;
+    color: white;
+    white-space: normal;
+}
+
+.inline-text {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    -unity-font-definition: var(--font-segoe-ui);
+    font-size: 20px;
+    color: white;
+    white-space: normal;
+}
+
+.inline-code {
+    white-space: normal;
+    -unity-font-definition: var(--font-consolas);
+    font-size: 18px;
+    color: orange;
+    background-color: rgba(255,255,255,0.08);
+    border-color: rgb(165,165,165);
+    border-width: 1px;
+    border-radius: 10px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.onboarding-footer-content {
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+.btn-back-root {    
+    height: 100%;
+    width: 150px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-back-root:hover .btn-outline {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
+
+.btn-back {
+    width: 100%;
+    height: 100%;
+    
+    color: var(--col-text-bright);
+    font-size: 24px;
+    -unity-font-definition: var(--font-troika);
+    letter-spacing: 2px;
+    text-shadow: 0 3px 0 rgba(0, 0, 0, 0.5);
+    background-color: transparent;
+
+    background-image: var(--img-btn);
+    -unity-background-image-tint-color: var(--col-export-btn);
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 5px;
+    border-color: transparent;    
+}
+
+.control-panel {
+    flex-direction: row;
+    align-items: center;
+    align-self: flex-end;
+    height: 100%;
+    width: 40%;
+    margin-left: auto;
+}
+
+.btn-arrow-root {
+    flex: 1 1 0;
+    align-items: center;
+    
+    height: 100%;
+    width: 80px;
+
+    background-color: transparent;
+    background-image: url("Icons/button_flat.png");
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 5px;
+    border-color: transparent;
+
+    transition-property: scale;
+    transition-duration: 0.08s;
+    transition-timing-function: ease;
+    scale: 1 1;
+}
+
+.btn-arrow-root:hover {
+    transition-timing-function: ease-in-out-sine;
+    transition-duration: 0.08s;
+    scale: 1.15 1.15;
+}
+
+.btn-arrow-root:active {
+    transition-timing-function: ease-in-out-sine;
+    transition-duration: 0.03s;
+    scale: 1.05 1.05;
+}
+
+.btn-arrow-root:disabled {
+    opacity: 0.4;
+    transition-timing-function: ease-in-out-sine;
+    transition-duration: 0.03s;
+    scale: 0.95 0.95;
+}
+
+.btn-arrow-right {
+    top: 50%;
+    translate: -3px -50%;
+    width: 35px;
+    height: 35px;
+    background-image: url("Icons/arrow.png");
+    -unity-background-scale-mode: scale-to-fit;
+    -unity-background-image-tint-color: rgb(65, 65, 65);
+}
+
+.btn-arrow-left {
+    top: 50%;
+    translate: 0 -50%;
+    width: 35px;
+    height: 35px;
+    rotate: 180deg;
+    background-image: url("Icons/arrow.png");
+    -unity-background-scale-mode: scale-to-fit;
+    -unity-background-image-tint-color: rgb(65, 65, 65);
+}
+
+.slide-progress-label {
+    flex: 2 1 0;
+    -unity-text-align: middle-center;
+    color: var(--col-text-bright);
+    font-size: 32px;
+    letter-spacing: 4px;
+    -unity-font-definition: var(--font-troika);
+    text-shadow: 0 3px 0 rgba(0, 0, 0, 0.5);
+    background-color: transparent;
 }

@@ -53,7 +53,7 @@
         <ui:VisualElement class="popup-overlay" name="popup-overlay">
             <ui:VisualElement class="popup-root" name="popup-root">
                 <ui:VisualElement class="popup-border" name="border">
-                    <ui:VisualElement class="popup-info-panel" name="info-panel">
+                    <ui:VisualElement class="popup-info-panel" name="welcome-hub-root">
                         <ui:VisualElement class="popup-header">
                             <ui:Label class="header-label" text="Welcome Hub"/>
                         </ui:VisualElement>
@@ -73,7 +73,7 @@
                                         <ui:Label class="info-onboarding-label" text="This onboarding just for you!"/>
                                         <ui:VisualElement class="btn-info-onboarding-root">
                                             <ui:VisualElement class="btn-outline"/>
-                                            <ui:Button class="btn-info-onboarding" text="Let's Start!"/>
+                                            <ui:Button name="btn-start-onboarding" class="btn-info-onboarding" text="Let's Start!"/>
                                         </ui:VisualElement>
                                     </ui:VisualElement>
                                 </ui:VisualElement>
@@ -83,6 +83,41 @@
                         </ui:VisualElement>
                         
                         <ui:VisualElement class="popup-footer"/>
+                    </ui:VisualElement>
+                    
+                    <ui:VisualElement name="onboarding-root" class="popup-onboarding-panel">
+                        <ui:VisualElement class="popup-header">
+                            <ui:Label class="header-label" text="Onboarding"/>
+                        </ui:VisualElement>
+                        
+                        <ui:VisualElement class="popup-body">
+                            <ui:VisualElement class="onboarding-body-content">
+                                <ui:Label class="onboarding-title" text="Step 1 — Get a Structure Block"/>
+                                <ui:VisualElement class="onboarding-image"/>
+                                <ui:Label class="onboarding-text" text="Open chat and run '/give @p minecraft:structure_block'. This is the one way to obtain it, since it isn't in the creative inventory by default."/>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        
+                        <ui:VisualElement class="popup-footer">
+                            <ui:VisualElement class="onboarding-footer-content">
+                                <ui:VisualElement class="btn-back-root">
+                                    <ui:VisualElement class="btn-outline"/>
+                                    <ui:Button name="btn-back" text="Go Back" class="btn-back"/>
+                                </ui:VisualElement>
+                                
+                                <ui:VisualElement class="control-panel">
+                                    <ui:Button name="btn-arrow-left" class="btn-arrow-root">
+                                        <ui:VisualElement class="btn-arrow-left"/>
+                                    </ui:Button>
+                                    
+                                    <ui:Label class="slide-progress-label" text="1/7"/>
+                                    
+                                    <ui:Button class="btn-arrow-root">
+                                        <ui:VisualElement class="btn-arrow-right"/>
+                                    </ui:Button>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
