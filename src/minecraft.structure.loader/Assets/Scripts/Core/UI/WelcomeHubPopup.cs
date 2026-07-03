@@ -8,6 +8,8 @@ namespace Core.UI
 {
     public class WelcomeHubPopup : MonoBehaviour
     {
+        public OnboardingSlidesConfig SlidesConfig;
+        
         public AnimationCurve ShowAnimationCurve;
         public AnimationCurve HideAnimationCurve;
 
@@ -21,6 +23,14 @@ namespace Core.UI
 
         private VisualElement _welcomeHubRoot;
         private VisualElement _onboardingRoot;
+
+        private Label _slideTitle;
+        private VisualElement _slideImage;
+        private Label _slideDescription;
+        
+        private Label _slidesProgressLabel;
+        private Button _leftArrow;
+        private Button _rightArrow;
 
         private float _popupHideHeight;
         private bool _isAnimating;
@@ -63,10 +73,54 @@ namespace Core.UI
                 _welcomeHubRoot.style.display = DisplayStyle.Flex;
             };
 
-            Button left = _popupRoot.Q<Button>("btn-arrow-left");
-            left.clicked += () => left.SetEnabled(false);
+            _slideTitle = _popupRoot.Q<Label>("onboarding-title");
+            _slideDescription = _popupRoot.Q<Label>("onboarding-description");
+            _slideImage = _popupRoot.Q<VisualElement>("onboarding-image");
+            
+            _slidesProgressLabel = _popupRoot.Q<Label>("slide-progress-label");
+            
+            _leftArrow = _popupRoot.Q<Button>("btn-arrow-left");
+            _leftArrow.clicked += LeftArrowClicked;
+            
+            _rightArrow = _popupRoot.Q<Button>("btn-arrow-right");
+            _rightArrow.clicked += RightArrowClicked;
         }
 
+        private int _currentSlide;
+        
+        private void LeftArrowClicked()
+        {
+            int totalSlides = SlidesConfig.Slides.Length;
+            _currentSlide = Mathf.Clamp(_currentSlide - 1, 0, totalSlides);
+
+            _leftArrow.SetEnabled(_currentSlide != 0);
+            _rightArrow.SetEnabled(_currentSlide != totalSlides - 1);
+            SetSlideByIndex(_currentSlide);
+        }
+
+        private void RightArrowClicked()
+        {
+            int totalSlides = SlidesConfig.Slides.Length;
+            _currentSlide = Mathf.Clamp(_currentSlide + 1, 0, totalSlides);
+
+            _leftArrow.SetEnabled(_currentSlide != 0);
+            _rightArrow.SetEnabled(_currentSlide != totalSlides - 1);
+            SetSlideByIndex(_currentSlide);
+        }
+        
+        private void SetSlideByIndex(int index)
+        {
+            if (index < 0 || index >= SlidesConfig.Slides.Length)
+                return;
+            
+            OnboardingSlide slide = SlidesConfig.Slides[index];
+            _slideTitle.text = slide.Title;
+            _slideDescription.text = slide.Description;
+            _slideImage.style.backgroundImage = new StyleBackground(slide.Image);
+
+            _slidesProgressLabel.text = $"{index + 1}/{SlidesConfig.Slides.Length}";
+        }
+        
         private void Update()
         {
             if (Keyboard.current.spaceKey.wasPressedThisFrame)
@@ -77,6 +131,9 @@ namespace Core.UI
         {
             if (_isAnimating)
                 return;
+            
+            _currentSlide = 0;
+            LeftArrowClicked();
             
             _popupOverlay.style.display = DisplayStyle.Flex;
             SpriteAnimator.StartAnimation();

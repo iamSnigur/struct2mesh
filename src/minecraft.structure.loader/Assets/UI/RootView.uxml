@@ -92,9 +92,9 @@
                         
                         <ui:VisualElement class="popup-body">
                             <ui:VisualElement class="onboarding-body-content">
-                                <ui:Label class="onboarding-title" text="Step 1 — Get a Structure Block"/>
-                                <ui:VisualElement class="onboarding-image"/>
-                                <ui:Label class="onboarding-text" text="Open chat and run '/give @p minecraft:structure_block'. This is the one way to obtain it, since it isn't in the creative inventory by default."/>
+                                <ui:Label name="onboarding-title" class="onboarding-title" text="Step 1 — Get a Structure Block"/>
+                                <ui:VisualElement name="onboarding-image" class="onboarding-image"/>
+                                <ui:Label name="onboarding-description" class="onboarding-text" text="Open chat and run '/give @p minecraft:structure_block'. This is the one way to obtain it, since it isn't in the creative inventory by default."/>
                             </ui:VisualElement>
                         </ui:VisualElement>
                         
@@ -110,9 +110,9 @@
                                         <ui:VisualElement class="btn-arrow-left"/>
                                     </ui:Button>
                                     
-                                    <ui:Label class="slide-progress-label" text="1/7"/>
+                                    <ui:Label name="slide-progress-label" class="slide-progress-label" text="1/7"/>
                                     
-                                    <ui:Button class="btn-arrow-root">
+                                    <ui:Button name="btn-arrow-right" class="btn-arrow-root">
                                         <ui:VisualElement class="btn-arrow-right"/>
                                     </ui:Button>
                                 </ui:VisualElement>

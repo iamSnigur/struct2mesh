@@ -517,7 +517,7 @@
 
 .onboarding-image {
     flex: 8 1 0;
-    background-image: url("Images/Onboarding/2025-11-04_11.51.29.png");
+    background-image: url("Images/Onboarding/1.png");
     -unity-background-scale-mode: scale-to-fit;
     margin-bottom: 16px;
     background-color: rgba(255, 255, 255, 0.05);

@@ -683,6 +683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4024f74178ef47fcbf312befd2cace4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: StructureLoader::Core.UI.WelcomeHubPopup
+  SlidesConfig: {fileID: 11400000, guid: 5303506692c4d104da354a1a969b323f, type: 2}
   ShowAnimationCurve:
     serializedVersion: 2
     m_Curve:
