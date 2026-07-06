@@ -3,6 +3,11 @@
     <ui:VisualElement name="root" class="root">
         <ui:Label name="version-label" text="v1.0.1-dev-e128f56" class="version-label"/>
         <ui:Label name="file-label" text="STRUCTURE.NBT" class="file-label"/>
+        
+        <ui:Button name="btn-welcome-hub" class="btn-welcome-hub" text="Welcome!">
+            <ui:VisualElement class="creeper-face"/>
+        </ui:Button>
+
         <ui:VisualElement name="sidebar" class="sidebar">
             <ui:VisualElement name="export-section" class="export-section">
                 <ui:Label name="export-title" text="EXPORT AS:" class="export-title"/>

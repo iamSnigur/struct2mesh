@@ -1,7 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 namespace Core.UI
@@ -52,21 +51,21 @@ namespace Core.UI
                 _popupOverlay.style.display = DisplayStyle.None;
             });
 
-            _popupOverlay.RegisterCallback<PointerDownEvent>(
+            _popupOverlay.RegisterCallback<ClickEvent>(
                 ev =>
                 {
                     if (ev.target == _popupOverlay)
                         Hide();
                 }, TrickleDown.TrickleDown);
 
-            Button start = _popupOverlay.Q<Button>("btn-start-onboarding");
+            Button start = _popupRoot.Q<Button>("btn-start-onboarding");
             start.clicked += () =>
             {
                 _onboardingRoot.style.display = DisplayStyle.Flex;
                 _welcomeHubRoot.style.display = DisplayStyle.None;
             };
             
-            Button back = _popupOverlay.Q<Button>("btn-back");
+            Button back = _popupRoot.Q<Button>("btn-back");
             back.clicked += () =>
             {
                 _onboardingRoot.style.display = DisplayStyle.None;
@@ -86,20 +85,23 @@ namespace Core.UI
             _rightArrow.clicked += RightArrowClicked;
 
             var gitHubLink = _popupRoot.Q<Label>("github-link");
-            gitHubLink.RegisterCallback<PointerDownEvent>(_ => OpenLink("https://github.com/iamSnigur"));
+            gitHubLink.RegisterCallback<ClickEvent>(_ => OpenLink("https://github.com/iamSnigur"));
             
             var supportLink = _popupRoot.Q<Label>("support-link");
-            supportLink.RegisterCallback<PointerDownEvent>(_ => OpenLink("https://buymeacoffee.com/iamsnigur"));
+            supportLink.RegisterCallback<ClickEvent>(_ => OpenLink("https://buymeacoffee.com/iamsnigur"));
             
             var feedbackLink = _popupRoot.Q<Label>("feedback-link");
-            feedbackLink.RegisterCallback<PointerDownEvent>(_ => OpenLink("https://forms.gle/Ujksc3g8e6U7pJHx6"));
+            feedbackLink.RegisterCallback<ClickEvent>(_ => OpenLink("https://forms.gle/Ujksc3g8e6U7pJHx6"));
+
+            
+            // remove
+            var welcomeHubBtn = doc.rootVisualElement.Q<Button>("btn-welcome-hub");
+            welcomeHubBtn.clicked += Show;
         }
 
-        private void OpenLink(string url)
-        {
+        private static void OpenLink(string url) => 
             Application.OpenURL(url);
-        }
-        
+
         private int _currentSlide;
         
         private void LeftArrowClicked()
@@ -133,12 +135,6 @@ namespace Core.UI
             _slideImage.style.backgroundImage = new StyleBackground(slide.Image);
 
             _slidesProgressLabel.text = $"{index + 1}/{SlidesConfig.Slides.Length}";
-        }
-        
-        private void Update()
-        {
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
-                Show();
         }
 
         public void Show()

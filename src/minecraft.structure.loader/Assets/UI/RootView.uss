@@ -199,18 +199,21 @@
     padding: 0;
 
     transition-property: scale;
-    transition-duration: 0.08s;
+    transition-duration: 0.1s;
     transition-timing-function: ease-out;
     scale: 1 1;
 }
 
 .btn-camera-reset:hover {
-    scale: 0.93 0.93;       
+    transition-duration: 0.8s;
+    scale: 0.9;
+    transition-timing-function: ease-out-elastic;
 }
 
 .btn-camera-reset:active {
-    transition-duration: 0.05s;
-    scale: 1.08 0.82;
+    transition-duration: 0.5s;
+    scale: 1.0 0.8;
+    transition-timing-function: ease-out-elastic;
 }
 
 .camera-icon {
@@ -329,6 +332,55 @@
     transition-timing-function: ease-in-out-sine;
     transition-duration: 0.03s;
     scale: 1.05 1.05;
+}
+
+.creeper-face {
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+    background-image: url("Icons/creeper-face.png");
+    align-self: flex-end;
+}
+
+.btn-welcome-hub {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    
+    height: 64px;
+    width: 250px;    
+        
+    background-image: url("Icons/button.png");
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-background-image-tint-color: var(--col-export-btn);
+    -unity-slice-scale: 5px;
+    background-color: transparent;
+    border-color: transparent;
+    
+    -unity-font-definition: var(--font-troika);
+    font-size: 24px;
+    color: white;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+    -unity-text-align: middle-center;
+    justify-content: center;
+    
+    scale: 1;
+    transition-duration: 0.8s;
+    transition-timing-function: ease-out-elastic;
+    translate: -190px 0;
+}
+
+.btn-welcome-hub:hover {
+    scale: 1;
+    transition-duration: 0.8s;
+    transition-timing-function: ease-out-elastic;
+    translate: -60px 0;
+}
+
+.btn-welcome-hub:active {
+    scale: 0.95;
+    transition-duration: 0.8s;
+    transition-timing-function: ease-out-elastic;
 }
 
 .popup-overlay {
