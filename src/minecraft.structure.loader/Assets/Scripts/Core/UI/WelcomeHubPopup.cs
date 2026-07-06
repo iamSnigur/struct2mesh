@@ -84,8 +84,22 @@ namespace Core.UI
             
             _rightArrow = _popupRoot.Q<Button>("btn-arrow-right");
             _rightArrow.clicked += RightArrowClicked;
+
+            var gitHubLink = _popupRoot.Q<Label>("github-link");
+            gitHubLink.RegisterCallback<PointerDownEvent>(_ => OpenLink("https://github.com/iamSnigur"));
+            
+            var supportLink = _popupRoot.Q<Label>("support-link");
+            supportLink.RegisterCallback<PointerDownEvent>(_ => OpenLink("https://buymeacoffee.com/iamsnigur"));
+            
+            var feedbackLink = _popupRoot.Q<Label>("feedback-link");
+            feedbackLink.RegisterCallback<PointerDownEvent>(_ => OpenLink("https://forms.gle/Ujksc3g8e6U7pJHx6"));
         }
 
+        private void OpenLink(string url)
+        {
+            Application.OpenURL(url);
+        }
+        
         private int _currentSlide;
         
         private void LeftArrowClicked()

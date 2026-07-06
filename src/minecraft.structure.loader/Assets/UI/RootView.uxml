@@ -82,7 +82,13 @@
                             </ui:VisualElement>
                         </ui:VisualElement>
                         
-                        <ui:VisualElement class="popup-footer"/>
+                        <ui:VisualElement class="popup-footer">
+                            <ui:VisualElement class="welcome-hub-footer-content">
+                                <ui:Label name="github-link" class="footer-link" text="GitHub"/>
+                                <ui:Label name="support-link" class="footer-link" text="Support"/>
+                                <ui:Label name="feedback-link" class="footer-link" text="Report an issue"/>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
                     </ui:VisualElement>
                     
                     <ui:VisualElement name="onboarding-root" class="popup-onboarding-panel">

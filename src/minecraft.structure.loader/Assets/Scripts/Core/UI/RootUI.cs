@@ -107,10 +107,10 @@ namespace Core.UI
             if (lbl != null) lbl.text = fileName.ToUpper();
         }
 
-        public void SetVersion(string version)
+        private void SetVersion(string version)
         {
             Label lbl = _root.Q<Label>("version-label");
-            if (lbl != null) lbl.text = version;
+            lbl.text = version;
         }
     }
 }
