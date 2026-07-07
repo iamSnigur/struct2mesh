@@ -7,7 +7,7 @@ namespace Editor
 {
     public static class RuntimeNbtFileParserTool
     {
-        private static NbtStructureParser _nbtParser;
+        private static StructureBuilder _builder;
         
         [MenuItem("Assets/Load NBT Structure", true)]
         private static bool ValidateProcessFile()
@@ -26,10 +26,11 @@ namespace Editor
         [MenuItem("Assets/Load NBT Structure")]
         private static void ProcessFile()
         {
-            _nbtParser ??= Object.FindFirstObjectByType<NbtStructureParser>();
+            _builder ??= Object.FindFirstObjectByType<StructureBuilder>();
             string path = AssetDatabase.GetAssetPath(Selection.activeObject);
             Debug.Log($"Processing {path}");
-            _nbtParser.LoadNbtStructure(path);
+            var fileContent = File.ReadAllBytes(path);
+            _builder.BuildFor(fileContent, "nbt").Forget();
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityGLTF;
 
 namespace Core.Exporter
 {
-    public class GlbExporter : IExportStrategy
+    public class GlbExporter : IExporter
     {
         public string Extension => "glb";
 

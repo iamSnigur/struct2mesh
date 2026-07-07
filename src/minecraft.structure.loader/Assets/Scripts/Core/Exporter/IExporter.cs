@@ -2,7 +2,7 @@
 
 namespace Core.Exporter
 {
-    public interface IExportStrategy
+    public interface IExporter
     {
         string Extension { get; }
         byte[] GetMeshBytes(GameObject root, string structureName);

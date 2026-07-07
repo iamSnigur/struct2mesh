@@ -147,22 +147,22 @@ namespace CraftSharp
             {
                 var cullFlags = 0;
 
-                if (check(self, NbtStructureParser.StructureVolume[x, y + 1, z], Direction.Up)) // Up
+                if (check(self, StructureBuilder.StructureVolume[x, y + 1, z], Direction.Up)) // Up
                     cullFlags |= 1 << 0;
 
-                if (check(self, NbtStructureParser.StructureVolume[x, y - 1, z], Direction.Down)) // Down
+                if (check(self, StructureBuilder.StructureVolume[x, y - 1, z], Direction.Down)) // Down
                     cullFlags |= 1 << 1;
                     
-                if (check(self, NbtStructureParser.StructureVolume[x + 1, y, z], Direction.South)) // South
+                if (check(self, StructureBuilder.StructureVolume[x + 1, y, z], Direction.South)) // South
                     cullFlags |= 1 << 2;
 
-                if (check(self, NbtStructureParser.StructureVolume[x - 1, y, z], Direction.North)) // North
+                if (check(self, StructureBuilder.StructureVolume[x - 1, y, z], Direction.North)) // North
                     cullFlags |= 1 << 3;
                     
-                if (check(self, NbtStructureParser.StructureVolume[x, y, z + 1], Direction.East)) // East
+                if (check(self, StructureBuilder.StructureVolume[x, y, z + 1], Direction.East)) // East
                     cullFlags |= 1 << 4;
 
-                if (check(self, NbtStructureParser.StructureVolume[x, y, z - 1], Direction.West)) // West
+                if (check(self, StructureBuilder.StructureVolume[x, y, z - 1], Direction.West)) // West
                     cullFlags |= 1 << 5;
                     
                 return cullFlags;
@@ -180,7 +180,7 @@ namespace CraftSharp
             {
                 for (var ox = offsetX; ox <= offsetX + 1; ox++)
                     for (var oz = offsetZ; oz <= offsetZ + 1; oz++)
-                        if (IsSameLiquid(self, NbtStructureParser.StructureVolume[pos + new Vector3(ox, 1f, oz)]))
+                        if (IsSameLiquid(self, StructureBuilder.StructureVolume[pos + new Vector3(ox, 1f, oz)]))
                             return 1f;
 
                 float sumHeight = 0F;
@@ -189,7 +189,7 @@ namespace CraftSharp
                 for (var ox = offsetX; ox <= offsetX + 1; ox++)
                     for (var oz = offsetZ; oz <= offsetZ + 1; oz++)
                     {
-                        BlockState? neighbor = NbtStructureParser.StructureVolume[pos + new Vector3(ox, 0f, oz)];
+                        BlockState? neighbor = StructureBuilder.StructureVolume[pos + new Vector3(ox, 0f, oz)];
 
                         if (IsSameLiquid(self, neighbor))
                         {

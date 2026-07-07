@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Core.Exporter
 {
-    public class ObjExporter : IExportStrategy
+    public class ObjExporter : IExporter
     {
         public string Extension => "obj";
 

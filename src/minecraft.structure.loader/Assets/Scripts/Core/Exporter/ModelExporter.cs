@@ -14,19 +14,19 @@ namespace Core.Exporter
             byte[] data,
             int length);
         
-        public static void ExportToZip(string structureName, GameObject root, IExportStrategy exportStrategy)
+        public static void ExportToZip(string structureName, GameObject root, IExporter exporter)
         {
             using MemoryStream zipMemory = new();
 
             using (ZipArchive archive = new(zipMemory, ZipArchiveMode.Create, true))
             {
                 ZipArchiveEntry modelEntry = archive.CreateEntry(
-                    $"{structureName}.{exportStrategy.Extension}",
+                    $"{structureName}.{exporter.Extension}",
                     System.IO.Compression.CompressionLevel.Optimal);
 
                 using (Stream entryStream = modelEntry.Open())
                 {
-                    byte[] modelBytes = exportStrategy.GetMeshBytes(root, structureName);
+                    byte[] modelBytes = exporter.GetMeshBytes(root, structureName);
 
                     entryStream.Write(
                         modelBytes,
@@ -51,6 +51,7 @@ namespace Core.Exporter
 
                 using (Stream stream = readmeEntry.Open())
                 {
+                    // move to separate file
                     const string content = "## Mesh Rendering\n\nThe exported mesh is split into three submeshes:\n\n- **Opaque**\n- **Translucent**\n- **Cutout**\n\n### Transparency Notes\n\nStructures containing many transparent blocks (such as water, ice, or glass) may exhibit incorrect rendering order when transparent surfaces overlap or intersect. This is a common limitation of transparency rendering.\n\nIf you have control over the material or shader, enabling **ZWrite** on the transparent material can fix rendering in many cases.\n\n> **Note:** Enabling `ZWrite` is not a universal solution and may introduce other transparency artifacts depending on the shader and rendering pipeline.";
                     stream.Write(Encoding.UTF8.GetBytes(content));
                 }
@@ -65,7 +66,7 @@ namespace Core.Exporter
                 zipBytes.Length);
 #elif UNITY_EDITOR && UNITY_EDITOR_WIN
             File.WriteAllBytes(
-                Path.Combine(Application.dataPath, $"../{exportStrategy.Extension}_{structureName}.zip"), 
+                Path.Combine(Application.dataPath, $"../{exporter.Extension}_{structureName}.zip"), 
                 zipBytes);
 #endif
         }

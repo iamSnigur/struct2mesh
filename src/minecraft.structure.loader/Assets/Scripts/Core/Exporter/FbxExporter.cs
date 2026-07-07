@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -7,13 +6,13 @@ using UnityEngine;
 
 namespace Core.Exporter
 {
-    public class FbxExporter : IExportStrategy
+    public class FbxExporter : IExporter
     {
         public string Extension => "fbx";
 
         public byte[] GetMeshBytes(GameObject root, string structureName)
         {
-            using MemoryStream stream = new MemoryStream();
+            using MemoryStream stream = new();
             SaveFBXToStream(root, stream, structureName);
 
             return stream.ToArray();

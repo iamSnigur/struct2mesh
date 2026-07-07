@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Core.Exporter
 {
-    public class PlyExporter : IExportStrategy
+    public class PlyExporter : IExporter
     {
         public string Extension => "ply";
 

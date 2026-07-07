@@ -18,23 +18,25 @@ namespace Core.UI
 
         private CameraController _cameraController;
         private FileReceiver _fileReceiver;
-        private NbtStructureParser _nbtStructureParser;
+        private StructureBuilder _structureBuilder;
         
+        private ExporterRegistry _exporterRegistry;
         private UIDocument _doc;
         private VisualElement _root;
 
         public void InjectDependencies(
             CameraController cameraController,
             FileReceiver fileReceiver,
-            NbtStructureParser nbtStructureParser)
+            StructureBuilder structureBuilder)
         {
             _cameraController = cameraController;
             _fileReceiver = fileReceiver;
-            _nbtStructureParser = nbtStructureParser;
+            _structureBuilder = structureBuilder;
         }
         
         private void Awake()
         {
+            _exporterRegistry = new ExporterRegistry();
             _doc = GetComponent<UIDocument>();
             _root = _doc.rootVisualElement;
             
@@ -50,7 +52,6 @@ namespace Core.UI
             while (!SplashScreen.isFinished)
                 yield return null;
 
-            yield return new WaitForSeconds(4f);
             FindFirstObjectByType<DisclaimerPopup>().Show();
 #if UNITY_WEBGL && !UNITY_EDITOR
             OpenUploadPanel();
@@ -66,18 +67,17 @@ namespace Core.UI
 
         private void BindExportButtons()
         {
-            // put objects into factory or what
             Button exportFbx = _root.Q<Button>("btn-export-fbx");
-            exportFbx.clicked += () => OnExportClicked(new FbxExporter());
+            exportFbx.clicked += () => OnExportClicked("fbx");
             
             Button exportGlb = _root.Q<Button>("btn-export-glb");
-            exportGlb.clicked += () => OnExportClicked(new GlbExporter());
+            exportGlb.clicked += () => OnExportClicked("glb");
             
             Button exportObj = _root.Q<Button>("btn-export-obj");
-            exportObj.clicked += () => OnExportClicked(new ObjExporter());
+            exportObj.clicked += () => OnExportClicked("obj");
             
             Button exportPly = _root.Q<Button>("btn-export-ply");
-            exportPly.clicked += () => OnExportClicked(new PlyExporter());
+            exportPly.clicked += () => OnExportClicked("ply");
         }
 
         private void BindButtons()
@@ -89,10 +89,11 @@ namespace Core.UI
             btnCamera.clicked += OnCameraResetClicked;
         }
 
-        private void OnExportClicked(IExportStrategy exportStrategy)
+        private void OnExportClicked(string format)
         {
+            IExporter exporter = _exporterRegistry.GetFor(format);
             Label lbl = _root.Q<Label>("file-label");
-            ModelExporter.ExportToZip(lbl.text.ToLower(), _nbtStructureParser.Root, exportStrategy);
+            ModelExporter.ExportToZip(lbl.text.ToLower(), _structureBuilder.Root, exporter);
         }
 
         private void OnLoadNewClicked() => 

@@ -4,7 +4,7 @@ using UnityGLTF;
 
 namespace Core.Exporter
 {
-    public class GltfExporter : IExportStrategy
+    public class GltfExporter : IExporter
     {
         public string Extension => "gltf";
 

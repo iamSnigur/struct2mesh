@@ -22,14 +22,14 @@ namespace Core
         private static void BindDependencies()
         {
             CameraController cameraController =         GetOnScene<CameraController>();
-            NbtStructureParser nbtStructureParser =     GetOnScene<NbtStructureParser>();
+            StructureBuilder structureBuilder =     GetOnScene<StructureBuilder>();
             FileReceiver fileReceiver =                 GetOnScene<FileReceiver>();
             LoadingCurtain loadingCurtain =             GetOnScene<LoadingCurtain>();
             RootUI rootUI =                             GetOnScene<RootUI>();
             
-            nbtStructureParser.InjectDependencies(loadingCurtain, cameraController);
-            fileReceiver.InjectDependencies(nbtStructureParser);
-            rootUI.InjectDependencies(cameraController, fileReceiver, nbtStructureParser);
+            structureBuilder.InjectDependencies(loadingCurtain, cameraController);
+            fileReceiver.InjectDependencies(structureBuilder);
+            rootUI.InjectDependencies(cameraController, fileReceiver, structureBuilder);
         }
 
         private static T GetOnScene<T>() where T : MonoBehaviour => 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.AssetManagement.External;
+using Core.Parser.Model;
 using Core.Utils;
 using CraftSharp;
 using CraftSharp.Resource;
@@ -133,13 +134,13 @@ namespace Core.AssetManagement
             await UniTask.WhenAll(texturesTask, modelsTask, blockstatesTask);
         }
 
-        public static async UniTask UpdateBlockStatePalette(List<NbtStructureParser.PaletteEntry> structurePalette)
+        public static async UniTask UpdateBlockStatePalette(List<PaletteEntry> structurePalette)
         {
             await UniTask.Yield();
             
             float yieldTime = 0;
             
-            foreach (NbtStructureParser.PaletteEntry paletteEntry in structurePalette)
+            foreach (PaletteEntry paletteEntry in structurePalette)
             {
                 BlockStatePaletteAdapter.Instance
                     .RegisterBlockState(paletteEntry.Name, paletteEntry.Properties);
