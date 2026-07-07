@@ -36,7 +36,7 @@ namespace Core
             _parserRegistry = new ParserRegistry();
         }
     
-        public async UniTaskVoid BuildFor(byte[] fileContent, string fileType)
+        public async UniTaskVoid BuildFrom(byte[] fileContent, string fileType)
         {
             _cameraController.InputDisabled = true;
             Root.SetActive(false);
@@ -56,7 +56,10 @@ namespace Core
             }
             catch (Exception e)
             {
+                Debug.Log(e);
                 _loadingCurtain.UpdateProgressLabel("Can't parse your structure file");
+                await UniTask.Delay(500);
+                _loadingCurtain.Hide();
                 return;
             }
             

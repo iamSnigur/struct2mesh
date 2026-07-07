@@ -61,7 +61,7 @@ namespace Core.Exporter
             
 #if UNITY_WEBGL && !UNITY_EDITOR
             DownloadFile(
-                $"{exportStrategy.Extension}_{structureName}.zip",
+                $"{exporter.Extension}_{structureName}.zip",
                 zipBytes,
                 zipBytes.Length);
 #elif UNITY_EDITOR && UNITY_EDITOR_WIN
