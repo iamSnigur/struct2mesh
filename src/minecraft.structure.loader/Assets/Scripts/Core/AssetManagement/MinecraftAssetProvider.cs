@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.AssetManagement.External;
+using Core.Async;
 using Core.Parser.Model;
 using Core.Utils;
 using CraftSharp;
@@ -25,7 +26,7 @@ namespace Core.AssetManagement
 
         public static bool Loaded { get; private set; }
 
-        public static async UniTaskVoid Init()
+        public static async UniTask Init()
         {
             if (Loaded)
                 return;
@@ -36,7 +37,6 @@ namespace Core.AssetManagement
 
             _colorRules = await AssetProvider.LoadByAddressAsync<TextAsset>(COLOR_RULES_ADDRESS);
             
-            await GatherResources(_resourcePackManager);
             await PreloadResources();
         }
 
@@ -47,6 +47,7 @@ namespace Core.AssetManagement
         {
             try
             {
+                await GatherResources(_resourcePackManager);
                 await _resourcePackManager.LoadPacks_Mod(UpdateStatus);
                 Loaded = true;
             }
@@ -108,11 +109,15 @@ namespace Core.AssetManagement
             var manifestIndexes = JsonConvert.DeserializeObject<Dictionary<string, string>>(manifest.text);
 
             table.Clear();
+
+            LongTaskYielder yielder = new();
             
             foreach (var index in manifestIndexes)
             {
                 ResourceLocation identifier = new(index.Key);
                 table[identifier] = index.Value;
+                
+                await yielder.TryYieldAsync();
             }
         }
         
@@ -136,22 +141,15 @@ namespace Core.AssetManagement
 
         public static async UniTask UpdateBlockStatePalette(List<PaletteEntry> structurePalette)
         {
-            await UniTask.Yield();
-            
-            float yieldTime = 0;
+            LongTaskYielder yielder = new();
             
             foreach (PaletteEntry paletteEntry in structurePalette)
             {
-                BlockStatePaletteAdapter.Instance
+                BlockStatePaletteAdapter
+                    .Instance
                     .RegisterBlockState(paletteEntry.Name, paletteEntry.Properties);
-                
-                if (yieldTime > 0.5f)
-                {
-                    await UniTask.Yield();
-                    yieldTime = 0;
-                }
 
-                yieldTime += Time.deltaTime;
+                await yielder.TryYieldAsync();
             }
 
             BlockStatePaletteAdapter.Instance.InjectEntries();

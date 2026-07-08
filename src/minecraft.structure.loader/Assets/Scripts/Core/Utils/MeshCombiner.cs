@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Core.Async;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -149,7 +150,7 @@ namespace Core.Utils
 			// If it will be over 65535 then use the 32 bit index buffer:
 			long verticesLength = 0;
 
-			float yieldTime = 0;
+			LongTaskYielder yielder = new(2.5f);
 			
 			for(int i = 0; i < meshFilters.Length-1; i++) // Skip first MeshFilter belongs to this GameObject in this loop.
 			{
@@ -157,14 +158,8 @@ namespace Core.Utils
 				combineInstances[i].mesh = meshFilters[i+1].sharedMesh;
 				combineInstances[i].transform = meshFilters[i+1].transform.localToWorldMatrix;
 				verticesLength += combineInstances[i].mesh.vertices.Length;
-				
-				if (yieldTime > 1f)
-				{
-					await UniTask.Yield();
-					yieldTime = 0;
-				}
 
-				yieldTime += Time.deltaTime;
+				await yielder.TryYieldAsync();
 			}
 
 			// Set Material from child:
@@ -259,8 +254,9 @@ namespace Core.Utils
 
 			// If it will be over 65535 then use the 32 bit index buffer:
 			long verticesLength = 0;
-			float yieldTime = 0;
 
+			LongTaskYielder yielder = new(2.5f);
+			
 			for(int i = 0; i < uniqueMaterialsList.Count; i++) // Create each Mesh (submesh) from Meshes with the same Material.
 			{
 				List<CombineInstance> submeshCombineInstancesList = new List<CombineInstance>();
@@ -287,14 +283,8 @@ namespace Core.Utils
 							}
 						}
 					}
-					
-					if (yieldTime > 1f)
-					{
-						await UniTask.Yield();
-						yieldTime = 0;
-					}
 
-					yieldTime += Time.deltaTime;
+					await yielder.TryYieldAsync();
 				}
 
 				// Create new Mesh (submesh) from Meshes with the same Material:
@@ -381,7 +371,7 @@ namespace Core.Utils
 
 		private async UniTask DeactivateCombinedGameObjects(MeshFilter[] meshFilters)
 		{
-			float yieldTime = 0f;
+			LongTaskYielder yielder = new(2.5f);
 			
 			for(int i = 0; i < meshFilters.Length-1; i++) // Skip first MeshFilter belongs to this GameObject in this loop.
 			{
@@ -404,14 +394,8 @@ namespace Core.Utils
 				{
 					DestroyImmediate(meshFilters[i+1].gameObject);
 				}
-				
-				if (yieldTime > 1f)
-				{
-					await UniTask.Yield();
-					yieldTime = 0;
-				}
 
-				yieldTime += Time.deltaTime;
+				await yielder.TryYieldAsync();
 			}
 		}
 

@@ -25,7 +25,7 @@ namespace Core
             OnFileReceived?.Invoke(payload.FileName);
             byte[] rawContent = Convert.FromBase64String(payload.FileContent);
             _structureBuilder
-                .BuildFrom(rawContent, "nbt")
+                .BuildFromBytesAsync(rawContent, "nbt")
                 .Forget();
         }
 

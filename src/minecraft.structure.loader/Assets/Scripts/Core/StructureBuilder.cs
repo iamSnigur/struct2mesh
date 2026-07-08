@@ -4,6 +4,7 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using CraftSharp;
 using Core.AssetManagement;
+using Core.Async;
 using Core.Parser;
 using Core.Parser.Model;
 using Core.UI;
@@ -36,11 +37,11 @@ namespace Core
             _parserRegistry = new ParserRegistry();
         }
     
-        public async UniTaskVoid BuildFrom(byte[] fileContent, string fileType)
+        public async UniTaskVoid BuildFromBytesAsync(byte[] rawBytes, string fileType)
         {
             _cameraController.InputDisabled = true;
             Root.SetActive(false);
-            _loadingCurtain.UpdateProgressLabel("Looking at your structure...");
+            _loadingCurtain.SetProgressText("Looking at your structure...");
             _loadingCurtain.Show();
             
             UniTask delay1 = UniTask.Delay(750);
@@ -49,7 +50,7 @@ namespace Core
             try
             {
                 IParser parser = _parserRegistry.GetFor(fileType);
-                UniTask<ParsedStructure> parseTask = parser.Parse(fileContent).Preserve();
+                UniTask<ParsedStructure> parseTask = parser.Parse(rawBytes).Preserve();
 
                 await UniTask.WhenAll(delay1, parseTask);
                 structure = await parseTask;
@@ -57,16 +58,16 @@ namespace Core
             catch (Exception e)
             {
                 Debug.Log(e);
-                _loadingCurtain.UpdateProgressLabel("Can't parse your structure file");
+                _loadingCurtain.SetProgressText("Can't parse your structure file");
                 await UniTask.Delay(500);
                 _loadingCurtain.Hide();
                 return;
             }
             
-            _loadingCurtain.UpdateProgressLabel("Collecting resources...");
+            _loadingCurtain.SetProgressText("Collecting resources...");
             
             UniTask delay2 = UniTask.Delay(750);
-            UniTask updateVolumeTask = UpdateStructureVolume(structure);
+            UniTask updateVolumeTask = UpdateStructureVolumeAsync(structure);
 
             await UniTask.WhenAll(delay2, updateVolumeTask);
             
@@ -74,16 +75,16 @@ namespace Core
             await MinecraftAssetProvider.UpdateBlockStatePalette(structure.Palette);
             MinecraftAssetProvider.UpdateColorRules();
             
-            _loadingCurtain.UpdateProgressLabel("Building...");
+            _loadingCurtain.SetProgressText("Building...");
             UniTask delay3 = UniTask.Delay(1500);
             UniTask constructTask = Construct(structure);
 
             await UniTask.WhenAll(
                 delay3.ContinueWith(() => 
-                    _loadingCurtain.UpdateProgressLabel("Building a massive structure...")),
+                    _loadingCurtain.SetProgressText("Building a massive structure...")),
                 constructTask);
             
-            _loadingCurtain.UpdateProgressLabel("Done");
+            _loadingCurtain.SetProgressText("Done");
 
             await UniTask.Delay(500);
             
@@ -97,28 +98,22 @@ namespace Core
                 .Forget();
         }
 
-        private async UniTask UpdateStructureVolume(ParsedStructure structure)
+        private async UniTask UpdateStructureVolumeAsync(ParsedStructure structure)
         {
             await UniTask.Yield();
             
             StructureVolume.Reset();
 
-            float yieldTime = 0f;
+            LongTaskYielder yielder = new(2.5f);
             
             foreach (BlockEntry block in structure.Blocks)
             {
                 StructureVolume[block.Pos] = CreateBlockState(structure.Palette[block.State]);
-                
-                if (yieldTime > 1f)
-                {
-                    await UniTask.Yield();
-                    yieldTime = 0;
-                }
 
-                yieldTime += Time.deltaTime;
+                await yielder.TryYieldAsync();
             }
         }
-
+        
         private static BlockState CreateBlockState(PaletteEntry entry)
         {
             if (entry.Name.Equals("air"))
@@ -177,19 +172,13 @@ namespace Core
         
             List<UniTask> warmupTasks = new(structure.Palette.Count);
 
-            float yieldTime = 0;
-
+            LongTaskYielder yielder = new(2.5f);
+            
             foreach (PaletteEntry entry in structure.Palette)
             {
                 warmupTasks.Add(MinecraftAssetProvider.WarmupBlockGeometriesAsync(entry.Name));
-                
-                if (yieldTime > 1f)
-                {
-                    await UniTask.Yield();
-                    yieldTime = 0;
-                }
 
-                yieldTime += Time.deltaTime;
+                await yielder.TryYieldAsync();
             }
             
             await UniTask.WhenAll(warmupTasks);
@@ -208,13 +197,7 @@ namespace Core
                 cachedTransform.parent = Root.transform;
                 cachedTransform.position = block.Pos;
 
-                if (yieldTime > 1f)
-                {
-                    await UniTask.Yield();
-                    yieldTime = 0;
-                }
-
-                yieldTime += Time.deltaTime;
+                await yielder.TryYieldAsync();
             }
 
             MeshCombiner meshCombiner = Root.AddComponent<MeshCombiner>();

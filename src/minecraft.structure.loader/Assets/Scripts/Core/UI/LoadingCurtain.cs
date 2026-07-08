@@ -21,7 +21,7 @@ namespace Core.UI
             _progressLabel = _doc.rootVisualElement.Q<Label>("loader-label");
         }
 
-        public void UpdateProgressLabel(string text) => 
+        public void SetProgressText(string text) => 
             _progressLabel.text = text;
 
         public void Show()

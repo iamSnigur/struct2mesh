@@ -30,7 +30,7 @@ namespace Editor
             string path = AssetDatabase.GetAssetPath(Selection.activeObject);
             Debug.Log($"Processing {path}");
             var fileContent = File.ReadAllBytes(path);
-            _builder.BuildFrom(fileContent, "nbt").Forget();
+            _builder.BuildFromBytesAsync(fileContent, "nbt").Forget();
         }
     }
 }

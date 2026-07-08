@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Rendering;
 using System.Collections;
+using Core.AssetManagement;
 
 namespace Core.UI
 {
@@ -49,12 +50,11 @@ namespace Core.UI
 
         private IEnumerator Start()
         {
-            while (!SplashScreen.isFinished)
+            while (!SplashScreen.isFinished || !MinecraftAssetProvider.Loaded)
                 yield return null;
 
-            yield return null;
-            
             FindFirstObjectByType<DisclaimerPopup>().Show();
+            
 #if UNITY_WEBGL && !UNITY_EDITOR
             OpenUploadPanel();
 #endif

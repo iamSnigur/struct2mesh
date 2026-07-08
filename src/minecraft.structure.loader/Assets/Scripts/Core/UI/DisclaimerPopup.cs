@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Core.UI
+﻿namespace Core.UI
 {
     using UnityEngine;
     using UnityEngine.UIElements;
@@ -23,7 +21,7 @@ namespace Core.UI
                 if (_popupRoot.ClassListContains("disclaimer-hidden"))
                     _popupRoot.style.display = DisplayStyle.None;
             });
-            
+
             Button okBtn = _popupRoot.Q<Button>("btn-ok");
             okBtn.clicked += Hide;
         }

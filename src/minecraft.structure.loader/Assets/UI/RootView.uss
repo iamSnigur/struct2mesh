@@ -207,7 +207,7 @@
 .btn-camera-reset:hover {
     transition-duration: 0.8s;
     scale: 0.9;
-    transition-timing-function: ease-out-elastic;
+    transition-timing-function: ease-out;
 }
 
 .btn-camera-reset:active {
@@ -281,7 +281,12 @@
     -unity-background-image-tint-color: rgba(60, 60, 60, 1);
     -unity-background-scale-mode: stretch-to-fill;
     -unity-slice-scale: 5px;
-    border-color: transparent;    
+    border-color: transparent;
+
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-cubic;
+    translate: 0 -110%;
+    margin-top: 0;
 }
 
 .disclaimer-shown {
@@ -293,11 +298,12 @@
 }
 
 .disclaimer-hidden {
+    /*transition-property: translate, margin-top;
     transition-duration: 0.5s;
     transition-timing-function: ease-in-cubic;
     
     translate: 0 -110%;
-    margin-top: 0;
+    margin-top: 0;*/
 }
 
 .disclaimer-label {
