@@ -69,6 +69,14 @@
     letter-spacing: 1px;
 }
 
+.export-error {
+    display: none;
+    color: rgb(250, 60, 0);
+    font-size: 20px;
+    -unity-font-definition: var(--font-troika);
+    letter-spacing: 1px;
+}
+
 .btn-export-root {
     width: 100%;
     height: 52px;
@@ -123,6 +131,10 @@
     padding-right: 48px;
 }
 
+.btn-export:active {
+    font-size: 23px;
+}
+
 .btn-export-root:hover .btn-outline {
     -unity-background-image-tint-color: rgb(255, 255, 255);
 }
@@ -145,6 +157,10 @@
     border-color: transparent;
 
     -unity-text-align: middle-center;
+}
+
+.btn-load-new:active {
+    font-size: 27px;
 }
 
 .btn-load-new-root:hover .btn-outline {
@@ -205,15 +221,15 @@
 }
 
 .btn-camera-reset:hover {
-    transition-duration: 0.8s;
+    transition-duration: 0.1s;
     scale: 0.9;
     transition-timing-function: ease-out;
 }
 
 .btn-camera-reset:active {
-    transition-duration: 0.5s;
+    transition-duration: 0.1s;
     scale: 1.0 0.8;
-    transition-timing-function: ease-out-elastic;
+    transition-timing-function: ease-out;
 }
 
 .camera-icon {
@@ -272,13 +288,13 @@
     width: 450px;
     height: 180px;
     
-    padding: 8px 10px;
+    padding: 8px;
     top: 0;
     position: absolute;
     align-self: center;
 
     background-image: var(--img-btn-flat);
-    -unity-background-image-tint-color: rgba(60, 60, 60, 1);
+    -unity-background-image-tint-color: rgb(253, 201, 34);
     -unity-background-scale-mode: stretch-to-fill;
     -unity-slice-scale: 5px;
     border-color: transparent;
@@ -287,6 +303,17 @@
     transition-timing-function: ease-in-cubic;
     translate: 0 -110%;
     margin-top: 0;
+}
+
+.disclaimer-border {
+    width: 100%;
+    height: 100%;
+    background-image: url("Icons/fancy_border1.png");
+    -unity-background-image-tint-color: rgba(60, 60, 60, 1);
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 3px;
+    border-color: transparent;
+    padding: 10px;
 }
 
 .disclaimer-shown {
@@ -309,10 +336,11 @@
 .disclaimer-label {
     flex-grow: 1;
     
-    color: rgba(255, 255, 255, 1);
+    color: rgba(60, 60, 60, 1);
     font-size: 13px;
     letter-spacing: 3px;
     -unity-font-definition: var(--font-segoe-ui);
+    -unity-font-style: bold;
     -unity-text-align: upper-left;
     
     white-space: normal;
@@ -325,34 +353,39 @@
     align-self: center;
     width: 25%;
     height: 40px;
-    color: rgba(60, 60, 60, 1);
+    color: rgb(253, 201, 34);
     font-size: 22px;
     -unity-font-definition: var(--font-troika);
     letter-spacing: 2px;
-    background-color: transparent;
 
-    background-image: var(--img-btn-flat);
-    -unity-background-image-tint-color: white;
+    /*background-image: var(--img-btn-flat);
+    -unity-background-image-tint-color: rgba(60, 60, 60, 1);
     -unity-background-scale-mode: stretch-to-fill;
     -unity-slice-scale: 5px;
-    border-color: transparent;
+    border-color: transparent;*/
+    
+    border-width: 3px;
+    border-radius: 20px;
+    background-color: rgba(60, 60, 60, 1);
+    border-color: rgba(60, 60, 60, 1);
 
-    transition-property: scale;
+    
     transition-duration: 0.08s;
     transition-timing-function: ease;
     scale: 1 1;
 }
 
 .btn-ok:hover {
-    transition-timing-function: ease-in-out-sine;
+    transition-timing-function: ease;
     transition-duration: 0.08s;
-    scale: 1.15 1.15;
+    color: rgba(60, 60, 60, 1);
+    background-color: rgb(253, 201, 34);
 }
 
 .btn-ok:active {
-    transition-timing-function: ease-in-out-sine;
+    transition-timing-function: ease;
     transition-duration: 0.03s;
-    scale: 1.05 1.05;
+    scale: 0.95 0.95;
 }
 
 .creeper-face {

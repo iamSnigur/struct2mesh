@@ -35,6 +35,8 @@
                     <ui:Button name="btn-export-ply" text="PLY" class="btn-export"/>
                     <ui:VisualElement class="chevron-icon"/>
                 </ui:VisualElement>
+                
+                <ui:Label name="export-error" text="Failed to export" class="export-error"/>
             </ui:VisualElement>
             
             <ui:VisualElement name="bottom-bar" class="bottom-bar">
@@ -51,8 +53,10 @@
         </ui:VisualElement>
         
         <ui:VisualElement name="disclaimer-root" class="disclaimer-root disclaimer-hidden">
-            <ui:Label name="disclaimer-label" class="disclaimer-label" text="This tool is an independent project and is not affiliated with, endorsed by, sponsored by, or approved by Mojang Studios or Microsoft. Minecraft and all related trademarks, names, and assets are the property of their respective owners." />
-            <ui:Button name="btn-ok" text="OK" class="btn-ok"/>
+            <ui:VisualElement class="disclaimer-border">
+                <ui:Label name="disclaimer-label" class="disclaimer-label" text="This tool is an independent project and is not affiliated with, endorsed by, sponsored by, or approved by Mojang Studios or Microsoft. Minecraft and all related trademarks, names, and assets are the property of their respective owners." />
+                <ui:Button name="btn-ok" text="OK" class="btn-ok"/>
+            </ui:VisualElement>
         </ui:VisualElement>
         
         <ui:VisualElement class="popup-overlay" name="popup-overlay">

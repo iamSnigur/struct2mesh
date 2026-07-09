@@ -24,6 +24,7 @@ namespace Core.UI
         private ExporterRegistry _exporterRegistry;
         private UIDocument _doc;
         private VisualElement _root;
+        private VisualElement _exportErrorLbl;
 
         public void InjectDependencies(
             CameraController cameraController,
@@ -40,6 +41,7 @@ namespace Core.UI
             _exporterRegistry = new ExporterRegistry();
             _doc = GetComponent<UIDocument>();
             _root = _doc.rootVisualElement;
+            _exportErrorLbl = _root.Q<Label>("export-error");
             
             BindExportButtons();
             BindButtons();
@@ -63,6 +65,7 @@ namespace Core.UI
         
         private void OnFileReceived(string fileName)
         {
+            _exportErrorLbl.style.display = DisplayStyle.None;
             SetFileName(fileName);
             CloseUploadPanel();
         }
@@ -93,6 +96,14 @@ namespace Core.UI
 
         private void OnExportClicked(string format)
         {
+            if (!_structureBuilder.Root.TryGetComponent(out Renderer _))
+            {
+                _exportErrorLbl.style.display = DisplayStyle.Flex;
+                return;
+            }
+            
+            _exportErrorLbl.style.display = DisplayStyle.None;
+            
             IExporter exporter = _exporterRegistry.GetFor(format);
             Label lbl = _root.Q<Label>("file-label");
             ModelExporter.ExportToZip(lbl.text.ToLower(), _structureBuilder.Root, exporter);
