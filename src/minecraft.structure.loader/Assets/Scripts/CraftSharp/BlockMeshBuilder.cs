@@ -15,12 +15,56 @@ namespace CraftSharp
     public static class BlockMeshBuilder
     {
         private static readonly MaterialManager s_materialManager;
-
+        private static readonly Mesh s_fallbackMesh;
+        private static readonly Material s_fallbackMaterial;
+        
         static BlockMeshBuilder()
         {
             s_materialManager = Object.FindFirstObjectByType<MaterialManager>();
+            
+            s_fallbackMesh = CreateFallbackMesh();
+            s_fallbackMaterial = CreateFallbackMaterial();
         }
-    
+
+        private static Material CreateFallbackMaterial()
+        {
+            Material material = new(Shader.Find("Universal Render Pipeline/Unlit"));
+            material.SetColor("_BaseColor", new Color(255, 0, 255));
+            return material;
+        }
+
+        private static Mesh CreateFallbackMesh()
+        {
+            Mesh mesh = new();
+            mesh.SetVertices(new []
+            {
+                new Vector3(0, 0, 0),
+                new Vector3(0, 0, 1),
+                new Vector3(0, 1, 1),
+                new Vector3(0, 1, 0),
+                new Vector3(1, 0, 0),
+                new Vector3(1, 0, 1),
+                new Vector3(1, 1, 1),
+                new Vector3(1, 1, 0),
+            });
+            mesh.SetTriangles(new []
+            {
+                0, 1, 2,  
+                0, 2, 3,
+                5, 4, 7,
+                5, 7, 6,
+                4, 0, 3,
+                4, 3, 7,
+                1, 5, 6,
+                1, 6, 2,
+                7, 3, 2,
+                7, 2, 6,
+                5, 1, 0,
+                5, 0, 4
+            },0);
+            return mesh;
+        }
+
         private static void ClearBlockVisual(GameObject modelObject)
         {
             // Clear mesh if present
@@ -58,8 +102,12 @@ namespace CraftSharp
             
             var packManager = ResourcePackManager.Instance;
             packManager.StateModelTable.TryGetValue(stateId, out var stateModel);
-            if (stateModel is null) 
+            if (stateModel is null)
+            {
+                meshFilter.sharedMesh = s_fallbackMesh;
+                meshRenderer.sharedMaterial = s_fallbackMaterial;
                 return;
+            }
             
             BlockGeometry? blockGeometry = stateModel.Geometries[0];
 

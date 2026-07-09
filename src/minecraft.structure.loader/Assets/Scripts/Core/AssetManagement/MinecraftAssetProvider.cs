@@ -72,7 +72,11 @@ namespace Core.AssetManagement
         public static async UniTask WarmupBlockGeometriesAsync(string blockStateId)
         {
             ResourceLocation location = new(blockStateId);
-            string blockstateJson = _resourcePackManager.BlockStateFileTable[location];
+
+            if (!_resourcePackManager.BlockStateFileTable.TryGetValue(location, out string blockstateJson))
+            {
+                return;
+            }
 
             RenderType renderType = BlockStateHelper.GetRenderTypeFor(blockStateId);
             OffsetType offsetType = BlockStateHelper.GetOffsetType(blockStateId);

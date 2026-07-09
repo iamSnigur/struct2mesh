@@ -807,6 +807,7 @@ namespace Core.Utils
             "minecraft:weeping_vines_plant",
 
             // Misc Thin / Partial blocks
+            "minecraft:dirt_path",
             "minecraft:snow",                      // 1–7 layer snow
             "minecraft:lily_pad",
             "minecraft:turtle_egg",
