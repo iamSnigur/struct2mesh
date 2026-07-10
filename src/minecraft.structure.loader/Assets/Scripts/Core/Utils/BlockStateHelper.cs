@@ -707,6 +707,20 @@ namespace Core.Utils
             "minecraft:waxed_weathered_copper_trapdoor",
             "minecraft:waxed_oxidized_copper_trapdoor",
 
+            //Shelf
+            "minecraft:oak_shelf",
+            "minecraft:spruce_shelf",
+            "minecraft:birch_shelf",
+            "minecraft:jungle_shelf",
+            "minecraft:acacia_shelf",
+            "minecraft:dark_oak_shelf",
+            "minecraft:mangrove_shelf",
+            "minecraft:cherry_shelf",
+            "minecraft:bamboo_shelf",
+            "minecraft:crimson_shelf",
+            "minecraft:warped_shelf",
+            "minecraft:pale_oak_shelf",
+            
             // Lanterns
             "minecraft:lantern",
             "minecraft:soul_lantern",
