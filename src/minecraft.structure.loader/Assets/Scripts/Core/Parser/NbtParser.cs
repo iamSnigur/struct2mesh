@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Core.Async;
 using Cysharp.Threading.Tasks;
 using fNbt;
 using Core.Parser.Model;
@@ -69,34 +70,43 @@ namespace Core.Parser
         {
             List<BlockEntry> blocks = new();
 
-            float yieldTime = 0f;
+            LongTaskYielder yielder = new(2.5f);
             
             foreach (NbtTag nbtTag in blocksTagList)
             {
-                var blockTag = (NbtCompound)nbtTag;
-
                 BlockEntry blockEntry = new();
-                Vector3 pos = new()
-                {
-                    x = blockTag["pos"][2].IntValue,
-                    y = blockTag["pos"][1].IntValue,
-                    z = blockTag["pos"][0].IntValue
-                };
-                blockEntry.Pos = pos;
+                NbtCompound blockTag = (NbtCompound)nbtTag;
+
+                blockEntry.Pos = GetPosition(blockTag);
                 blockEntry.State = blockTag["state"].IntValue;
             
                 blocks.Add(blockEntry);
-                
-                if (yieldTime > 1f)
-                {
-                    await UniTask.Yield();
-                    yieldTime = 0;
-                }
 
-                yieldTime += Time.deltaTime;
+                await yielder.TryYieldAsync();
             }
 
             return blocks;
+        }
+
+        private static Vector3 GetPosition(NbtCompound blockTag)
+        {
+            if (blockTag["pos"] is NbtIntArray array)
+                return new Vector3
+                {
+                    x = array[2],
+                    y = array[1],
+                    z = array[0],
+                };
+            
+            if (blockTag["pos"] is NbtList list)
+                return new Vector3
+                {
+                    x = list[2].IntValue,
+                    y = list[1].IntValue,
+                    z = list[0].IntValue
+                };
+
+            return Vector3.zero;
         }
 
         private List<PaletteEntry> ParseNbtPalette(NbtList paletteTagList)

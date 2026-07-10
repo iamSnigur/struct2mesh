@@ -57,7 +57,7 @@ namespace Core
             }
             catch (Exception e)
             {
-                Debug.Log(e);
+                Debug.LogError(e);
                 _loadingCurtain.SetProgressText("Can't parse your structure file");
                 await UniTask.Delay(500);
                 _loadingCurtain.Hide();
