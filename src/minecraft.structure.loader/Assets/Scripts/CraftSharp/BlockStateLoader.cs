@@ -138,6 +138,29 @@ namespace CraftSharp
                                     buildersList[stateId].AppendWrapper(partWrapper);
                             }
                         }
+                        else if (whenData.Properties.TryGetValue("AND", out var andData))
+                        {
+                            foreach (var stateItem in buildersList) // For each state
+                            {
+                                int stateId = stateItem.Key;
+                                // Check and apply...
+                                bool apply = true;
+                                // An array of predicates in the value of 'AND'
+                                foreach (var conditionData in andData.DataArray)
+                                {
+                                    if (!BlockStatePredicate
+                                        .FromJson(conditionData)
+                                        .Check(BlockStatePaletteAdapter.Instance.GetByNumId(stateId)))
+                                    {
+                                        apply = false;
+                                        break;
+                                    }
+                                }
+
+                                if (apply) // Apply this part to the current state
+                                    buildersList[stateId].AppendWrapper(partWrapper);
+                            }
+                        }
                         else // 'when' is only a single predicate...
                         {
                             foreach (var stateItem in buildersList) // For each state
