@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.AssetManagement.External;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,12 +8,8 @@ namespace Core.UI
 {
     public class WelcomeHubPopup : MonoBehaviour
     {
-        public OnboardingSlidesConfig SlidesConfig;
-        
         public AnimationCurve ShowAnimationCurve;
         public AnimationCurve HideAnimationCurve;
-
-        public SpriteAnimator SpriteAnimator;
 
         public Color OverlayShownColor;
         public Color OverlayHiddenColor;
@@ -34,8 +31,11 @@ namespace Core.UI
         private float _popupHideHeight;
         private bool _isAnimating;
         
-        private void Awake()
+        private OnboardingSlidesConfig _slidesConfig;
+        
+        private async void Awake()
         {
+            _slidesConfig = await AssetProvider.LoadByAddressAsync<OnboardingSlidesConfig>("onboarding_slides_config");
             UIDocument doc = GetComponent<UIDocument>();
             _popupOverlay = doc.rootVisualElement.Q<VisualElement>("popup-overlay");
             _popupRoot = _popupOverlay.Q<VisualElement>("popup-root");
@@ -107,7 +107,7 @@ namespace Core.UI
         
         private void LeftArrowClicked()
         {
-            int totalSlides = SlidesConfig.Slides.Length;
+            int totalSlides = _slidesConfig.Slides.Length;
             _currentSlide = Mathf.Clamp(_currentSlide - 1, 0, totalSlides);
 
             _leftArrow.SetEnabled(_currentSlide != 0);
@@ -117,7 +117,7 @@ namespace Core.UI
 
         private void RightArrowClicked()
         {
-            int totalSlides = SlidesConfig.Slides.Length;
+            int totalSlides = _slidesConfig.Slides.Length;
             _currentSlide = Mathf.Clamp(_currentSlide + 1, 0, totalSlides);
 
             _leftArrow.SetEnabled(_currentSlide != 0);
@@ -127,15 +127,15 @@ namespace Core.UI
         
         private void SetSlideByIndex(int index)
         {
-            if (index < 0 || index >= SlidesConfig.Slides.Length)
+            if (index < 0 || index >= _slidesConfig.Slides.Length)
                 return;
             
-            OnboardingSlide slide = SlidesConfig.Slides[index];
+            OnboardingSlide slide = _slidesConfig.Slides[index];
             _slideTitle.text = slide.Title;
             _slideDescription.text = slide.Description;
             _slideImage.style.backgroundImage = new StyleBackground(slide.Image);
 
-            _slidesProgressLabel.text = $"{index + 1}/{SlidesConfig.Slides.Length}";
+            _slidesProgressLabel.text = $"{index + 1}/{_slidesConfig.Slides.Length}";
         }
 
         public void Show()
@@ -147,7 +147,6 @@ namespace Core.UI
             LeftArrowClicked();
             
             _popupOverlay.style.display = DisplayStyle.Flex;
-            SpriteAnimator.StartAnimation();
             Animate(
                 ShowAnimationCurve, 
                 _popupHideHeight, 0f,
@@ -167,7 +166,6 @@ namespace Core.UI
                 onComplete: () =>
                 {
                     _popupOverlay.style.display = DisplayStyle.None;
-                    SpriteAnimator.PauseAnimation();
                 }).Forget();
         }
         

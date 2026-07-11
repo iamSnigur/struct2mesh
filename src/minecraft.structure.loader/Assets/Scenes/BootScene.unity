@@ -507,7 +507,6 @@ GameObject:
   - component: {fileID: 512578761}
   - component: {fileID: 512578762}
   - component: {fileID: 512578763}
-  - component: {fileID: 512578764}
   - component: {fileID: 512578765}
   m_Layer: 5
   m_Name: UIRoot
@@ -590,87 +589,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45bed1c97a804ebb8e6e0f8e5534d04a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: StructureLoader::Core.UI.DisclaimerPopup
-  ShowAnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.4823797
-      value: 0.9319932
-      inSlope: 1.0432712
-      outSlope: 1.0432712
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: -0.055921573
-      outSlope: -0.055921573
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.08882379
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  HideAnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: -0.13371606
-      outSlope: -0.13371606
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.49775624
-      value: -0.066558
-      inSlope: 0.99493515
-      outSlope: 0.99493515
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2.1235864
-      outSlope: 2.1235864
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &512578764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 512578758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28bb3a3c5c72420fb0ad94553c5dd531, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: StructureLoader::Core.UI.SpriteAnimator
-  Atlas: {fileID: 100100200, guid: 1954a7686f2c75841a1322426d340beb, type: 3}
-  AnimationConfig: {fileID: 0}
-  ElementName: 
 --- !u!114 &512578765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,7 +601,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4024f74178ef47fcbf312befd2cace4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: StructureLoader::Core.UI.WelcomeHubPopup
-  SlidesConfig: {fileID: 11400000, guid: 5303506692c4d104da354a1a969b323f, type: 2}
   ShowAnimationCurve:
     serializedVersion: 2
     m_Curve:
@@ -750,7 +667,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  SpriteAnimator: {fileID: 512578764}
   OverlayShownColor: {r: 0, g: 0, b: 0, a: 0.68235296}
   OverlayHiddenColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &832575517
@@ -831,7 +747,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344685372120438b876eb15625f443fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: StructureLoader::NbtReader
-  StructureNbtFilePath: Assets/Structures/block_entity_test.nbt
 --- !u!4 &1188278965
 Transform:
   m_ObjectHideFlags: 0
