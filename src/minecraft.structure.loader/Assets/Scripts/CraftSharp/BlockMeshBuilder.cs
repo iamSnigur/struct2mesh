@@ -26,12 +26,8 @@ namespace CraftSharp
             s_fallbackMaterial = CreateFallbackMaterial();
         }
 
-        private static Material CreateFallbackMaterial()
-        {
-            Material material = new(Shader.Find("Universal Render Pipeline/Unlit"));
-            material.SetColor("_BaseColor", new Color(255, 0, 255));
-            return material;
-        }
+        private static Material CreateFallbackMaterial() => 
+            Resources.Load<Material>("FallbackMaterial");
 
         private static Mesh CreateFallbackMesh()
         {
