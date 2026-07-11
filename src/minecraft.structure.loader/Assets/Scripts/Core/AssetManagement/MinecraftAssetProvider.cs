@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using Core.AssetManagement.External;
 using Core.Async;
-using Core.Parser.Model;
-using Core.Utils;
 using CraftSharp;
 using CraftSharp.Resource;
 using Cysharp.Threading.Tasks;
+using Logic.Parser.Model;
+using Logic.Utils;
 using Newtonsoft.Json;
 using UnityEngine;
 

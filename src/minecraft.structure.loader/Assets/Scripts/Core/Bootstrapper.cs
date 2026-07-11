@@ -1,19 +1,20 @@
 ﻿using System;
 using Core.AssetManagement;
 using Core.AssetManagement.External;
-using Core.UI;
 using Cysharp.Threading.Tasks;
+using Logic;
+using UI;
 using UnityEngine;
 
 namespace Core
 {
     public class Bootstrapper : MonoBehaviour
     {
-        private static CameraController _cameraController;
-        private static StructureBuilder _structureBuilder;
-        private static FileReceiver _fileReceiver;
-        private static LoadingCurtain _loadingCurtain;
-        private static RootUI _rootUI;
+        private CameraController _cameraController;
+        private StructureBuilder _structureBuilder;
+        private FileReceiver _fileReceiver;
+        private LoadingCurtain _loadingCurtain;
+        private RootUI _rootUI;
 
         private async void Awake()
         {
@@ -41,14 +42,14 @@ namespace Core
         private void OnDestroy() => 
             AssetProvider.Release();
 
-        private static void InjectDependencies()
+        private void InjectDependencies()
         {
             _structureBuilder.InjectDependencies(_loadingCurtain, _cameraController);
             _fileReceiver.InjectDependencies(_structureBuilder);
             _rootUI.InjectDependencies(_cameraController, _fileReceiver, _structureBuilder);
         }
 
-        private static void GetSceneReferences()
+        private void GetSceneReferences()
         {
             _cameraController = GetOnScene<CameraController>();
             _structureBuilder = GetOnScene<StructureBuilder>();

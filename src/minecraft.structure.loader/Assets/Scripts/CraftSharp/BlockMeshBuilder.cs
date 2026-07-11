@@ -2,8 +2,9 @@
 using System;
 using System.Linq;
 using Core;
-using Core.Utils;
 using CraftSharp.Resource;
+using Logic;
+using Logic.Utils;
 using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
