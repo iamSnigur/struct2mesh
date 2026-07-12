@@ -1,147 +1,25 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/RootView.uss?fileID=7433441132597879392&amp;guid=9eb4ff6fa0e9e8a4fa56834dfac8fd37&amp;type=3#RootView"/>
+<ui:UXML 
+    xmlns:ui="UnityEngine.UIElements" 
+    noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd"
+    editor-extension-mode="False">
+    
+    <Style src="RootView.uss"/>
+    <ui:Template name="sidebar" src="Uxml/Sidebar.uxml"/>
+    <ui:Template name="disclaimer" src="Uxml/Disclaimer.uxml"/>
+    <ui:Template name="popup-overlay" src="Uxml/PopupOverlay.uxml"/>
+    <ui:Template name="loading-curtain" src="Uxml/LoadingCurtain.uxml"/>
+    
     <ui:VisualElement name="root" class="root">
         <ui:Label name="version-label" text="v1.0.1-dev-e128f56" class="version-label"/>
         <ui:Label name="file-label" text="STRUCTURE.NBT" class="file-label"/>
-        
         <ui:Button name="btn-welcome-hub" class="btn-welcome-hub" text="Welcome!">
             <ui:VisualElement class="creeper-face"/>
         </ui:Button>
 
-        <ui:VisualElement name="sidebar" class="sidebar">
-            <ui:VisualElement name="export-section" class="export-section">
-                <ui:Label name="export-title" text="EXPORT AS:" class="export-title"/>
-                
-                <ui:VisualElement class="btn-export-root">
-                    <ui:VisualElement class="btn-outline"/>
-                    <ui:Button name="btn-export-fbx" text="ASCII FBX" class="btn-export"/>
-                    <ui:VisualElement class="chevron-icon"/>
-                </ui:VisualElement>
-                
-                <ui:VisualElement class="btn-export-root">
-                    <ui:VisualElement class="btn-outline"/>
-                    <ui:Button name="btn-export-glb" text="GLTF/GLB" class="btn-export"/>
-                    <ui:VisualElement class="chevron-icon"/>
-                </ui:VisualElement>
-                
-                <ui:VisualElement class="btn-export-root">
-                    <ui:VisualElement class="btn-outline"/>
-                    <ui:Button name="btn-export-obj" text="OBJ" class="btn-export"/>
-                    <ui:VisualElement class="chevron-icon"/>
-                </ui:VisualElement>
-                
-                <ui:VisualElement class="btn-export-root">
-                    <ui:VisualElement class="btn-outline"/>
-                    <ui:Button name="btn-export-ply" text="PLY" class="btn-export"/>
-                    <ui:VisualElement class="chevron-icon"/>
-                </ui:VisualElement>
-                
-                <ui:Label name="export-error" text="Failed to export" class="export-error"/>
-            </ui:VisualElement>
-            
-            <ui:VisualElement name="bottom-bar" class="bottom-bar">
-                <ui:VisualElement class="btn-load-new-root">
-                    <ui:VisualElement class="btn-outline"/>
-                    <ui:Button name="btn-load-new" text="LOAD NEW" class="btn-load-new"/>
-                </ui:VisualElement>
-            </ui:VisualElement>
-            
-            <ui:Button name="btn-camera-reset" class="btn-camera-reset">
-                <ui:VisualElement name="camera-icon" class="camera-icon" picking-mode="Ignore"/>
-            </ui:Button>
-            
-        </ui:VisualElement>
+        <ui:Instance template="sidebar" name="sidebar" class="sidebar"/>
+        <ui:Instance template="disclaimer" name="disclaimer-root" class="disclaimer-root disclaimer-hidden"/>
+        <ui:Instance template="popup-overlay" name="popup-overlay" class="popup-overlay popup-overlay-hidden"/>
         
-        <ui:VisualElement name="disclaimer-root" class="disclaimer-root disclaimer-hidden">
-            <ui:VisualElement class="disclaimer-border">
-                <ui:Label name="disclaimer-label" class="disclaimer-label" text="This tool is an independent project and is not affiliated with, endorsed by, sponsored by, or approved by Mojang Studios or Microsoft. Minecraft and all related trademarks, names, and assets are the property of their respective owners." />
-                <ui:Button name="btn-ok" text="OK" class="btn-ok"/>
-            </ui:VisualElement>
-        </ui:VisualElement>
-        
-        <ui:VisualElement class="popup-overlay" name="popup-overlay">
-            <ui:VisualElement class="popup-root" name="popup-root">
-                <ui:VisualElement class="popup-border" name="border">
-                    <ui:VisualElement class="popup-info-panel" name="welcome-hub-root">
-                        <ui:VisualElement class="popup-header">
-                            <ui:Label class="header-label" text="Welcome Hub"/>
-                        </ui:VisualElement>
-                        
-                        <ui:VisualElement class="popup-body">
-                            <ui:VisualElement class="info-content">
-                                <ui:VisualElement class="info-left-panel">
-                                    <ui:VisualElement class="info-text">
-                                        <ui:Label class="info-title" text="Support"/>
-                                        <ui:Label class="body-label" text="Hey!"/>
-                                        <ui:Label class="body-label" text="If you find this tool helpful or like what you see, consider supporting my work."/>
-                                        <ui:Label class="body-label" text="Thanks for being here!"/>
-                                    </ui:VisualElement>
-                                    <ui:VisualElement class="info-onboarding">
-                                        <ui:Label class="info-title" text="Onboarding"/>
-                                        <ui:Label class="info-onboarding-label" text="Don't know where to start? New to structure blocks?"/>
-                                        <ui:Label class="info-onboarding-label" text="This onboarding just for you!"/>
-                                        <ui:VisualElement class="btn-info-onboarding-root">
-                                            <ui:VisualElement class="btn-outline"/>
-                                            <ui:Button name="btn-start-onboarding" class="btn-info-onboarding" text="Let's Start!"/>
-                                        </ui:VisualElement>
-                                    </ui:VisualElement>
-                                </ui:VisualElement>
-                                
-                                <ui:VisualElement name="pool-animation" class="info-promo" />
-                            </ui:VisualElement>
-                        </ui:VisualElement>
-                        
-                        <ui:VisualElement class="popup-footer">
-                            <ui:VisualElement class="welcome-hub-footer-content">
-                                <ui:Label name="github-link" class="footer-link" text="GitHub"/>
-                                <ui:Label name="support-link" class="footer-link" text="Support"/>
-                                <ui:Label name="feedback-link" class="footer-link" text="Report an issue"/>
-                            </ui:VisualElement>
-                        </ui:VisualElement>
-                    </ui:VisualElement>
-                    
-                    <ui:VisualElement name="onboarding-root" class="popup-onboarding-panel">
-                        <ui:VisualElement class="popup-header">
-                            <ui:Label class="header-label" text="Onboarding"/>
-                        </ui:VisualElement>
-                        
-                        <ui:VisualElement class="popup-body">
-                            <ui:VisualElement class="onboarding-body-content">
-                                <ui:Label name="onboarding-title" class="onboarding-title" text="Step 1 — Get a Structure Block"/>
-                                <ui:VisualElement name="onboarding-image" class="onboarding-image"/>
-                                <ui:Label name="onboarding-description" class="onboarding-text" text="Open chat and run '/give @p minecraft:structure_block'. This is the one way to obtain it, since it isn't in the creative inventory by default."/>
-                            </ui:VisualElement>
-                        </ui:VisualElement>
-                        
-                        <ui:VisualElement class="popup-footer">
-                            <ui:VisualElement class="onboarding-footer-content">
-                                <ui:VisualElement class="btn-back-root">
-                                    <ui:VisualElement class="btn-outline"/>
-                                    <ui:Button name="btn-back" text="Go Back" class="btn-back"/>
-                                </ui:VisualElement>
-                                
-                                <ui:VisualElement class="control-panel">
-                                    <ui:Button name="btn-arrow-left" class="btn-arrow-root">
-                                        <ui:VisualElement class="btn-arrow-left"/>
-                                    </ui:Button>
-                                    
-                                    <ui:Label name="slide-progress-label" class="slide-progress-label" text="1/7"/>
-                                    
-                                    <ui:Button name="btn-arrow-right" class="btn-arrow-root">
-                                        <ui:VisualElement class="btn-arrow-right"/>
-                                    </ui:Button>
-                                </ui:VisualElement>
-                            </ui:VisualElement>
-                        </ui:VisualElement>
-                    </ui:VisualElement>
-                </ui:VisualElement>
-            </ui:VisualElement>
-        </ui:VisualElement>
-        
-        <ui:VisualElement name="loader" class="loader">
-            <ui:VisualElement name="loader-icon" class="loader-icon"/>
-            <ui:Label name="loader-label" class="loader-label" text="Building ..."/>
-        </ui:VisualElement>
-        
+        <ui:Instance template="loading-curtain" name="loader" class="loader"/>
     </ui:VisualElement>
 </ui:UXML>

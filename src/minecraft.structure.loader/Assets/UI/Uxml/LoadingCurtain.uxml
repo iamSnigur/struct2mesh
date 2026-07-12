@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="../RootView.uss"/>
+    <ui:VisualElement name="loader-icon" class="loader-icon"/>
+    <ui:Label name="loader-label" class="loader-label" text="Building ..."/>
+</ui:UXML>
