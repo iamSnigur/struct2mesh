@@ -23,13 +23,13 @@ namespace Core
             {
                 DontDestroyOnLoad(this);
                 await BindDependencies();
-                _loadingCurtainView.SetProgressText("Loading assets...");
+                _loadingCurtainView.SetProgressText("Loading boot assets...");
                 _loadingCurtainView.Show();
                 await MinecraftAssetProvider.Init();
             }
             catch (Exception e)
             {
-                Debug.Log(e);
+                Debug.LogError(e);
             }
             finally
             {
@@ -48,11 +48,10 @@ namespace Core
             _fileReceiver = GetOnScene<FileReceiver>();
             _uiRoot = GetOnScene<UIRoot>();
             
-            _structureBuilder.InjectDependencies(_loadingCurtainView, _cameraController);
-            _fileReceiver.InjectDependencies(_structureBuilder);
+            OnboardingSlidesConfig slidesConfig = 
+                await AssetProvider
+                    .LoadByAddressAsync<OnboardingSlidesConfig>("onboarding_slides_config");
             
-            OnboardingSlidesConfig slidesConfig = await AssetProvider
-                .LoadByAddressAsync<OnboardingSlidesConfig>("onboarding_slides_config");
             _uiRoot.InjectDependencies(
                 _cameraController,
                 _fileReceiver,
@@ -60,6 +59,8 @@ namespace Core
                 slidesConfig);
             
             _loadingCurtainView = _uiRoot.LoadingCurtainView;
+            _fileReceiver.InjectDependencies(_structureBuilder);
+            _structureBuilder.InjectDependencies(_loadingCurtainView, _cameraController);
         }
 
         private static T GetOnScene<T>() where T : MonoBehaviour => 

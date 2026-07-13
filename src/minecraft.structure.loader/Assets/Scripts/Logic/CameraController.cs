@@ -200,6 +200,7 @@ namespace Logic
             _yaw = 0f;
             _targetDistance = GetDistanceToFit(_camera, structureBounds);
             _currentDistance = _targetDistance;
+            maxZoomDistance = 1.5f * _targetDistance;
             _targetRotation = Quaternion.Euler(_pitch, _yaw, 0f);
             _currentRotation = _targetRotation;
             

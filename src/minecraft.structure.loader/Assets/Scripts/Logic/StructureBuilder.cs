@@ -87,7 +87,7 @@ namespace Logic
             
             _loadingCurtainView.SetProgressText("Done");
 
-            await UniTask.Delay(500);
+            await UniTask.Delay(300);
             
             Root.SetActive(true);
             _loadingCurtainView.Hide();
