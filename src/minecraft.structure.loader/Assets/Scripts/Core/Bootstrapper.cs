@@ -4,6 +4,7 @@ using Core.AssetManagement.External;
 using Cysharp.Threading.Tasks;
 using Logic;
 using UI;
+using UI.Views;
 using UnityEngine;
 
 namespace Core
@@ -13,19 +14,17 @@ namespace Core
         private CameraController _cameraController;
         private StructureBuilder _structureBuilder;
         private FileReceiver _fileReceiver;
-        private LoadingCurtain _loadingCurtain;
-        private RootUI _rootUI;
+        private LoadingCurtainView _loadingCurtainView;
+        private UIRoot _uiRoot;
 
         private async void Awake()
         {
-            DontDestroyOnLoad(this);
-            GetSceneReferences();
-            InjectDependencies();
-            
             try
             {
-                _loadingCurtain.SetProgressText("Loading assets...");
-                _loadingCurtain.Show();
+                DontDestroyOnLoad(this);
+                await BindDependencies();
+                _loadingCurtainView.SetProgressText("Loading assets...");
+                _loadingCurtainView.Show();
                 await MinecraftAssetProvider.Init();
             }
             catch (Exception e)
@@ -35,27 +34,32 @@ namespace Core
             finally
             {
                 await UniTask.Delay(500);
-                _loadingCurtain.Hide();
+                _loadingCurtainView.Hide();
             }
         }
 
         private void OnDestroy() => 
             AssetProvider.Release();
 
-        private void InjectDependencies()
-        {
-            _structureBuilder.InjectDependencies(_loadingCurtain, _cameraController);
-            _fileReceiver.InjectDependencies(_structureBuilder);
-            _rootUI.InjectDependencies(_cameraController, _fileReceiver, _structureBuilder);
-        }
-
-        private void GetSceneReferences()
+        private async UniTask BindDependencies()
         {
             _cameraController = GetOnScene<CameraController>();
             _structureBuilder = GetOnScene<StructureBuilder>();
             _fileReceiver = GetOnScene<FileReceiver>();
-            _loadingCurtain = GetOnScene<LoadingCurtain>();
-            _rootUI = GetOnScene<RootUI>();
+            _uiRoot = GetOnScene<UIRoot>();
+            
+            _structureBuilder.InjectDependencies(_loadingCurtainView, _cameraController);
+            _fileReceiver.InjectDependencies(_structureBuilder);
+            
+            OnboardingSlidesConfig slidesConfig = await AssetProvider
+                .LoadByAddressAsync<OnboardingSlidesConfig>("onboarding_slides_config");
+            _uiRoot.InjectDependencies(
+                _cameraController,
+                _fileReceiver,
+                _structureBuilder,
+                slidesConfig);
+            
+            _loadingCurtainView = _uiRoot.LoadingCurtainView;
         }
 
         private static T GetOnScene<T>() where T : MonoBehaviour => 

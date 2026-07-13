@@ -1,30 +1,33 @@
 ﻿using Cysharp.Threading.Tasks;
+using UI.Components;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace UI
+namespace UI.Views
 {
-    public class LoadingCurtain : MonoBehaviour
+    public class LoadingCurtainView : ViewComponent
     {
-        private UIDocument _doc;
         private VisualElement _loader;
         private VisualElement _loaderIcon;
         private Label _progressLabel;
 
         private bool _isActive;
-        
-        private void Awake()
+
+        public LoadingCurtainView(VisualElement root) : base(root)
         {
-            _doc = GetComponent<UIDocument>();
-            _loader = _doc.rootVisualElement.Q<VisualElement>("loader");
-            _loaderIcon = _doc.rootVisualElement.Q<VisualElement>("loader-icon");
-            _progressLabel = _doc.rootVisualElement.Q<Label>("loader-label");
+        }
+
+        protected override void QueryElements()
+        {
+            _loader = Query<VisualElement>("loader");
+            _loaderIcon = Query<VisualElement>("loader-icon");
+            _progressLabel = Query<Label>("loader-label");
         }
 
         public void SetProgressText(string text) => 
             _progressLabel.text = text;
 
-        public void Show()
+        public override void Show()
         {
             _isActive = true;
             _loader.style.display = DisplayStyle.Flex;
@@ -32,7 +35,7 @@ namespace UI
             DoSpinnerAnimation(0.9f).Forget();
         }
 
-        public void Hide() => 
+        public override void Hide() => 
             FadeOut(0.3f).Forget();
 
         private async UniTaskVoid FadeOut(float duration = 1f)

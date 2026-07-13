@@ -2,7 +2,7 @@
     <Style src="../RootView.uss"/>
     <ui:VisualElement class="popup-root" name="popup-root">
         <ui:VisualElement class="popup-border" name="border">
-            <ui:VisualElement class="popup-info-panel" name="welcome-hub-root">
+            <ui:VisualElement name="welcome-hub-root" class="popup-info-panel">
                 <ui:VisualElement class="popup-header">
                     <ui:Label class="header-label" text="Welcome Hub" />
                 </ui:VisualElement>

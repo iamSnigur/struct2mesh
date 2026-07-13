@@ -70,7 +70,7 @@
 }
 
 .export-error {
-    display: none;
+    visibility: hidden;
     color: rgb(250, 60, 0);
     font-size: 20px;
     -unity-font-definition: var(--font-troika);
@@ -687,29 +687,6 @@
     font-size: 20px;
     color: white;
     white-space: normal;
-}
-
-.inline-text {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    -unity-font-definition: var(--font-segoe-ui);
-    font-size: 20px;
-    color: white;
-    white-space: normal;
-}
-
-.inline-code {
-    white-space: normal;
-    -unity-font-definition: var(--font-consolas);
-    font-size: 18px;
-    color: orange;
-    background-color: rgba(255,255,255,0.08);
-    border-color: rgb(165,165,165);
-    border-width: 1px;
-    border-radius: 10px;
-    padding-left: 4px;
-    padding-right: 4px;
 }
 
 .onboarding-footer-content {

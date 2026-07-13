@@ -8,6 +8,7 @@ using Logic.Parser;
 using Logic.Parser.Model;
 using Logic.Utils;
 using UI;
+using UI.Views;
 using UnityEngine;
 
 namespace Logic
@@ -18,15 +19,15 @@ namespace Logic
         public static StructureVolume StructureVolume;
     
         private CameraController _cameraController;
-        private LoadingCurtain _loadingCurtain;
+        private LoadingCurtainView _loadingCurtainView;
 
         private ParserRegistry _parserRegistry;
         
         public void InjectDependencies(
-            LoadingCurtain loadingCurtain,
+            LoadingCurtainView loadingCurtainView,
             CameraController cameraController)
         {
-            _loadingCurtain = loadingCurtain;
+            _loadingCurtainView = loadingCurtainView;
             _cameraController = cameraController;
         }
         
@@ -41,8 +42,8 @@ namespace Logic
         {
             _cameraController.InputDisabled = true;
             Root.SetActive(false);
-            _loadingCurtain.SetProgressText("Looking at your structure...");
-            _loadingCurtain.Show();
+            _loadingCurtainView.SetProgressText("Looking at your structure...");
+            _loadingCurtainView.Show();
             
             UniTask delay1 = UniTask.Delay(750);
             ParsedStructure structure = null;
@@ -58,13 +59,13 @@ namespace Logic
             catch (Exception e)
             {
                 Debug.LogError(e);
-                _loadingCurtain.SetProgressText("Can't parse your structure file");
+                _loadingCurtainView.SetProgressText("Can't parse your structure file");
                 await UniTask.Delay(500);
-                _loadingCurtain.Hide();
+                _loadingCurtainView.Hide();
                 return;
             }
             
-            _loadingCurtain.SetProgressText("Collecting resources...");
+            _loadingCurtainView.SetProgressText("Collecting resources...");
             
             UniTask delay2 = UniTask.Delay(750);
             UniTask updateVolumeTask = UpdateStructureVolumeAsync(structure);
@@ -75,21 +76,21 @@ namespace Logic
             await MinecraftAssetProvider.UpdateBlockStatePalette(structure.Palette);
             MinecraftAssetProvider.UpdateColorRules();
             
-            _loadingCurtain.SetProgressText("Building...");
+            _loadingCurtainView.SetProgressText("Building...");
             UniTask delay3 = UniTask.Delay(1500);
             UniTask constructTask = Construct(structure);
 
             await UniTask.WhenAll(
                 delay3.ContinueWith(() => 
-                    _loadingCurtain.SetProgressText("Building a massive structure...")),
+                    _loadingCurtainView.SetProgressText("Building a massive structure...")),
                 constructTask);
             
-            _loadingCurtain.SetProgressText("Done");
+            _loadingCurtainView.SetProgressText("Done");
 
             await UniTask.Delay(500);
             
             Root.SetActive(true);
-            _loadingCurtain.Hide();
+            _loadingCurtainView.Hide();
             _cameraController
                 .DoOrbitAnimation(
                     Root.GetComponent<Renderer>().bounds,
