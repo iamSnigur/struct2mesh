@@ -101,6 +101,29 @@ body { padding: 0; margin: 0 }
   opacity: 0.6;
 }
 
+.formats-content {
+  margin-top: 20px;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.format {
+  height: 20px;
+  width: fit-content;
+  padding: 5px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: gray;
+  background-color: rgba(160, 160, 160, 0.3);
+  border: 2px solid rgba(200, 200, 200, 0.3);
+  border-radius: 10px;
+}
+
 .drop-content,
 #uploadContent {
   position: absolute;
