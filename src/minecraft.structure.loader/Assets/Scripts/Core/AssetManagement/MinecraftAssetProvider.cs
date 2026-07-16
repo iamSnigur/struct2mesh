@@ -84,7 +84,7 @@ namespace Core.AssetManagement
             s_blockstateHandles.Add(await _blockStateLoader.LoadBlockStateModel(location, blockstateJson, renderType, offsetType));
         }
         
-        public static GameObject LoadModel(string blockStateId, Vector3 blockPos, Dictionary<string, string> prop, byte cullFlags)
+        public static GameObject BuildModel(string blockStateId, Vector3 blockPos, Dictionary<string, string> prop, byte cullFlags)
         {
             ResourceLocation location = new(blockStateId);
             BlockState[] blockStates = BlockStatePaletteAdapter.Instance.GetAll(location);

@@ -288,7 +288,10 @@ namespace Logic.Utils
 				}
 
 				// Create new Mesh (submesh) from Meshes with the same Material:
-				Mesh submesh = new Mesh();
+				Mesh submesh = new Mesh
+				{
+					name = $"Submesh{i}"
+				};
 
 #if UNITY_2017_3_OR_NEWER
 				if(verticesLength > Mesh16BitBufferVertexLimit)
@@ -317,8 +320,10 @@ namespace Logic.Utils
 			#region Set Materials array & combine submeshes into one multimaterial Mesh:
 			meshRenderers[0].sharedMaterials = uniqueMaterialsList.ToArray();
 
-			Mesh combinedMesh = new Mesh();
-			combinedMesh.name = name;
+			Mesh combinedMesh = new()
+			{
+				name = this.name
+			};
 
 #if UNITY_2017_3_OR_NEWER
 			if(verticesLength > Mesh16BitBufferVertexLimit)
@@ -330,6 +335,10 @@ namespace Logic.Utils
 			combinedMesh.Optimize();
 			GenerateUV(combinedMesh);
 			meshFilters[0].sharedMesh = combinedMesh;
+
+			foreach (CombineInstance instance in finalMeshCombineInstancesList) 
+				Destroy(instance.mesh);
+			
 			await DeactivateCombinedGameObjects(meshFilters);
 
 			if(showCreatedMeshInfo)
@@ -392,7 +401,8 @@ namespace Logic.Utils
 				}
 				else
 				{
-					DestroyImmediate(meshFilters[i+1].gameObject);
+					Destroy(meshFilters[i+1].sharedMesh);
+					Destroy(meshFilters[i+1].gameObject);
 				}
 
 				await yielder.TryYieldAsync();

@@ -98,7 +98,7 @@ namespace Logic
                     () => _cameraController.InputDisabled = false)
                 .Forget();
         }
-
+        
         private async UniTask UpdateStructureVolumeAsync(ParsedStructure structure)
         {
             await UniTask.Yield();
@@ -150,10 +150,11 @@ namespace Logic
             return blockState;
         }
     
-        private static void ClearBlockVisual(GameObject modelObject)
+        private static void ClearRootVisual(GameObject modelObject)
         {
             if (modelObject.TryGetComponent<MeshFilter>(out var meshFilter))
             {
+                Destroy(meshFilter.sharedMesh);
                 meshFilter.sharedMesh = null;
             }
             
@@ -167,7 +168,7 @@ namespace Logic
         {
             await UniTask.Yield();
             
-            ClearBlockVisual(Root);
+            ClearRootVisual(Root);
             
             MinecraftAssetProvider.ReleaseBlockStateHandles();
         
@@ -193,15 +194,17 @@ namespace Logic
 
                 byte cullFlags = StructureVolume.GetCullFlagsFor(block.Pos);
             
-                GameObject blockView = MinecraftAssetProvider.LoadModel(paletteEntry.Name, block.Pos, paletteEntry.Properties, cullFlags);
+                GameObject blockView = MinecraftAssetProvider.BuildModel(paletteEntry.Name, block.Pos, paletteEntry.Properties, cullFlags);
                 Transform cachedTransform = blockView.transform;
                 cachedTransform.parent = Root.transform;
                 cachedTransform.position = block.Pos;
 
                 await yielder.TryYieldAsync();
             }
-
-            MeshCombiner meshCombiner = Root.AddComponent<MeshCombiner>();
+            
+            MeshCombiner meshCombiner = Root.GetComponent<MeshCombiner>();
+            meshCombiner ??= Root.AddComponent<MeshCombiner>();
+            
             meshCombiner.CreateMultiMaterialMesh = true;
             meshCombiner.DestroyCombinedChildren = true;
             await meshCombiner.CombineMeshes(false);

@@ -16,14 +16,15 @@ namespace CraftSharp
     public static class BlockMeshBuilder
     {
         private static readonly MaterialManager s_materialManager;
-        private static readonly Mesh s_fallbackMesh;
         private static readonly Material s_fallbackMaterial;
-        
+        private static readonly Mesh s_sharedFallbackMesh;
+        private static Mesh? _fallbackMesh;
+
         static BlockMeshBuilder()
         {
             s_materialManager = Object.FindFirstObjectByType<MaterialManager>();
             
-            s_fallbackMesh = CreateFallbackMesh();
+            s_sharedFallbackMesh = CreateFallbackMesh();
             s_fallbackMaterial = CreateFallbackMaterial();
         }
 
@@ -32,7 +33,10 @@ namespace CraftSharp
 
         private static Mesh CreateFallbackMesh()
         {
-            Mesh mesh = new();
+            Mesh mesh = new()
+            {
+                name = "FallbackMesh"
+            };
             mesh.SetVertices(new []
             {
                 new Vector3(0, 0, 0),
@@ -67,6 +71,7 @@ namespace CraftSharp
             // Clear mesh if present
             if (modelObject.TryGetComponent<MeshFilter>(out var meshFilter))
             {
+                Object.Destroy(meshFilter.sharedMesh);
                 meshFilter.sharedMesh = null;
             }
             
@@ -101,7 +106,10 @@ namespace CraftSharp
             packManager.StateModelTable.TryGetValue(stateId, out var stateModel);
             if (stateModel is null)
             {
-                meshFilter.sharedMesh = s_fallbackMesh;
+                if (_fallbackMesh == null)
+                    _fallbackMesh = Object.Instantiate(s_sharedFallbackMesh);
+                
+                meshFilter.sharedMesh = _fallbackMesh;
                 meshRenderer.sharedMaterial = s_fallbackMaterial;
                 return;
             }
