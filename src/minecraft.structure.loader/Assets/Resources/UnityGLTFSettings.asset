@@ -394,7 +394,6 @@ MonoBehaviour:
   m_Name: VisualScriptingExportPlugin
   m_EditorClassIdentifier: UnityGLTF.Interactivity.VisualScripting.ExportPlugin::UnityGLTF.Interactivity.VisualScripting.VisualScriptingExportPlugin
   enabled: 0
-  cleanUpAndOptimizeExportedGraph: 1
 --- !u!114 &7277628132905837248
 MonoBehaviour:
   m_ObjectHideFlags: 3
