@@ -12,7 +12,6 @@ using UnityEngine;
 using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine.Assertions;
-using Object = UnityEngine.Object;
 
 namespace CraftSharp.Resource
 {
@@ -84,7 +83,6 @@ namespace CraftSharp.Resource
 
         public const int ATLAS_SIZE = 1024;
         public const int MIN_MIPMAP_SIZE = 16;
-        private const int MIPMAP_LIMIT = 4;
 
         public bool Loaded { get; private set; } = false;
 
@@ -152,7 +150,7 @@ namespace CraftSharp.Resource
 
             updateStatus("resource.info.create_texture", string.Empty);
             //await GenerateAtlas();
-            await LoadAtlasAndManifest();
+            await LoadAtlas();
             
             // Load block models...
             updateStatus("resource.info.load_block_model", string.Empty);
@@ -707,29 +705,13 @@ namespace CraftSharp.Resource
             return tex;
         }
 
-        private async UniTask LoadAtlasAndManifest()
+        private async UniTask LoadAtlas()
         {
             texAtlasTable.Clear();
             await AtlasTableHelper.LoadAtlasTable(texAtlasTable);
-            blockAtlas = await LoadAtlas();
-        }
-
-        private async UniTask<Texture2D> LoadAtlas()
-        {
-            AssetHandle<Texture2D> atlasHandle = await AssetProvider.LoadAssetHandleAsync<Texture2D>("block_atlas");
-            Texture2D atlas = atlasHandle.Asset;
             
-            Texture2D limitedMipMapsAtlas = new(atlas.width, atlas.height, atlas.format, MIPMAP_LIMIT, false)
-            {
-                filterMode = FilterMode.Point
-            };
-            
-            for (var i = 0; i < MIPMAP_LIMIT; i++) 
-                Graphics.CopyTexture(atlas, 0, i, limitedMipMapsAtlas, 0, i);
-
-            atlasHandle.Release();
-            
-            return limitedMipMapsAtlas;
+            Texture2D atlas = await AssetProvider.LoadByAddressAsync<Texture2D>("block_atlas");
+            blockAtlas = atlas ?? throw new NullReferenceException("Can't load baked atlas: block_atlas");
         }
         
         private async UniTask GenerateAtlas()
@@ -861,11 +843,7 @@ namespace CraftSharp.Resource
                     filterMode = FilterMode.Point
                 };
 
-                Rect[]? rects = atlas.PackTextures(
-                    textureInfosConsumed.Select(x => x.Item1).ToArray(),
-                    0,
-                    ATLAS_SIZE,
-                    false);
+                Rect[]? rects = atlas.PackTextures(textureInfosConsumed.Select(x => x.Item1).ToArray(), 0, ATLAS_SIZE, false);
 
                 if (atlas.width != ATLAS_SIZE || atlas.height != ATLAS_SIZE)
                 {
@@ -993,7 +971,7 @@ namespace CraftSharp.Resource
             atlasArray1.Apply(false, false);
 
             AtlasTableHelper.SaveAtlasTable(texAtlasTable);
-            blockAtlas = Save(atlasArray0, "Assets/Resources_moved/vanilla/minecraft/textures/block_atlas.png");
+            blockAtlas = Save(atlasArray1, "Assets/Resources_moved/vanilla/minecraft/textures/block_atlas.png");
         }
 
         private static Texture2D Save(Texture2DArray array, string path)
