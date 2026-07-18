@@ -49,6 +49,7 @@ namespace Core.AssetManagement
             {
                 await GatherResources(_resourcePackManager);
                 await _resourcePackManager.LoadPacks_Mod(UpdateStatus);
+                await Resources.UnloadUnusedAssets();
                 Loaded = true;
             }
             catch (Exception e)

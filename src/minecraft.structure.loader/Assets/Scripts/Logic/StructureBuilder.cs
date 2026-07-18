@@ -44,7 +44,7 @@ namespace Logic
             _loadingCurtainView.SetProgressText("Looking at your structure...");
             _loadingCurtainView.Show();
             
-            UniTask delay1 = UniTask.Delay(750);
+            UniTask delay1 = UniTask.Delay(250);
             ParsedStructure structure = null;
             
             try
@@ -74,7 +74,7 @@ namespace Logic
             
             _loadingCurtainView.SetProgressText("Collecting resources...");
             
-            UniTask delay2 = UniTask.Delay(750);
+            UniTask delay2 = UniTask.Delay(250);
             UniTask updateVolumeTask = UpdateStructureVolumeAsync(structure);
 
             await UniTask.WhenAll(delay2, updateVolumeTask);
@@ -84,15 +84,13 @@ namespace Logic
             MinecraftAssetProvider.UpdateColorRules();
             
             _loadingCurtainView.SetProgressText("Building...");
-            UniTask delay3 = UniTask.Delay(1500);
+            UniTask delay3 = UniTask.Delay(1000);
             UniTask constructTask = Construct(structure);
 
             await UniTask.WhenAll(
                 delay3.ContinueWith(() => 
                     _loadingCurtainView.SetProgressText("Building a massive structure...")),
                 constructTask);
-
-            await ClearGarbageAsync();
             
             _loadingCurtainView.SetProgressText("Done");
 
@@ -108,24 +106,13 @@ namespace Logic
                 .Forget();
         }
 
-        private async UniTask ClearGarbageAsync()
-        {
-            await UniTask.WaitForEndOfFrame();
-            await Resources.UnloadUnusedAssets();
-
-            int generation = GC.MaxGeneration;
-            GC.Collect(generation, GCCollectionMode.Forced, false);
-            GC.WaitForPendingFinalizers();
-            GC.Collect(generation, GCCollectionMode.Forced, false);
-        }
-
         private async UniTask UpdateStructureVolumeAsync(ParsedStructure structure)
         {
             await UniTask.Yield();
             
             StructureVolume.Reset();
 
-            LongTaskYielder yielder = new(2.5f);
+            LongTaskYielder yielder = new();
             
             foreach (BlockEntry block in structure.Blocks)
             {
@@ -194,7 +181,7 @@ namespace Logic
         
             List<UniTask> warmupTasks = new(structure.Palette.Count);
 
-            LongTaskYielder yielder = new(2.5f);
+            LongTaskYielder yielder = new();
             
             foreach (PaletteEntry entry in structure.Palette)
             {

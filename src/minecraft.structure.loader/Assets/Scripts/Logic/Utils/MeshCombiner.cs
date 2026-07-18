@@ -150,7 +150,7 @@ namespace Logic.Utils
 			// If it will be over 65535 then use the 32 bit index buffer:
 			long verticesLength = 0;
 
-			LongTaskYielder yielder = new(2.5f);
+			LongTaskYielder yielder = new();
 			
 			for(int i = 0; i < meshFilters.Length-1; i++) // Skip first MeshFilter belongs to this GameObject in this loop.
 			{
@@ -255,7 +255,7 @@ namespace Logic.Utils
 			// If it will be over 65535 then use the 32 bit index buffer:
 			long verticesLength = 0;
 
-			LongTaskYielder yielder = new(2.5f);
+			LongTaskYielder yielder = new();
 			
 			for(int i = 0; i < uniqueMaterialsList.Count; i++) // Create each Mesh (submesh) from Meshes with the same Material.
 			{
@@ -380,7 +380,7 @@ namespace Logic.Utils
 
 		private async UniTask DeactivateCombinedGameObjects(MeshFilter[] meshFilters)
 		{
-			LongTaskYielder yielder = new(2.5f);
+			LongTaskYielder yielder = new();
 			
 			for(int i = 0; i < meshFilters.Length-1; i++) // Skip first MeshFilter belongs to this GameObject in this loop.
 			{

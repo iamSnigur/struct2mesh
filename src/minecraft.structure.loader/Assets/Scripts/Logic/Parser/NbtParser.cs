@@ -83,7 +83,7 @@ namespace Logic.Parser
         {
             List<BlockEntry> blocks = new();
 
-            LongTaskYielder yielder = new(2.5f);
+            LongTaskYielder yielder = new();
             
             foreach (NbtTag nbtTag in blocksTagList)
             {

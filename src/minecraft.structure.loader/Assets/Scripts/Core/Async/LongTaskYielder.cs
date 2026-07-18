@@ -5,25 +5,25 @@ namespace Core.Async
 {
     public sealed class LongTaskYielder
     {
-        private readonly float _yieldInterval;
-        private float _elapsed;
+        private readonly int _operationsPerFrame;
+        private int _operationsElapsed;
 
-        public LongTaskYielder(float yieldInterval = 1f)
+        public LongTaskYielder(int operationsPerFrame = 2500)
         {
-            _yieldInterval = yieldInterval;
-            _elapsed = 0f;
+            _operationsPerFrame = operationsPerFrame;
+            _operationsElapsed = 0;
         }
             
         public async UniTask TryYieldAsync()
         {
                 
-            if (_elapsed > _yieldInterval)
+            if (_operationsElapsed > _operationsPerFrame)
             {
                 await UniTask.Yield();
-                _elapsed = 0;
+                _operationsElapsed = 0;
             }
             
-            _elapsed += Time.deltaTime;
+            _operationsElapsed++;
         }
     }
 }
