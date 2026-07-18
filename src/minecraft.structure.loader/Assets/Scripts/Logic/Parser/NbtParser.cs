@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Core.Async;
 using Cysharp.Threading.Tasks;
 using fNbt;
@@ -9,12 +10,20 @@ namespace Logic.Parser
 {
     public class NbtParser : IParser
     {
+        // workaround to prevent OOM on web
+        private const int BLOCK_COUNT_LIMIT = 200_000;
+        
         public async UniTask<ParsedStructure> Parse(byte[] fileContent)
         {
             NbtFile nbtFile = GetNbtFile(fileContent);
 
+            await UniTask.Yield();
+            
             if (!IsFileNbtStructure(nbtFile))
-                return null;
+                throw new ArgumentException();
+
+            if (IsBlockCountExceededLimits(nbtFile))
+                throw new OverflowException();
 
             ParsedStructure parsedStructure = await ParseNbtFile(nbtFile);
 
@@ -35,11 +44,9 @@ namespace Logic.Parser
             NbtList paletteTagList = nbtFile.RootTag.Get<NbtList>("palette") 
                  ?? nbtFile
                      .RootTag
-                     .Get<NbtList>("palettes")
+                     .Get<NbtList>("palettes")!
                      .Get<NbtList>(0);
 
-            await UniTask.Yield();
-            
             ParsedStructure structure = new()
             {
                 Blocks = await ParseNbtBlocks(blocksTagList),
@@ -64,6 +71,12 @@ namespace Logic.Parser
             return sizeTag is not null 
                    && blocksTag is not null
                    && paletteTag is not null;
+        }
+
+        private static bool IsBlockCountExceededLimits(NbtFile file)
+        {
+            NbtList blocksTagList = file.RootTag.Get<NbtList>("blocks")!;
+            return blocksTagList.Count > BLOCK_COUNT_LIMIT;
         }
         
         private async UniTask<List<BlockEntry>> ParseNbtBlocks(NbtList blocksTagList)

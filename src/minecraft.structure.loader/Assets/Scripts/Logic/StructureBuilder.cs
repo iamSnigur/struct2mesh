@@ -55,11 +55,19 @@ namespace Logic
                 await UniTask.WhenAll(delay1, parseTask);
                 structure = await parseTask;
             }
-            catch (Exception e)
+            catch (ArgumentException e)
             {
                 Debug.LogError(e);
-                _loadingCurtainView.SetProgressText("Can't parse your structure file");
-                await UniTask.Delay(500);
+                _loadingCurtainView.SetProgressText("Structure format is not supported");
+                await UniTask.Delay(1500);
+                _loadingCurtainView.Hide();
+                return;
+            }
+            catch (OverflowException e)
+            {
+                Debug.LogError(e);
+                _loadingCurtainView.SetProgressText("Structure exceeded block limit");
+                await UniTask.Delay(1500);
                 _loadingCurtainView.Hide();
                 return;
             }
