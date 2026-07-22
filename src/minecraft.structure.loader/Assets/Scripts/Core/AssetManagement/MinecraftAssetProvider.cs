@@ -85,6 +85,28 @@ namespace Core.AssetManagement
             s_blockstateHandles.Add(await _blockStateLoader.LoadBlockStateModel(location, blockstateJson, renderType, offsetType));
         }
         
+        public static BuildMesh BuildModel(ref Mesh.MeshData meshData,string blockStateId, Vector3 blockPos, Dictionary<string, string> prop, byte cullFlags)
+        {
+            ResourceLocation location = new(blockStateId);
+            BlockState[] blockStates = BlockStatePaletteAdapter.Instance.GetAll(location);
+            BlockStatePredicate predicate = new(prop);
+
+            BlockState currentState = blockStates[0];
+
+            foreach (BlockState state in blockStates)
+            {
+                if (predicate.Check(state))
+                {
+                    currentState = state;
+                    break;
+                }
+            }
+
+            BuildMesh buildMesh = BlockMeshBuilder.BuildMeshData(ref meshData, currentState, blockPos, cullFlags, _world);
+            return buildMesh;
+        }
+
+        
         public static GameObject BuildModel(string blockStateId, Vector3 blockPos, Dictionary<string, string> prop, byte cullFlags)
         {
             ResourceLocation location = new(blockStateId);
@@ -103,7 +125,7 @@ namespace Core.AssetManagement
             }
 
             GameObject gameObject = new(currentState.ToString());
-            BlockMeshBuilder.BuildBlockGameObject(gameObject, currentState, blockPos, cullFlags, _world);
+            //BlockMeshBuilder.BuildMeshData(gameObject, currentState, blockPos, cullFlags, _world);
 
             return gameObject;
         }

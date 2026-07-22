@@ -17,40 +17,63 @@ namespace CraftSharp
     {
         private static readonly MaterialManager s_materialManager;
         private static readonly Material s_fallbackMaterial;
-        private static readonly Mesh s_sharedFallbackMesh;
-        private static Mesh? _fallbackMesh;
+        private static Mesh.MeshDataArray _fallbackMeshDataArray;
 
         static BlockMeshBuilder()
         {
             s_materialManager = Object.FindFirstObjectByType<MaterialManager>();
             
-            s_sharedFallbackMesh = CreateFallbackMesh();
+            //CreateFallbackMesh();
             s_fallbackMaterial = CreateFallbackMaterial();
+        }
+
+        public static void Dispose()
+        {
+            _fallbackMeshDataArray.Dispose();
         }
 
         private static Material CreateFallbackMaterial() => 
             Resources.Load<Material>("FallbackMaterial");
 
-        private static Mesh CreateFallbackMesh()
+        private static void CreateFallbackMesh(ref Mesh.MeshData meshData, float3 posOffset)
         {
-            Mesh mesh = new()
+            NativeArray<VertexAttributeDescriptor> vertAttrs = new(4, Allocator.Temp, NativeArrayOptions.UninitializedMemory);
+            vertAttrs[0] = new VertexAttributeDescriptor(VertexAttribute.Position,  dimension: 3, stream: 0);
+            vertAttrs[1] = new VertexAttributeDescriptor(VertexAttribute.TexCoord0, dimension: 3, stream: 1);
+            vertAttrs[2] = new VertexAttributeDescriptor(VertexAttribute.TexCoord3, dimension: 4, stream: 2);
+            vertAttrs[3] = new VertexAttributeDescriptor(VertexAttribute.Color,     dimension: 4, stream: 3);
+
+            meshData.SetVertexBufferParams(8, vertAttrs);
+            vertAttrs.Dispose();
+
+            meshData.SetIndexBufferParams(36, IndexFormat.UInt32);
+
+            NativeArray<float3> positions = meshData.GetVertexData<float3>(0);
+            positions[0] = new float3(0, 0, 0) + posOffset;
+            positions[1] = new float3(0, 0, 1) + posOffset;
+            positions[2] = new float3(0, 1, 1) + posOffset;
+            positions[3] = new float3(0, 1, 0) + posOffset;
+            positions[4] = new float3(1, 0, 0) + posOffset;
+            positions[5] = new float3(1, 0, 1) + posOffset;
+            positions[6] = new float3(1, 1, 1) + posOffset;
+            positions[7] = new float3(1, 1, 0) + posOffset;
+
+            NativeArray<float3> texCoords = meshData.GetVertexData<float3>(1);
+            for (int i = 0; i < 8; i++)
+                texCoords[i] = float3.zero;
+
+            NativeArray<float4> animInfos = meshData.GetVertexData<float4>(2);
+            for (int i = 0; i < 8; i++)
+                animInfos[i] = float4.zero;
+
+            NativeArray<float4> vertColors = meshData.GetVertexData<float4>(3);
+            for (int i = 0; i < 8; i++)
+                vertColors[i] = new float4(1, 1, 1, 1);
+
+            NativeArray<uint> indices = meshData.GetIndexData<uint>();
+            uint[] tris =
             {
-                name = "FallbackMesh"
-            };
-            mesh.SetVertices(new []
-            {
-                new Vector3(0, 0, 0),
-                new Vector3(0, 0, 1),
-                new Vector3(0, 1, 1),
-                new Vector3(0, 1, 0),
-                new Vector3(1, 0, 0),
-                new Vector3(1, 0, 1),
-                new Vector3(1, 1, 1),
-                new Vector3(1, 1, 0),
-            });
-            mesh.SetTriangles(new []
-            {
-                0, 1, 2,  
+                0, 1, 2,
                 0, 2, 3,
                 5, 4, 7,
                 5, 7, 6,
@@ -62,56 +85,30 @@ namespace CraftSharp
                 7, 2, 6,
                 5, 1, 0,
                 5, 0, 4
-            },0);
-            return mesh;
+            };
+            for (int i = 0; i < tris.Length; i++)
+                indices[i] = tris[i];
+
+            meshData.subMeshCount = 1;
+            meshData.SetSubMesh(0, new SubMeshDescriptor(0, 36)
+            {
+                vertexCount = 8
+            }, MeshUpdateFlags.DontRecalculateBounds);
         }
-
-        private static void ClearBlockVisual(GameObject modelObject)
+        
+        public static BuildMesh BuildMeshData(ref Mesh.MeshData meshData, BlockState blockState, Vector3 pos, byte cullFlags, World world)
         {
-            // Clear mesh if present
-            if (modelObject.TryGetComponent<MeshFilter>(out var meshFilter))
-            {
-                Object.Destroy(meshFilter.sharedMesh);
-                meshFilter.sharedMesh = null;
-            }
-            
-            // Clear children if present
-            foreach (Transform t in modelObject.transform)
-            {
-                Object.Destroy(t.gameObject);
-            }
-        }
-
-        /// <summary>
-        /// Build item object from item stack. Returns true if item is not empty and successfully built
-        /// </summary>
-        public static void BuildBlockGameObject(GameObject modelObject, BlockState blockState, Vector3 pos, byte cullFlags, World world)
-        {
-            ClearBlockVisual(modelObject);
-            
-            if (!modelObject.TryGetComponent<MeshFilter>(out var meshFilter))
-            {
-                meshFilter = modelObject.AddComponent<MeshFilter>();
-            }
-
-            if (!modelObject.TryGetComponent<MeshRenderer>(out var meshRenderer))
-            {
-                meshRenderer = modelObject.AddComponent<MeshRenderer>();
-            }
-
-            var blockId = blockState.BlockId;
+            BuildMesh buildMesh;
             int stateId = BlockStatePaletteAdapter.Instance.GetNumIdByObject(blockState);
             
             var packManager = ResourcePackManager.Instance;
             packManager.StateModelTable.TryGetValue(stateId, out var stateModel);
             if (stateModel is null)
             {
-                if (_fallbackMesh == null)
-                    _fallbackMesh = Object.Instantiate(s_sharedFallbackMesh);
-                
-                meshFilter.sharedMesh = _fallbackMesh;
-                meshRenderer.sharedMaterial = s_fallbackMaterial;
-                return;
+                CreateFallbackMesh(ref meshData, (float3)pos);
+                buildMesh.MeshData = meshData;
+                buildMesh.Materials = new[] { s_fallbackMaterial };
+                return buildMesh;
             }
             
             BlockGeometry? blockGeometry = stateModel.Geometries[0];
@@ -119,23 +116,38 @@ namespace CraftSharp
             int color = BlockStatePaletteAdapter.Instance.GetBlockColor(stateId, world, BlockLoc.Zero);
             int waterColor = world.GetWaterColor(BlockLoc.Zero);
 
-            Mesh mesh = BuildBlockMesh_Internal(blockState, blockGeometry, pos,float3.zero, cullFlags, color, waterColor, 1, true);
-            
-            meshFilter.sharedMesh = mesh;
+            BuildBlockMesh_Internal(ref meshData, blockState, blockGeometry, pos, (float3)pos, cullFlags, color, waterColor, 1, true);
+
+            buildMesh.MeshData = meshData;
+            buildMesh.Materials = new Material[meshData.subMeshCount];
 
             if (blockState.InWater)
             {
-                meshRenderer.sharedMaterials = new [] {
+                buildMesh.Materials = new [] 
+                {
                     s_materialManager.GetAtlasMaterial(RenderType.WATER),
-                    s_materialManager.GetAtlasMaterial(stateModel.RenderType) };
+                    s_materialManager.GetAtlasMaterial(stateModel.RenderType) 
+                };
             }
             else
             {
-                meshRenderer.sharedMaterial = s_materialManager.GetAtlasMaterial(stateModel.RenderType);
+                buildMesh.Materials = new []
+                {
+                    s_materialManager.GetAtlasMaterial(stateModel.RenderType)
+                };
             }
+
+            return buildMesh;
         }
         
-        private static Mesh BuildBlockMesh_Internal(BlockState state, BlockGeometry geometry, Vector3 blockPos, float3 posOffset, int cullFlags, int colorInt, int waterColorInt, byte blockLight, bool includeLiquidMesh)
+        private static void BuildBlockMesh_Internal(
+            ref Mesh.MeshData meshData, 
+            BlockState state,
+            BlockGeometry geometry,
+            Vector3 blockPos,
+            float3 posOffset,
+            int cullFlags, int colorInt, int waterColorInt,
+            byte blockLight, bool includeLiquidMesh)
         {
             int vertexCount = geometry.GetVertexCount(cullFlags);
             int fluidVertexCount = 0;
@@ -185,7 +197,7 @@ namespace CraftSharp
                     FluidGeometry.Build(
                         visualBuffer, 
                         ref vertexOffset,
-                        offset,
+                        offset + posOffset,
                         scale,
                         liquidTextureStill, 
                         liquidTextureFlow,
@@ -272,9 +284,6 @@ namespace CraftSharp
 
             var triIdxCount = vertexCount / 2 * 3;
 
-            var meshDataArr = Mesh.AllocateWritableMeshData(1);
-            var meshData = meshDataArr[0];
-
             var vertAttrs = new NativeArray<VertexAttributeDescriptor>(4, Allocator.Temp, NativeArrayOptions.UninitializedMemory);
             vertAttrs[0] = new(VertexAttribute.Position,  dimension: 3, stream: 0);
             vertAttrs[1] = new(VertexAttribute.TexCoord0, dimension: 3, stream: 1);
@@ -341,14 +350,6 @@ namespace CraftSharp
                     vertexCount = vertexCount
                 }, MeshUpdateFlags.DontRecalculateBounds);
             }
-
-            // Create and assign mesh
-            var mesh = new Mesh { bounds = bounds };
-            Mesh.ApplyAndDisposeWritableMeshData(meshDataArr, mesh);
-            // Recalculate mesh normals
-            mesh.RecalculateNormals();
-
-            return mesh;
         }
     
         private static bool IsSameLiquid(BlockState self, BlockState neighbor)

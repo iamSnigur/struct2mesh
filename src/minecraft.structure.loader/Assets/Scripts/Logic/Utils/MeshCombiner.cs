@@ -13,8 +13,14 @@ namespace Logic.Utils
 		private const int Mesh16BitBufferVertexLimit = 65535;
 
 		[SerializeField]
-		private bool createMultiMaterialMesh = false, combineInactiveChildren = false, deactivateCombinedChildren = true,
-			deactivateCombinedChildrenMeshRenderers = false, generateUVMap = false, destroyCombinedChildren = false;
+		private bool 
+			createMultiMaterialMesh = false,
+			combineInactiveChildren = false,
+			deactivateCombinedChildren = true,
+			deactivateCombinedChildrenMeshRenderers = false,
+			generateUVMap = false, 
+			destroyCombinedChildren = false;
+		
 		[SerializeField]
 		private string folderPath = "Prefabs/CombinedMeshes";
 		[SerializeField]
@@ -377,7 +383,7 @@ namespace Logic.Utils
 #endif
 			#endregion Set Materials array & combine submeshes into one multimaterial Mesh.
 		}
-
+		
 		private async UniTask DeactivateCombinedGameObjects(MeshFilter[] meshFilters)
 		{
 			LongTaskYielder yielder = new();
