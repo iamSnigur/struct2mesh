@@ -40,6 +40,7 @@ namespace Logic.Parser
 
         private async UniTask<ParsedStructure> ParseNbtFile(NbtFile nbtFile)
         {
+            NbtList sizeTagList = nbtFile.RootTag.Get<NbtList>("size");
             NbtList blocksTagList = nbtFile.RootTag.Get<NbtList>("blocks");
             NbtList paletteTagList = nbtFile.RootTag.Get<NbtList>("palette") 
                  ?? nbtFile
@@ -49,11 +50,21 @@ namespace Logic.Parser
 
             ParsedStructure structure = new()
             {
+                Size = ParseNbtSize(sizeTagList),
                 Blocks = await ParseNbtBlocks(blocksTagList),
                 Palette = ParseNbtPalette(paletteTagList)
             };
 
             return structure;
+        }
+
+        private static Vector3 ParseNbtSize(NbtList sizeTagList)
+        {
+            float x = sizeTagList[2].IntValue;
+            float y = sizeTagList[1].IntValue;
+            float z = sizeTagList[0].IntValue;
+
+            return new Vector3(x, y, z);
         }
 
         private static bool IsFileNbtStructure(NbtFile file)

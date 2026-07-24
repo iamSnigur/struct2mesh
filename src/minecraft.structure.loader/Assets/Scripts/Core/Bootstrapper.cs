@@ -38,8 +38,10 @@ namespace Core
             }
         }
 
-        private void OnDestroy() => 
+        private void OnDestroy()
+        {
             AssetProvider.Release();
+        }
 
         private async UniTask BindDependencies()
         {

@@ -4,6 +4,7 @@ using Core.AssetManagement;
 using Core.Async;
 using CraftSharp;
 using Cysharp.Threading.Tasks;
+using Logic.MeshGenerator;
 using Logic.Parser;
 using Logic.Parser.Model;
 using Logic.Utils;
@@ -14,6 +15,9 @@ namespace Logic
 {
     public class StructureBuilder : MonoBehaviour
     {
+        public bool SeparateMeshes; // debug option
+        
+        public bool IsStructureLoaded { get; private set; }
         public GameObject Root { get; private set; }
         public static StructureVolume StructureVolume;
     
@@ -21,6 +25,11 @@ namespace Logic
         private LoadingCurtainView _loadingCurtainView;
 
         private ParserRegistry _parserRegistry;
+        private IMeshGenerator _meshGenerator;
+        private LongTaskYielder _taskYielder;
+
+        private MeshFilter _meshFilter;
+        private MeshRenderer _meshRenderer;
         
         public void InjectDependencies(
             LoadingCurtainView loadingCurtainView,
@@ -33,13 +42,25 @@ namespace Logic
         private void Awake()
         {
             Root = new GameObject("Structure");
+            _meshRenderer = Root.AddComponent<MeshRenderer>();
+            _meshFilter = Root.AddComponent<MeshFilter>();
+            _meshFilter.sharedMesh = new Mesh {name = "StructureMesh"};
+            
             StructureVolume = new StructureVolume();
             _parserRegistry = new ParserRegistry();
+            _meshGenerator = new SimpleMeshGenerator();
+            _taskYielder = new LongTaskYielder();
         }
-    
+
+        private void OnDestroy()
+        {
+            ((IDisposable)_meshGenerator).Dispose();  
+        }
+
         public async UniTaskVoid BuildFromBytesAsync(byte[] rawBytes, string fileType)
         {
             _cameraController.InputDisabled = true;
+            IsStructureLoaded = false;
             Root.SetActive(false);
             _loadingCurtainView.SetProgressText("Looking at your structure...");
             _loadingCurtainView.Show();
@@ -85,7 +106,7 @@ namespace Logic
             
             _loadingCurtainView.SetProgressText("Building...");
             UniTask delay3 = UniTask.Delay(1000);
-            UniTask constructTask = Construct(structure);
+            UniTask constructTask = ConstructAsync(structure);
 
             await UniTask.WhenAll(
                 delay3.ContinueWith(() => 
@@ -95,13 +116,14 @@ namespace Logic
             _loadingCurtainView.SetProgressText("Done");
 
             await UniTask.Delay(300);
-            
+
+            IsStructureLoaded = true;
             Root.SetActive(true);
             _loadingCurtainView.Hide();
             _cameraController
-                .DoOrbitAnimation(
-                    Root.GetComponent<Renderer>().bounds,
-                    2f,
+                .DoOrbitAnimationAsync(
+                    _meshRenderer.bounds,
+                    duration: 2f,
                     () => _cameraController.InputDisabled = false)
                 .Forget();
         }
@@ -112,13 +134,10 @@ namespace Logic
             
             StructureVolume.Reset();
 
-            LongTaskYielder yielder = new();
-            
             foreach (BlockEntry block in structure.Blocks)
             {
                 StructureVolume[block.Pos] = CreateBlockState(structure.Palette[block.State]);
-
-                await yielder.TryYieldAsync();
+                await _taskYielder.TryYieldAsync();
             }
         }
         
@@ -157,67 +176,31 @@ namespace Logic
             return blockState;
         }
     
-        private static void ClearRootVisual(GameObject modelObject)
+        private static void ClearVisual(GameObject modelObject)
         {
-            if (modelObject.TryGetComponent<MeshFilter>(out var meshFilter))
-            {
-                Destroy(meshFilter.sharedMesh);
-                meshFilter.sharedMesh = null;
-            }
-            
-            foreach (Transform t in modelObject.transform)
-            {
-                Destroy(t.gameObject);
-            }
+            if (modelObject.TryGetComponent<MeshFilter>(out var meshFilter)) 
+                meshFilter.sharedMesh.Clear();
         }
     
-        private async UniTask Construct(ParsedStructure structure)
+        private async UniTask ConstructAsync(ParsedStructure structure)
         {
-            await UniTask.Yield();
-            
-            ClearRootVisual(Root);
+            ClearVisual(Root);
             
             MinecraftAssetProvider.ReleaseBlockStateHandles();
         
             List<UniTask> warmupTasks = new(structure.Palette.Count);
 
-            LongTaskYielder yielder = new();
-            
             foreach (PaletteEntry entry in structure.Palette)
             {
                 warmupTasks.Add(MinecraftAssetProvider.WarmupBlockGeometriesAsync(entry.Name));
-
-                await yielder.TryYieldAsync();
+                await _taskYielder.TryYieldAsync();
             }
             
             await UniTask.WhenAll(warmupTasks);
-            
-            foreach (BlockEntry block in structure.Blocks)
-            {
-                PaletteEntry paletteEntry = structure.Palette[block.State];
 
-                if (paletteEntry.Name.Equals("air"))
-                    continue;
-
-                byte cullFlags = StructureVolume.GetCullFlagsFor(block.Pos);
+            await _meshGenerator.GenerateMesh(_meshFilter, _meshRenderer, structure, StructureVolume);
             
-                GameObject blockView = MinecraftAssetProvider.BuildModel(paletteEntry.Name, block.Pos, paletteEntry.Properties, cullFlags);
-                Transform cachedTransform = blockView.transform;
-                cachedTransform.parent = Root.transform;
-                cachedTransform.position = block.Pos;
-
-                await yielder.TryYieldAsync();
-            }
-            
-            MeshCombiner meshCombiner = Root.GetComponent<MeshCombiner>();
-            meshCombiner ??= Root.AddComponent<MeshCombiner>();
-            
-            meshCombiner.CreateMultiMaterialMesh = true;
-            meshCombiner.DestroyCombinedChildren = true;
-            await meshCombiner.CombineMeshes(false);
-
-            Renderer component = Root.GetComponent<Renderer>();
-            _cameraController.SetPivot(component.bounds.center);
+            _cameraController.SetPivot(_meshRenderer.bounds.center);
         }
     }
 }

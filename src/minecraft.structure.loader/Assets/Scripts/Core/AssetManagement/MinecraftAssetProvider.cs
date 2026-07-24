@@ -85,7 +85,7 @@ namespace Core.AssetManagement
             s_blockstateHandles.Add(await _blockStateLoader.LoadBlockStateModel(location, blockstateJson, renderType, offsetType));
         }
         
-        public static GameObject BuildModel(string blockStateId, Vector3 blockPos, Dictionary<string, string> prop, byte cullFlags)
+        public static BlockRenderData BuildBlock(ref Mesh.MeshData meshData, string blockStateId, Vector3 blockPos, Dictionary<string, string> prop, byte cullFlags)
         {
             ResourceLocation location = new(blockStateId);
             BlockState[] blockStates = BlockStatePaletteAdapter.Instance.GetAll(location);
@@ -102,10 +102,8 @@ namespace Core.AssetManagement
                 }
             }
 
-            GameObject gameObject = new(currentState.ToString());
-            BlockMeshBuilder.BuildBlockGameObject(gameObject, currentState, blockPos, cullFlags, _world);
-
-            return gameObject;
+            BlockRenderData blockRenderData = BlockMeshBuilder.BuildMeshData(ref meshData, currentState, blockPos, cullFlags, _world);
+            return blockRenderData;
         }
 
         private static async UniTask LoadLocations(Dictionary<ResourceLocation, string> table, string manifestAddress)
