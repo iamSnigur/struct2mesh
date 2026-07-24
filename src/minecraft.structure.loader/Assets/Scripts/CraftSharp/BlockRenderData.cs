@@ -2,7 +2,7 @@
 
 namespace CraftSharp
 {
-    public struct BuildMesh
+    public struct BlockRenderData
     {
         public Mesh.MeshData MeshData;
         public Material[] Materials;

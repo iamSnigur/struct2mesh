@@ -76,7 +76,7 @@ namespace UI.Views
         
         private void OnExportClicked(string format)
         {
-            if (!_structureBuilder.Root.TryGetComponent(out Renderer _))
+            if (!_structureBuilder.IsStructureLoaded)
             {
                 ToggleExportError(true);
                 return;

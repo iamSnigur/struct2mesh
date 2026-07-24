@@ -85,7 +85,7 @@ namespace Core.AssetManagement
             s_blockstateHandles.Add(await _blockStateLoader.LoadBlockStateModel(location, blockstateJson, renderType, offsetType));
         }
         
-        public static BuildMesh BuildModel(ref Mesh.MeshData meshData,string blockStateId, Vector3 blockPos, Dictionary<string, string> prop, byte cullFlags)
+        public static BlockRenderData BuildBlock(ref Mesh.MeshData meshData, string blockStateId, Vector3 blockPos, Dictionary<string, string> prop, byte cullFlags)
         {
             ResourceLocation location = new(blockStateId);
             BlockState[] blockStates = BlockStatePaletteAdapter.Instance.GetAll(location);
@@ -102,32 +102,8 @@ namespace Core.AssetManagement
                 }
             }
 
-            BuildMesh buildMesh = BlockMeshBuilder.BuildMeshData(ref meshData, currentState, blockPos, cullFlags, _world);
-            return buildMesh;
-        }
-
-        
-        public static GameObject BuildModel(string blockStateId, Vector3 blockPos, Dictionary<string, string> prop, byte cullFlags)
-        {
-            ResourceLocation location = new(blockStateId);
-            BlockState[] blockStates = BlockStatePaletteAdapter.Instance.GetAll(location);
-            BlockStatePredicate predicate = new(prop);
-
-            BlockState currentState = blockStates[0];
-
-            foreach (BlockState state in blockStates)
-            {
-                if (predicate.Check(state))
-                {
-                    currentState = state;
-                    break;
-                }
-            }
-
-            GameObject gameObject = new(currentState.ToString());
-            //BlockMeshBuilder.BuildMeshData(gameObject, currentState, blockPos, cullFlags, _world);
-
-            return gameObject;
+            BlockRenderData blockRenderData = BlockMeshBuilder.BuildMeshData(ref meshData, currentState, blockPos, cullFlags, _world);
+            return blockRenderData;
         }
 
         private static async UniTask LoadLocations(Dictionary<ResourceLocation, string> table, string manifestAddress)

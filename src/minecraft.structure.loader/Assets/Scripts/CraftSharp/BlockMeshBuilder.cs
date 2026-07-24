@@ -17,19 +17,11 @@ namespace CraftSharp
     {
         private static readonly MaterialManager s_materialManager;
         private static readonly Material s_fallbackMaterial;
-        private static Mesh.MeshDataArray _fallbackMeshDataArray;
 
         static BlockMeshBuilder()
         {
             s_materialManager = Object.FindFirstObjectByType<MaterialManager>();
-            
-            //CreateFallbackMesh();
             s_fallbackMaterial = CreateFallbackMaterial();
-        }
-
-        public static void Dispose()
-        {
-            _fallbackMeshDataArray.Dispose();
         }
 
         private static Material CreateFallbackMaterial() => 
@@ -96,9 +88,9 @@ namespace CraftSharp
             }, MeshUpdateFlags.DontRecalculateBounds);
         }
         
-        public static BuildMesh BuildMeshData(ref Mesh.MeshData meshData, BlockState blockState, Vector3 pos, byte cullFlags, World world)
+        public static BlockRenderData BuildMeshData(ref Mesh.MeshData meshData, BlockState blockState, Vector3 pos, byte cullFlags, World world)
         {
-            BuildMesh buildMesh;
+            BlockRenderData blockRenderData;
             int stateId = BlockStatePaletteAdapter.Instance.GetNumIdByObject(blockState);
             
             var packManager = ResourcePackManager.Instance;
@@ -106,9 +98,9 @@ namespace CraftSharp
             if (stateModel is null)
             {
                 CreateFallbackMesh(ref meshData, (float3)pos);
-                buildMesh.MeshData = meshData;
-                buildMesh.Materials = new[] { s_fallbackMaterial };
-                return buildMesh;
+                blockRenderData.MeshData = meshData;
+                blockRenderData.Materials = new[] { s_fallbackMaterial };
+                return blockRenderData;
             }
             
             BlockGeometry? blockGeometry = stateModel.Geometries[0];
@@ -118,12 +110,12 @@ namespace CraftSharp
 
             BuildBlockMesh_Internal(ref meshData, blockState, blockGeometry, pos, (float3)pos, cullFlags, color, waterColor, 1, true);
 
-            buildMesh.MeshData = meshData;
-            buildMesh.Materials = new Material[meshData.subMeshCount];
+            blockRenderData.MeshData = meshData;
+            blockRenderData.Materials = new Material[meshData.subMeshCount];
 
             if (blockState.InWater)
             {
-                buildMesh.Materials = new [] 
+                blockRenderData.Materials = new [] 
                 {
                     s_materialManager.GetAtlasMaterial(RenderType.WATER),
                     s_materialManager.GetAtlasMaterial(stateModel.RenderType) 
@@ -131,13 +123,13 @@ namespace CraftSharp
             }
             else
             {
-                buildMesh.Materials = new []
+                blockRenderData.Materials = new []
                 {
                     s_materialManager.GetAtlasMaterial(stateModel.RenderType)
                 };
             }
 
-            return buildMesh;
+            return blockRenderData;
         }
         
         private static void BuildBlockMesh_Internal(

@@ -1,13 +1,11 @@
 ﻿using System;
 using Core.AssetManagement;
 using Core.AssetManagement.External;
-using CraftSharp;
 using Cysharp.Threading.Tasks;
 using Logic;
 using UI;
 using UI.Views;
 using UnityEngine;
-using UnityEngine.Pool;
 
 namespace Core
 {
@@ -42,7 +40,6 @@ namespace Core
 
         private void OnDestroy()
         {
-            BlockMeshBuilder.Dispose();
             AssetProvider.Release();
         }
 

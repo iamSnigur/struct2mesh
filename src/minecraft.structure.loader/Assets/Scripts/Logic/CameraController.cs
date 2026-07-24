@@ -194,7 +194,7 @@ namespace Logic
             _currentRotation = _targetRotation;
         }
 
-        public async UniTaskVoid DoOrbitAnimation(Bounds structureBounds, float duration = 1f, Action onComplete = null)
+        public async UniTaskVoid DoOrbitAnimationAsync(Bounds structureBounds, float duration = 1f, Action onComplete = null)
         {
             _pitch = 15f;
             _yaw = 0f;
