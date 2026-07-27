@@ -2,14 +2,14 @@
 
 namespace Logic.Exporter
 {
-    public class ExporterRegistry : AbstractRegistry<string, IExporter>
+    public class ExporterRegistry : AbstractRegistry<ExportType, IExporter>
     {
         public ExporterRegistry()
         {
-            Register("fbx", new FbxExporter());
-            Register("glb", new GlbExporter());
-            Register("obj", new ObjExporter());
-            Register("ply", new PlyExporter());
+            Register(ExportType.AsciiFbx, new FbxExporter());
+            Register(ExportType.Glb, new GlbExporter());
+            Register(ExportType.Obj, new ObjExporter());
+            Register(ExportType.Ply, new PlyExporter());
         }
     }
 }

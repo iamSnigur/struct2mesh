@@ -2,6 +2,28 @@
 {
     public static class Selectors
     {
-        public const string ROOT = "root";
+        public const string LOADING_CURTAIN_ROOT = "loading-curtain-root";
+        public const string LOADER_ICON = "loader-icon";
+        public const string LOADER_LABEL = "loader-label";
+
+        public const string VERSION_LABEL = "version-label";
+        public const string FILE_NAME_LABEL = "file-name-label";
+        public const string BTN_WELCOME_HUB = "btn-welcome-hub";
+        
+        public const string DISCLAIMER_HIDDEN = "disclaimer-hidden";
+        public const string DISCLAIMER_SHOWN = "disclaimer-shown";
+        public const string DISCLAIMER_ROOT = "disclaimer-root";
+        public const string DISCLAIMER_BTN_OK = "btn-ok";
+        
+        public const string SIDEBAR_ROOT = "sidebar-root";
+        public const string EXPORT_ERROR = "export-error";
+        public const string BTN_EXPORT_ASCII_FBX = "btn-export-ascii-fbx";
+        public const string BTN_EXPORT_GLB = "btn-export-glb";
+        public const string BTN_EXPORT_OBJ = "btn-export-obj";
+        public const string BTN_EXPORT_PLY = "btn-export-ply";
+        public const string BTN_CAMERA_RESET = "btn-camera-reset";
+        public const string BTN_LOAD_NEW = "btn-load-new";
+        
+        public const string POPUP_OVERLAY_ROOT = "popup-overlay-root";
     }
 }

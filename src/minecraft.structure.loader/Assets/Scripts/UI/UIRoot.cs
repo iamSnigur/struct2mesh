@@ -31,7 +31,7 @@ namespace UI
                 slidesConfig);
             
             LoadingCurtainView = new LoadingCurtainView(
-                _document.rootVisualElement.Q<VisualElement>("loader"));
+                _document.rootVisualElement.Q<VisualElement>(Selectors.LOADING_CURTAIN_ROOT));
         }
         
         private IEnumerator Start()

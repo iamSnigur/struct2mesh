@@ -12,7 +12,7 @@ namespace UI.Views
 
         protected override void QueryElements()
         {
-            _okButton = Query<Button>("btn-ok");
+            _okButton = Query<Button>(Selectors.DISCLAIMER_BTN_OK);
         }
 
         protected override void RegisterCallbacks()
@@ -24,7 +24,7 @@ namespace UI.Views
                 if (evt.target != evt.currentTarget)
                     return;
                 
-                if (_root.ClassListContains("disclaimer-hidden"))
+                if (_root.ClassListContains(Selectors.DISCLAIMER_HIDDEN))
                     _root.style.display = DisplayStyle.None;
             });
         }
@@ -32,14 +32,14 @@ namespace UI.Views
         public override void Show()
         {
             _root.style.display = DisplayStyle.Flex;
-            _root.RemoveFromClassList("disclaimer-hidden");
-            _root.AddToClassList("disclaimer-shown");
+            _root.RemoveFromClassList(Selectors.DISCLAIMER_HIDDEN);
+            _root.AddToClassList(Selectors.DISCLAIMER_SHOWN);
         }
 
         public override void Hide()
         {
-            _root.RemoveFromClassList("disclaimer-shown");
-            _root.AddToClassList("disclaimer-hidden");
+            _root.RemoveFromClassList(Selectors.DISCLAIMER_SHOWN);
+            _root.AddToClassList(Selectors.DISCLAIMER_HIDDEN);
         }
     }
 }

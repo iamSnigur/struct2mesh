@@ -23,15 +23,15 @@ namespace UI.Views
             OnboardingSlidesConfig slidesConfig) : base(root)
         {
             _overlayPopupView = new OverlayPopupView(
-                Query<VisualElement>("popup-overlay"),
+                Query<VisualElement>(Selectors.POPUP_OVERLAY_ROOT),
                 slidesConfig);
             _sidebarView = new SidebarView(
-                Query<VisualElement>("sidebar"),
+                Query<VisualElement>(Selectors.SIDEBAR_ROOT),
                 _fileNameLabel,
                 structureBuilder,
                 cameraController);
             
-            _disclaimerView = new DisclaimerView(Query<VisualElement>("disclaimer-root"));
+            _disclaimerView = new DisclaimerView(Query<VisualElement>(Selectors.DISCLAIMER_ROOT));
             
             BuildInfo.Init();
             SetVersion(BuildInfo.FullInfo);
@@ -40,9 +40,9 @@ namespace UI.Views
 
         protected override void QueryElements()
         {
-            _fileNameLabel = Query<Label>("file-label");
-            _versionLabel = Query<Label>("version-label");
-            _openPopupButton = Query<Button>("btn-welcome-hub");
+            _fileNameLabel = Query<Label>(Selectors.FILE_NAME_LABEL);
+            _versionLabel = Query<Label>(Selectors.VERSION_LABEL);
+            _openPopupButton = Query<Button>(Selectors.BTN_WELCOME_HUB);
         }
 
         protected override void RegisterCallbacks()

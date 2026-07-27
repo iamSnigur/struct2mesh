@@ -186,6 +186,7 @@ namespace Logic.MeshGenerator
             Mesh.ApplyAndDisposeWritableMeshData(outputArray, mesh);
             mesh.bounds = new Bounds(structure.Size / 2f, structure.Size);
             mesh.RecalculateNormals();
+            mesh.RecalculateBounds();
 
             meshRenderer.sharedMaterials = _finalMaterialsBuffer;
 

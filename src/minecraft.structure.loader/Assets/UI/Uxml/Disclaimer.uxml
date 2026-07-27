@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ui:UXML xmlns:ui="UnityEngine.UIElements">
-    <Style src="../RootView.uss"/>
+    <Style src="../Styles/Disclaimer.uss"/>
     <ui:VisualElement class="disclaimer-border">
         <ui:Label name="disclaimer-label" class="disclaimer-label" text="This tool is an independent project and is not affiliated with, endorsed by, sponsored by, or approved by Mojang Studios. Minecraft and all related trademarks, names, and assets are the property of their respective owners." />
         <ui:Button name="btn-ok" text="OK" class="btn-ok"/>

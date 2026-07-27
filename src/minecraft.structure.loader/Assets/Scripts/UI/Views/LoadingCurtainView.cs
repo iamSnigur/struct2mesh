@@ -7,21 +7,18 @@ namespace UI.Views
 {
     public class LoadingCurtainView : ViewComponent
     {
-        private VisualElement _loader;
         private VisualElement _loaderIcon;
         private Label _progressLabel;
 
         private bool _isActive;
 
         public LoadingCurtainView(VisualElement root) : base(root)
-        {
-        }
+        { }
 
         protected override void QueryElements()
         {
-            _loader = Query<VisualElement>("loader");
-            _loaderIcon = Query<VisualElement>("loader-icon");
-            _progressLabel = Query<Label>("loader-label");
+            _loaderIcon = Query<VisualElement>(Selectors.LOADER_ICON);
+            _progressLabel = Query<Label>(Selectors.LOADER_LABEL);
         }
 
         public void SetProgressText(string text) => 
@@ -30,8 +27,8 @@ namespace UI.Views
         public override void Show()
         {
             _isActive = true;
-            _loader.style.display = DisplayStyle.Flex;
-            _loader.style.opacity = 1f;
+            _root.style.display = DisplayStyle.Flex;
+            _root.style.opacity = 1f;
             DoSpinnerAnimation(0.9f).Forget();
         }
 
@@ -46,15 +43,15 @@ namespace UI.Views
             {
                 float t = elapsed / duration;
 
-                _loader.style.opacity = 1f - t;
+                _root.style.opacity = 1f - t;
 
                 elapsed += Time.deltaTime;
                 await UniTask.Yield();
             }
 
-            _loader.style.opacity = 0f;
+            _root.style.opacity = 0f;
             _isActive = false;
-            _loader.style.display = DisplayStyle.None;
+            _root.style.display = DisplayStyle.None;
         }
         
         private async UniTaskVoid DoSpinnerAnimation(float cycleDuration = 1f)

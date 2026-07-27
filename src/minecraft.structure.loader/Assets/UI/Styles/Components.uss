@@ -1,0 +1,51 @@
+.btn-dungeons-root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-dungeons-outline {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+
+    background-color: transparent;
+    background-image: var(--img-btn-flat);
+    -unity-background-image-tint-color: black;
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 5px;
+}
+
+.btn-dungeons {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+
+    color: white;
+    font-size: 24px;
+    -unity-font-definition: var(--font-troika);
+    letter-spacing: 2px;
+    text-shadow: 0 3px 0 rgba(0, 0, 0, 0.5);
+    background-color: transparent;
+
+    background-image: var(--img-btn);
+    -unity-background-image-tint-color: var(--col-dungeons-btn);
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 5px;
+    border-color: transparent;
+
+    transition-duration: 0.08s;
+    transition-timing-function: ease;
+}
+
+.btn-dungeons:active {
+    -unity-background-image-tint-color: var(--col-dungeons-btn-active);
+    transition-duration: 0.08s;
+    transition-timing-function: ease;
+}
+
+.btn-dungeons-root:hover .btn-dungeons-outline {
+    -unity-background-image-tint-color: white;
+}

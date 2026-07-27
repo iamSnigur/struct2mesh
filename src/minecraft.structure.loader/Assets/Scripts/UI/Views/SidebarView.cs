@@ -41,23 +41,23 @@ namespace UI.Views
 
         protected override void QueryElements()
         {
-            _exportErrorLabel = Query<Label>("export-error");
+            _exportErrorLabel = Query<Label>(Selectors.EXPORT_ERROR);
 
-            _exportFbxButton = Query<Button>("btn-export-fbx");
-            _exportGlbButton = Query<Button>("btn-export-glb");
-            _exportObjButton = Query<Button>("btn-export-obj");
-            _exportPlyButton = Query<Button>("btn-export-ply");
+            _exportFbxButton = Query<Button>(Selectors.BTN_EXPORT_ASCII_FBX);
+            _exportGlbButton = Query<Button>(Selectors.BTN_EXPORT_GLB);
+            _exportObjButton = Query<Button>(Selectors.BTN_EXPORT_OBJ);
+            _exportPlyButton = Query<Button>(Selectors.BTN_EXPORT_PLY);
             
-            _cameraResetButton = Query<Button>("btn-camera-reset");
-            _loadNewButton = Query<Button>("btn-load-new");
+            _cameraResetButton = Query<Button>(Selectors.BTN_CAMERA_RESET);
+            _loadNewButton = Query<Button>(Selectors.BTN_LOAD_NEW);
         }
 
         protected override void RegisterCallbacks()
         {
-            _exportFbxButton.clicked += () => OnExportClicked("fbx");
-            _exportGlbButton.clicked += () => OnExportClicked("glb");
-            _exportObjButton.clicked += () => OnExportClicked("obj");
-            _exportPlyButton.clicked += () => OnExportClicked("ply");
+            _exportFbxButton.clicked += () => OnExportClicked(ExportType.AsciiFbx);
+            _exportGlbButton.clicked += () => OnExportClicked(ExportType.Glb);
+            _exportObjButton.clicked += () => OnExportClicked(ExportType.Obj);
+            _exportPlyButton.clicked += () => OnExportClicked(ExportType.Ply);
 
             _loadNewButton.clicked += OpenUploadOverlay;
             _cameraResetButton.clicked += () => _cameraController.ResetPivot();
@@ -74,7 +74,7 @@ namespace UI.Views
         public void CloseUploadOverlay() => 
             CloseUploadPanel();
         
-        private void OnExportClicked(string format)
+        private void OnExportClicked(ExportType exportType)
         {
             if (!_structureBuilder.IsStructureLoaded)
             {
@@ -84,7 +84,7 @@ namespace UI.Views
             
             ToggleExportError(false);
             
-            IExporter exporter = _exporterRegistry.GetFor(format);
+            IExporter exporter = _exporterRegistry.GetFor(exportType);
             ModelExporter.ExportToZip(
                 _fileNameLabel.text.ToLower(),
                 _structureBuilder.Root,

@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements">
-    <Style src="../RootView.uss"/>
+    <Style src="../Styles/Components.uss"/>
+    <Style src="../Styles/PopupOverlay.uss"/>
     <ui:VisualElement class="popup-root" name="popup-root">
         <ui:VisualElement class="popup-border" name="border">
             <ui:VisualElement name="welcome-hub-root" class="popup-info-panel">
@@ -21,9 +22,9 @@
                                 <ui:Label class="info-onboarding-label" text="Don't know where to start? New to structure blocks?" />
                                 <ui:Label class="info-onboarding-label" text="This onboarding just for you!" />
                                 
-                                <ui:VisualElement class="btn-info-onboarding-root">
-                                    <ui:VisualElement class="btn-outline" />
-                                    <ui:Button name="btn-start-onboarding" class="btn-info-onboarding" text="Let's Start!" />
+                                <ui:VisualElement class="btn-dungeons-root btn-info-onboarding-root">
+                                    <ui:VisualElement class="btn-dungeons-outline" />
+                                    <ui:Button name="btn-start-onboarding" class="btn-dungeons btn-info-onboarding" text="Let's Start!" />
                                 </ui:VisualElement>
                             </ui:VisualElement>
                         </ui:VisualElement>
@@ -47,20 +48,21 @@
                 </ui:VisualElement>
 
                 <ui:VisualElement class="popup-body">
-                    <ui:VisualElement class="onboarding-body-content">
-                        <ui:Label name="onboarding-title" class="onboarding-title"
-                                  text="Step 1 — Get a Structure Block" />
-                        <ui:VisualElement name="onboarding-image" class="onboarding-image" />
-                        <ui:Label name="onboarding-description" class="onboarding-text"
-                                  text="Open chat and run '/give @p minecraft:structure_block'. This is the one way to obtain it, since it isn't in the creative inventory by default." />
-                    </ui:VisualElement>
+                    <ui:ScrollView>
+                            <ui:Label name="onboarding-title" class="onboarding-title"
+                                      text="Step 1 — Get a Structure Block" />
+                            <ui:VisualElement name="onboarding-image" class="onboarding-image" />
+                            <ui:Label name="onboarding-description" class="onboarding-text"
+                                      text="Open chat and run '/give @p minecraft:structure_block'. This is the one way to obtain it, since it isn't in the creative inventory by default." />
+                    </ui:ScrollView>
+                    
                 </ui:VisualElement>
 
                 <ui:VisualElement class="popup-footer">
                     <ui:VisualElement class="onboarding-footer-content">
-                        <ui:VisualElement class="btn-back-root">
-                            <ui:VisualElement class="btn-outline" />
-                            <ui:Button name="btn-back" text="Go Back" class="btn-back" />
+                        <ui:VisualElement class="btn-dungeons-root btn-back-root">
+                            <ui:VisualElement class="btn-dungeons-outline" />
+                            <ui:Button name="btn-back" text="Go Back" class="btn-dungeons btn-back" />
                         </ui:VisualElement>
 
                         <ui:VisualElement class="control-panel">

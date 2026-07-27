@@ -1,0 +1,93 @@
+:root {
+    --col-sidebar-bg:       rgba(0, 0, 0, 0.5);
+    --col-dungeons-btn:     rgb(82, 175, 45);
+    --col-dungeons-btn-active: rgb(66 140 36);
+
+    --font-troika:          url("../Fonts/troika.otf");
+    --font-consolas:        url("../Fonts/Consolas-Regular.ttf");
+    --font-segoe-ui:        url("../Fonts/Segoe UI.ttf");
+    
+    --img-btn:              url("../Icons/button.png");
+    --img-btn-flat:         url("../Icons/button_flat.png");
+}
+
+.root {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-name-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    font-size: 15px;
+    letter-spacing: 1px;
+    -unity-font-definition: var(--font-troika);
+    -unity-text-align: middle-center;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.version-label {
+    position: absolute;
+    bottom: 0;
+    left: 4px;
+    color: rgba(255, 255, 255, 0.3);
+    -unity-font-definition: var(--font-consolas);
+    font-size: 10px;
+    -unity-text-align: middle-center;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+    align-self: flex-start;
+}
+
+.creeper-face {
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+    background-image: url("../Icons/creeper-face.png");
+    align-self: flex-end;
+}
+
+.btn-welcome-hub {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    
+    height: 64px;
+    width: 250px;    
+        
+    background-image: url("../Icons/button.png");
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-background-image-tint-color: var(--col-dungeons-btn);
+    -unity-slice-scale: 5px;
+    background-color: transparent;
+    border-color: transparent;
+    
+    -unity-font-definition: var(--font-troika);
+    font-size: 24px;
+    color: white;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+    -unity-text-align: middle-center;
+    justify-content: center;
+    
+    scale: 1;
+    transition-duration: 0.8s;
+    transition-timing-function: ease-out-elastic;
+    translate: -190px 0;
+}
+
+.btn-welcome-hub:hover {
+    scale: 1;
+    transition-duration: 0.4s;
+    transition-timing-function: ease-out-back;
+    translate: -60px 0;
+}
+
+.btn-welcome-hub:active {
+    scale: 0.95;
+    transition-duration: 0.8s;
+    transition-timing-function: ease-out-elastic;
+}
