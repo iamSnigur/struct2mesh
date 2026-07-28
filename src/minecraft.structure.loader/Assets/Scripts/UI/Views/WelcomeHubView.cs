@@ -9,13 +9,14 @@ namespace UI.Views
         private Label _githubLabel;
         private Label _supportLabel;
         private Label _reportIssueLabel;
+        private VisualElement _image;
         
         public WelcomeHubView(VisualElement root) : base(root)
-        {
-        }
+        { }
 
         protected override void QueryElements()
         {
+            _image = Query<Label>("");
             _githubLabel = Query<Label>("github-link");
             _supportLabel = Query<Label>("support-link");
             _reportIssueLabel = Query<Label>("feedback-link");

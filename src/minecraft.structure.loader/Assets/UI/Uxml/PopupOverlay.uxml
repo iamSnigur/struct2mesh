@@ -44,18 +44,60 @@
 
             <ui:VisualElement name="onboarding-root" class="popup-onboarding-panel">
                 <ui:VisualElement class="popup-header">
-                    <ui:Label class="header-label" text="Onboarding" />
+                    <ui:Label class="header-label" text="Knowledge base" />
                 </ui:VisualElement>
 
                 <ui:VisualElement class="popup-body">
-                    <ui:ScrollView>
-                            <ui:Label name="onboarding-title" class="onboarding-title"
-                                      text="Step 1 — Get a Structure Block" />
-                            <ui:VisualElement name="onboarding-image" class="onboarding-image" />
-                            <ui:Label name="onboarding-description" class="onboarding-text"
-                                      text="Open chat and run '/give @p minecraft:structure_block'. This is the one way to obtain it, since it isn't in the creative inventory by default." />
+                    <ui:ScrollView class="scroll-root" scroll-deceleration-rate="0.8" >
+                        <ui:VisualElement class="info-card-base">
+                            <ui:VisualElement class="info-card-decor"/>
+                            <ui:Label class="onboarding-title" text="Supported Minecraft Version" />
+                            <ui:Label class="onboarding-text" text="Struct2Mesh currently supports Minecraft Java Edition block states from 26.1." />
+                            <ui:Label class="onboarding-text" text="Block states from older or newer versions are not recognized and will fallback to a placeholder block, making it still possible to load a structures from other version." />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="info-card-base">
+                            <ui:VisualElement class="info-card-decor"/>
+                            <ui:Label class="onboarding-title" text="Entity Support" />
+                            <ui:Label class="onboarding-text" text="Entities are currently not supported, and support is not planned." />
+                            <ui:Label class="onboarding-text" text="Structures containing entities will still load correctly, but all entities will be ignored during import." />
+                            <ui:Label class="onboarding-text" text="Block entities are supported. However, visuals driven by NBT data — such as banner patterns or pottery patterns — are currently not supported." />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="info-card-base">
+                            <ui:VisualElement class="info-card-decor"/>
+                            <ui:Label class="onboarding-title" text="Supported File Formats" />
+                            <ui:Label class="onboarding-text" text="Struct2Mesh currently supports importing .nbt structure files." />
+                            <ui:Label class="onboarding-text" text="Support for additional formats may be added in future releases." />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="info-card-base">
+                            <ui:VisualElement class="info-card-decor"/>
+                            <ui:Label class="onboarding-title" text="Transparent Blocks" />
+                            <ui:Label class="onboarding-text" text="Structures containing overlapping transparent blocks (such as glass, water, or ice) may display incorrect rendering order in exported models." />
+                            <ui:Label class="onboarding-text" text="This is a common limitation of real-time transparency rendering." />
+                            <ui:Label class="onboarding-text" text="If your rendering pipeline allows it, enabling ZWrite on transparent materials can improve the result in many cases." />
+                            <ui:Label class="onboarding-text" text="A more accurate solution requires sorting transparent geometry, which adds significant processing overhead and is currently outside the scope of this project." />
+                            <ui:Label class="info-card-note" text="Note: Enabling `ZWrite` is not a universal solution and may introduce other transparency artifacts depending on the shader and rendering pipeline you use." />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="info-card-base">
+                            <ui:VisualElement class="info-card-decor"/>
+                            <ui:Label class="onboarding-title" text="Texture Animations" />
+                            <ui:Label class="onboarding-text" text="Texture animations are fully supported inside Struct2Mesh using a custom shader." />
+                            <ui:Label class="onboarding-text" text="Exported models contain static textures by default because standard 3D formats do not preserve Minecraft's texture animation system." />
+                            <ui:Label class="onboarding-text" text="To restore animated textures, you'll need to implement a custom shader in your target engine or application." />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="info-card-base">
+                            <ui:VisualElement class="info-card-decor"/>
+                            <ui:Label class="onboarding-title" text="Exporting Large Structures From Minecraft" />
+                            <ui:Label class="onboarding-text" text="Minecraft Java Edition Structure Blocks can save areas up to 48 × 48 × 48 blocks." />
+                            <ui:Label class="onboarding-text" text="Struct2Mesh itself does not have this limitation. Larger .nbt files can be imported if they were generated using another tool." />
+                            <ui:Label class="onboarding-text" text="If your build exceeds the Structure Block limit, you can convert formats such as .schematic to .nbt using tools like Bloxilize." />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="info-card-base">
+                            <ui:VisualElement class="info-card-decor"/>
+                            <ui:Label class="onboarding-title" text="Structure size limits" />
+                            <ui:Label class="onboarding-text" text="The current maximum structure size is 200,000 blocks in volume." />
+                            <ui:Label class="onboarding-text" text="Loading very large structures can put a lot of pressure on your browser's memory. If imports start failing after opening several large structures, simply refresh the page and try again." />
+                        </ui:VisualElement>
                     </ui:ScrollView>
-                    
                 </ui:VisualElement>
 
                 <ui:VisualElement class="popup-footer">
@@ -63,18 +105,6 @@
                         <ui:VisualElement class="btn-dungeons-root btn-back-root">
                             <ui:VisualElement class="btn-dungeons-outline" />
                             <ui:Button name="btn-back" text="Go Back" class="btn-dungeons btn-back" />
-                        </ui:VisualElement>
-
-                        <ui:VisualElement class="control-panel">
-                            <ui:Button name="btn-arrow-left" class="btn-arrow-root">
-                                <ui:VisualElement class="btn-arrow-left" />
-                            </ui:Button>
-
-                            <ui:Label name="slide-progress-label" class="slide-progress-label" text="1/7" />
-
-                            <ui:Button name="btn-arrow-right" class="btn-arrow-root">
-                                <ui:VisualElement class="btn-arrow-right" />
-                            </ui:Button>
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>

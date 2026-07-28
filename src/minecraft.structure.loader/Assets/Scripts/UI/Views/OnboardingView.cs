@@ -25,19 +25,10 @@ namespace UI.Views
 
         protected override void QueryElements()
         {
-            _slideTitle = Query<Label>("onboarding-title");
-            _slideDescription = Query<Label>("onboarding-description");
-            _slideImage = Query<VisualElement>("onboarding-image");
-            _slidesProgressLabel = Query<Label>("slide-progress-label");
-            
-            _leftArrow = Query<Button>("btn-arrow-left");
-            _rightArrow = Query<Button>("btn-arrow-right");
         }
 
         protected override void RegisterCallbacks()
         {
-            _leftArrow.clicked += LeftArrowClicked;
-            _rightArrow.clicked += RightArrowClicked;
         }
 
         public override void Show() => 

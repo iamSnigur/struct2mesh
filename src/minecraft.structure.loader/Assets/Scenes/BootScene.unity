@@ -640,6 +640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344685372120438b876eb15625f443fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: StructureLoader::NbtReader
+  SeparateMeshes: 0
 --- !u!4 &1188278965
 Transform:
   m_ObjectHideFlags: 0
