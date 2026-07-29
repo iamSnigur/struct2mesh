@@ -19,12 +19,10 @@ namespace UI.Views
             VisualElement root,
             StructureBuilder structureBuilder,
             FileReceiver fileReceiver,
-            CameraController cameraController,
-            OnboardingSlidesConfig slidesConfig) : base(root)
+            CameraController cameraController) : base(root)
         {
             _overlayPopupView = new OverlayPopupView(
-                Query<VisualElement>(Selectors.POPUP_OVERLAY_ROOT),
-                slidesConfig);
+                Query<VisualElement>(Selectors.POPUP_OVERLAY_ROOT));
             _sidebarView = new SidebarView(
                 Query<VisualElement>(Selectors.SIDEBAR_ROOT),
                 _fileNameLabel,
@@ -32,6 +30,8 @@ namespace UI.Views
                 cameraController);
             
             _disclaimerView = new DisclaimerView(Query<VisualElement>(Selectors.DISCLAIMER_ROOT));
+            
+            Initialize();
             
             BuildInfo.Init();
             SetVersion(BuildInfo.FullInfo);

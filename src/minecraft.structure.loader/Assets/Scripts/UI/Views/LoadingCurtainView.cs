@@ -13,7 +13,9 @@ namespace UI.Views
         private bool _isActive;
 
         public LoadingCurtainView(VisualElement root) : base(root)
-        { }
+        {
+            Initialize();
+        }
 
         protected override void QueryElements()
         {

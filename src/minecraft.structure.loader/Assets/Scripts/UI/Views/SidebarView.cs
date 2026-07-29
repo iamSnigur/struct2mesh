@@ -37,6 +37,7 @@ namespace UI.Views
             _fileNameLabel = fileNameLabel;
             _structureBuilder = structureBuilder;
             _cameraController = cameraController;
+            Initialize();
         }
 
         protected override void QueryElements()

@@ -81,19 +81,25 @@
     padding: 16px;
 }
 
-.info-content {
+.popup-footer {
+    width: 100%;
+    height: 10%;
+    padding: 8px;
+}
+
+.welcome-hub-content {
     width: 100%;
     height: 100%;
     flex-grow: 1;
     flex-direction: row;
 }
 
-.info-left-panel {
+.left-panel {
     flex: 1 1 0;
     flex-direction: column;
 }
 
-.info-text {
+.sponsor-card {
     flex: 1 1 0;
     padding: 12px;
     margin-bottom: 10px;
@@ -104,7 +110,7 @@
     border-color: transparent;
 }
 
-.info-onboarding {
+.knowledge-base-card {
     padding: 12px;
     flex: 1.2 1 0;
     flex-direction: column;
@@ -116,45 +122,13 @@
     border-color: transparent;
 }
 
-.info-title {
+.card-title {
     font-size: 32px;
     color: rgb(245, 195, 56);
     -unity-font-definition: var(--font-troika);
 }
 
-.info-onboarding-label {
-    white-space: normal;
-    font-size: 26px;
-    color: rgb(220, 220, 220);
-    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
-    -unity-font-definition: var(--font-segoe-ui);
-}
-
-.btn-info-onboarding-root {
-    width: 90%;
-    height: 60px;
-    min-height: 60px;
-    margin-top: auto;
-    margin-bottom: 10px;
-    align-self: center;
-}
-
-
-.btn-info-onboarding {
-    color: white;
-    font-size: 24px;
-}
-
-.info-promo {
-    flex: 1 1 0;
-    background-image: url("../Images/Animations/Pool/ezgif-frame-001.jpg");
-    -unity-background-scale-mode: scale-and-crop;
-    border-radius: 35px;
-    overflow: hidden;
-    margin-left: 24px;
-}
-
-.body-label {
+.card-label {
     width: 100%;
     font-size: 25px;
     color: white;
@@ -163,10 +137,35 @@
     white-space: normal;
 }
 
-.popup-footer {
-    width: 100%;
-    height: 10%;
-    padding: 8px;
+.btn-show-knowledge-base-root {
+    width: 90%;
+    height: 60px;
+    min-height: 60px;
+    margin-top: auto;
+    margin-bottom: 10px;
+    align-self: center;
+}
+
+.btn-show-knowledge-base {
+    color: white;
+    font-size: 24px;
+}
+
+.parallax-viewport {
+    flex: 1 1 0;
+    border-radius: 35px;
+    overflow: hidden;
+    margin-left: 24px;
+}
+
+.parallax-media {
+    background-image: url("../Images/parallax-media.jpg");
+    -unity-background-scale-mode: scale-and-crop;
+    position: absolute;
+    left: -40px;
+    top: -40px;
+    right: -40px;
+    bottom: -40px;
 }
 
 .welcome-hub-footer-content {
@@ -191,26 +190,26 @@
     color: rgb(160, 160, 160);
 }
 
-.popup-info-panel {
+.popup-welcome-hub-panel {
     width: 100%;
     height: 100%;
     display: flex;
 }
 
-.popup-onboarding-panel {
+.popup-knowledge-base-panel {
     width: 100%;
     height: 100%;
     display: none;
 }
 
-.onboarding-body-content {
+.knowledge-base-body-content {
     width: 100%;
     height: 100%;
     padding: 8px;
     flex-direction: column;
 }
 
-.onboarding-footer-content {
+.knowledge-base-footer-content {
     width: 100%;
     height: 100%;
     flex-direction: row;
@@ -248,14 +247,14 @@
     background-color: rebeccapurple;
 }
 
-.onboarding-title {
+.info-card-title {
     -unity-font-definition: var(--font-troika);
     -unity-font-style: normal;
     font-size: 26px;
     color: rgb(245, 195, 56);
 }
 
-.onboarding-text {
+.info-card-text {
     -unity-font-definition: var(--font-segoe-ui);
     font-size: 20px;
     color: white;
@@ -269,38 +268,7 @@
     white-space: normal;
 }
 
-.scroll-root {
+.scroll-view-root {
     width: 100%;
     height: 100%;
-}
-
-.unity-scroller__slider {
-    margin: 0 0 0 0;
-}
-
-.unity-scroller--vertical {
-    width: 12px;
-    margin-left: 10px;
-}
-
-.unity-scroller .unity-base-slider__tracker {
-    background-color: rgba(255, 255, 255, 0.05);
-    width: 6px;
-    border-width: 0;
-    margin-left: 5px;
-}
-
-.unity-scroller .unity-base-slider__dragger {
-    background-color: rgb(121, 121, 121);
-    width: 12px;
-    border-width: 0;
-}
-
-.unity-scroller .unity-base-slider__dragger:hover {
-    background-color: rgb(192, 192, 192);
-}
-
-.unity-scroller__low-button,
-.unity-scroller__high-button {
-    display: none;
 }

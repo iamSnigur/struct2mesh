@@ -19,16 +19,14 @@ namespace UI
         public void InjectDependencies(
             CameraController cameraController,
             FileReceiver fileReceiver,
-            StructureBuilder structureBuilder,
-            OnboardingSlidesConfig slidesConfig)
+            StructureBuilder structureBuilder)
         {
             _document = GetComponent<UIDocument>();
             _mainView = new MainView(
                 _document.rootVisualElement,
                 structureBuilder, 
                 fileReceiver,
-                cameraController,
-                slidesConfig);
+                cameraController);
             
             LoadingCurtainView = new LoadingCurtainView(
                 _document.rootVisualElement.Q<VisualElement>(Selectors.LOADING_CURTAIN_ROOT));

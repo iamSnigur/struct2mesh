@@ -22,7 +22,7 @@ namespace Core
             try
             {
                 DontDestroyOnLoad(this);
-                await BindDependencies();
+                BindDependencies();
                 _loadingCurtainView.SetProgressText("Loading boot assets...");
                 _loadingCurtainView.Show();
                 await MinecraftAssetProvider.Init();
@@ -43,22 +43,17 @@ namespace Core
             AssetProvider.Release();
         }
 
-        private async UniTask BindDependencies()
+        private void BindDependencies()
         {
             _cameraController = GetOnScene<CameraController>();
             _structureBuilder = GetOnScene<StructureBuilder>();
             _fileReceiver = GetOnScene<FileReceiver>();
             _uiRoot = GetOnScene<UIRoot>();
             
-            OnboardingSlidesConfig slidesConfig = 
-                await AssetProvider
-                    .LoadByAddressAsync<OnboardingSlidesConfig>("onboarding_slides_config");
-            
             _uiRoot.InjectDependencies(
                 _cameraController,
                 _fileReceiver,
-                _structureBuilder,
-                slidesConfig);
+                _structureBuilder);
             
             _loadingCurtainView = _uiRoot.LoadingCurtainView;
             _fileReceiver.InjectDependencies(_structureBuilder);

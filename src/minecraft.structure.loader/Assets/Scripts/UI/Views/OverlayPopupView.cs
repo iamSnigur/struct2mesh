@@ -6,30 +6,33 @@ namespace UI.Views
     public class OverlayPopupView : ViewComponent
     {
         private readonly WelcomeHubView _welcomeHubView;
-        private readonly OnboardingView _onboardingView;
+        private readonly KnowledgeBaseView _knowledgeBaseView;
 
-        private Button _startOnboardingButton;
+        private Button _showKnowledgeBaseButton;
         private Button _goBackButton;
         
-        public OverlayPopupView(VisualElement root, OnboardingSlidesConfig slidesConfig) : base(root)
+        public OverlayPopupView(VisualElement root) : base(root)
         {
-            _welcomeHubView = new WelcomeHubView(Query<VisualElement>("welcome-hub-root"));
-            _onboardingView = new OnboardingView(
-                Query<VisualElement>("onboarding-root"), 
-                slidesConfig);
+            _welcomeHubView = new WelcomeHubView(
+                Query<VisualElement>(Selectors.WELCOME_HUB_ROOT), 
+                _root);
+            _knowledgeBaseView = new KnowledgeBaseView(
+                Query<VisualElement>(Selectors.KNOWLEDGE_BASE_ROOT));
             
             _root.pickingMode = PickingMode.Ignore;
+            
+            Initialize();
         }
 
         protected override void QueryElements()
         {
-            _startOnboardingButton = Query<Button>("btn-start-onboarding");
-            _goBackButton = Query<Button>("btn-back");
+            _showKnowledgeBaseButton = Query<Button>(Selectors.BTN_SHOW_KNOWLEDGE_BASE);
+            _goBackButton = Query<Button>(Selectors.BTN_BACK_TO_WELCOME_HUB);
         }
 
         protected override void RegisterCallbacks()
         {
-            _startOnboardingButton.clicked += ShowOnboarding;
+            _showKnowledgeBaseButton.clicked += ShowKnowledgeBase;
             _goBackButton.clicked += ShowWelcomeHub;
             
             _root.RegisterCallback<TransitionEndEvent>(evt =>
@@ -37,11 +40,8 @@ namespace UI.Views
                 if (evt.target != evt.currentTarget)
                     return;
 
-                if (_root.ClassListContains("popup-overlay-hidden"))
-                {
-                    //_root.style.visibility = Visibility.Hidden;
+                if (_root.ClassListContains(Selectors.POPUP_OVERLAY_HIDDEN)) 
                     _root.pickingMode = PickingMode.Ignore;
-                }
             });
 
             _root.RegisterCallback<ClickEvent>(evt =>
@@ -55,30 +55,28 @@ namespace UI.Views
 
         public override void Show()
         {
-            //_currentSlide = 0;
-            //LeftArrowClicked();
-
+            ShowWelcomeHub();
             _root.pickingMode = PickingMode.Position;
-            _root.RemoveFromClassList("popup-overlay-hidden");
-            _root.AddToClassList("popup-overlay-shown");
+            _root.RemoveFromClassList(Selectors.POPUP_OVERLAY_HIDDEN);
+            _root.AddToClassList(Selectors.POPUP_OVERLAY_SHOWN);
         }
 
         public override void Hide()
         {
-            _root.RemoveFromClassList("popup-overlay-shown");
-            _root.AddToClassList("popup-overlay-hidden");
+            _root.RemoveFromClassList(Selectors.POPUP_OVERLAY_SHOWN);
+            _root.AddToClassList(Selectors.POPUP_OVERLAY_HIDDEN);
         }
 
         private void ShowWelcomeHub()
         {
-            _onboardingView.Hide();
+            _knowledgeBaseView.Hide();
             _welcomeHubView.Show();
         }
 
-        private void ShowOnboarding()
+        private void ShowKnowledgeBase()
         {
             _welcomeHubView.Hide();
-            _onboardingView.Show();
+            _knowledgeBaseView.Show();
         }
     }
 }

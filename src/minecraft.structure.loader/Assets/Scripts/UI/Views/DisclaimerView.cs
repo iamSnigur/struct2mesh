@@ -6,13 +6,15 @@ namespace UI.Views
     public class DisclaimerView : ViewComponent
     {
         private Button _okButton;
-        
+
         public DisclaimerView(VisualElement root) : base(root)
-        { }
+        {
+            Initialize();
+        }
 
         protected override void QueryElements()
         {
-            _okButton = Query<Button>(Selectors.DISCLAIMER_BTN_OK);
+            _okButton = Query<Button>(Selectors.BTN_OK);
         }
 
         protected override void RegisterCallbacks()

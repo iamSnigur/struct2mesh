@@ -7,10 +7,11 @@ namespace UI.Components
     {
         protected readonly VisualElement _root;
 
-        protected ViewComponent(VisualElement root)
-        {
+        protected ViewComponent(VisualElement root) => 
             _root = root;
-            
+
+        protected void Initialize()
+        {
             QueryElements();
             RegisterCallbacks();
         }
@@ -18,8 +19,8 @@ namespace UI.Components
         protected virtual void QueryElements() { }
         protected virtual void RegisterCallbacks() { }
         
-        public virtual void Show() {}
-        public virtual void Hide() {}
+        public virtual void Show() => _root.style.display = DisplayStyle.Flex;
+        public virtual void Hide() => _root.style.display = DisplayStyle.None;
 
         protected T Query<T>(string name) where T : VisualElement
         {
