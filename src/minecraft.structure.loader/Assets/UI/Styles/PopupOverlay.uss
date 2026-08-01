@@ -262,6 +262,7 @@
 }
 
 .info-card-note {
+    padding-left: 20px;
     -unity-font-definition: var(--font-segoe-ui);
     font-size: 20px;
     color: gray;
