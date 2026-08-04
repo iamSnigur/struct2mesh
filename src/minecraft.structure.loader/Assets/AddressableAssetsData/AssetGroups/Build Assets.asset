@@ -30,13 +30,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 90705263dac28bf44bb5089ba0d91ea2
-    m_Address: block_atlas
+  - m_GUID: a119eb2380cc60441889947577fcc2f6
+    m_Address: block_color_rules
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a119eb2380cc60441889947577fcc2f6
-    m_Address: block_color_rules
+  - m_GUID: ba9d780e17645ff4dab1d8fc17449285
+    m_Address: block_atlas
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

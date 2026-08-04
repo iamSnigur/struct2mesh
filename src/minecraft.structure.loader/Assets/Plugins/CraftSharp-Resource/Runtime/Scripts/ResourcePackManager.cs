@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.AssetManagement.External;
 using Cysharp.Threading.Tasks;
+using Unity.Collections;
 using UnityEngine;
 using Unity.Mathematics;
 using UnityEditor;
@@ -34,6 +35,7 @@ namespace CraftSharp.Resource
 
         // Identifier -> Texture file path (For atlas)
         public readonly Dictionary<ResourceLocation, string> TextureFileTable = new();
+
         // Identifier -> Entity texture
         public readonly Dictionary<ResourceLocation, Texture2D> EntityTexture2DTable = new();
 
@@ -59,7 +61,7 @@ namespace CraftSharp.Resource
         public readonly Dictionary<int, ItemModel> ItemModelTable = new();
 
         public readonly HashSet<ResourceLocation> BuiltinEntityModels = new();
-        
+
         public readonly HashSet<ResourceLocation> GeneratedItemModels = new();
 
         public readonly BlockModelLoader BlockModelLoader;
@@ -68,7 +70,7 @@ namespace CraftSharp.Resource
         public readonly ItemModelLoader ItemModelLoader;
 
         public int GeneratedItemModelPrecision { get; set; } = 16;
-        public int GeneratedItemModelThickness { get; set; } =  1;
+        public int GeneratedItemModelThickness { get; set; } = 1;
 
         // Identifier -> Particle json file path
         public readonly Dictionary<ResourceLocation, string> ParticleFileTable = new();
@@ -89,13 +91,13 @@ namespace CraftSharp.Resource
 #nullable disable
         private Texture2D blockAtlas;
 #nullable enable
-        
+
         private Texture2DArray? destroyTextureArray;
 
         private readonly List<ResourcePack> packs = new();
 
         public static readonly ResourcePackManager Instance = new();
-        
+
         private ResourcePackManager()
         {
             // Block model loaders
@@ -134,13 +136,13 @@ namespace CraftSharp.Resource
 
             // And clear up colormap data
             World.ColormapSize = 0;
-            World.GrassColormapPixels = new Color32[]{ };
-            World.FoliageColormapPixels = new Color32[]{ };
+            World.GrassColormapPixels = new Color32[] { };
+            World.FoliageColormapPixels = new Color32[] { };
         }
 
         private static string GetProgressString(int curCount, int totalCount)
         {
-            return $" {Mathf.RoundToInt(curCount / (float) totalCount * 100)}%";
+            return $" {Mathf.RoundToInt(curCount / (float)totalCount * 100)}%";
         }
 
         public async UniTask LoadPacks_Mod(Action<string, string> updateStatus)
@@ -151,10 +153,10 @@ namespace CraftSharp.Resource
             updateStatus("resource.info.create_texture", string.Empty);
             //await GenerateAtlas();
             await LoadAtlas();
-            
+
             // Load block models...
             updateStatus("resource.info.load_block_model", string.Empty);
-            
+
             foreach (ResourceLocation blockModelId in BlockModelFileTable.Keys)
             {
                 try
@@ -168,23 +170,24 @@ namespace CraftSharp.Resource
                     throw;
                 }
             }
-                
+
             updateStatus("resource.info.resource_loaded", string.Empty);
-            
+
             Loaded = true;
         }
 
-#region ignore
+        #region ignore
 
         private void BuildStateGeometries(Action<int, int> progressUpdate)
         {
             var groupIds = BlockStatePalette.INSTANCE.GetAllGroupIds();
             int i = 0;
-            
+
             // Load all blockstate files and build their block meshes...
             foreach (var blockId in groupIds)
             {
-                if (BlockStateFileTable.TryGetValue(blockId, out var path)) // Load the state model definition of this block
+                if (BlockStateFileTable.TryGetValue(blockId,
+                        out var path)) // Load the state model definition of this block
                 {
                     var renderType =
                         BlockStatePalette.INSTANCE.RenderTypeTable.GetValueOrDefault(blockId, RenderType.SOLID);
@@ -198,7 +201,7 @@ namespace CraftSharp.Resource
                 {
                     Debug.LogWarning($"Block state model definition not assigned for {blockId}!");
                 }
-                
+
                 progressUpdate(i++, groupIds.Length);
             }
         }
@@ -207,7 +210,7 @@ namespace CraftSharp.Resource
         {
             var numIds = ItemPalette.INSTANCE.GetAllNumIds();
             int i = 0;
-            
+
             // Load all item model files and build their item meshes...
             foreach (var numId in numIds)
             {
@@ -229,21 +232,23 @@ namespace CraftSharp.Resource
                             int layerCount = rawModel.Textures.Count;
 
                             rawModel.Elements.AddRange(
-                                    ItemModelLoader.GetGeneratedItemModelElements(
-                                            layerCount, GeneratedItemModelPrecision,
-                                                    GeneratedItemModelThickness, tintable).ToArray());
-                            
+                                ItemModelLoader.GetGeneratedItemModelElements(
+                                    layerCount, GeneratedItemModelPrecision,
+                                    GeneratedItemModelThickness, tintable).ToArray());
+
                             //Debug.Log($"Generating item model for {itemModelId} tintable: {tintable}");
                         }
 
                         var itemGeometry = new ItemGeometryBuilder(rawModel).Build();
 
                         // Set render type to cutout for all generated item models
-                        var renderType = generated ? RenderType.CUTOUT : BlockStatePalette
-                            .INSTANCE.RenderTypeTable.GetValueOrDefault(itemId, RenderType.SOLID);
+                        var renderType = generated
+                            ? RenderType.CUTOUT
+                            : BlockStatePalette
+                                .INSTANCE.RenderTypeTable.GetValueOrDefault(itemId, RenderType.SOLID);
 
                         var itemModel = new ItemModel(itemGeometry, renderType);
-                        
+
                         // Look for and append geometry overrides to the item model
                         Json.JSONData modelData = Json.ParseJson(File.ReadAllText(path));
 
@@ -255,7 +260,8 @@ namespace CraftSharp.Resource
                             {
                                 var overrideModelId = ResourceLocation.FromString(o.Properties["model"].StringValue);
 
-                                if (RawItemModelTable.TryGetValue(overrideModelId, out var rawOverrideModel)) // Build this override
+                                if (RawItemModelTable.TryGetValue(overrideModelId,
+                                        out var rawOverrideModel)) // Build this override
                                 {
                                     var overrideGenerated = GeneratedItemModels.Contains(overrideModelId);
 
@@ -265,19 +271,18 @@ namespace CraftSharp.Resource
                                         int layerCount = rawModel.Textures.Count;
 
                                         rawOverrideModel.Elements.AddRange(
-                                                ItemModelLoader.GetGeneratedItemModelElements(
-                                                        layerCount, GeneratedItemModelPrecision,
-                                                                GeneratedItemModelThickness, tintable).ToArray());
-                                        
+                                            ItemModelLoader.GetGeneratedItemModelElements(
+                                                layerCount, GeneratedItemModelPrecision,
+                                                GeneratedItemModelThickness, tintable).ToArray());
+
                                         //Debug.Log($"Generating item model (override) for {itemModelId} tintable: {tintable}");
                                     }
 
                                     var overrideGeometry = new ItemGeometryBuilder(rawOverrideModel).Build();
                                     var predicate = ItemModelPredicate.fromJson(o.Properties["predicate"]);
-                                    
+
                                     itemModel.AddOverride(predicate, overrideGeometry);
                                 }
-                                
                             }
                         }
 
@@ -292,16 +297,18 @@ namespace CraftSharp.Resource
                 {
                     Debug.LogWarning($"Item model not assigned for {itemModelId}");
                 }
-                
+
                 progressUpdate(i++, numIds.Length);
             }
         }
-        
+
         public Texture2D GetParticleAtlas()
         {
             return particleAtlas!;
         }
-#endregion
+
+        #endregion
+
         private IEnumerator GenerateParticleAtlasAndBuildMeshes(DataLoadFlag atlasGenFlag)
         {
             ParticleMeshesTable.Clear(); // Clear previously loaded table...
@@ -327,7 +334,8 @@ namespace CraftSharp.Resource
 
                         foreach (var textureId in textureIds.DataArray
                                      .Select(textureIdElem => ResourceLocation.FromString(textureIdElem.StringValue))
-                                     .Select(textureId => new ResourceLocation(textureId.Namespace, $"particle/{textureId.Path}")))
+                                     .Select(textureId =>
+                                         new ResourceLocation(textureId.Namespace, $"particle/{textureId.Path}")))
                         {
                             textureIdSet.Add(textureId);
                             textureLists[particleTypeId][frame++] = textureId;
@@ -388,24 +396,9 @@ namespace CraftSharp.Resource
 
             atlasGenFlag.Finished = true;
         }
-        
+
         private readonly Dictionary<ResourceLocation, TextureInfo> texAtlasTable = new();
 
-        public float3[] GetParticleUVs(int stateId, Vector4 part)
-        {
-            var identifier = StateModelTable.TryGetValue(stateId, out var stateModel) ?
-                stateModel.ParticleTexture : ResourceLocation.INVALID;
-
-            var info = GetTextureInfo(identifier);
-            if (info.frameCount > 1) // This texture is animated
-            {
-                float oneX = info.bounds.width / info.framePerRow; // Frame size on texture atlas array
-
-                return GetUVsAt(info.bounds, info.index, oneX, oneX, part, 0);
-            }
-            return GetUVsAt(info.bounds, info.index, info.bounds.width, info.bounds.height, part, 0);
-        }
-        
         /// <summary>
         /// Get texture uvs (x, y, depth in atlas array) and texture animation info (frame count, frame interval, frame size, frame per row)
         /// </summary>
@@ -417,9 +410,11 @@ namespace CraftSharp.Resource
                 var oneX = info.bounds.width / info.framePerRow; // Frame size on texture atlas array
 
                 return (GetUVsAt(info.bounds, info.index, oneX, oneX, part, areaRot),
-                        new(info.frameCount, info.frameInterval, oneX, info.framePerRow));
+                    new(info.frameCount, info.frameInterval, oneX, info.framePerRow));
             }
-            return (GetUVsAt(info.bounds, info.index, info.bounds.width, info.bounds.height, part, areaRot), float4.zero);
+
+            return (GetUVsAt(info.bounds, info.index, info.bounds.width, info.bounds.height, part, areaRot),
+                float4.zero);
         }
 
         private static float3[] GetUVsAt(Rect bounds, int index, float oneU, float oneV, Vector4 part, int areaRot)
@@ -434,27 +429,47 @@ namespace CraftSharp.Resource
 
             return areaRot switch
             {
-                0 => new[]{ new float3(       u1, oneV - v1, 0F) + o, new float3(       u2, oneV - v1, 0F) + o, new float3(       u1, oneV - v2, 0F) + o, new float3(       u2, oneV - v2, 0F) + o }, //   0 Deg
-                1 => new[]{ new float3(       v1,        u1, 0F) + o, new float3(       v1,        u2, 0F) + o, new float3(       v2,        u1, 0F) + o, new float3(       v2,        u2, 0F) + o }, //  90 Deg
-                2 => new[]{ new float3(oneU - u1,        v1, 0F) + o, new float3(oneU - u2,        v1, 0F) + o, new float3(oneU - u1,        v2, 0F) + o, new float3(oneU - u2,        v2, 0F) + o }, // 180 Deg
-                3 => new[]{ new float3(oneV - v1, oneV - u1, 0F) + o, new float3(oneV - v1, oneU - u2, 0F) + o, new float3(oneV - v2, oneU - u1, 0F) + o, new float3(oneV - v2, oneU - u2, 0F) + o }, // 270 Deg
+                0 => new[]
+                {
+                    new float3(u1, oneV - v1, 0F) + o, new float3(u2, oneV - v1, 0F) + o,
+                    new float3(u1, oneV - v2, 0F) + o, new float3(u2, oneV - v2, 0F) + o
+                }, //   0 Deg
+                1 => new[]
+                {
+                    new float3(v1, u1, 0F) + o, new float3(v1, u2, 0F) + o, new float3(v2, u1, 0F) + o,
+                    new float3(v2, u2, 0F) + o
+                }, //  90 Deg
+                2 => new[]
+                {
+                    new float3(oneU - u1, v1, 0F) + o, new float3(oneU - u2, v1, 0F) + o,
+                    new float3(oneU - u1, v2, 0F) + o, new float3(oneU - u2, v2, 0F) + o
+                }, // 180 Deg
+                3 => new[]
+                {
+                    new float3(oneV - v1, oneV - u1, 0F) + o, new float3(oneV - v1, oneU - u2, 0F) + o,
+                    new float3(oneV - v2, oneU - u1, 0F) + o, new float3(oneV - v2, oneU - u2, 0F) + o
+                }, // 270 Deg
 
-                _ => new[]{ new float3(       u1, oneV - v1, 0F) + o, new float3(       u2, oneV - v1, 0F) + o, new float3(       u1, oneV - v2, 0F) + o, new float3(       u2, oneV - v2, 0F) + o }  // Default
+                _ => new[]
+                {
+                    new float3(u1, oneV - v1, 0F) + o, new float3(u2, oneV - v1, 0F) + o,
+                    new float3(u1, oneV - v2, 0F) + o, new float3(u2, oneV - v2, 0F) + o
+                } // Default
             };
         }
-        
+
         private TextureInfo GetTextureInfo(ResourceLocation identifier)
         {
             if (texAtlasTable.TryGetValue(identifier, out var info))
                 return info;
-            
+
             Debug.Log($"Texture {identifier} is not in atlas!");
 
             // Return missing no texture
             return texAtlasTable[ResourceLocation.INVALID];
         }
 
-        public Texture2D GetAtlasArray(bool mipped) => 
+        public Texture2D GetAtlasArray(bool mipped) =>
             blockAtlas;
 
         public Texture2DArray? GetDestroyTextureArray()
@@ -468,6 +483,7 @@ namespace CraftSharp.Resource
             public readonly int frameCount;
             public readonly float frameInterval;
             public readonly bool interpolate;
+
             public TextureAnimationInfo(int f, int fRow, float i, bool itpl)
             {
                 frameCount = f;
@@ -479,16 +495,16 @@ namespace CraftSharp.Resource
 
         private static async UniTask<(Texture2D, TextureAnimationInfo?)> LoadSingleTexture_Mod(string texFilePath)
         {
-            Texture2D tex = await AssetProvider.LoadByAddressAsync<Texture2D>(texFilePath); 
+            Texture2D tex = await AssetProvider.LoadByAddressAsync<Texture2D>(texFilePath);
             Assert.IsNotNull(tex, $"Failed to load texture: {texFilePath}");
 
             string mcmeta = $"{texFilePath}.mcmeta";
-            
+
             if (!await AssetProvider.KeyExistsAsync<TextAsset>(mcmeta))
                 return (tex, null);
-            
+
             TextAsset metaAsset = await AssetProvider.LoadByAddressAsync<TextAsset>(mcmeta);
-            
+
             int spriteCount = tex.height / tex.width;
 
             Json.JSONData? metaJson = Json.ParseJson(metaAsset.text);
@@ -497,7 +513,7 @@ namespace CraftSharp.Resource
                 return (tex, null);
 
             int[] frames;
-                
+
             if (animJson.Properties.TryGetValue("frames", out var frameArray)) // Place the frames in specified order
             {
                 frames = frameArray.DataArray.Select(x => int.Parse(x.StringValue)).ToArray();
@@ -506,12 +522,12 @@ namespace CraftSharp.Resource
             {
                 frames = Enumerable.Range(0, spriteCount).ToArray();
             }
-                
+
             int frameCount = frames.Length;
 
-            if (frameCount <= 1) 
+            if (frameCount <= 1)
                 return (tex, null);
-            
+
             float frameInterval;
 
             if (animJson.Properties.TryGetValue("frametime", out var frameTime))
@@ -523,26 +539,25 @@ namespace CraftSharp.Resource
                               && interpolation.StringValue.ToLower().Equals("true");
 
             int frameSize = tex.width;
-                    
+
             int framePerRow = Mathf.CeilToInt(math.sqrt(frameCount));
-            int framePerCol = Mathf.CeilToInt((float) frameCount / framePerRow);
+            int framePerCol = Mathf.CeilToInt((float)frameCount / framePerRow);
 
             // Re-arrange the texture
             Texture2D rearranged = new(framePerRow * frameSize, framePerCol * frameSize);
 
-            for (int fi = 0;fi < frameCount;fi++)
+            for (int fi = 0; fi < frameCount; fi++)
             {
                 int framePos = frames[fi];
 
                 // Copy pixel data
                 Graphics.CopyTexture(tex, 0, 0, 0, (spriteCount - 1 - framePos) * frameSize, frameSize, frameSize,
                     rearranged, 0, 0, (fi % framePerRow) * frameSize, (framePerCol - 1 - fi / framePerRow) * frameSize);
-                        
             }
 
             return (rearranged, new TextureAnimationInfo(frameCount, framePerRow, frameInterval, interpolate));
         }
-        
+
         private static (Texture2D, TextureAnimationInfo?) LoadSingleTexture(string texFilePath)
         {
             Texture2D tex = new(2, 2);
@@ -561,8 +576,9 @@ namespace CraftSharp.Resource
                 }
 
                 int[] frames;
-                
-                if (animJson.Properties.TryGetValue("frames", out var frameArray)) // Place the frames in specified order
+
+                if (animJson.Properties.TryGetValue("frames",
+                        out var frameArray)) // Place the frames in specified order
                 {
                     frames = frameArray.DataArray.Select(x => int.Parse(x.StringValue)).ToArray();
                 }
@@ -570,7 +586,7 @@ namespace CraftSharp.Resource
                 {
                     frames = Enumerable.Range(0, spriteCount).ToArray();
                 }
-                
+
                 int frameCount = frames.Length;
 
                 if (frameCount > 1)
@@ -578,7 +594,8 @@ namespace CraftSharp.Resource
                     float frameInterval;
 
                     if (animJson.Properties.TryGetValue("frametime", out var frameTime)) // Use specified frame interval
-                        frameInterval = float.Parse(frameTime.StringValue, CultureInfo.InvariantCulture.NumberFormat) * 0.05F;
+                        frameInterval = float.Parse(frameTime.StringValue, CultureInfo.InvariantCulture.NumberFormat) *
+                                        0.05F;
                     else // Use default frame interval
                         frameInterval = 0.05F;
 
@@ -586,23 +603,24 @@ namespace CraftSharp.Resource
                                       && interpolation.StringValue.ToLower().Equals("true");
 
                     int frameSize = tex.width;
-                    
+
                     int framePerRow = Mathf.CeilToInt(math.sqrt(frameCount));
-                    int framePerCol = Mathf.CeilToInt((float) frameCount / framePerRow);
+                    int framePerCol = Mathf.CeilToInt((float)frameCount / framePerRow);
 
                     // Re-arrange the texture
                     Texture2D rearranged = new(framePerRow * frameSize, framePerCol * frameSize);
                     //Debug.Log($"Animated texture {texId} (pr: {framePerRow} pc: {framePerCol} f: {frameCount})");
                     //Debug.Log($"Animated texture {texId} (frames: {string.Join(",", frames)})");
 
-                    for (int fi = 0;fi < frameCount;fi++)
+                    for (int fi = 0; fi < frameCount; fi++)
                     {
                         int framePos = frames[fi];
 
                         // Copy pixel data
-                        Graphics.CopyTexture(tex, 0, 0, 0, (spriteCount - 1 - framePos) * frameSize, frameSize, frameSize,
-                                rearranged, 0, 0, (fi % framePerRow) * frameSize, (framePerCol - 1 - fi / framePerRow) * frameSize);
-                        
+                        Graphics.CopyTexture(tex, 0, 0, 0, (spriteCount - 1 - framePos) * frameSize, frameSize,
+                            frameSize,
+                            rearranged, 0, 0, (fi % framePerRow) * frameSize,
+                            (framePerCol - 1 - fi / framePerRow) * frameSize);
                     }
 
                     return (rearranged, new(frameCount, framePerRow, frameInterval, interpolate));
@@ -611,7 +629,7 @@ namespace CraftSharp.Resource
 
             return (tex, null);
         }
-        
+
         private static Texture2D GetBlankTexture()
         {
             Texture2D tex = new(16, 16);
@@ -630,7 +648,7 @@ namespace CraftSharp.Resource
         {
             return GetSolidTexture(new Color32(0, 0, 0, 0));
         }
-        
+
         private static Texture2D GetSolidTexture(Color32 color)
         {
             Texture2D tex = new(16, 16);
@@ -652,22 +670,22 @@ namespace CraftSharp.Resource
 
             var colors = new Color32[16 * 16];
 
-            for (int i = 0;i < 8;i++)
+            for (int i = 0; i < 8; i++)
             {
-                for (int j = 0;j < 8;j++)
-                    colors[(i << 4) + j] =   black;
-                
-                for (int j = 8;j < 16;j++)
+                for (int j = 0; j < 8; j++)
+                    colors[(i << 4) + j] = black;
+
+                for (int j = 8; j < 16; j++)
                     colors[(i << 4) + j] = magenta;
             }
 
-            for (int i = 8;i < 16;i++)
+            for (int i = 8; i < 16; i++)
             {
-                for (int j = 0;j < 8;j++)
+                for (int j = 0; j < 8; j++)
                     colors[(i << 4) + j] = magenta;
-                
-                for (int j = 8;j < 16;j++)
-                    colors[(i << 4) + j] =   black;
+
+                for (int j = 8; j < 16; j++)
+                    colors[(i << 4) + j] = black;
             }
 
             tex.SetPixels32(colors);
@@ -689,13 +707,13 @@ namespace CraftSharp.Resource
 
             var colors = Enumerable.Repeat(magenta, width * height).ToArray();
 
-            for (int i = 0;i < height;i++)
+            for (int i = 0; i < height; i++)
             {
-                for (int j = 0;j < width;j++)
+                for (int j = 0; j < width; j++)
                 {
-                    if ( ( (i >> 2) + (j >> 2) ) % 2 == 0 )
+                    if (((i >> 2) + (j >> 2)) % 2 == 0)
                         colors[i * width + j] = black;
-                }     
+                }
             }
 
             tex.SetPixels32(colors);
@@ -709,11 +727,9 @@ namespace CraftSharp.Resource
         {
             texAtlasTable.Clear();
             await AtlasTableHelper.LoadAtlasTable(texAtlasTable);
-            
-            Texture2D atlas = await AssetProvider.LoadByAddressAsync<Texture2D>("block_atlas");
-            blockAtlas = atlas ?? throw new NullReferenceException("Can't load baked atlas: block_atlas");
+            blockAtlas = await AssetProvider.LoadByAddressAsync<Texture2D>("block_atlas");
         }
-        
+
         private async UniTask GenerateAtlas()
         {
             HashSet<ResourceLocation> textureIdSet = new();
@@ -723,7 +739,7 @@ namespace CraftSharp.Resource
             modelFilePaths.AddRange(ItemModelFileTable.Values);
 
             await GatherTexturesCoroutine(textureIdSet, modelFilePaths);
-            
+
             // Append liquid textures, which are not referenced in model files, but will be used by fluid mesh
             foreach (ResourceLocation texId in FluidGeometry.LiquidTextures)
             {
@@ -766,12 +782,12 @@ namespace CraftSharp.Resource
 
             (Texture2D, TextureAnimationInfo?)[] textureData = await UniTask.WhenAll(textureTasks);
 
-            foreach (var data in textureData) 
+            foreach (var data in textureData)
                 textureInfos[count++] = data;
-            
+
             await GenerateAtlas_Internal(textureInfos, ids);
         }
-        
+
         private async UniTask GatherTexturesCoroutine(HashSet<ResourceLocation> textureIdSet, List<string> modelFiles)
         {
             for (int i = 0; i < modelFiles.Count; i++)
@@ -796,11 +812,12 @@ namespace CraftSharp.Resource
                     await UniTask.Yield();
             }
         }
-        
-        private IEnumerator GenerateAtlas_Internal((Texture2D, TextureAnimationInfo?)[] textureInfos, ResourceLocation[] ids)
+
+        private IEnumerator GenerateAtlas_Internal((Texture2D, TextureAnimationInfo?)[] textureInfos,
+            ResourceLocation[] ids)
         {
             texAtlasTable.Clear(); // Clear previously loaded table...
-            
+
             int curTexIndex = 0, curAtlasIndex = 0;
             var totalCount = textureInfos.Length;
             List<Texture2D> atlases = new();
@@ -835,7 +852,8 @@ namespace CraftSharp.Resource
                 }
 
                 // Then we go stitch 'em        (inclusive)..(exclusive)
-                (Texture2D, TextureAnimationInfo?)[] textureInfosConsumed = textureInfos[curTexIndex..(lastTexIndex + 1)];
+                (Texture2D, TextureAnimationInfo?)[] textureInfosConsumed =
+                    textureInfos[curTexIndex..(lastTexIndex + 1)];
 
                 // First assign a placeholder
                 var atlas = new Texture2D(ATLAS_SIZE, ATLAS_SIZE)
@@ -843,7 +861,8 @@ namespace CraftSharp.Resource
                     filterMode = FilterMode.Point
                 };
 
-                Rect[]? rects = atlas.PackTextures(textureInfosConsumed.Select(x => x.Item1).ToArray(), 0, ATLAS_SIZE, false);
+                Rect[]? rects = atlas.PackTextures(textureInfosConsumed.Select(x => x.Item1).ToArray(), 0, ATLAS_SIZE,
+                    false);
 
                 if (atlas.width != ATLAS_SIZE || atlas.height != ATLAS_SIZE)
                 {
@@ -853,15 +872,15 @@ namespace CraftSharp.Resource
 
                     Graphics.CopyTexture(atlas, 0, 0, 0, 0, atlas.width, atlas.height, newAtlas, 0, 0, 0, 0);
 
-                    float scaleX = atlas.width  / (float) ATLAS_SIZE;
-                    float scaleY = atlas.height / (float) ATLAS_SIZE;
+                    float scaleX = atlas.width / (float)ATLAS_SIZE;
+                    float scaleY = atlas.height / (float)ATLAS_SIZE;
 
                     // Rescale the texture boundaries
-                    for (int i = 0;i < rects.Length;i++)
+                    for (int i = 0; i < rects.Length; i++)
                     {
                         rects[i] = new Rect(
-                            rects[i].x     * scaleX,    rects[i].y      * scaleY,
-                            rects[i].width * scaleX,    rects[i].height * scaleY
+                            rects[i].x * scaleX, rects[i].y * scaleY,
+                            rects[i].width * scaleX, rects[i].height * scaleY
                         );
                     }
 
@@ -872,37 +891,40 @@ namespace CraftSharp.Resource
 
                 yield return null;
 
-                for (int i = 0;i < consumedTexCount;i++)
+                for (int i = 0; i < consumedTexCount; i++)
                 {
                     //Debug.Log($"{curTexIndex + i} {ids[curTexIndex + i]} => ({curAtlasIndex}) {rects[i].xMin} {rects[i].xMax} {rects[i].yMin} {rects[i].yMax}");
                     var curAnimInfo = textureInfos[curTexIndex + i].Item2;
-                    
+
                     if (curAnimInfo is null)
                         texAtlasTable.Add(ids[curTexIndex + i], new TextureInfo(rects[i], curAtlasIndex));
                     else
-                        texAtlasTable.Add(ids[curTexIndex + i], new TextureInfo(rects[i], curAtlasIndex, curAnimInfo.frameCount,
-                                rects[i].width / curAnimInfo.framePerRow, curAnimInfo.framePerRow, curAnimInfo.interpolate, curAnimInfo.frameInterval));
+                        texAtlasTable.Add(ids[curTexIndex + i], new TextureInfo(rects[i], curAtlasIndex,
+                            curAnimInfo.frameCount,
+                            rects[i].width / curAnimInfo.framePerRow, curAnimInfo.framePerRow, curAnimInfo.interpolate,
+                            curAnimInfo.frameInterval));
                 }
 
                 curTexIndex += consumedTexCount;
                 curAtlasIndex++;
 
                 yield return null;
-            }
-            while (curTexIndex < totalCount);
+            } while (curTexIndex < totalCount);
 
             // mipCount 1 means no mipmapping, mipCount 0 means use maximum level of mipmaps
             // A mipCount of ((int) math.log2(MIN_MIPMAP_SIZE)) + 1 makes sure that all
             // MIN_MIPMAP_SIZE * MIN_MIPMAP_SIZE mipmap chunks are sampled from a single tile
-            var mipCount1 = ((int) math.log2(MIN_MIPMAP_SIZE)) + 1;
+            var mipCount1 = ((int)math.log2(MIN_MIPMAP_SIZE)) + 1;
             var mipCount0 = Mathf.Max(1, mipCount1 - 2);
-            var atlasArray0 = new Texture2DArray(ATLAS_SIZE, ATLAS_SIZE, curAtlasIndex, TextureFormat.RGBA32, mipCount0, false);
-            var atlasArray1 = new Texture2DArray(ATLAS_SIZE, ATLAS_SIZE, curAtlasIndex, TextureFormat.RGBA32, mipCount1, false);
+            var atlasArray0 = new Texture2DArray(ATLAS_SIZE, ATLAS_SIZE, curAtlasIndex, TextureFormat.RGBA32, mipCount0,
+                false);
+            var atlasArray1 = new Texture2DArray(ATLAS_SIZE, ATLAS_SIZE, curAtlasIndex, TextureFormat.RGBA32, mipCount1,
+                false);
 
             atlasArray0.filterMode = FilterMode.Point;
             atlasArray1.filterMode = FilterMode.Point;
 
-            for (int index = 0;index < atlases.Count;index++)
+            for (int index = 0; index < atlases.Count; index++)
             {
                 // Set texture pixels
                 atlasArray0.SetPixels32(atlases[index].GetPixels32(), index, 0);
@@ -920,9 +942,9 @@ namespace CraftSharp.Resource
                     for (int y = 0; y < mipSize; y++)
                         for (int x = 0; x < mipSize; x++)
                         {
-                            pixColors[0] = lastColors[ y * 2      * size + x * 2    ];
-                            pixColors[1] = lastColors[ y * 2      * size + x * 2 + 1];
-                            pixColors[2] = lastColors[(y * 2 + 1) * size + x * 2    ];
+                            pixColors[0] = lastColors[y * 2 * size + x * 2];
+                            pixColors[1] = lastColors[y * 2 * size + x * 2 + 1];
+                            pixColors[2] = lastColors[(y * 2 + 1) * size + x * 2];
                             pixColors[3] = lastColors[(y * 2 + 1) * size + x * 2 + 1];
 
                             float r = 0, g = 0, b = 0;
@@ -941,13 +963,14 @@ namespace CraftSharp.Resource
                                     pixCount++;
                                 }
                             }
+
                             if (pixCount > 2 || (pixCount == 2 && (x + y) % 2 == 0))
                             {
-                                byte blendR = (byte) Mathf.RoundToInt(Mathf.LinearToGammaSpace(r / pixCount) * 255F);
-                                byte blendG = (byte) Mathf.RoundToInt(Mathf.LinearToGammaSpace(g / pixCount) * 255F);
-                                byte blendB = (byte) Mathf.RoundToInt(Mathf.LinearToGammaSpace(b / pixCount) * 255F);
+                                byte blendR = (byte)Mathf.RoundToInt(Mathf.LinearToGammaSpace(r / pixCount) * 255F);
+                                byte blendG = (byte)Mathf.RoundToInt(Mathf.LinearToGammaSpace(g / pixCount) * 255F);
+                                byte blendB = (byte)Mathf.RoundToInt(Mathf.LinearToGammaSpace(b / pixCount) * 255F);
 
-                                mipColors[y * mipSize + x] = new Color32(blendR, blendG, blendB, (byte) (a / pixCount));
+                                mipColors[y * mipSize + x] = new Color32(blendR, blendG, blendB, (byte)(a / pixCount));
                             }
                             else // The composited pixel is transparent
                             {
@@ -959,6 +982,7 @@ namespace CraftSharp.Resource
                     {
                         atlasArray0.SetPixels32(mipColors, index, mipLevel);
                     }
+
                     atlasArray1.SetPixels32(mipColors, index, mipLevel);
 
                     lastColors = mipColors; // Continue to generate next level of mipmap
@@ -971,12 +995,12 @@ namespace CraftSharp.Resource
             atlasArray1.Apply(false, false);
 
             AtlasTableHelper.SaveAtlasTable(texAtlasTable);
-            blockAtlas = Save(atlasArray1, "Assets/Resources_moved/vanilla/minecraft/textures/block_atlas.png");
+            blockAtlas = Save(atlasArray1, "Assets/Resources_moved/vanilla/minecraft/textures/block_atlas.asset");
         }
 
         private static Texture2D Save(Texture2DArray array, string path)
         {
-            int sliceIndex = 0;            
+            int sliceIndex = 0;
             Texture2D tex = new(array.width, array.height, array.format, array.mipmapCount, false)
             {
                 filterMode = FilterMode.Point
@@ -984,13 +1008,14 @@ namespace CraftSharp.Resource
             Graphics.CopyTexture(array, sliceIndex, tex, 0);
             tex.Apply();
 #if UNITY_EDITOR
-            File.WriteAllBytes(path, tex.EncodeToPNG());
+            //File.WriteAllBytes(path, tex.EncodeToPNG());
+            AssetDatabase.CreateAsset(tex, path);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 #endif
             return tex;
         }
-        
+
         /// <summary>
         /// Preload any texture whose id starts with "entity" into the entity texture table.
         /// </summary>
@@ -1031,7 +1056,7 @@ namespace CraftSharp.Resource
                 blankTextureInstance = GetBlankTexture();
                 return blankTextureInstance;
             }
-            
+
             if (EntityTexture2DTable.TryGetValue(texId, out var tex))
             {
                 return tex;

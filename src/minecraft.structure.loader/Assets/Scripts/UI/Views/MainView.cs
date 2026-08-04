@@ -21,6 +21,8 @@ namespace UI.Views
             FileReceiver fileReceiver,
             CameraController cameraController) : base(root)
         {
+            Initialize();
+            
             _overlayPopupView = new OverlayPopupView(
                 Query<VisualElement>(Selectors.POPUP_OVERLAY_ROOT));
             _sidebarView = new SidebarView(
@@ -30,8 +32,6 @@ namespace UI.Views
                 cameraController);
             
             _disclaimerView = new DisclaimerView(Query<VisualElement>(Selectors.DISCLAIMER_ROOT));
-            
-            Initialize();
             
             BuildInfo.Init();
             SetVersion(BuildInfo.FullInfo);
