@@ -9,7 +9,7 @@
     <ui:Template name="popup-overlay" src="Uxml/PopupOverlay.uxml"/>
     <ui:Template name="loading-curtain" src="Uxml/LoadingCurtain.uxml"/>
     
-    <ui:VisualElement name="ui-root" class="root">
+    <ui:VisualElement name="ui-root" class="root" pickingMode="Ignore">
         <ui:Label name="version-label" class="version-label" text="/-/-/"/>
         <ui:Label name="file-name-label" class="file-name-label" text="STRUCTURE.NBT"/>
         <ui:Button name="btn-welcome-hub" class="btn-welcome-hub" text="Welcome!">

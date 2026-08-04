@@ -3,6 +3,7 @@ using Core.AssetManagement;
 using Logic;
 using UI.Views;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
@@ -15,6 +16,7 @@ namespace UI
         
         private UIDocument _document;
         private MainView _mainView;
+        private static IPanel _rootPanel;
 
         public void InjectDependencies(
             CameraController cameraController,
@@ -22,6 +24,8 @@ namespace UI
             StructureBuilder structureBuilder)
         {
             _document = GetComponent<UIDocument>();
+            _rootPanel = _document.rootVisualElement.Q<VisualElement>(Selectors.UI_ROOT).panel;
+            
             _mainView = new MainView(
                 _document.rootVisualElement,
                 structureBuilder, 
@@ -38,6 +42,15 @@ namespace UI
                 yield return null;
 
             _mainView.Show();
+        }
+
+        public static bool IsPointerOverUI()
+        {
+            Vector2 mousePos = Mouse.current.position.ReadValue();
+            mousePos.y = Screen.height - mousePos.y;
+            mousePos = RuntimePanelUtils.ScreenToPanel(_rootPanel, mousePos);
+            
+            return _rootPanel.Pick(mousePos) != null;
         }
     }
 }

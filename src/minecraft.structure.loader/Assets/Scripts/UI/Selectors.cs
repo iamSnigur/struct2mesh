@@ -2,6 +2,8 @@
 {
     public static class Selectors
     {
+        public const string UI_ROOT = "ui-root";
+        
         public const string LOADING_CURTAIN_ROOT = "loading-curtain-root";
         public const string LOADER_ICON = "loader-icon";
         public const string LOADER_LABEL = "loader-label";

@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -133,10 +134,12 @@ namespace Logic
  
             _pivotPosition += (right * deltaX + up * deltaY) * scale;
         }
- 
+
         private void HandleZoom()
         {
             if (_mouse == null) return;
+            
+            if (UIRoot.IsPointerOverUI()) return;
  
             float scroll = _mouse.scroll.ReadValue().y;
             if (Mathf.Abs(scroll) < 0.0001f) return;

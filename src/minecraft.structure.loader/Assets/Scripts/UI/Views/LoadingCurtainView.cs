@@ -30,6 +30,7 @@ namespace UI.Views
         {
             _isActive = true;
             _root.style.display = DisplayStyle.Flex;
+            _root.pickingMode = PickingMode.Position;
             _root.style.opacity = 1f;
             DoSpinnerAnimation(0.9f).Forget();
         }
@@ -54,6 +55,7 @@ namespace UI.Views
             _root.style.opacity = 0f;
             _isActive = false;
             _root.style.display = DisplayStyle.None;
+            _root.pickingMode = PickingMode.Ignore;
         }
         
         private async UniTaskVoid DoSpinnerAnimation(float cycleDuration = 1f)
