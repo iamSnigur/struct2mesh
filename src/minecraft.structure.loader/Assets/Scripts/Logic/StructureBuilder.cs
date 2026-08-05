@@ -62,60 +62,46 @@ namespace Logic
             _cameraController.InputDisabled = true;
             IsStructureLoaded = false;
             Root.SetActive(false);
+            
             _loadingCurtainView.SetProgressText("Looking at your structure...");
+            _loadingCurtainView.SetProgressBar(0f);
             _loadingCurtainView.Show();
             
-            UniTask delay1 = UniTask.Delay(250);
-            ParsedStructure structure = null;
+            ParsedStructure structure;
             
             try
             {
                 IParser parser = _parserRegistry.GetFor(fileType);
-                UniTask<ParsedStructure> parseTask = parser.Parse(rawBytes).Preserve();
-
-                await UniTask.WhenAll(delay1, parseTask);
-                structure = await parseTask;
+                structure = await parser.Parse(rawBytes).Preserve().RunWithMinDuration(250);
             }
             catch (ArgumentException e)
             {
-                Debug.LogError(e);
-                _loadingCurtainView.SetProgressText("Structure format is not supported");
-                await UniTask.Delay(1500);
-                _loadingCurtainView.Hide();
+                await ShowErrorAndHideCurtain(e, "Structure format is not supported");
                 return;
             }
             catch (OverflowException e)
             {
-                Debug.LogError(e);
-                _loadingCurtainView.SetProgressText("Structure exceeded block limit");
-                await UniTask.Delay(1500);
-                _loadingCurtainView.Hide();
+                await ShowErrorAndHideCurtain(e, "Structure exceeded block limit");
                 return;
             }
             
             _loadingCurtainView.SetProgressText("Collecting resources...");
+            _loadingCurtainView.SetProgressBar(10f);
             
-            UniTask delay2 = UniTask.Delay(250);
-            UniTask updateVolumeTask = UpdateStructureVolumeAsync(structure);
-
-            await UniTask.WhenAll(delay2, updateVolumeTask);
+            await UpdateStructureVolumeAsync(structure).RunWithMinDuration(250);
             
             MinecraftAssetProvider.ClearBlockStatePalette();
             await MinecraftAssetProvider.UpdateBlockStatePalette(structure.Palette);
             MinecraftAssetProvider.UpdateColorRules();
             
             _loadingCurtainView.SetProgressText("Building...");
-            UniTask delay3 = UniTask.Delay(1000);
-            UniTask constructTask = ConstructAsync(structure);
-
-            await UniTask.WhenAll(
-                delay3.ContinueWith(() => 
-                    _loadingCurtainView.SetProgressText("Building a massive structure...")),
-                constructTask);
+            _loadingCurtainView.SetProgressBar(25f);
+            await ConstructAsync(structure).RunWithMinDuration(1000);
             
             _loadingCurtainView.SetProgressText("Done");
+            _loadingCurtainView.SetProgressBar(100f);
 
-            await UniTask.Delay(300);
+            await UniTask.Delay(400);
 
             IsStructureLoaded = true;
             Root.SetActive(true);
@@ -126,6 +112,14 @@ namespace Logic
                     duration: 2f,
                     () => _cameraController.InputDisabled = false)
                 .Forget();
+        }
+
+        private async UniTask ShowErrorAndHideCurtain(Exception e, string message)
+        {
+            Debug.LogError(e);
+            _loadingCurtainView.SetProgressText(message);
+            await UniTask.Delay(1500);
+            _loadingCurtainView.Hide();
         }
 
         private async UniTask UpdateStructureVolumeAsync(ParsedStructure structure)
@@ -188,6 +182,8 @@ namespace Logic
             
             MinecraftAssetProvider.ReleaseBlockStateHandles();
         
+            _loadingCurtainView.SetProgressText("Warming Up Block Geometries...");
+            _loadingCurtainView.SetProgressBar(60f);
             List<UniTask> warmupTasks = new(structure.Palette.Count);
 
             foreach (PaletteEntry entry in structure.Palette)
@@ -197,7 +193,9 @@ namespace Logic
             }
             
             await UniTask.WhenAll(warmupTasks);
-
+            
+            _loadingCurtainView.SetProgressText("Generating Mesh...");
+            _loadingCurtainView.SetProgressBar(90f);
             await _meshGenerator.GenerateMesh(_meshFilter, _meshRenderer, structure, StructureVolume);
             
             _cameraController.SetPivot(_meshRenderer.bounds.center);

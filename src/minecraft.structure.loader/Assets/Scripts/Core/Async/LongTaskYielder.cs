@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace Core.Async
 {
@@ -16,7 +15,6 @@ namespace Core.Async
             
         public async UniTask TryYieldAsync()
         {
-                
             if (_operationsElapsed > _operationsPerFrame)
             {
                 await UniTask.Yield();

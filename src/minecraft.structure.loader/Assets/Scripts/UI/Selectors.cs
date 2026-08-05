@@ -5,7 +5,9 @@
         public const string UI_ROOT = "ui-root";
         
         public const string LOADING_CURTAIN_ROOT = "loading-curtain-root";
-        public const string LOADER_ICON = "loader-icon";
+        public const string LOADER_SHOWN = "loader-shown";
+        public const string LOADER_HIDDEN = "loader-hidden";
+        public const string PROGRESS_BAR = "progress-bar";
         public const string LOADER_LABEL = "loader-label";
 
         public const string VERSION_LABEL = "version-label";

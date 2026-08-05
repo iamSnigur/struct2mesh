@@ -124,6 +124,8 @@ namespace Logic.MeshGenerator
                     bucket.Entries.Add((i, s));
                     totalIndexCount += renderData.MeshData.GetSubMesh(s).indexCount;
                 }
+
+                await _taskYielder.TryYieldAsync();
             }
 
             if (_finalMaterialsBuffer.Length != _materialOrder.Count)
@@ -153,6 +155,8 @@ namespace Logic.MeshGenerator
                 NativeArray<float3>.Copy(srcData.GetVertexData<float3>(1), 0, outTexCoords, offset, count);
                 NativeArray<float4>.Copy(srcData.GetVertexData<float4>(2), 0, outAnimInfos, offset, count);
                 NativeArray<float4>.Copy(srcData.GetVertexData<float4>(3), 0, outVertColors, offset, count);
+
+                await _taskYielder.TryYieldAsync();
             }
 
             int indexCursor = 0;
@@ -175,6 +179,8 @@ namespace Logic.MeshGenerator
                         outIndices[indexCursor + idx] = srcIndices[sub.indexStart + idx] + vOffset;
 
                     indexCursor += sub.indexCount;
+
+                    await _taskYielder.TryYieldAsync();
                 }
 
                 outData.SetSubMesh(m,

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ui:UXML xmlns:ui="UnityEngine.UIElements">
     <Style src="../Styles/LoadingCurtain.uss"/>
-    <ui:VisualElement name="loader-icon" class="loader-icon"/>
     <ui:Label name="loader-label" class="loader-label" text="Building ..."/>
+    <ui:VisualElement class="progress-bar-root">
+        <ui:VisualElement name="progress-bar" class="progress-bar" />
+    </ui:VisualElement>
 </ui:UXML>
