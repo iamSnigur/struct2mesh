@@ -105,6 +105,7 @@ namespace Logic
 
             IsStructureLoaded = true;
             Root.SetActive(true);
+            _loadingCurtainView.SetProgressBar(0f);
             _loadingCurtainView.Hide();
             _cameraController
                 .DoOrbitAnimationAsync(

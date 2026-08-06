@@ -144,8 +144,12 @@ namespace Logic
             float scroll = _mouse.scroll.ReadValue().y;
             if (Mathf.Abs(scroll) < 0.0001f) return;
  
-            // scroll.y is in pixels (120 per notch on most mice) — normalise to ~1 per notch
+            // webgl scroll delta is bigger than desktop
+#if UNITY_WEBGL && !UNITY_EDITOR
+            scroll *= 0.001f;
+#else
             scroll *= 0.01f;
+#endif
  
             _targetDistance -= scroll * zoomSensitivity * _currentDistance;
             _targetDistance  = Mathf.Clamp(_targetDistance, minZoomDistance, maxZoomDistance);
