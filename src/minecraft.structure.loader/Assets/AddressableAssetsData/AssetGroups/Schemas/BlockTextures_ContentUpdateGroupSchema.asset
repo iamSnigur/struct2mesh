@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
-  m_Name: Textures_ContentUpdateGroupSchema
+  m_Name: BlockTextures_ContentUpdateGroupSchema
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.GroupSchemas.ContentUpdateGroupSchema
-  m_Group: {fileID: 11400000, guid: 10de223d37945ab4a9d9337ffcd463fa, type: 2}
+  m_Group: {fileID: 11400000, guid: c0f41e021f035f94f97330a681e78bb9, type: 2}
   m_StaticContent: 0

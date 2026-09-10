@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Build Assets
+  m_Name: BuildAssets
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
-  m_GroupName: Build Assets
+  m_GroupName: BuildAssets
   m_GUID: 313d9be37ae0412459736a5e5e2e6af6
   m_SerializeEntries:
   - m_GUID: 02109f96d369498438fae62fcb212c06

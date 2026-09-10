@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Textures
+  m_Name: BlockTextures
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
-  m_GroupName: Textures
-  m_GUID: b5cb3749a13ac574bbbc31b6decf7c08
+  m_GroupName: BlockTextures
+  m_GUID: 2287ee02b810c2a408bf1da7d247ffaf
   m_SerializeEntries:
   - m_GUID: 003db0d02163b634e80650e0c27dccaa
     m_Address: vanilla/minecraft/textures/block/chiseled_deepslate
@@ -40,11 +40,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 01d7269b3a42db44bbc8cb994e4d8383
-    m_Address: vanilla/minecraft/textures/block/chest/ender
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 020ca5eab4eb07d4eb04c41371575ea0
     m_Address: vanilla/minecraft/textures/block/dead_horn_coral_fan
     m_ReadOnly: 0
@@ -60,18 +55,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 024d168df25f59349b4bbf33ecfe80d7
-    m_Address: vanilla/minecraft/textures/block/banner/border
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 02708cc028e67684db61589e82f42ba7
     m_Address: vanilla/minecraft/textures/block/jukebox_top
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0287d50bd9d804d4898e4b139a5ed580
-    m_Address: vanilla/minecraft/textures/block/shulker/spark
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -130,18 +115,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 05792653871067f449b69158c8fc0de6
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/decorated_pot_base
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 05db6bd02287d384282f62a2371c43ac
     m_Address: vanilla/minecraft/textures/block/raw_gold_block
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 05f9c327ce7024d4482a48e43c4866a5
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/explorer_pottery_pattern
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -167,11 +142,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 06fe94f71eea1da4ebba9cd567945caa
     m_Address: vanilla/minecraft/textures/block/wet_sponge
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 070083c10f1038046a7900b554078618
-    m_Address: vanilla/minecraft/textures/block/banner/diagonal_up_right
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -212,11 +182,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 080009e5d1ff8e946a0af863a96812e6
     m_Address: vanilla/minecraft/textures/block/crafter_bottom
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 08744b4a894bd4542883baf7e4eedec3
-    m_Address: vanilla/minecraft/textures/block/conduit/wind_vertical
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -310,11 +275,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0b83bdbaf255fc94b873abea1cdfab24
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/angler_pottery_pattern
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0b9b26a48cc98bb40b05cdf1415fe10b
     m_Address: vanilla/minecraft/textures/block/azalea_plant
     m_ReadOnly: 0
@@ -390,11 +350,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0d2fe74dfc729cb4e9e7c4e97e8dda6e
-    m_Address: vanilla/minecraft/textures/block/signs/mangrove
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0d9152acc93a59849913d46b4677156e
     m_Address: vanilla/minecraft/textures/block/mangrove_trapdoor
     m_ReadOnly: 0
@@ -402,11 +357,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0dadb9c342a4bd841945d00a53c9d0b1
     m_Address: vanilla/minecraft/textures/block/sculk_sensor_bottom
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0db58d4c831eb6642a8c529f17b7b62a
-    m_Address: vanilla/minecraft/textures/block/banner/base
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -510,11 +460,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 10b8cec65e67bf248b7c8b27590a92ad
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/decorated_pot_side
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 10d9bb14d900d074292ee5acd35a3501
     m_Address: vanilla/minecraft/textures/block/cornflower.mcmeta
     m_ReadOnly: 0
@@ -522,11 +467,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 10e8d966b89b9054c90433ade2befdf9
     m_Address: vanilla/minecraft/textures/block/stripped_crimson_stem_top
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 117d1188e391eb942b730999a68cbd8f
-    m_Address: vanilla/minecraft/textures/block/conduit/break_particle
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -570,11 +510,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 13303c526720c5b45848abe2548c89d9
-    m_Address: vanilla/minecraft/textures/block/conduit/cage
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 139818fd2023a1c4eabae6baf01d8a8a
     m_Address: vanilla/minecraft/textures/block/sculk_catalyst_top_bloom
     m_ReadOnly: 0
@@ -610,11 +545,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 14cec1820bd47924a8c76cd9d66e3af1
-    m_Address: vanilla/minecraft/textures/block/signs/dark_oak
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 15379d88b1dbf9440af7da2ff90556b1
     m_Address: vanilla/minecraft/textures/block/black_candle_lit
     m_ReadOnly: 0
@@ -632,11 +562,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 157ca9205b849974399085e9d8c0e9e0
     m_Address: vanilla/minecraft/textures/block/test_block_fail
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 158b6c98bc936a9468ff3ce02ffca8d6
-    m_Address: vanilla/minecraft/textures/block/chest/copper_left
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -675,11 +600,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 16c289a4382383b4f910999535ab4b15
-    m_Address: vanilla/minecraft/textures/block/banner/square_top_right
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 16d3879e865bb0b4b9dc21f149d24ec8
     m_Address: vanilla/minecraft/textures/block/cake_top
     m_ReadOnly: 0
@@ -705,11 +625,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 182ca46e870842042ba0072cdface771
-    m_Address: vanilla/minecraft/textures/block/signs/hanging/birch
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1871cc6efe7d3e24cb1dcf79301940cd
     m_Address: vanilla/minecraft/textures/block/attached_pumpkin_stem
     m_ReadOnly: 0
@@ -720,16 +635,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 18da1e66cd2b0e443a2b6fbf00a1f260
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_light_gray
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 18f25e4459103ee4e940ef068c2183cf
-    m_Address: vanilla/minecraft/textures/block/chest/trapped_left
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1921ff64d7b2c7c4883a05f8aa9cba67
     m_Address: vanilla/minecraft/textures/block/hay_block_side
     m_ReadOnly: 0
@@ -737,11 +642,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 19480cf99189a794693f5f11b8cfb422
     m_Address: vanilla/minecraft/textures/block/anvil
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 194dbcea3b5b15944afd3c2f697a65cd
-    m_Address: vanilla/minecraft/textures/block/banner/half_vertical
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -767,11 +667,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1b8b4e2d1bf548a4b9dcb5ff732ea054
     m_Address: vanilla/minecraft/textures/block/light_gray_concrete_powder
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1b993fb38750d694399b771545099140
-    m_Address: vanilla/minecraft/textures/block/banner/flower
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -852,11 +747,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1e4d6536c229cfc43990bdad99a51014
     m_Address: vanilla/minecraft/textures/block/chiseled_sandstone
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1e515b754d51144479f52e224a8c087b
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/brewer_pottery_pattern
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -960,11 +850,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 23b1d98be3cc09c4ca966d952c313272
-    m_Address: vanilla/minecraft/textures/block/signs/hanging/crimson
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 23df9e3364d7df24488cc717ab97e808
     m_Address: vanilla/minecraft/textures/block/reinforced_deepslate_bottom
     m_ReadOnly: 0
@@ -1010,11 +895,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 25de35ec3e5231d4aaee0b00e756b376
-    m_Address: vanilla/minecraft/textures/block/signs/hanging/mangrove
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2644f9933792b994698204b3f106dc63
     m_Address: vanilla/minecraft/textures/block/sculk_sensor_tendril_active.mcmeta
     m_ReadOnly: 0
@@ -1032,11 +912,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 26d1af40ef0276943a5cb9bc884dacd4
     m_Address: vanilla/minecraft/textures/block/blue_concrete_powder
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 275acad063b18084094bc2ed28dc78fb
-    m_Address: vanilla/minecraft/textures/block/banner/stripe_center
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1107,11 +982,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 296ccf0a47510b04d8f48b2a733b5926
     m_Address: vanilla/minecraft/textures/block/chorus_flower_dead
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 299f178d0aabd044dabd088f8dc8827b
-    m_Address: vanilla/minecraft/textures/block/banner/cross
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1280,16 +1150,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2f37d385e1b13ab459496a912d8a15d3
-    m_Address: vanilla/minecraft/textures/block/banner/stripe_top
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2f4f10d4e00ec184e9930ee51c76001d
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_black
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2f52cd0fbdda9df429bc37b8ab424e74
     m_Address: vanilla/minecraft/textures/block/sniffer_egg_slightly_cracked_west
     m_ReadOnly: 0
@@ -1302,11 +1162,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2fc65e9371c55b24b87ebf6681df4263
     m_Address: vanilla/minecraft/textures/block/carrots_stage0
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 30272155d6ba80547977318339eb5b52
-    m_Address: vanilla/minecraft/textures/block/signs/hanging/spruce
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1327,11 +1182,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 308d408affc3d0448947c7b5dc4456ea
     m_Address: vanilla/minecraft/textures/block/dried_ghast_hydration_2_west
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 30d254737c633724d8be9c09ca495d22
-    m_Address: vanilla/minecraft/textures/block/banner/square_bottom_left
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1465,18 +1315,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 35bca4fcae36bfd4c8ee71e62841bf1f
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/archer_pottery_pattern
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 35c502a9037b70942938235292cc5836
     m_Address: vanilla/minecraft/textures/block/dead_brain_coral_block
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 367651ef657b8e2498b2e426de2081b2
-    m_Address: vanilla/minecraft/textures/block/chest/copper_weathered_right
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1495,11 +1335,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 37c569125a2181c4eb9d87f7c9c278a6
-    m_Address: vanilla/minecraft/textures/block/copper_golem/weathered_copper_golem
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 37eb3a8776a493e49873860420aa4ca6
     m_Address: vanilla/minecraft/textures/block/respawn_anchor_side2
     m_ReadOnly: 0
@@ -1507,11 +1342,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 385d3e4cbda3cb845bab9256fe8780fa
     m_Address: vanilla/minecraft/textures/block/lime_concrete_powder
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3884b0b527e84eb4e9319d1dbac81623
-    m_Address: vanilla/minecraft/textures/block/banner/triangles_top
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1532,11 +1362,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 39b4ece4b5b8a3249a11d15c9528b657
     m_Address: vanilla/minecraft/textures/block/iron_trapdoor
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3b167aa69f0738446bc21e0930f7308d
-    m_Address: vanilla/minecraft/textures/block/banner/stripe_downright
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1592,11 +1417,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3d8d8fc0e2786994f8816f3c5c3d6e5d
     m_Address: vanilla/minecraft/textures/block/blue_ice
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3dc9b0e095fb81a4eba10d2043f4f643
-    m_Address: vanilla/minecraft/textures/block/banner/flow
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1692,11 +1512,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4161578a5ed60ce459ed0785ef7c4a98
     m_Address: vanilla/minecraft/textures/block/bricks
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4170461e7c0af3243b98922c86f45815
-    m_Address: vanilla/minecraft/textures/block/signs/cherry
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1805,11 +1620,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 449a4910b0adbc04799c9b8392dcc702
-    m_Address: vanilla/minecraft/textures/block/oxidized_copper_golem
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 449e9cafe4bd6ad4c80baa937c765bb4
     m_Address: vanilla/minecraft/textures/block/polished_deepslate
     m_ReadOnly: 0
@@ -1822,11 +1632,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 44d24303d9be7b04aa0cb6100dcc67bb
     m_Address: vanilla/minecraft/textures/block/deepslate_top
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 44f3b6a47788974478fdd89da9d9e57c
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_green
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1885,28 +1690,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 47b00d72ec4b9ca438747a3348950d95
-    m_Address: vanilla/minecraft/textures/block/signs/warped
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 47c01612428a13a409cd27785fc2fc17
     m_Address: vanilla/minecraft/textures/block/weeping_vines
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 47e2c68404385694f86a39a34117e449
-    m_Address: vanilla/minecraft/textures/block/exposed_copper_golem
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 481c5e66987544f4b971edbb92d7451e
     m_Address: vanilla/minecraft/textures/block/stripped_oak_log
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 48a25b4e73b708d428a468eaade5fe46
-    m_Address: vanilla/minecraft/textures/block/banner/half_horizontal
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2040,23 +1830,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4d2455ab214518a438c5d4c62ef28133
-    m_Address: vanilla/minecraft/textures/block/banner/triangle_bottom
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4d41daeb3efbcde46a9b75148fd58e7a
-    m_Address: vanilla/minecraft/textures/block/banner/triangles_bottom
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4d56d559256ef9e47acf3754d4810c9f
     m_Address: vanilla/minecraft/textures/block/rose_bush_bottom
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4d5ee5fe4f686f8439d1c69aa7340144
-    m_Address: vanilla/minecraft/textures/block/banner/mojang
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2070,11 +1845,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4e1cf4ef0cd14ec4d9f57a415ef3251f
-    m_Address: vanilla/minecraft/textures/block/signs/birch
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4e3fbfa34a0b34349b23427cec2fa79f
     m_Address: vanilla/minecraft/textures/block/bamboo_large_leaves
     m_ReadOnly: 0
@@ -2082,11 +1852,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4e42ca49d9129f2408e083dfd413c7ae
     m_Address: vanilla/minecraft/textures/block/ochre_froglight_side
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4f2e04af0c23c1a4d92e71c5e9246afa
-    m_Address: vanilla/minecraft/textures/block/conduit/wind.mcmeta
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2165,11 +1930,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 51c15d5e81869674281fdd54af27f68d
-    m_Address: vanilla/minecraft/textures/block/zombie/zombie
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 51c73dad28058dc47881a6a7e2ec0bb5
     m_Address: vanilla/minecraft/textures/block/dropper_front
     m_ReadOnly: 0
@@ -2187,11 +1947,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 52352f85fc9229b4cb0ee8e6c3d9b89f
     m_Address: vanilla/minecraft/textures/block/dried_ghast_hydration_3_top
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 523cbf8cdb8279a46aa4620481014977
-    m_Address: vanilla/minecraft/textures/block/chest/copper_weathered
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2230,11 +1985,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 53885fd1d68365344bb0aeb8541c7ab8
-    m_Address: vanilla/minecraft/textures/block/creeper/creeper
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 53b4f33fdcd38c9439e7fc067dca2b6e
     m_Address: vanilla/minecraft/textures/block/dried_ghast_hydration_2_top
     m_ReadOnly: 0
@@ -2270,18 +2020,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5540f90274caec547865c79bae6c0278
-    m_Address: vanilla/minecraft/textures/block/chest/normal
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 55436ef98ecb297478776ec558731bc5
     m_Address: vanilla/minecraft/textures/block/repeating_command_block_side.mcmeta
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5558d7258ab98c542ab6bd95f8ccc35b
-    m_Address: vanilla/minecraft/textures/block/banner/stripe_downleft
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2315,18 +2055,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 571e1f621ebaafe43bb11283fc75ca26
-    m_Address: vanilla/minecraft/textures/block/banner/stripe_middle
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5721e6d08d4efb04388825e3fd664f20
     m_Address: vanilla/minecraft/textures/block/deepslate_emerald_ore
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 57289af34243a6340bde5c94f4c9de6d
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/scrape_pottery_pattern
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2342,11 +2072,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 581405d414c94434bbd15fb584840f97
     m_Address: vanilla/minecraft/textures/block/grindstone_round
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5834e176a3b1d3d4587c7331f0d4b74e
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_pink
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2425,11 +2150,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5b5a79d15a7522147929bd83c82659a4
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_light_blue
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5b871a19f53da5348ba4ca8016c988a2
     m_Address: vanilla/minecraft/textures/block/mangrove_door_top
     m_ReadOnly: 0
@@ -2472,11 +2192,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5d41b03d5a90aeb4788d629709abf710
     m_Address: vanilla/minecraft/textures/block/bamboo_trapdoor
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5d88015bdb1c9c949ae1bf5480a5e152
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/friend_pottery_pattern
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2532,11 +2247,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5ec8279357bcf0c4c9e0164915a67612
     m_Address: vanilla/minecraft/textures/block/small_dripleaf_stem_top
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5f2b220a26c5d4248bf5270a37d83b6c
-    m_Address: vanilla/minecraft/textures/block/banner/square_bottom_right
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2655,11 +2365,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 63af8ea51beb5474fba7cfb15d266fa3
-    m_Address: vanilla/minecraft/textures/block/signs/hanging/acacia
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 63f122cd6db27ac4e89d80252dca0478
     m_Address: vanilla/minecraft/textures/block/sandstone
     m_ReadOnly: 0
@@ -2682,11 +2387,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 645e4bf31d35fce4d8d5fbbb3d72f9e7
     m_Address: vanilla/minecraft/textures/block/sniffer_egg_very_cracked_top
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 646f3b085743fb141bd70e9da36a826a
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_orange
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2770,11 +2470,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 66a9ed418f4980d4fa59d614ae045383
-    m_Address: vanilla/minecraft/textures/block/banner/diagonal_right
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 66bee09798cd48f498c8c6349820d81a
     m_Address: vanilla/minecraft/textures/block/red_concrete_powder
     m_ReadOnly: 0
@@ -2802,11 +2497,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 676e6b6b6c3d2794da1fd3a7f828b266
     m_Address: vanilla/minecraft/textures/block/crimson_nylium_side
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 676f884d0ff06ae4b969c5e8bff198a9
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/prize_pottery_pattern
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2855,18 +2545,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6943fdd7938d1bd49a020964260be286
-    m_Address: vanilla/minecraft/textures/block/piglin/piglin
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 69687fc38240fc14e8d82201e1c3e34a
     m_Address: vanilla/minecraft/textures/block/water_overlay
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 69940f6a18eff2d43b2d650709e6272d
-    m_Address: vanilla/minecraft/textures/block/banner/guster
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2895,11 +2575,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6b148d5701c607949ba63194c391c405
-    m_Address: vanilla/minecraft/textures/block/conduit/closed_eye
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6b2e038bb075d3b49ba16da3f9b60393
     m_Address: vanilla/minecraft/textures/block/copper_bulb
     m_ReadOnly: 0
@@ -2922,11 +2597,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6bfe1d64890ffa44d9b0783a1290831d
     m_Address: vanilla/minecraft/textures/block/lime_candle
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6c1fca44cd8699f409d80c2d58627cb9
-    m_Address: vanilla/minecraft/textures/block/signs/pale_oak
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2967,11 +2637,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6e540614629cf3144b75866ae0c5303c
     m_Address: vanilla/minecraft/textures/block/tube_coral
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6e6f09dca5a9f0b4fa1f0b2f7e85433e
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/heart_pottery_pattern
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -3205,11 +2870,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 77033d1b38b1c9b4284ad0f06c0ffece
-    m_Address: vanilla/minecraft/textures/block/banner/circle
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 770c9accb4a6edd4f974809c962df28b
     m_Address: vanilla/minecraft/textures/block/sweet_berry_bush_stage0
     m_ReadOnly: 0
@@ -3217,11 +2877,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 77142b3a86328f54db96ca91a21cbdf9
     m_Address: vanilla/minecraft/textures/block/orange_candle_lit
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 77504b3a3b53e334ebba6fe9108de46b
-    m_Address: vanilla/minecraft/textures/block/banner/rhombus
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -3340,11 +2995,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7c2290f6e9daebd40844a5d965fa9c66
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_gray
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7c55cd8aacf876f43afa0b1d33195e2e
     m_Address: vanilla/minecraft/textures/block/dried_ghast_hydration_3_west
     m_ReadOnly: 0
@@ -3377,11 +3027,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7d41618471629554bb54c19ec6980761
     m_Address: vanilla/minecraft/textures/block/dead_bubble_coral
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7d890f9c345069a4a8a0925ead8b6b82
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/shelter_pottery_pattern
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -3540,11 +3185,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8224a6767b95c5d43aeb4e82675f8201
-    m_Address: vanilla/minecraft/textures/block/banner/bricks
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8294d2793e98a4f42975b3052da8104b
     m_Address: vanilla/minecraft/textures/block/light_gray_shulker_box
     m_ReadOnly: 0
@@ -3600,16 +3240,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 84e290d3dff8e18448016e34bb9c6bfa
-    m_Address: vanilla/minecraft/textures/block/banner/gradient_up
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 84f026dc7ee174344a27bca9d4bdb4bf
-    m_Address: vanilla/minecraft/textures/block/chest/normal_left
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 850c36522f7572a4f98dbb13e585bf0b
     m_Address: vanilla/minecraft/textures/block/dried_ghast_hydration_0_south
     m_ReadOnly: 0
@@ -3650,11 +3280,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 861420e8d6a790048b522249aedd45da
-    m_Address: vanilla/minecraft/textures/block/copper_golem/copper_golem
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 86286d2f98e144141b7e97dddebef118
     m_Address: vanilla/minecraft/textures/block/jungle_log
     m_ReadOnly: 0
@@ -3665,11 +3290,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 86a139c76bfde21469279af472290217
-    m_Address: vanilla/minecraft/textures/block/chest/copper_oxidized_left
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 86a769c3b74855045af9a7d4e41c414d
     m_Address: vanilla/minecraft/textures/block/basalt_top
     m_ReadOnly: 0
@@ -3677,11 +3297,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 86cdc92e28245554593c81504b9ac4d1
     m_Address: vanilla/minecraft/textures/block/destroy_stage_0
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 86e7d31249069e14283e4c62d492d870
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_yellow
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -3702,11 +3317,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 881842bbcb88c694aaa3bff309b58c03
     m_Address: vanilla/minecraft/textures/block/piston_side
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 884de01d9815eb042894005701ebcf79
-    m_Address: vanilla/minecraft/textures/block/banner/small_stripes
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -3765,11 +3375,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8b895c571b5fe604db18a9cebf485511
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/burn_pottery_pattern
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8b9e3362fd7f14c4c9a647aa36d13c4e
     m_Address: vanilla/minecraft/textures/block/iron_chain
     m_ReadOnly: 0
@@ -3787,11 +3392,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8c50339a2a062b546afa38e6130c6b14
     m_Address: vanilla/minecraft/textures/block/redstone_dust_line0
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8c65f858c10b93f4f98bcf765450aa09
-    m_Address: vanilla/minecraft/textures/block/copper_golem/oxidized_copper_golem
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -3855,11 +3455,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8f39a4ea94278414dbc0df986e90266e
-    m_Address: vanilla/minecraft/textures/block/signs/hanging/warped
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8f7e583caa8cc9d49bda5560f4793331
     m_Address: vanilla/minecraft/textures/block/polished_andesite
     m_ReadOnly: 0
@@ -3897,11 +3492,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 90994170178eb2f4687ed21f713009a2
     m_Address: vanilla/minecraft/textures/block/pink_shulker_box
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 90d898142c5052b479096866ad5fe181
-    m_Address: vanilla/minecraft/textures/block/signs/crimson
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4000,11 +3590,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 93477cbd427bc7c4f9ae46687660f1c7
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_magenta
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 938057fa26326884bbedcaf97add2d72
     m_Address: vanilla/minecraft/textures/block/light_gray_concrete
     m_ReadOnly: 0
@@ -4082,11 +3667,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 96b74e30ea7413c4ba7c777e96e1a612
     m_Address: vanilla/minecraft/textures/block/oak_log
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 96d4a86a245383a4bbc954efd26650a9
-    m_Address: vanilla/minecraft/textures/block/chest/trapped
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4195,11 +3775,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9bfa4e019ede82c429bae7502a0f0a8c
-    m_Address: vanilla/minecraft/textures/block/banner/diagonal_left
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9bfdd41da1f968b4d826068c205a6f4b
     m_Address: vanilla/minecraft/textures/block/crimson_stem
     m_ReadOnly: 0
@@ -4265,11 +3840,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9db84bbecd336c54f9a917c9d69495f4
-    m_Address: vanilla/minecraft/textures/block/end_portal/end_portal
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9dceb8e07dda8c043b65e8b49a3a9f62
     m_Address: vanilla/minecraft/textures/block/detector_rail_on
     m_ReadOnly: 0
@@ -4320,11 +3890,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9fdfe466158a6a54490f113aca84ee2f
-    m_Address: vanilla/minecraft/textures/block/signs/acacia
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9ff3a86457bd9e0459a79a2e342e87e7
     m_Address: vanilla/minecraft/textures/block/grass_block_snow
     m_ReadOnly: 0
@@ -4352,11 +3917,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a07f404cd3870fa44acafef0294efc95
     m_Address: vanilla/minecraft/textures/block/azalea_leaves
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a0a3151854a58cb4c934567796578847
-    m_Address: vanilla/minecraft/textures/block/signs/hanging/oak
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4425,11 +3985,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a367dbd1eddc2c744bfa9f801dbab8d2
-    m_Address: vanilla/minecraft/textures/block/conduit/wind_vertical.mcmeta
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a369f150c4854cb40913b5c4c947945b
     m_Address: vanilla/minecraft/textures/block/blackstone
     m_ReadOnly: 0
@@ -4470,18 +4025,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a4cc1bb0d5dedaa4f8e6ddd7427962f1
-    m_Address: vanilla/minecraft/textures/block/banner/banner_base
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a4d1a0bc65b369b4cb36d8c264a35574
     m_Address: vanilla/minecraft/textures/block/conduit
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a530b8828cb0d9a478ad679d7c341452
-    m_Address: vanilla/minecraft/textures/block/chest/christmas_right
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4500,11 +4045,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a6c479411bea8194caa22d153f3a5259
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/snort_pottery_pattern
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a6e9177464592834087632258a3eefef
     m_Address: vanilla/minecraft/textures/block/dead_brain_coral_fan
     m_ReadOnly: 0
@@ -4520,18 +4060,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a744964638b15ac4ebc127942f740aeb
-    m_Address: vanilla/minecraft/textures/block/chest/copper_exposed_left
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a75f10e74f13d284bbd3087c80f01b4e
     m_Address: vanilla/minecraft/textures/block/pitcher_crop_bottom_stage_1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a765553d37dd1fa48a05c8cf2dae934f
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/heartbreak_pottery_pattern
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4542,11 +4072,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a7db0623a4ca55c4691c30cfcbd285d2
     m_Address: vanilla/minecraft/textures/block/pitcher_crop_bottom
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a7f0cde63d70df84aa1d7f3e2229903f
-    m_Address: vanilla/minecraft/textures/block/skeleton/skeleton
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4600,11 +4125,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a9d6b0404784a50439cc9c18b2237d84
-    m_Address: vanilla/minecraft/textures/block/banner/square_top_left
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aa1995ffd485bf34a8bf7c7eb7b2f589
     m_Address: vanilla/minecraft/textures/block/gray_glazed_terracotta
     m_ReadOnly: 0
@@ -4630,11 +4150,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: aab4aba2db9b93640aa26f1acfb4285c
-    m_Address: vanilla/minecraft/textures/block/weathered_copper_golem
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aacea25f9107f9d46a5cd8b5707d834f
     m_Address: vanilla/minecraft/textures/block/sniffer_egg_slightly_cracked_bottom
     m_ReadOnly: 0
@@ -4657,11 +4172,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: abb0fd2816dd1cd438beadf23fbc7acd
     m_Address: vanilla/minecraft/textures/block/stripped_birch_log
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: abb5839f2dc9c3c45ab6f906547960e8
-    m_Address: vanilla/minecraft/textures/block/signs/spruce
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4750,16 +4260,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: aea12f00fb8e34743853f04e4b075d44
-    m_Address: vanilla/minecraft/textures/block/chest/copper_exposed_right
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: aead59256cf179644b58ddfbceb7a0fc
-    m_Address: vanilla/minecraft/textures/block/conduit/open_eye
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aeeb642c25919004f9c3f3b252c8411b
     m_Address: vanilla/minecraft/textures/block/dispenser_front_vertical
     m_ReadOnly: 0
@@ -4800,18 +4300,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b06aeb28ec17bb74d915eb6a671c3cfd
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_blue
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b07be19fbc288054da2fa17656e4a362
     m_Address: vanilla/minecraft/textures/block/chiseled_tuff_bricks_top
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b08f38d30f14edc448de85c59146fa83
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/plenty_pottery_pattern
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4877,11 +4367,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b2288a59d49bc114390d19de78633d68
     m_Address: vanilla/minecraft/textures/block/green_concrete_powder
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b26b16d72e867214da80cb301637d1ef
-    m_Address: vanilla/minecraft/textures/block/chest/copper
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5035,11 +4520,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b82c67f78fb104745b4177a959b849a2
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/arms_up_pottery_pattern
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b871fff2eccf12748ae82ad368644249
     m_Address: vanilla/minecraft/textures/block/acacia_door_bottom
     m_ReadOnly: 0
@@ -5080,11 +4560,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ba508a6cca193b849a27f085237f30b5
-    m_Address: vanilla/minecraft/textures/block/banner/triangle_top
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ba92dd8b351fb2249b29777b7530f0ca
     m_Address: vanilla/minecraft/textures/block/smooth_stone_slab_side
     m_ReadOnly: 0
@@ -5092,11 +4567,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: baad7ca8904f58444bef4888ee155dfc
     m_Address: vanilla/minecraft/textures/block/command_block_side.mcmeta
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: baafdc7c61144664da319dd2fb499432
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/danger_pottery_pattern
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5165,11 +4635,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bccb8ce201312ef40b6171d65744bb14
-    m_Address: vanilla/minecraft/textures/block/chest/trapped_right
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bd6c52f441ff90c4e83a161e33ab7186
     m_Address: vanilla/minecraft/textures/block/dried_ghast_hydration_2_north
     m_ReadOnly: 0
@@ -5220,11 +4685,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: be21524902c2fc346960788d8bb89e0f
-    m_Address: vanilla/minecraft/textures/block/signs/hanging/cherry
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: be2b94da4ca09d04db39b5e16604fd8e
     m_Address: vanilla/minecraft/textures/block/pale_oak_shelf
     m_ReadOnly: 0
@@ -5260,11 +4720,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bef6188bc24dfdf4485c078fe1d66507
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_brown
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bf029d61c6bff2941a86b4e6a8e36f34
     m_Address: vanilla/minecraft/textures/block/dead_horn_coral
     m_ReadOnly: 0
@@ -5272,11 +4727,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bf4fe00494738f94b9db10756b81eb51
     m_Address: vanilla/minecraft/textures/block/sniffer_egg_not_cracked_north
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bf981962f5d8bde49b311b4b8490b595
-    m_Address: vanilla/minecraft/textures/block/chest/normal_right
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5405,16 +4855,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c573687055ad1744ba44762ce2aff5f9
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_cyan
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c575b46cae0b04b4abe3d717805bfb90
-    m_Address: vanilla/minecraft/textures/block/signs/bamboo
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c64c200a15e96684f9ba0e791aae3401
     m_Address: vanilla/minecraft/textures/block/redstone_dust_dot
     m_ReadOnly: 0
@@ -5455,16 +4895,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c7c7b5d2841d1c848ae048237bb0309d
-    m_Address: vanilla/minecraft/textures/block/conduit/base
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c7e1265c914a7754ba3e8e6e3c4f3eff
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/miner_pottery_pattern
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c7f5d5b868e7c864d80ce041477e290c
     m_Address: vanilla/minecraft/textures/block/weathered_copper_bars
     m_ReadOnly: 0
@@ -5487,11 +4917,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c9251a8cd5d74b64b9381608b58fb2f8
     m_Address: vanilla/minecraft/textures/block/hay_block_top
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c933eae0e10f1174281cad0e41659e42
-    m_Address: vanilla/minecraft/textures/block/chest/copper_right
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5540,18 +4965,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cb632ee15763f714cad044d85bdc2f68
-    m_Address: vanilla/minecraft/textures/block/enderdragon/dragon
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cb90d4e12e738f34c8093be2662cab5d
     m_Address: vanilla/minecraft/textures/block/pitcher_crop_bottom_stage_3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cb9c13749fe75364599ab7183579a146
-    m_Address: vanilla/minecraft/textures/block/banner/globe
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5602,11 +5017,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cde33e8d12c3b124ca5735baf8b999b4
     m_Address: vanilla/minecraft/textures/block/beehive_front
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cdfb2c152437d9943b34f56b5ce3b010
-    m_Address: vanilla/minecraft/textures/block/signs/oak
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5710,11 +5120,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d1ccc2a7a8f7e4243baeedce47f00e52
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/guster_pottery_pattern
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d205c184129e7d54bb94389eac83da1f
     m_Address: vanilla/minecraft/textures/block/exposed_copper_grate
     m_ReadOnly: 0
@@ -5725,11 +5130,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d267ad8a7e185374587d84b4c49de398
-    m_Address: vanilla/minecraft/textures/block/banner/piglin
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d26a16aafaa7dc84c93bb5b65f46dc65
     m_Address: vanilla/minecraft/textures/block/cracked_nether_bricks
     m_ReadOnly: 0
@@ -5737,11 +5137,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d27bd5db0ab22f4448ea1f9d14cc0aca
     m_Address: vanilla/minecraft/textures/block/spruce_log_top
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d280c412140ba104b8f6a7fad9798980
-    m_Address: vanilla/minecraft/textures/block/banner/half_vertical_right
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5770,11 +5165,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d3666c789392530418c89612ccb434f9
-    m_Address: vanilla/minecraft/textures/block/copper_golem
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d3714d792070a954c85399c5a773dab8
     m_Address: vanilla/minecraft/textures/block/stripped_mangrove_log_top
     m_ReadOnly: 0
@@ -5787,11 +5177,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d3c6689fec303c64ea9618c8f9380ba6
     m_Address: vanilla/minecraft/textures/block/slime_block
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d40e126e5da19d749a4d7445e289b85f
-    m_Address: vanilla/minecraft/textures/block/chest/copper_exposed
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5845,18 +5230,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d5c00c0e558222743b52638e7e26917f
-    m_Address: vanilla/minecraft/textures/block/banner/gradient
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d5cef73ff9752d649a378cacb6a575da
     m_Address: vanilla/minecraft/textures/block/hanging_roots
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d5d195dbd00051c409a19a22a5127275
-    m_Address: vanilla/minecraft/textures/block/chest/copper_weathered_left
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5880,11 +5255,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d73f1abbfd1db334bb75f92de6b46d56
-    m_Address: vanilla/minecraft/textures/block/player/steve
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d7878ae8122385a4e810b80eb4fac9cd
     m_Address: vanilla/minecraft/textures/block/purpur_pillar
     m_ReadOnly: 0
@@ -5902,11 +5272,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d7e24a0d17f488f4f8ba59ae0103a931
     m_Address: vanilla/minecraft/textures/block/lightning_rod_on
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d835ac70b6a1f314cbead5f73f36129b
-    m_Address: vanilla/minecraft/textures/block/banner/color/banner_yellow
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6055,11 +5420,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: dcb267be46e3a834487f694f4fdab3c9
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dcbcfc45a3d561e4fa2547355b3f9075
     m_Address: vanilla/minecraft/textures/block/campfire_log_lit
     m_ReadOnly: 0
@@ -6072,11 +5432,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dd16a9698f722eb4db2c36f5df9e7f0c
     m_Address: vanilla/minecraft/textures/block/cyan_concrete_powder
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ddc3207988828494b83d447c5cd5b475
-    m_Address: vanilla/minecraft/textures/block/banner/stripe_left
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6135,11 +5490,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e0516efe8fc9f6641a5ab1b374fc8e49
-    m_Address: vanilla/minecraft/textures/block/banner/stripe_bottom
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e06adfdba6924f347b93028e47fdf999
     m_Address: vanilla/minecraft/textures/block/purple_stained_glass_pane_top
     m_ReadOnly: 0
@@ -6185,16 +5535,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e1c16586728cbde4fb8a2bfaa71497de
-    m_Address: vanilla/minecraft/textures/block/banner/diagonal_up_left
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e1dbe327b6d6016448c327e109e23a41
-    m_Address: vanilla/minecraft/textures/block/chest/christmas_left
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e1e50d1680ba32a4f88507abb9d1c707
     m_Address: vanilla/minecraft/textures/block/sea_lantern.mcmeta
     m_ReadOnly: 0
@@ -6207,11 +5547,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e2741ae80b5b7a540a85ede1f8b99a7a
     m_Address: vanilla/minecraft/textures/block/yellow_glazed_terracotta
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e280a6f7118e44b4e9edbae94e4a01f9
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_purple
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6265,11 +5600,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e4ba9a0929ae5714997d85f58c4e8f99
-    m_Address: vanilla/minecraft/textures/block/banner/creeper
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e4c0fee68d5c1054c8d64670c8b79cf9
     m_Address: vanilla/minecraft/textures/block/cocoa_stage1
     m_ReadOnly: 0
@@ -6290,18 +5620,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e5739c21d1ae27e449e966ace5fa2472
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_red
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e5a23df43acb593479b08049bd3362c6
     m_Address: vanilla/minecraft/textures/block/redstone_block
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e5b9ff84d0a7d6b4a8e7dda149e53cd0
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/mourner_pottery_pattern
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6322,11 +5642,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e64c04317c6f63746a16b0b311b3ec94
     m_Address: vanilla/minecraft/textures/block/dirt
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e673913d4b8c0244e8a15f85d4eb466d
-    m_Address: vanilla/minecraft/textures/block/chest/copper_oxidized
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6365,23 +5680,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e79d7d95d9381794382a7a6876a2bcb6
-    m_Address: vanilla/minecraft/textures/block/banner/straight_cross
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e7b8a0b3c2630d74e9aee5e6748a4130
     m_Address: vanilla/minecraft/textures/block/sculk
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e7dedf9a4b8c8e748baa9ef2e42c3b45
-    m_Address: vanilla/minecraft/textures/block/copper_golem/exposed_copper_golem
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e801a7ae654099149a33521d88134529
-    m_Address: vanilla/minecraft/textures/block/signs/hanging/bamboo
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6440,11 +5740,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e9416477b6427714586b5d7ef32f07ad
-    m_Address: vanilla/minecraft/textures/block/chest/copper_oxidized_right
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e96d51de386063648941d83cc5fe9732
     m_Address: vanilla/minecraft/textures/block/birch_door_top
     m_ReadOnly: 0
@@ -6470,11 +5765,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: eb2e0ca74751388499757952f997f6c7
-    m_Address: vanilla/minecraft/textures/block/banner/curly_border
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: eb8dc3afcd4a057479fea6dc954a5c1a
     m_Address: vanilla/minecraft/textures/block/cut_copper
     m_ReadOnly: 0
@@ -6495,11 +5785,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ec05d1eacbe0f8e4b96e631ca981c4b8
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_white
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: eccd85f1fa508a047a95a95fff359588
     m_Address: vanilla/minecraft/textures/block/stripped_warped_stem
     m_ReadOnly: 0
@@ -6507,11 +5792,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ecf8dfffa6ad45d4c9f2e6fc013f0e83
     m_Address: vanilla/minecraft/textures/block/dried_ghast_hydration_3_east
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ed85c72d56945b646bad9fa4f1c992d6
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/blade_pottery_pattern
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6542,11 +5822,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ee7e199a4b388b545a3abd58f22a8d0c
     m_Address: vanilla/minecraft/textures/block/bamboo_fence_gate
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ef70621263c3dae4aac2acf4666370da
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/flow_pottery_pattern
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6605,11 +5880,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f20ac8bacbdedde41bd3e9c674b6bffd
-    m_Address: vanilla/minecraft/textures/block/conduit/wind
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f214da2aaafa02b4fa770e2a07181f13
     m_Address: vanilla/minecraft/textures/block/bed/brown
     m_ReadOnly: 0
@@ -6645,18 +5915,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f2ec739277affb04bb364566336f22d7
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/sheaf_pottery_pattern
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f31887c25412f1749b9485b8eb9fd969
     m_Address: vanilla/minecraft/textures/block/stripped_birch_log_top
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f33de15d03037b74f81e00e104ec8549
-    m_Address: vanilla/minecraft/textures/block/shulker/shulker_lime
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6685,11 +5945,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f41590c927ad7a94fac59708476fc827
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/howl_pottery_pattern
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f45349495c0ec8046942c90da78afdb9
     m_Address: vanilla/minecraft/textures/block/deepslate_copper_ore
     m_ReadOnly: 0
@@ -6697,11 +5952,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f48a1adc828bd2043bda9f3160de7218
     m_Address: vanilla/minecraft/textures/block/smoker_front
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f495821dda2fd6a41bf6ccd256e4f5af
-    m_Address: vanilla/minecraft/textures/block/skeleton/wither_skeleton
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6752,11 +6002,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f5f1a8274b5b8c0488828d9e63a72043
     m_Address: vanilla/minecraft/textures/block/amethyst_cluster.mcmeta
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f5f565bdcd1b90f45bea9ea57998d3f1
-    m_Address: vanilla/minecraft/textures/block/chest/christmas
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6820,11 +6065,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f90cb54a50dbbe9458bd2be7913e1ae0
-    m_Address: vanilla/minecraft/textures/block/banner/half_horizontal_bottom
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f980d643ba777bd46bc8eb5ea022246d
     m_Address: vanilla/minecraft/textures/block/dead_fire_coral_block
     m_ReadOnly: 0
@@ -6832,16 +6072,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f988693c3837dea4aaf279fb3e1538e7
     m_Address: vanilla/minecraft/textures/block/test_block_log
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f9e0a1a98be9cc746b788a11f5751485
-    m_Address: vanilla/minecraft/textures/block/signs/hanging/pale_oak
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f9f89bc7a6596774991a6806bdebcc34
-    m_Address: vanilla/minecraft/textures/block/banner/stripe_right
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6862,11 +6092,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fa9c2ec462da7d24cbbdf7be9aa525eb
     m_Address: vanilla/minecraft/textures/block/blue_stained_glass
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: faab1c40af9216943852645ce0d74fba
-    m_Address: vanilla/minecraft/textures/block/banner/skull
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6915,16 +6140,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fbfbb12c713282a4b97825c5cd32c854
-    m_Address: vanilla/minecraft/textures/block/bed/yellow
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fc050a2c68f15ec4fb033f2fc1f728c6
-    m_Address: vanilla/minecraft/textures/block/signs/jungle
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fc1293c3fe7dfc342a7007eea2453eaa
     m_Address: vanilla/minecraft/textures/block/blackstone_top
     m_ReadOnly: 0
@@ -6932,11 +6147,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fc6a7a5e24479794cb03930cdf4b7589
     m_Address: vanilla/minecraft/textures/block/dead_tube_coral
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fc9b245a78dc71043a52b19f1d0055af
-    m_Address: vanilla/minecraft/textures/block/decorated_pot/skull_pottery_pattern
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -6985,11 +6195,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fe061a809c4eb9a42bb6ebc0a41bb420
-    m_Address: vanilla/minecraft/textures/block/signs/hanging/dark_oak
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fe5319489fa055b4fa4ac93bab4b438e
     m_Address: vanilla/minecraft/textures/block/cracked_polished_blackstone_bricks
     m_ReadOnly: 0
@@ -7007,11 +6212,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fec4f6bbd7c5c4e48ad9acdc63da5330
     m_Address: vanilla/minecraft/textures/block/heavy_core
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ff74f0cd9f2c4ae49b99273d77cbaa21
-    m_Address: vanilla/minecraft/textures/block/signs/hanging/jungle
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -7039,5 +6239,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 12436699e6d3fed48ab831dd0baa2ef1, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 3a40b81839b98e04e990d35392a2bd89, type: 2}
-    - {fileID: 11400000, guid: 63d9f9903e658614da8d41e2567aec36, type: 2}
+    - {fileID: 11400000, guid: 4ee92c820e769d14a992bcace4f889bd, type: 2}
+    - {fileID: 11400000, guid: cf26d3dc87fc1fa498eb0e3c90d1f683, type: 2}
