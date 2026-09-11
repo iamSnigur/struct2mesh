@@ -83,7 +83,7 @@ namespace CraftSharp.Resource
         // Particle type id -> meshes for its frames
         public readonly Dictionary<ResourceLocation, Mesh[]> ParticleMeshesTable = new();
 
-        public const int ATLAS_SIZE = 1024;
+        public const int ATLAS_SIZE = 2048;
         public const int MIN_MIPMAP_SIZE = 16;
 
         public bool Loaded { get; private set; } = false;
@@ -145,13 +145,15 @@ namespace CraftSharp.Resource
             return $" {Mathf.RoundToInt(curCount / (float)totalCount * 100)}%";
         }
 
-        public async UniTask LoadPacks_Mod(Action<string, string> updateStatus)
+        public async UniTask LoadPacksAsync_Mod(Action<string, string> updateStatus)
         {
             updateStatus("resource.info.gather_resource", string.Empty);
             foreach (var pack in packs) pack.GatherResources(this);
 
             updateStatus("resource.info.create_texture", string.Empty);
             //await GenerateAtlas();
+            // await GenerateAtlas("blocks_atlas");
+            // await GenerateAtlas("block_entities_atlas");
             await LoadAtlas();
 
             // Load block models...
@@ -725,11 +727,65 @@ namespace CraftSharp.Resource
 
         private async UniTask LoadAtlas()
         {
+            // load two atlases
             texAtlasTable.Clear();
-            await AtlasTableHelper.LoadAtlasTable(texAtlasTable);
+            await AtlasTableHelper.LoadAtlasTableAsync(texAtlasTable, "block_atlas_index");
             blockAtlas = await AssetProvider.LoadByAddressAsync<Texture2D>("block_atlas");
         }
 
+        // GenerateBlockEntityAtlas
+        private async UniTask GenerateBlockAtlas(ResourceLocation[] atlasTextureIds)
+        {
+            HashSet<ResourceLocation> textureIdSet = new();
+
+            // Append liquid textures, which are not referenced in model files, but will be used by fluid mesh
+            foreach (ResourceLocation texId in FluidGeometry.LiquidTextures)
+            {
+                if (TextureFileTable.ContainsKey(texId))
+                {
+                    textureIdSet.Add(texId);
+                }
+            }
+
+            // Array for textures in collection, plus one blank texture, one empty texture and one missing texture
+            int totalCount = 3 + textureIdSet.Count;
+            var textureInfos = new (Texture2D, TextureAnimationInfo?)[totalCount];
+            ResourceLocation[] ids = new ResourceLocation[totalCount];
+
+            int count = 0;
+
+            // Blank texture
+            ids[count] = BLANK_TEXTURE;
+            textureInfos[count] = (GetBlankTexture(), null);
+            count++;
+
+            // Empty texture
+            ids[count] = EMPTY_TEXTURE;
+            textureInfos[count] = (GetEmptyTexture(), null);
+            count++;
+
+            // Missing texture
+            ids[count] = ResourceLocation.INVALID;
+            textureInfos[count] = (GetMissingTexture(), null);
+            count++;
+
+            var textureTasks = new UniTask<(Texture2D, TextureAnimationInfo?)>[textureIdSet.Count];
+
+            for (int i = 0; i < textureIdSet.Count; i++)
+            {
+                ResourceLocation textureId = textureIdSet.ElementAt(i);
+                ids[count + i] = textureId;
+                textureTasks[i] = LoadSingleTexture_Mod(TextureFileTable[textureId]);
+            }
+
+            (Texture2D, TextureAnimationInfo?)[] textureData = await UniTask.WhenAll(textureTasks);
+
+            foreach (var data in textureData)
+                textureInfos[count++] = data;
+
+            await GenerateAtlas_Internal(textureInfos, ids);
+        }
+        
         private async UniTask GenerateAtlas()
         {
             HashSet<ResourceLocation> textureIdSet = new();
@@ -813,7 +869,8 @@ namespace CraftSharp.Resource
             }
         }
 
-        private IEnumerator GenerateAtlas_Internal((Texture2D, TextureAnimationInfo?)[] textureInfos,
+        private IEnumerator GenerateAtlas_Internal(
+            (Texture2D, TextureAnimationInfo?)[] textureInfos,
             ResourceLocation[] ids)
         {
             texAtlasTable.Clear(); // Clear previously loaded table...
@@ -861,7 +918,10 @@ namespace CraftSharp.Resource
                     filterMode = FilterMode.Point
                 };
 
-                Rect[]? rects = atlas.PackTextures(textureInfosConsumed.Select(x => x.Item1).ToArray(), 0, ATLAS_SIZE,
+                Rect[]? rects = atlas.PackTextures(
+                    textureInfosConsumed.Select(x => x.Item1).ToArray(),
+                    0,
+                    ATLAS_SIZE,
                     false);
 
                 if (atlas.width != ATLAS_SIZE || atlas.height != ATLAS_SIZE)
@@ -994,7 +1054,7 @@ namespace CraftSharp.Resource
             atlasArray0.Apply(false, false);
             atlasArray1.Apply(false, false);
 
-            AtlasTableHelper.SaveAtlasTable(texAtlasTable);
+            AtlasTableHelper.SaveAtlasTable(texAtlasTable, "texture_atlas_manifest");
             blockAtlas = Save(atlasArray1, "Assets/Resources_moved/vanilla/minecraft/textures/block_atlas.asset");
         }
 

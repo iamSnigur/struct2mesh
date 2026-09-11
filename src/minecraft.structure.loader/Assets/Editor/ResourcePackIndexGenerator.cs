@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using Unity.Plastic.Newtonsoft.Json;
-using Unity.Plastic.Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
@@ -10,10 +9,11 @@ using UnityEngine;
 
 namespace Editor
 {
-    public static class ResourcePackManifestGenerator
+    public static class ResourcePackIndexGenerator
     {
-        private const string TEXTURES_GROUP_NAME    = "Textures";
-        private const string MODELS_GROUP_NAME      = "Models";
+        private const string BLOCK_TEXTURES_GROUP_NAME = "BlockTextures";
+        private const string BLOCK_ENTITY_TEXTURES_GROUP_NAME = "BlockEntityTextures";
+        private const string MODELS_GROUP_NAME = "Models";
         private const string BLOCKSTATES_GROUP_NAME = "Blockstates";
 
         private const string OUTPUT_FOLDER = "Assets/Resources_moved";
@@ -21,7 +21,7 @@ namespace Editor
         [MenuItem("Tools/ResourcePack/Generate Textures Index")]
         public static void GenerateTexturesIndex()
         {
-            GenerateIndex(TEXTURES_GROUP_NAME, "textures_manifest_index.json", entry =>
+            GenerateIndex(BLOCK_TEXTURES_GROUP_NAME, "block_textures_index.json", entry =>
             {
                 try
                 {
@@ -35,7 +35,23 @@ namespace Editor
                 }
             });
             
-            Debug.Log("Textures Index generated");
+            Debug.Log($"{BLOCK_TEXTURES_GROUP_NAME} Index generated");
+            
+            GenerateIndex(BLOCK_ENTITY_TEXTURES_GROUP_NAME, "block_entity_textures_index.json", entry =>
+            {
+                try
+                {
+                    var key = entry.address[entry.address.IndexOf("block/", StringComparison.Ordinal)..];
+                    return (key, entry.address);
+                }
+                catch
+                {
+                    Debug.Log($"Invalid asset in group: {entry.address}");
+                    throw;
+                }
+            });
+            
+            Debug.Log($"{BLOCK_ENTITY_TEXTURES_GROUP_NAME} Index generated");
         }
 
         [MenuItem("Tools/ResourcePack/Generate Blockstates Index")]

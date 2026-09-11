@@ -15,8 +15,18 @@ MonoBehaviour:
   m_GroupName: BuildAssets
   m_GUID: 313d9be37ae0412459736a5e5e2e6af6
   m_SerializeEntries:
-  - m_GUID: 02109f96d369498438fae62fcb212c06
-    m_Address: textures_manifest_index
+  - m_GUID: 09b3394b424177a4f834f7b118fd4fed
+    m_Address: block_atlas_index
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c019821e107000459e7dfa97b70bac7
+    m_Address: block_entity_textures_index
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28b14f72a7698154c90fd5bcc7514125
+    m_Address: block_atlas
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -25,18 +35,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 68d9b9d492efa6c4abc6b2de642a49df
-    m_Address: texture_atlas_manifest
+  - m_GUID: 624300da9811b264e9f75bd362477300
+    m_Address: block_textures_index
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a119eb2380cc60441889947577fcc2f6
     m_Address: block_color_rules
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ba9d780e17645ff4dab1d8fc17449285
-    m_Address: block_atlas
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

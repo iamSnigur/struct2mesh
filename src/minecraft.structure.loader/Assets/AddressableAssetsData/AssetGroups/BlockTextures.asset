@@ -105,11 +105,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 04e4e717224a54947b0eee6e9150f055
-    m_Address: vanilla/minecraft/textures/block/bed/lime
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0521933f38636c04d9c352f2e728d9ce
     m_Address: vanilla/minecraft/textures/block/raw_iron_block
     m_ReadOnly: 0
@@ -440,11 +435,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 10078ca6a62cbb746a6cd39ebcc249c3
-    m_Address: vanilla/minecraft/textures/block/bed/gray
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 10320f70a694dae4b8316f85a1fb502f
     m_Address: vanilla/minecraft/textures/block/big_dripleaf_side
     m_ReadOnly: 0
@@ -497,11 +487,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 128d534ec8bde4f438194b8c99628eef
     m_Address: vanilla/minecraft/textures/block/vault_bottom
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 12c824ae3be9a40439a163545039dcf0
-    m_Address: vanilla/minecraft/textures/block/bed/white
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -942,11 +927,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 27c58a6b4c4cc19418183fe9486e2f98
     m_Address: vanilla/minecraft/textures/block/red_wool
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 27ccf326318e7314aa8346cac0189943
-    m_Address: vanilla/minecraft/textures/block/bed/cyan
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -1545,11 +1525,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 42a091c9f59c61d4aaf5694314f05351
-    m_Address: vanilla/minecraft/textures/block/bed/black
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 42b8fac2754ce8041abf15cfc6918a14
     m_Address: vanilla/minecraft/textures/block/melon_stem
     m_ReadOnly: 0
@@ -1642,11 +1617,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 458b99257772f4842a5bace088e06153
     m_Address: vanilla/minecraft/textures/block/bubble_coral_fan
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 45c31e4903acaec48adbfddacc8a72f6
-    m_Address: vanilla/minecraft/textures/block/bed/red
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2115,11 +2085,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 599f89de4cde1c046bc58c705b9629c2
-    m_Address: vanilla/minecraft/textures/block/bed/green
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5a169c2d208f88d49bef0095b971e116
     m_Address: vanilla/minecraft/textures/block/black_concrete_powder
     m_ReadOnly: 0
@@ -2162,11 +2127,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5c23da518fa4cad41b7e01692d8bf949
     m_Address: vanilla/minecraft/textures/block/iron_door_top
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5c3d886cc0cd8564587a9f6aaa65a641
-    m_Address: vanilla/minecraft/textures/block/bed/orange
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -2487,11 +2447,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 672c735ad24256b40879cc95b01ca949
     m_Address: vanilla/minecraft/textures/block/spruce_sapling
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 676db99a72d63824c99934925afe693d
-    m_Address: vanilla/minecraft/textures/block/bed/purple
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -3545,11 +3500,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 91a57243703585a499390c67c2a640c1
-    m_Address: vanilla/minecraft/textures/block/bed/blue
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 91aa27601c732ce4a8e24fc1f1334acb
     m_Address: vanilla/minecraft/textures/block/trial_spawner_side_active
     m_ReadOnly: 0
@@ -4450,11 +4400,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b6381a87de36f944c980f2958fc0c7d6
-    m_Address: vanilla/minecraft/textures/block/bed/pink
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b63d800d12c82f849811c5035e949d64
     m_Address: vanilla/minecraft/textures/block/lily_of_the_valley
     m_ReadOnly: 0
@@ -4607,11 +4552,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bb482036583a78044815696750a215c5
     m_Address: vanilla/minecraft/textures/block/repeating_command_block_back
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bbd0b736393794d4c8d2eb49023af980
-    m_Address: vanilla/minecraft/textures/block/bed/magenta
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -4777,11 +4717,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c1a2c4ac7487f944ebd0b31a8b4ff900
     m_Address: vanilla/minecraft/textures/block/pointed_dripstone_up_middle
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c1ac321ab429e384d82d9f38584c69a5
-    m_Address: vanilla/minecraft/textures/block/bed/light_gray
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -5565,11 +5500,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e3624230d808c06498effec373d88ce2
-    m_Address: vanilla/minecraft/textures/block/bed/light_blue
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e3f6253fe39a6944d86b854b6cf39726
     m_Address: vanilla/minecraft/textures/block/campfire_log
     m_ReadOnly: 0
@@ -5877,11 +5807,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f10e5a12e0a5a684eb48a86d07ad0cca
     m_Address: vanilla/minecraft/textures/block/destroy_stage_1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f214da2aaafa02b4fa770e2a07181f13
-    m_Address: vanilla/minecraft/textures/block/bed/brown
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

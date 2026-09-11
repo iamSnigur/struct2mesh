@@ -30,6 +30,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 04e4e717224a54947b0eee6e9150f055
+    m_Address: vanilla/minecraft/textures/block/bed/lime
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 05792653871067f449b69158c8fc0de6
     m_Address: vanilla/minecraft/textures/block/decorated_pot/decorated_pot_base
     m_ReadOnly: 0
@@ -65,6 +70,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 10078ca6a62cbb746a6cd39ebcc249c3
+    m_Address: vanilla/minecraft/textures/block/bed/gray
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 10b8cec65e67bf248b7c8b27590a92ad
     m_Address: vanilla/minecraft/textures/block/decorated_pot/decorated_pot_side
     m_ReadOnly: 0
@@ -72,6 +82,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 117d1188e391eb942b730999a68cbd8f
     m_Address: vanilla/minecraft/textures/block/conduit/break_particle
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 12c824ae3be9a40439a163545039dcf0
+    m_Address: vanilla/minecraft/textures/block/bed/white
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -140,6 +155,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27ccf326318e7314aa8346cac0189943
+    m_Address: vanilla/minecraft/textures/block/bed/cyan
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 299f178d0aabd044dabd088f8dc8827b
     m_Address: vanilla/minecraft/textures/block/banner/cross
     m_ReadOnly: 0
@@ -200,8 +220,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 42a091c9f59c61d4aaf5694314f05351
+    m_Address: vanilla/minecraft/textures/block/bed/black
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 44f3b6a47788974478fdd89da9d9e57c
     m_Address: vanilla/minecraft/textures/block/shulker/shulker_green
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 45c31e4903acaec48adbfddacc8a72f6
+    m_Address: vanilla/minecraft/textures/block/bed/red
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -280,8 +310,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 599f89de4cde1c046bc58c705b9629c2
+    m_Address: vanilla/minecraft/textures/block/bed/green
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5b5a79d15a7522147929bd83c82659a4
     m_Address: vanilla/minecraft/textures/block/shulker/shulker_light_blue
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c3d886cc0cd8564587a9f6aaa65a641
+    m_Address: vanilla/minecraft/textures/block/bed/orange
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -307,6 +347,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 66a9ed418f4980d4fa59d614ae045383
     m_Address: vanilla/minecraft/textures/block/banner/diagonal_right
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 676db99a72d63824c99934925afe693d
+    m_Address: vanilla/minecraft/textures/block/bed/purple
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -415,6 +460,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91a57243703585a499390c67c2a640c1
+    m_Address: vanilla/minecraft/textures/block/bed/blue
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 93477cbd427bc7c4f9ae46687660f1c7
     m_Address: vanilla/minecraft/textures/block/shulker/shulker_magenta
     m_ReadOnly: 0
@@ -515,6 +565,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6381a87de36f944c980f2958fc0c7d6
+    m_Address: vanilla/minecraft/textures/block/bed/pink
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b82c67f78fb104745b4177a959b849a2
     m_Address: vanilla/minecraft/textures/block/decorated_pot/arms_up_pottery_pattern
     m_ReadOnly: 0
@@ -527,6 +582,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: baafdc7c61144664da319dd2fb499432
     m_Address: vanilla/minecraft/textures/block/decorated_pot/danger_pottery_pattern
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bbd0b736393794d4c8d2eb49023af980
+    m_Address: vanilla/minecraft/textures/block/bed/magenta
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -547,6 +607,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bf981962f5d8bde49b311b4b8490b595
     m_Address: vanilla/minecraft/textures/block/chest/normal_right
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c1ac321ab429e384d82d9f38584c69a5
+    m_Address: vanilla/minecraft/textures/block/bed/light_gray
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -660,6 +725,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3624230d808c06498effec373d88ce2
+    m_Address: vanilla/minecraft/textures/block/bed/light_blue
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e4ba9a0929ae5714997d85f58c4e8f99
     m_Address: vanilla/minecraft/textures/block/banner/creeper
     m_ReadOnly: 0
@@ -722,6 +792,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f20ac8bacbdedde41bd3e9c674b6bffd
     m_Address: vanilla/minecraft/textures/block/conduit/wind
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f214da2aaafa02b4fa770e2a07181f13
+    m_Address: vanilla/minecraft/textures/block/bed/brown
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

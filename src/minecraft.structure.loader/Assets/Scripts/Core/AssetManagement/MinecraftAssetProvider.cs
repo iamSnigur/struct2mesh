@@ -14,7 +14,7 @@ namespace Core.AssetManagement
 {
     public static class MinecraftAssetProvider
     {
-        private const string TEXTURES_MANIFEST_ADDRESS = "textures_manifest_index";
+        private const string BLOCK_TEXTURES_INDEX_ADDRESS = "block_textures_index";
         private const string MODELS_MANIFEST_ADDRESS = "models_manifest_index";
         private const string BLOCKSTATES_MANIFEST_ADDRESS = "blockstates_manifest_index";
         private const string COLOR_RULES_ADDRESS = "block_color_rules";
@@ -37,18 +37,18 @@ namespace Core.AssetManagement
 
             _colorRules = await AssetProvider.LoadByAddressAsync<TextAsset>(COLOR_RULES_ADDRESS);
             
-            await PreloadResources();
+            await PreloadResourcesAsync();
         }
 
         private static void UpdateStatus(string status, string progress) =>
             Debug.Log($"{status}: {progress}");
 
-        private static async UniTask PreloadResources()
+        private static async UniTask PreloadResourcesAsync()
         {
             try
             {
-                await GatherResources(_resourcePackManager);
-                await _resourcePackManager.LoadPacks_Mod(UpdateStatus);
+                await GatherResourcesAsync(_resourcePackManager);
+                await _resourcePackManager.LoadPacksAsync_Mod(UpdateStatus);
                 await Resources.UnloadUnusedAssets();
                 Loaded = true;
             }
@@ -74,17 +74,23 @@ namespace Core.AssetManagement
         {
             ResourceLocation location = new(blockStateId);
 
-            if (!_resourcePackManager.BlockStateFileTable.TryGetValue(location, out string blockstateJson))
-            {
+            if (!BlockStateExists(location, out string blockstateJson))
                 return;
-            }
 
             RenderType renderType = BlockStateHelper.GetRenderTypeFor(blockStateId);
             OffsetType offsetType = BlockStateHelper.GetOffsetType(blockStateId);
 
-            s_blockstateHandles.Add(await _blockStateLoader.LoadBlockStateModel(location, blockstateJson, renderType, offsetType));
+            s_blockstateHandles
+                .Add(await _blockStateLoader.LoadBlockStateModel(location, blockstateJson, renderType, offsetType));
         }
-        
+
+        private static bool BlockStateExists(ResourceLocation location, out string blockstateJson)
+        {
+            return _resourcePackManager
+                .BlockStateFileTable
+                .TryGetValue(location, out blockstateJson);
+        }
+
         public static BlockRenderData BuildBlock(ref Mesh.MeshData meshData, string blockStateId, Vector3 blockPos, Dictionary<string, string> prop, byte cullFlags)
         {
             ResourceLocation location = new(blockStateId);
@@ -106,7 +112,7 @@ namespace Core.AssetManagement
             return blockRenderData;
         }
 
-        private static async UniTask LoadLocations(Dictionary<ResourceLocation, string> table, string manifestAddress)
+        private static async UniTask LoadLocationsAsync(Dictionary<ResourceLocation, string> table, string manifestAddress)
         {
             TextAsset manifest = await AssetProvider.LoadByAddressAsync<TextAsset>(manifestAddress);
             var manifestIndexes = JsonConvert.DeserializeObject<Dictionary<string, string>>(manifest.text);
@@ -124,25 +130,26 @@ namespace Core.AssetManagement
             }
         }
         
-        private static async UniTask LoadTextures(ResourcePackManager manager) => 
-            await LoadLocations(manager.TextureFileTable, TEXTURES_MANIFEST_ADDRESS);
+        // fix up
+        private static async UniTask LoadTexturesAsync(ResourcePackManager manager) => 
+            await LoadLocationsAsync(manager.TextureFileTable, BLOCK_TEXTURES_INDEX_ADDRESS);
 
-        private static async UniTask LoadModels(ResourcePackManager manager) => 
-            await LoadLocations(manager.BlockModelFileTable, MODELS_MANIFEST_ADDRESS);
+        private static async UniTask LoadModelsAsync(ResourcePackManager manager) => 
+            await LoadLocationsAsync(manager.BlockModelFileTable, MODELS_MANIFEST_ADDRESS);
 
-        private static async UniTask LoadBlockstates(ResourcePackManager manager) => 
-            await LoadLocations(manager.BlockStateFileTable, BLOCKSTATES_MANIFEST_ADDRESS);
+        private static async UniTask LoadBlockstatesAsync(ResourcePackManager manager) => 
+            await LoadLocationsAsync(manager.BlockStateFileTable, BLOCKSTATES_MANIFEST_ADDRESS);
 
-        private static async UniTask GatherResources(ResourcePackManager manager)
+        private static async UniTask GatherResourcesAsync(ResourcePackManager manager)
         {
-            UniTask texturesTask = LoadTextures(manager);
-            UniTask modelsTask = LoadModels(manager);
-            UniTask blockstatesTask = LoadBlockstates(manager);
+            UniTask texturesTask = LoadTexturesAsync(manager);
+            UniTask modelsTask = LoadModelsAsync(manager);
+            UniTask blockstatesTask = LoadBlockstatesAsync(manager);
 
             await UniTask.WhenAll(texturesTask, modelsTask, blockstatesTask);
         }
 
-        public static async UniTask UpdateBlockStatePalette(List<PaletteEntry> structurePalette)
+        public static async UniTask UpdateBlockStatePaletteAsync(List<PaletteEntry> structurePalette)
         {
             LongTaskYielder yielder = new();
             
