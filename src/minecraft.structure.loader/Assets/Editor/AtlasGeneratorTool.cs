@@ -489,11 +489,10 @@ namespace Editor
             };
             Graphics.CopyTexture(array, sliceIndex, tex, 0);
             tex.Apply();
-#if UNITY_EDITOR
+      
             AssetDatabase.CreateAsset(tex, path);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-#endif
             //Object.Destroy(tex);
         }
         
