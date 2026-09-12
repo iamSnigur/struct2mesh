@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace CraftSharp.Resource
 {
-    public static class AtlasTableHelper
+    public static class AtlasIndexHelper
     {
         [Serializable]
         private record TextureInfoEntry
@@ -66,7 +66,7 @@ namespace CraftSharp.Resource
             };
         }
     
-        public static void SaveAtlasTable(
+        public static void Save(
             Dictionary<ResourceLocation, TextureInfo> atlasTable,
             string atlasName)
         {
@@ -84,7 +84,7 @@ namespace CraftSharp.Resource
 #endif
         }
 
-        public static async UniTask LoadAtlasTableAsync(
+        public static async UniTask LoadAsync(
             Dictionary<ResourceLocation, TextureInfo> atlasTable,
             string atlasName)
         {

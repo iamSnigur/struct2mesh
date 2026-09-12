@@ -12,11 +12,13 @@ using Unity.Plastic.Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Color = UnityEngine.Color;
+using Graphics = UnityEngine.Graphics;
 
 namespace Editor
 {
     #nullable enable
-    public static class AtlasAssetsGeneratorTool
+    public static class AtlasGeneratorTool
     {
         private record TextureAnimationInfo
         {
@@ -34,10 +36,18 @@ namespace Editor
             }
         }
         
+        private struct AtlasConfig
+        {
+            public string AtlasAssetPath;
+            public string AtlasIndexName;
+            public int Size;
+            public bool ExtrudeEdges;
+            public int ExtrudeBorder;
+        }
+        
         private static readonly ResourceLocation BLANK_TEXTURE = new("builtin", "blank");
         private static readonly ResourceLocation EMPTY_TEXTURE = new("builtin", "empty");
         
-        private const int ATLAS_SIZE = 2048;
         private const int MIN_MIPMAP_SIZE = 16;
         
         private static readonly Dictionary<ResourceLocation, string> s_blockTexturesTable = new(); 
@@ -45,20 +55,49 @@ namespace Editor
         
         private static readonly Dictionary<ResourceLocation, TextureInfo> s_textureAtlasTable = new();
         
-        [MenuItem("Tools/Generate Atlas")]
+        [MenuItem("Tools/Atlas/Generate Block Atlas")]
         public static async UniTaskVoid GenerateAtlasAndIndexing()
         {
-            // load block textures resource locations
             await LoadLocationsAsync(s_blockTexturesTable, "block_textures_index");
-            //await LoadLocations(s_blockEntityTexturesTable, "block_entity_textures_index");
             Debug.Log("Block locations loaded");
+
+            AtlasConfig blockAtlasConfig = new()
+            {
+                AtlasAssetPath = "Assets/Resources_moved/vanilla/minecraft/textures/block_atlas.asset",
+                AtlasIndexName = "block_atlas_index",
+                Size = 2048,
+                ExtrudeEdges = true,
+                ExtrudeBorder = 16
+            };
             
             await GenerateAtlasAsync(
                 s_blockTexturesTable,
-                "Assets/Resources_moved/vanilla/minecraft/textures/block_atlas_16.asset",
-                "block_atlas_index");
+                blockAtlasConfig);
             
-            Debug.Log("Atlas assets generated");
+            Debug.Log("Block Atlas assets generated");
+        }
+        
+        [MenuItem("Tools/Atlas/Generate Block Entity Atlas")]
+        public static async UniTaskVoid GenerateBlockEntityAtlas()
+        {
+            await LoadLocationsAsync(
+                s_blockEntityTexturesTable,
+                "block_entity_textures_index");
+            Debug.Log("Block Entity locations loaded");
+            
+            AtlasConfig blockEntityAtlasConfig = new()
+            {
+                AtlasAssetPath = "Assets/Resources_moved/vanilla/minecraft/textures/block_entity_atlas.asset",
+                AtlasIndexName = "block_entity_atlas_index",
+                Size = 1024,
+                ExtrudeEdges = false
+            };
+            
+            await GenerateAtlasAsync(
+                s_blockEntityTexturesTable,
+                blockEntityAtlasConfig);
+            
+            Debug.Log("Block Entity Atlas assets generated");
         }
         
         private static async UniTask LoadLocationsAsync(
@@ -86,28 +125,27 @@ namespace Editor
         
         private static async UniTask GenerateAtlasAsync(
             Dictionary<ResourceLocation, string> textureTable,
-            string atlasAssetPath,
-            string atlasIndexName)
+            AtlasConfig atlasConfig)
         {
             // Array for textures in collection, plus one blank texture, one empty texture and one missing texture
             int totalCount = 3 + textureTable.Count;
             var textureInfos = new (Texture2D, TextureAnimationInfo?)[totalCount];
-            ResourceLocation[] ids = new ResourceLocation[totalCount];
+            ResourceLocation[] textureLocations = new ResourceLocation[totalCount];
 
             int count = 0;
 
             // Blank texture
-            ids[count] = BLANK_TEXTURE;
+            textureLocations[count] = BLANK_TEXTURE;
             textureInfos[count] = (GetBlankTexture(), null);
             count++;
 
             // Empty texture
-            ids[count] = EMPTY_TEXTURE;
+            textureLocations[count] = EMPTY_TEXTURE;
             textureInfos[count] = (GetEmptyTexture(), null);
             count++;
 
             // Missing texture
-            ids[count] = ResourceLocation.INVALID;
+            textureLocations[count] = ResourceLocation.INVALID;
             textureInfos[count] = (GetMissingTexture(), null);
             count++;
 
@@ -116,7 +154,7 @@ namespace Editor
             int i = 0;
             foreach ((ResourceLocation textureId, string texturePath) in textureTable)
             {
-                ids[count + i] = textureId;
+                textureLocations[count + i] = textureId;
                 textureTasks[i] = LoadSingleTextureAsync(texturePath);
                 ++i;
             }
@@ -126,7 +164,10 @@ namespace Editor
             foreach (var data in textureData)
                 textureInfos[count++] = data;
 
-            await GenerateAtlasAsync_Internal(textureInfos, ids, atlasAssetPath, atlasIndexName);
+            await GenerateAtlasAsync_Internal(
+                textureInfos,
+                textureLocations,
+                atlasConfig);
         }
         
         private static async UniTask<(Texture2D, TextureAnimationInfo?)> LoadSingleTextureAsync(string texturePath)
@@ -194,20 +235,54 @@ namespace Editor
             return (rearranged, new TextureAnimationInfo(frameCount, framePerRow, frameInterval, interpolate));
         }
 
+        private static Texture2D ExtrudeTexture(Texture2D src, int border)
+        {
+            int w = src.width;
+            int h = src.height;
+            var dst = new Texture2D(w + border * 2, h + border * 2, TextureFormat.RGBA32, false)
+            {
+                filterMode = src.filterMode
+            };
+
+            Color32[] srcPx = src.GetPixels32();
+            var dstPx = new Color32[dst.width * dst.height];
+
+            for (int y = 0; y < dst.height; y++)
+                for (int x = 0; x < dst.width; x++)
+                {
+                    int sx = Mathf.Clamp(x - border, 0, w - 1);
+                    int sy = Mathf.Clamp(y - border, 0, h - 1);
+                    dstPx[y * dst.width + x] = srcPx[sy * w + sx];
+                }
+
+            dst.SetPixels32(dstPx);
+            dst.Apply(false);
+            return dst;
+        }
+        
         private static IEnumerator GenerateAtlasAsync_Internal(
             (Texture2D, TextureAnimationInfo?)[] textureInfos,
             ResourceLocation[] ids,
-            string atlasAssetPath,
-            string atlasIndexName)
+            AtlasConfig atlasConfig)
         {
             s_textureAtlasTable.Clear(); // Clear previously loaded table...
 
+            if (atlasConfig.ExtrudeEdges)
+            {
+                for (int i = 0; i < textureInfos.Length; i++)
+                {
+                    (Texture2D tex, TextureAnimationInfo? anim) = textureInfos[i];
+                    textureInfos[i] = (ExtrudeTexture(tex, atlasConfig.ExtrudeBorder), anim);
+                }
+            }
+            
+            int atlasSize = atlasConfig.Size;
             int curTexIndex = 0, curAtlasIndex = 0;
             var totalCount = textureInfos.Length;
             List<Texture2D> atlases = new();
 
-            const int totalVolume = ATLAS_SIZE * ATLAS_SIZE;
-            const int maxContentVolume = (int)(totalVolume * 0.97F);
+            int totalVolume = atlasSize * atlasSize;
+            int maxContentVolume = (int)(totalVolume * 0.97F);
 
             do
             {
@@ -216,8 +291,9 @@ namespace Editor
 
                 while (lastTexIndex < totalCount - 1)
                 {
-                    var (nextTex, _) = textureInfos[lastTexIndex + 1];
+                    (Texture2D nextTex, _) = textureInfos[lastTexIndex + 1];
                     Assert.IsNotNull(nextTex, $"Texture {ids[lastTexIndex + 1]} is null");
+                    
                     curVolume += nextTex.width * nextTex.height;
 
                     if (curVolume < maxContentVolume)
@@ -240,27 +316,27 @@ namespace Editor
                     textureInfos[curTexIndex..(lastTexIndex + 1)];
 
                 // First assign a placeholder
-                var atlas = new Texture2D(ATLAS_SIZE, ATLAS_SIZE)
+                var atlas = new Texture2D(atlasSize, atlasSize)
                 {
                     filterMode = FilterMode.Point
                 };
 
                 Rect[]? rects = atlas.PackTextures(
                     textureInfosConsumed.Select(x => x.Item1).ToArray(),
-                    32,
-                    ATLAS_SIZE,
+                    0,
+                    atlasSize,
                     false);
 
-                if (atlas.width != ATLAS_SIZE || atlas.height != ATLAS_SIZE)
+                if (atlas.width != atlasSize || atlas.height != atlasSize)
                 {
                     // Size not right, replace it (usually the last atlas in array which doesn't
                     // have enough textures to take up all the place and thus is smaller in size)
-                    var newAtlas = new Texture2D(ATLAS_SIZE, ATLAS_SIZE);
+                    var newAtlas = new Texture2D(atlasSize, atlasSize);
 
                     Graphics.CopyTexture(atlas, 0, 0, 0, 0, atlas.width, atlas.height, newAtlas, 0, 0, 0, 0);
 
-                    float scaleX = atlas.width / (float)ATLAS_SIZE;
-                    float scaleY = atlas.height / (float)ATLAS_SIZE;
+                    float scaleX = atlas.width / (float)atlasSize;
+                    float scaleY = atlas.height / (float)atlasSize;
 
                     // Rescale the texture boundaries
                     for (int i = 0; i < rects.Length; i++)
@@ -277,6 +353,18 @@ namespace Editor
                 atlases.Add(atlas);
 
                 yield return null;
+                
+                if (atlasConfig.ExtrudeEdges)
+                {
+                    float inset = atlasConfig.ExtrudeBorder / (float)atlasSize;
+
+                    for (int i = 0; i < rects.Length; i++)
+                        rects[i] = new Rect(
+                            rects[i].x + inset,
+                            rects[i].y + inset,
+                            rects[i].width - inset * 2,
+                            rects[i].height - inset * 2);
+                }
 
                 for (int i = 0; i < consumedTexCount; i++)
                 {
@@ -303,9 +391,16 @@ namespace Editor
             // MIN_MIPMAP_SIZE * MIN_MIPMAP_SIZE mipmap chunks are sampled from a single tile
             var mipCount1 = ((int)math.log2(MIN_MIPMAP_SIZE)) + 1;
             var mipCount0 = Mathf.Max(1, mipCount1 - 2);
-            var atlasArray0 = new Texture2DArray(ATLAS_SIZE, ATLAS_SIZE, curAtlasIndex, TextureFormat.RGBA32, mipCount0,
+            var atlasArray0 = new Texture2DArray(
+                atlasSize, atlasSize,
+                curAtlasIndex,
+                TextureFormat.RGBA32,
+                mipCount0,
                 false);
-            var atlasArray1 = new Texture2DArray(ATLAS_SIZE, ATLAS_SIZE, curAtlasIndex, TextureFormat.RGBA32, mipCount1,
+            var atlasArray1 = new Texture2DArray(atlasSize, atlasSize,
+                curAtlasIndex,
+                TextureFormat.RGBA32,
+                mipCount1,
                 false);
 
             atlasArray0.filterMode = FilterMode.Point;
@@ -318,10 +413,10 @@ namespace Editor
                 atlasArray1.SetPixels32(atlases[index].GetPixels32(), index, 0);
 
                 // Generate mipmaps of different levels
-                var lastColors = atlases[index].GetPixels32();
+                Color32[] lastColors = atlases[index].GetPixels32();
                 var pixColors = new Color32[4];
 
-                for (int mipLevel = 1, size = ATLAS_SIZE; mipLevel < mipCount1; mipLevel++, size >>= 1)
+                for (int mipLevel = 1, size = atlasSize; mipLevel < mipCount1; mipLevel++, size >>= 1)
                 {
                     int mipSize = size >> 1;
                     var mipColors = new Color32[mipSize * mipSize];
@@ -381,11 +476,11 @@ namespace Editor
             atlasArray0.Apply(false, false);
             atlasArray1.Apply(false, false);
 
-            AtlasTableHelper.SaveAtlasTable(s_textureAtlasTable, atlasIndexName);
-            Save(atlasArray1, atlasAssetPath);
+            AtlasIndexHelper.Save(s_textureAtlasTable, atlasConfig.AtlasIndexName);
+            Save(atlasArray1, atlasConfig.AtlasAssetPath);
         }
 
-        private static Texture2D Save(Texture2DArray array, string path)
+        private static void Save(Texture2DArray array, string path)
         {
             int sliceIndex = 0;
             Texture2D tex = new(array.width, array.height, array.format, array.mipmapCount, false)
@@ -399,7 +494,7 @@ namespace Editor
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 #endif
-            return tex;
+            //Object.Destroy(tex);
         }
         
         private static Texture2D GetBlankTexture()

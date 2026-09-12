@@ -729,7 +729,7 @@ namespace CraftSharp.Resource
         {
             // load two atlases
             texAtlasTable.Clear();
-            await AtlasTableHelper.LoadAtlasTableAsync(texAtlasTable, "block_atlas_index");
+            await AtlasIndexHelper.LoadAsync(texAtlasTable, "block_atlas_index");
             blockAtlas = await AssetProvider.LoadByAddressAsync<Texture2D>("block_atlas");
         }
 
@@ -1054,7 +1054,7 @@ namespace CraftSharp.Resource
             atlasArray0.Apply(false, false);
             atlasArray1.Apply(false, false);
 
-            AtlasTableHelper.SaveAtlasTable(texAtlasTable, "texture_atlas_manifest");
+            AtlasIndexHelper.Save(texAtlasTable, "texture_atlas_manifest");
             blockAtlas = Save(atlasArray1, "Assets/Resources_moved/vanilla/minecraft/textures/block_atlas.asset");
         }
 

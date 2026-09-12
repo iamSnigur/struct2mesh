@@ -1,0 +1,2807 @@
+[
+  {
+    "PathKey": "blank",
+    "InfoValue": {
+      "xOffset": 0.625,
+      "yOffset": 0.453125,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "empty",
+    "InfoValue": {
+      "xOffset": 0.75,
+      "yOffset": 0.4375,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "<missingno>",
+    "InfoValue": {
+      "xOffset": 0.546875,
+      "yOffset": 0.4375,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/ender",
+    "InfoValue": {
+      "xOffset": 0.4375,
+      "yOffset": 0.1875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/border",
+    "InfoValue": {
+      "xOffset": 0.5,
+      "yOffset": 0.0,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/spark",
+    "InfoValue": {
+      "xOffset": 0.75,
+      "yOffset": 0.375,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/bed/lime",
+    "InfoValue": {
+      "xOffset": 0.5,
+      "yOffset": 0.125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/decorated_pot_base",
+    "InfoValue": {
+      "xOffset": 0.4375,
+      "yOffset": 0.4375,
+      "width": 0.03125,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/explorer_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.5625,
+      "yOffset": 0.4375,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/diagonal_up_right",
+    "InfoValue": {
+      "xOffset": 0.5625,
+      "yOffset": 0.0625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/conduit/wind_vertical",
+    "InfoValue": {
+      "xOffset": 0.0,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.6875,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/angler_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.578125,
+      "yOffset": 0.4375,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/mangrove",
+    "InfoValue": {
+      "xOffset": 0.8125,
+      "yOffset": 0.40625,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/base",
+    "InfoValue": {
+      "xOffset": 0.625,
+      "yOffset": 0.0,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/bed/gray",
+    "InfoValue": {
+      "xOffset": 0.625,
+      "yOffset": 0.0625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/decorated_pot_side",
+    "InfoValue": {
+      "xOffset": 0.59375,
+      "yOffset": 0.453125,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/conduit/break_particle",
+    "InfoValue": {
+      "xOffset": 0.578125,
+      "yOffset": 0.453125,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/bed/white",
+    "InfoValue": {
+      "xOffset": 0.6875,
+      "yOffset": 0.0,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/conduit/cage",
+    "InfoValue": {
+      "xOffset": 0.5,
+      "yOffset": 0.4375,
+      "width": 0.03125,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/dark_oak",
+    "InfoValue": {
+      "xOffset": 0.9375,
+      "yOffset": 0.375,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/copper_left",
+    "InfoValue": {
+      "xOffset": 0.6875,
+      "yOffset": 0.1875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/square_top_right",
+    "InfoValue": {
+      "xOffset": 0.75,
+      "yOffset": 0.0,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/hanging/birch",
+    "InfoValue": {
+      "xOffset": 0.9375,
+      "yOffset": 0.40625,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_light_gray",
+    "InfoValue": {
+      "xOffset": 0.25,
+      "yOffset": 0.1875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/trapped_left",
+    "InfoValue": {
+      "xOffset": 0.9375,
+      "yOffset": 0.0,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/half_vertical",
+    "InfoValue": {
+      "xOffset": 0.75,
+      "yOffset": 0.0625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/flower",
+    "InfoValue": {
+      "xOffset": 0.75,
+      "yOffset": 0.125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/brewer_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.59375,
+      "yOffset": 0.4375,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/hanging/crimson",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.46875,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/hanging/mangrove",
+    "InfoValue": {
+      "xOffset": 0.6875,
+      "yOffset": 0.375,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/stripe_center",
+    "InfoValue": {
+      "xOffset": 0.9375,
+      "yOffset": 0.0625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/bed/cyan",
+    "InfoValue": {
+      "xOffset": 0.8125,
+      "yOffset": 0.125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/cross",
+    "InfoValue": {
+      "xOffset": 0.8125,
+      "yOffset": 0.1875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/stripe_top",
+    "InfoValue": {
+      "xOffset": 0.875,
+      "yOffset": 0.125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_black",
+    "InfoValue": {
+      "xOffset": 0.9375,
+      "yOffset": 0.125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/hanging/spruce",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.53125,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/square_bottom_left",
+    "InfoValue": {
+      "xOffset": 0.9375,
+      "yOffset": 0.1875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/archer_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.609375,
+      "yOffset": 0.453125,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/copper_weathered_right",
+    "InfoValue": {
+      "xOffset": 0.0625,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/copper_golem/weathered_copper_golem",
+    "InfoValue": {
+      "xOffset": 0.0625,
+      "yOffset": 0.3125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/triangles_top",
+    "InfoValue": {
+      "xOffset": 0.0625,
+      "yOffset": 0.375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/stripe_downright",
+    "InfoValue": {
+      "xOffset": 0.0625,
+      "yOffset": 0.4375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/flow",
+    "InfoValue": {
+      "xOffset": 0.0625,
+      "yOffset": 0.5,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/cherry",
+    "InfoValue": {
+      "xOffset": 0.75,
+      "yOffset": 0.40625,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/bed/black",
+    "InfoValue": {
+      "xOffset": 0.0625,
+      "yOffset": 0.625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_green",
+    "InfoValue": {
+      "xOffset": 0.0625,
+      "yOffset": 0.6875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/bed/red",
+    "InfoValue": {
+      "xOffset": 0.875,
+      "yOffset": 0.0,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/warped",
+    "InfoValue": {
+      "xOffset": 0.875,
+      "yOffset": 0.40625,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/half_horizontal",
+    "InfoValue": {
+      "xOffset": 0.0625,
+      "yOffset": 0.875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/triangle_bottom",
+    "InfoValue": {
+      "xOffset": 0.0625,
+      "yOffset": 0.9375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/triangles_bottom",
+    "InfoValue": {
+      "xOffset": 0.125,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/mojang",
+    "InfoValue": {
+      "xOffset": 0.125,
+      "yOffset": 0.3125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/birch",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.4375,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/zombie/zombie",
+    "InfoValue": {
+      "xOffset": 0.125,
+      "yOffset": 0.4375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/copper_weathered",
+    "InfoValue": {
+      "xOffset": 0.125,
+      "yOffset": 0.5,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/creeper/creeper",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.5,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/normal",
+    "InfoValue": {
+      "xOffset": 0.125,
+      "yOffset": 0.625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/stripe_downleft",
+    "InfoValue": {
+      "xOffset": 0.125,
+      "yOffset": 0.6875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/stripe_middle",
+    "InfoValue": {
+      "xOffset": 0.125,
+      "yOffset": 0.75,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/scrape_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.640625,
+      "yOffset": 0.4375,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_pink",
+    "InfoValue": {
+      "xOffset": 0.125,
+      "yOffset": 0.875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/bed/green",
+    "InfoValue": {
+      "xOffset": 0.125,
+      "yOffset": 0.9375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_light_blue",
+    "InfoValue": {
+      "xOffset": 0.1875,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/bed/orange",
+    "InfoValue": {
+      "xOffset": 0.1875,
+      "yOffset": 0.3125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/friend_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.640625,
+      "yOffset": 0.453125,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/square_bottom_right",
+    "InfoValue": {
+      "xOffset": 0.1875,
+      "yOffset": 0.4375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/hanging/acacia",
+    "InfoValue": {
+      "xOffset": 0.6875,
+      "yOffset": 0.40625,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_orange",
+    "InfoValue": {
+      "xOffset": 0.1875,
+      "yOffset": 0.5625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/diagonal_right",
+    "InfoValue": {
+      "xOffset": 0.1875,
+      "yOffset": 0.625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/bed/purple",
+    "InfoValue": {
+      "xOffset": 0.1875,
+      "yOffset": 0.6875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/prize_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.5625,
+      "yOffset": 0.453125,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/piglin/piglin",
+    "InfoValue": {
+      "xOffset": 0.1875,
+      "yOffset": 0.8125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/guster",
+    "InfoValue": {
+      "xOffset": 0.1875,
+      "yOffset": 0.875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/conduit/closed_eye",
+    "InfoValue": {
+      "xOffset": 0.65625,
+      "yOffset": 0.4375,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/pale_oak",
+    "InfoValue": {
+      "xOffset": 0.8125,
+      "yOffset": 0.375,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/heart_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.65625,
+      "yOffset": 0.453125,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/circle",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/rhombus",
+    "InfoValue": {
+      "xOffset": 0.4375,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_gray",
+    "InfoValue": {
+      "xOffset": 0.5,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/shelter_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.6875,
+      "yOffset": 0.4375,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/bricks",
+    "InfoValue": {
+      "xOffset": 0.625,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/gradient_up",
+    "InfoValue": {
+      "xOffset": 0.6875,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/normal_left",
+    "InfoValue": {
+      "xOffset": 0.75,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/copper_golem/copper_golem",
+    "InfoValue": {
+      "xOffset": 0.8125,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/copper_oxidized_left",
+    "InfoValue": {
+      "xOffset": 0.875,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_yellow",
+    "InfoValue": {
+      "xOffset": 0.9375,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/small_stripes",
+    "InfoValue": {
+      "xOffset": 0.25,
+      "yOffset": 0.3125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/burn_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.703125,
+      "yOffset": 0.453125,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/copper_golem/oxidized_copper_golem",
+    "InfoValue": {
+      "xOffset": 0.25,
+      "yOffset": 0.4375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/hanging/warped",
+    "InfoValue": {
+      "xOffset": 0.875,
+      "yOffset": 0.375,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/crimson",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.875,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/bed/blue",
+    "InfoValue": {
+      "xOffset": 0.25,
+      "yOffset": 0.5,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_magenta",
+    "InfoValue": {
+      "xOffset": 0.25,
+      "yOffset": 0.5625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/trapped",
+    "InfoValue": {
+      "xOffset": 0.1875,
+      "yOffset": 0.75,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/diagonal_left",
+    "InfoValue": {
+      "xOffset": 0.25,
+      "yOffset": 0.6875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/end_portal/end_portal",
+    "InfoValue": {
+      "xOffset": 0.46875,
+      "yOffset": 0.4375,
+      "width": 0.03125,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/acacia",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.6875,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/hanging/oak",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.8125,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/banner_base",
+    "InfoValue": {
+      "xOffset": 0.25,
+      "yOffset": 0.75,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/christmas_right",
+    "InfoValue": {
+      "xOffset": 0.25,
+      "yOffset": 0.8125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/snort_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.703125,
+      "yOffset": 0.4375,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/copper_exposed_left",
+    "InfoValue": {
+      "xOffset": 0.25,
+      "yOffset": 0.875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/heartbreak_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.734375,
+      "yOffset": 0.4375,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/skeleton/skeleton",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.96875,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/square_top_left",
+    "InfoValue": {
+      "xOffset": 0.25,
+      "yOffset": 0.9375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/spruce",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.65625,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/copper_exposed_right",
+    "InfoValue": {
+      "xOffset": 0.3125,
+      "yOffset": 0.3125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/conduit/open_eye",
+    "InfoValue": {
+      "xOffset": 0.609375,
+      "yOffset": 0.4375,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_blue",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.3125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/plenty_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.671875,
+      "yOffset": 0.453125,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/copper",
+    "InfoValue": {
+      "xOffset": 0.4375,
+      "yOffset": 0.3125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/bed/pink",
+    "InfoValue": {
+      "xOffset": 0.5,
+      "yOffset": 0.3125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/arms_up_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.734375,
+      "yOffset": 0.453125,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/triangle_top",
+    "InfoValue": {
+      "xOffset": 0.5625,
+      "yOffset": 0.3125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/danger_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.53125,
+      "yOffset": 0.4375,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/bed/magenta",
+    "InfoValue": {
+      "xOffset": 0.625,
+      "yOffset": 0.3125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/trapped_right",
+    "InfoValue": {
+      "xOffset": 0.25,
+      "yOffset": 0.625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/hanging/cherry",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.59375,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_brown",
+    "InfoValue": {
+      "xOffset": 0.6875,
+      "yOffset": 0.3125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/normal_right",
+    "InfoValue": {
+      "xOffset": 0.75,
+      "yOffset": 0.3125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/bed/light_gray",
+    "InfoValue": {
+      "xOffset": 0.8125,
+      "yOffset": 0.3125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_cyan",
+    "InfoValue": {
+      "xOffset": 0.875,
+      "yOffset": 0.3125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/bamboo",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.84375,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/conduit/base",
+    "InfoValue": {
+      "xOffset": 0.5,
+      "yOffset": 0.453125,
+      "width": 0.03125,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/miner_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.671875,
+      "yOffset": 0.4375,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/copper_right",
+    "InfoValue": {
+      "xOffset": 0.9375,
+      "yOffset": 0.3125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/enderdragon/dragon",
+    "InfoValue": {
+      "xOffset": 0.0,
+      "yOffset": 0.0,
+      "width": 0.25,
+      "height": 0.25,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/globe",
+    "InfoValue": {
+      "xOffset": 0.3125,
+      "yOffset": 0.375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/oak",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.90625,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/guster_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.71875,
+      "yOffset": 0.4375,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/piglin",
+    "InfoValue": {
+      "xOffset": 0.3125,
+      "yOffset": 0.4375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/half_vertical_right",
+    "InfoValue": {
+      "xOffset": 0.3125,
+      "yOffset": 0.5,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/copper_exposed",
+    "InfoValue": {
+      "xOffset": 0.3125,
+      "yOffset": 0.5625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/gradient",
+    "InfoValue": {
+      "xOffset": 0.3125,
+      "yOffset": 0.625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/copper_weathered_left",
+    "InfoValue": {
+      "xOffset": 0.3125,
+      "yOffset": 0.6875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/player/steve",
+    "InfoValue": {
+      "xOffset": 0.3125,
+      "yOffset": 0.75,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_yellow",
+    "InfoValue": {
+      "xOffset": 0.3125,
+      "yOffset": 0.8125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker",
+    "InfoValue": {
+      "xOffset": 0.3125,
+      "yOffset": 0.875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/stripe_left",
+    "InfoValue": {
+      "xOffset": 0.3125,
+      "yOffset": 0.9375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/stripe_bottom",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/diagonal_up_left",
+    "InfoValue": {
+      "xOffset": 0.4375,
+      "yOffset": 0.375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/christmas_left",
+    "InfoValue": {
+      "xOffset": 0.5,
+      "yOffset": 0.375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_purple",
+    "InfoValue": {
+      "xOffset": 0.5625,
+      "yOffset": 0.375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/bed/light_blue",
+    "InfoValue": {
+      "xOffset": 0.625,
+      "yOffset": 0.375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/creeper",
+    "InfoValue": {
+      "xOffset": 0.3125,
+      "yOffset": 0.1875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_red",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.1875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/mourner_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.6875,
+      "yOffset": 0.453125,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/copper_oxidized",
+    "InfoValue": {
+      "xOffset": 0.5,
+      "yOffset": 0.0625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/straight_cross",
+    "InfoValue": {
+      "xOffset": 0.5,
+      "yOffset": 0.1875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/copper_golem/exposed_copper_golem",
+    "InfoValue": {
+      "xOffset": 0.5625,
+      "yOffset": 0.0,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/hanging/bamboo",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.9375,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/copper_oxidized_right",
+    "InfoValue": {
+      "xOffset": 0.5625,
+      "yOffset": 0.125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/curly_border",
+    "InfoValue": {
+      "xOffset": 0.5625,
+      "yOffset": 0.1875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_white",
+    "InfoValue": {
+      "xOffset": 0.625,
+      "yOffset": 0.125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/blade_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.75,
+      "yOffset": 0.453125,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/flow_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.71875,
+      "yOffset": 0.453125,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/conduit/wind",
+    "InfoValue": {
+      "xOffset": 0.25,
+      "yOffset": 0.0,
+      "width": 0.25,
+      "height": 0.1875,
+      "index": 0,
+      "frameCount": 11,
+      "frameSize": 0.0625,
+      "framePerRow": 4,
+      "interpolate": false,
+      "frameInterval": 0.15
+    }
+  },
+  {
+    "PathKey": "block/bed/brown",
+    "InfoValue": {
+      "xOffset": 0.625,
+      "yOffset": 0.1875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/sheaf_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.53125,
+      "yOffset": 0.453125,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/shulker/shulker_lime",
+    "InfoValue": {
+      "xOffset": 0.6875,
+      "yOffset": 0.0625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/howl_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.546875,
+      "yOffset": 0.453125,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/skeleton/wither_skeleton",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.5625,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/chest/christmas",
+    "InfoValue": {
+      "xOffset": 0.6875,
+      "yOffset": 0.125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/half_horizontal_bottom",
+    "InfoValue": {
+      "xOffset": 0.8125,
+      "yOffset": 0.0,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/hanging/pale_oak",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.625,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/stripe_right",
+    "InfoValue": {
+      "xOffset": 0.75,
+      "yOffset": 0.1875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/skull",
+    "InfoValue": {
+      "xOffset": 0.8125,
+      "yOffset": 0.0625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/bed/yellow",
+    "InfoValue": {
+      "xOffset": 0.875,
+      "yOffset": 0.0625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/jungle",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.71875,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/decorated_pot/skull_pottery_pattern",
+    "InfoValue": {
+      "xOffset": 0.625,
+      "yOffset": 0.4375,
+      "width": 0.015625,
+      "height": 0.015625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/hanging/dark_oak",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.75,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/signs/hanging/jungle",
+    "InfoValue": {
+      "xOffset": 0.375,
+      "yOffset": 0.78125,
+      "width": 0.0625,
+      "height": 0.03125,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_pink",
+    "InfoValue": {
+      "xOffset": 0.875,
+      "yOffset": 0.1875,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_white",
+    "InfoValue": {
+      "xOffset": 0.0,
+      "yOffset": 0.9375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_blue",
+    "InfoValue": {
+      "xOffset": 0.0625,
+      "yOffset": 0.5625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_gray",
+    "InfoValue": {
+      "xOffset": 0.0625,
+      "yOffset": 0.75,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_black",
+    "InfoValue": {
+      "xOffset": 0.0625,
+      "yOffset": 0.8125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_orange",
+    "InfoValue": {
+      "xOffset": 0.125,
+      "yOffset": 0.375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_cyan",
+    "InfoValue": {
+      "xOffset": 0.125,
+      "yOffset": 0.5625,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_light_gray",
+    "InfoValue": {
+      "xOffset": 0.125,
+      "yOffset": 0.8125,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_green",
+    "InfoValue": {
+      "xOffset": 0.1875,
+      "yOffset": 0.375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_magenta",
+    "InfoValue": {
+      "xOffset": 0.1875,
+      "yOffset": 0.5,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_purple",
+    "InfoValue": {
+      "xOffset": 0.1875,
+      "yOffset": 0.9375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_brown",
+    "InfoValue": {
+      "xOffset": 0.25,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_red",
+    "InfoValue": {
+      "xOffset": 0.3125,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_light_blue",
+    "InfoValue": {
+      "xOffset": 0.5625,
+      "yOffset": 0.25,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  },
+  {
+    "PathKey": "block/banner/color/banner_lime",
+    "InfoValue": {
+      "xOffset": 0.25,
+      "yOffset": 0.375,
+      "width": 0.0625,
+      "height": 0.0625,
+      "index": 0,
+      "frameCount": 1,
+      "frameSize": 1.0,
+      "framePerRow": 1,
+      "interpolate": false,
+      "frameInterval": 1.0
+    }
+  }
+]
