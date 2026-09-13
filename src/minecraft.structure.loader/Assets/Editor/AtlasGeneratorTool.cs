@@ -45,8 +45,8 @@ namespace Editor
             public int ExtrudeBorder;
         }
         
-        private static readonly ResourceLocation BLANK_TEXTURE = new("builtin", "blank");
-        private static readonly ResourceLocation EMPTY_TEXTURE = new("builtin", "empty");
+        private static readonly ResourceLocation BLANK_TEXTURE = new("blank");
+        private static readonly ResourceLocation EMPTY_TEXTURE = new("empty");
         
         private const int MIN_MIPMAP_SIZE = 16;
         

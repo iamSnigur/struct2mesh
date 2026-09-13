@@ -13,7 +13,7 @@ namespace CraftSharp.Resource
     public static class AtlasIndexHelper
     {
         [Serializable]
-        private record TextureInfoEntry
+        private struct TextureInfoEntry
         {
             public string PathKey;
             public TextureInfoDto InfoValue;

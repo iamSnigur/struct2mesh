@@ -1,25 +1,18 @@
 #nullable enable
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Core.AssetManagement.External;
 using Cysharp.Threading.Tasks;
-using Unity.Collections;
 using UnityEngine;
 using Unity.Mathematics;
-using UnityEditor;
-using UnityEngine.Assertions;
 
 namespace CraftSharp.Resource
 {
     public class ResourcePackManager
     {
         public static readonly ResourceLocation BLANK_TEXTURE = new("builtin", "blank");
-        public static readonly ResourceLocation EMPTY_TEXTURE = new("builtin", "empty");
+        public static readonly ResourceLocation EMPTY_TEXTURE = new("empty");
         public static readonly ResourceLocation FOLIAGE_COLORMAP = new("colormap/foliage");
         public static readonly ResourceLocation GRASS_COLORMAP = new("colormap/grass");
 
@@ -83,13 +76,11 @@ namespace CraftSharp.Resource
         // Particle type id -> meshes for its frames
         public readonly Dictionary<ResourceLocation, Mesh[]> ParticleMeshesTable = new();
 
-        public const int ATLAS_SIZE = 2048;
-        public const int MIN_MIPMAP_SIZE = 16;
-
         public bool Loaded { get; private set; } = false;
 
 #nullable disable
-        private Texture2D blockAtlas;
+        private Texture2D _blockAtlas;
+        private Texture2D _blockEntityAtlas;
 #nullable enable
 
         private Texture2DArray? destroyTextureArray;
@@ -175,7 +166,8 @@ namespace CraftSharp.Resource
             Loaded = true;
         }
         
-        private readonly Dictionary<ResourceLocation, TextureInfo> texAtlasTable = new();
+        private readonly Dictionary<ResourceLocation, TextureInfo> _blockAtlasTable = new();
+        private readonly Dictionary<ResourceLocation, TextureInfo> _blockEntityAtlasTable = new();
 
         /// <summary>
         /// Get texture uvs (x, y, depth in atlas array) and texture animation info (frame count, frame interval, frame size, frame per row)
@@ -238,17 +230,20 @@ namespace CraftSharp.Resource
 
         private TextureInfo GetTextureInfo(ResourceLocation identifier)
         {
-            if (texAtlasTable.TryGetValue(identifier, out var info))
+            if (_blockAtlasTable.TryGetValue(identifier, out var info))
+                return info;
+            
+            if (_blockEntityAtlasTable.TryGetValue(identifier, out info))
                 return info;
 
             Debug.Log($"Texture {identifier} is not in atlas!");
 
             // Return missing no texture
-            return texAtlasTable[ResourceLocation.INVALID];
+            return _blockAtlasTable[ResourceLocation.INVALID];
         }
 
-        public Texture2D GetAtlasArray(bool mipped) =>
-            blockAtlas;
+        public Texture2D GetBlockAtlas() => _blockAtlas;
+        public Texture2D GetBlockEntityAtlas() => _blockEntityAtlas;
 
         public static Texture2D GetMissingEntityTexture(int width, int height)
         {
@@ -280,9 +275,13 @@ namespace CraftSharp.Resource
         private async UniTask LoadAtlas()
         {
             // load two atlases
-            texAtlasTable.Clear();
-            await AtlasIndexHelper.LoadAsync(texAtlasTable, "block_atlas_index");
-            blockAtlas = await AssetProvider.LoadByAddressAsync<Texture2D>("block_atlas");
+            _blockAtlasTable.Clear();
+            await AtlasIndexHelper.LoadAsync(_blockAtlasTable, "block_atlas_index");
+            _blockAtlas = await AssetProvider.LoadByAddressAsync<Texture2D>("block_atlas");
+            
+            _blockEntityAtlasTable.Clear();
+            await AtlasIndexHelper.LoadAsync(_blockEntityAtlasTable, "block_entity_atlas_index");
+            _blockEntityAtlas = await AssetProvider.LoadByAddressAsync<Texture2D>("block_entity_atlas");
         }
     }
 }

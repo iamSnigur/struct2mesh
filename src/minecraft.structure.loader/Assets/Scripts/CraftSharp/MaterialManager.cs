@@ -1,100 +1,124 @@
-﻿#nullable enable
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using CraftSharp.Resource;
+using Logic.Utils;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace CraftSharp
 {
     public class MaterialManager : MonoBehaviour
     {
-        [SerializeField] public Material? AtlasSolid;
-        [SerializeField] public Material? AtlasCutout;
-        [SerializeField] public Material? AtlasCutoutMipped;
-        [SerializeField] public Material? AtlasTranslucent;
+        private static readonly int s_baseMap = Shader.PropertyToID("_BaseMap");
+        
+        [SerializeField] public Material AtlasSolid;
+        [SerializeField] public Material AtlasCutout;
+        [SerializeField] public Material AtlasCutoutMipped;
+        [SerializeField] public Material AtlasTranslucent;
 
-        [SerializeField] public Material? EntitySolid;
-        [SerializeField] public Material? EntityCutout;
-        [SerializeField] public Material? EntityCutoutDoubleSided;
-        [SerializeField] public Material? EntityTranslucent;
-
-        private readonly Dictionary<RenderType, Material> _atlasMaterials = new();
-        private Dictionary<RenderType, Material> _foglessAtlasMaterials = new();
-        private Material? _defaultAtlasMaterial;
+        private readonly Dictionary<RenderType, Material> _blockAtlasMaterials = new();
+        private readonly Dictionary<RenderType, Material> _blockEntityAtlasMaterials = new();
 
         private bool _atlasInitialized = false;
 
-        public Material GetAtlasMaterial(RenderType renderType, bool disableFog = false)
+        public Material GetAtlasMaterial(RenderType renderType, ResourceLocation blockId)
         {
             EnsureAtlasInitialized();
-            if (disableFog)
-            {
-                return _foglessAtlasMaterials.GetValueOrDefault(renderType, _defaultAtlasMaterial!);
-            }
 
-            return _atlasMaterials.GetValueOrDefault(renderType, _defaultAtlasMaterial!);
+            return BlockEntityHelper.IsBlockEntity(blockId.Path) 
+                ? GetBlockEntityMaterial(renderType) 
+                : GetBlockMaterial(renderType);
         }
-
-        public Material GetEntityMaterial(EntityRenderType renderType)
+        
+        public Material GetBlockMaterial(RenderType renderType)
         {
-            return renderType switch
-            {
-                EntityRenderType.SOLID              => EntitySolid!,
-                EntityRenderType.CUTOUT             => EntityCutout!,
-                EntityRenderType.CUTOUT_CULLOFF     => EntityCutoutDoubleSided!,
-                EntityRenderType.TRANSLUCENT        => EntityTranslucent!,
-                _                                   => EntitySolid!
-            };
+            EnsureAtlasInitialized();
+
+            _blockAtlasMaterials.TryGetValue(renderType, out Material material);
+            Assert.IsNotNull(
+                material,
+                $"Material not exists for render type {renderType} in block table");
+
+            return material;
+        }
+        
+        public Material GetBlockEntityMaterial(RenderType renderType)
+        {
+            EnsureAtlasInitialized();
+
+            _blockEntityAtlasMaterials.TryGetValue(renderType, out Material material);
+            Assert.IsNotNull(
+                material,
+                $"Material not exists for render type {renderType} in block entity table");
+
+            return material;
         }
 
-        public void EnsureAtlasInitialized()
+        private void EnsureAtlasInitialized()
         {
             if (!_atlasInitialized) Initialize();
         }
 
         private void Initialize()
         {
-            _atlasMaterials.Clear();
             var packManager = ResourcePackManager.Instance;
+            InitBlockAtlasMaterials(packManager);
+            InitBlockEntityAtlasMaterials(packManager);
+            _atlasInitialized = true;
+        }
+
+        private void InitBlockAtlasMaterials(ResourcePackManager packManager)
+        {
+            _blockAtlasMaterials.Clear();
 
             // Solid
             var solid = new Material(AtlasSolid!);
-            solid.SetTexture("_BaseMap", packManager.GetAtlasArray(false));
-            _atlasMaterials.Add(RenderType.SOLID, solid);
-
-            _defaultAtlasMaterial = solid;
+            
+            solid.SetTexture(s_baseMap, packManager.GetBlockAtlas());
+            _blockAtlasMaterials.Add(RenderType.SOLID, solid);
 
             // Cutout & Cutout Mipped
             var cutout = new Material(AtlasCutout!);
-            cutout.SetTexture("_BaseMap", packManager.GetAtlasArray(false));
-            _atlasMaterials.Add(RenderType.CUTOUT, cutout);
+            cutout.SetTexture(s_baseMap, packManager.GetBlockAtlas());
+            _blockAtlasMaterials.Add(RenderType.CUTOUT, cutout);
 
             var cutoutMipped = new Material(AtlasCutoutMipped!);
-            cutoutMipped.SetTexture("_BaseMap", packManager.GetAtlasArray(true));
-            _atlasMaterials.Add(RenderType.CUTOUT_MIPPED, cutoutMipped);
+            cutoutMipped.SetTexture(s_baseMap, packManager.GetBlockAtlas());
+            _blockAtlasMaterials.Add(RenderType.CUTOUT_MIPPED, cutoutMipped);
 
             // Translucent
             var translucent = new Material(AtlasTranslucent!);
-            translucent.SetTexture("_BaseMap", packManager.GetAtlasArray(false));
-            _atlasMaterials.Add(RenderType.TRANSLUCENT, translucent);
+            translucent.SetTexture(s_baseMap, packManager.GetBlockAtlas());
+            _blockAtlasMaterials.Add(RenderType.TRANSLUCENT, translucent);
 
             // Water, Foliage, Plants, Tall Plants
-            _atlasMaterials.Add(RenderType.WATER, translucent);
-            _atlasMaterials.Add(RenderType.FOLIAGE, cutout);
-            _atlasMaterials.Add(RenderType.PLANTS, cutout);
-            _atlasMaterials.Add(RenderType.TALL_PLANTS, cutout);
+            _blockAtlasMaterials.Add(RenderType.WATER, translucent);
+            _blockAtlasMaterials.Add(RenderType.FOLIAGE, cutout);
+            _blockAtlasMaterials.Add(RenderType.PLANTS, cutout);
+            _blockAtlasMaterials.Add(RenderType.TALL_PLANTS, cutout);
+        }
+        
+        private void InitBlockEntityAtlasMaterials(ResourcePackManager packManager)
+        {
+            _blockEntityAtlasMaterials.Clear();
 
-            // Make fogless variants
-            _foglessAtlasMaterials = _atlasMaterials.ToDictionary(x => x.Key, x =>
-            {
-                // Make a copy of the material
-                var m = new Material(x.Value);
-                // Set disable fog keyword
-                m.EnableKeyword("_DISABLE_FOG");
-                return m;
-            });
+            // Solid
+            var solid = new Material(AtlasSolid!);
+            solid.SetTexture(s_baseMap, packManager.GetBlockEntityAtlas());
+            _blockEntityAtlasMaterials.Add(RenderType.SOLID, solid);
 
-            _atlasInitialized = true;
+            // Cutout & Cutout Mipped
+            var cutout = new Material(AtlasCutout!);
+            cutout.SetTexture(s_baseMap, packManager.GetBlockEntityAtlas());
+            _blockEntityAtlasMaterials.Add(RenderType.CUTOUT, cutout);
+
+            var cutoutMipped = new Material(AtlasCutoutMipped!);
+            cutoutMipped.SetTexture(s_baseMap, packManager.GetBlockEntityAtlas());
+            _blockEntityAtlasMaterials.Add(RenderType.CUTOUT_MIPPED, cutoutMipped);
+
+            // Translucent
+            var translucent = new Material(AtlasTranslucent!);
+            translucent.SetTexture(s_baseMap, packManager.GetBlockEntityAtlas());
+            _blockEntityAtlasMaterials.Add(RenderType.TRANSLUCENT, translucent);
         }
     }
 }

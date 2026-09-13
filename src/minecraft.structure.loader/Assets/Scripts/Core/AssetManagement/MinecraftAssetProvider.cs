@@ -14,7 +14,6 @@ namespace Core.AssetManagement
 {
     public static class MinecraftAssetProvider
     {
-        private const string BLOCK_TEXTURES_INDEX_ADDRESS = "block_textures_index";
         private const string MODELS_MANIFEST_ADDRESS = "models_manifest_index";
         private const string BLOCKSTATES_MANIFEST_ADDRESS = "blockstates_manifest_index";
         private const string COLOR_RULES_ADDRESS = "block_color_rules";
@@ -26,6 +25,8 @@ namespace Core.AssetManagement
 
         public static bool Loaded { get; private set; }
 
+        // init material manager here
+        // also release resources from this class
         public static async UniTask Init()
         {
             if (Loaded)
@@ -121,19 +122,15 @@ namespace Core.AssetManagement
 
             LongTaskYielder yielder = new();
             
-            foreach (var index in manifestIndexes)
+            foreach (var indexPair in manifestIndexes)
             {
-                ResourceLocation identifier = new(index.Key);
-                table[identifier] = index.Value;
+                ResourceLocation identifier = new(indexPair.Key);
+                table[identifier] = indexPair.Value;
                 
                 await yielder.TryYieldAsync();
             }
         }
         
-        // fix up
-        private static async UniTask LoadTexturesAsync(ResourcePackManager manager) => 
-            await LoadLocationsAsync(manager.TextureFileTable, BLOCK_TEXTURES_INDEX_ADDRESS);
-
         private static async UniTask LoadModelsAsync(ResourcePackManager manager) => 
             await LoadLocationsAsync(manager.BlockModelFileTable, MODELS_MANIFEST_ADDRESS);
 
@@ -142,11 +139,10 @@ namespace Core.AssetManagement
 
         private static async UniTask GatherResourcesAsync(ResourcePackManager manager)
         {
-            UniTask texturesTask = LoadTexturesAsync(manager);
             UniTask modelsTask = LoadModelsAsync(manager);
             UniTask blockstatesTask = LoadBlockstatesAsync(manager);
 
-            await UniTask.WhenAll(texturesTask, modelsTask, blockstatesTask);
+            await UniTask.WhenAll(modelsTask, blockstatesTask);
         }
 
         public static async UniTask UpdateBlockStatePaletteAsync(List<PaletteEntry> structurePalette)
