@@ -15,8 +15,6 @@ namespace Core.AssetManagement
 {
     public static class MinecraftAssetProvider
     {
-        private const string MODELS_MANIFEST_ADDRESS = "models_manifest_index";
-        private const string BLOCKSTATES_MANIFEST_ADDRESS = "blockstates_manifest_index";
         private const string COLOR_RULES_ADDRESS = "block_color_rules";
         
         private static ResourcePackManager s_resourcePackManager;
@@ -121,10 +119,12 @@ namespace Core.AssetManagement
             return blockRenderData;
         }
 
-        private static async UniTask LoadLocationsAsync(Dictionary<ResourceLocation, string> table, string manifestAddress)
+        private static async UniTask LoadLocationsAsync(
+            Dictionary<ResourceLocation, string> table,
+            string indexAddress)
         {
-            TextAsset manifest = await AssetProvider.LoadByAddressAsync<TextAsset>(manifestAddress);
-            var manifestIndexes = JsonConvert.DeserializeObject<Dictionary<string, string>>(manifest.text);
+            TextAsset index = await AssetProvider.LoadByAddressAsync<TextAsset>(indexAddress);
+            var manifestIndexes = JsonConvert.DeserializeObject<Dictionary<string, string>>(index.text);
 
             table.Clear();
 
@@ -140,10 +140,10 @@ namespace Core.AssetManagement
         }
         
         private static async UniTask LoadModelsAsync(ResourcePackManager manager) => 
-            await LoadLocationsAsync(manager.BlockModelFileTable, MODELS_MANIFEST_ADDRESS);
+            await LoadLocationsAsync(manager.BlockModelFileTable, Constants.MODELS_INDEX);
 
         private static async UniTask LoadBlockstatesAsync(ResourcePackManager manager) => 
-            await LoadLocationsAsync(manager.BlockStateFileTable, BLOCKSTATES_MANIFEST_ADDRESS);
+            await LoadLocationsAsync(manager.BlockStateFileTable, Constants.BLOCKSTATE_INDEX);
 
         private static async UniTask GatherResourcesAsync(ResourcePackManager manager)
         {

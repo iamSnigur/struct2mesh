@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Core.AssetManagement.External;
 using Unity.Plastic.Newtonsoft.Json;
 using UnityEditor;
 using UnityEditor.AddressableAssets;
@@ -21,7 +22,10 @@ namespace Editor
         [MenuItem("Tools/ResourcePack/Generate Textures Index")]
         public static void GenerateTexturesIndex()
         {
-            GenerateIndex(BLOCK_TEXTURES_GROUP_NAME, "block_textures_index.json", entry =>
+            GenerateIndex(
+                BLOCK_TEXTURES_GROUP_NAME,
+                Constants.BLOCK_TEXTURES_INDEX,
+                entry =>
             {
                 try
                 {
@@ -37,7 +41,10 @@ namespace Editor
             
             Debug.Log($"{BLOCK_TEXTURES_GROUP_NAME} Index generated");
             
-            GenerateIndex(BLOCK_ENTITY_TEXTURES_GROUP_NAME, "block_entity_textures_index.json", entry =>
+            GenerateIndex(
+                BLOCK_ENTITY_TEXTURES_GROUP_NAME,
+                Constants.BLOCK_ENTITY_TEXTURES_INDEX,
+                entry =>
             {
                 try
                 {
@@ -57,7 +64,9 @@ namespace Editor
         [MenuItem("Tools/ResourcePack/Generate Blockstates Index")]
         public static void GenerateBlockstatesIndex()
         {
-            GenerateIndex(BLOCKSTATES_GROUP_NAME, "blockstates_manifest_index.json",
+            GenerateIndex(
+                BLOCKSTATES_GROUP_NAME,
+                Constants.BLOCKSTATE_INDEX,
                 entry => (
                     key: Path.GetFileName(entry.address),
                     value: entry.address
@@ -107,7 +116,8 @@ namespace Editor
             }
 
             string json = JsonConvert.SerializeObject(dict, Formatting.Indented);
-            File.WriteAllText(Path.Combine(OUTPUT_FOLDER, outputFileName), json);
+            string path = Path.Combine(OUTPUT_FOLDER, outputFileName + ".json");
+            File.WriteAllText(path, json);
             
             AssetDatabase.Refresh();
         }
@@ -115,7 +125,9 @@ namespace Editor
         [MenuItem("Tools/ResourcePack/Generate Models Index With Json")]
         public static void GenerateModelsIndexWithJson()
         {
-            GenerateModelsIndex(MODELS_GROUP_NAME, "models_manifest_index.json",
+            GenerateModelsIndex(
+                MODELS_GROUP_NAME,
+                Constants.MODELS_INDEX,
                 entry => (
                     key: entry.address[entry.address.IndexOf("block/", StringComparison.Ordinal)..],
                     path: entry.AssetPath
@@ -165,7 +177,8 @@ namespace Editor
             }
 
             string json = JsonConvert.SerializeObject(dict, Formatting.Indented);
-            File.WriteAllText(Path.Combine(OUTPUT_FOLDER, outputFileName), json);
+            string savePath = Path.Combine(OUTPUT_FOLDER, outputFileName + ".json");
+            File.WriteAllText(savePath, json);
             
             AssetDatabase.Refresh();
         }

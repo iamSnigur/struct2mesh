@@ -896,6 +896,7 @@
   "waxed_copper_block": "vanilla/minecraft/blockstates/waxed_copper_block",
   "candle_cake": "vanilla/minecraft/blockstates/candle_cake",
   "kelp": "vanilla/minecraft/blockstates/kelp",
+  "potted_golden_dandelion": "vanilla/minecraft/blockstates/potted_golden_dandelion",
   "waxed_oxidized_copper_bulb": "vanilla/minecraft/blockstates/waxed_oxidized_copper_bulb",
   "mangrove_log": "vanilla/minecraft/blockstates/mangrove_log",
   "weathered_copper_bars": "vanilla/minecraft/blockstates/weathered_copper_bars",
@@ -1168,6 +1169,5 @@
   "oak_door": "vanilla/minecraft/blockstates/oak_door",
   "flowering_azalea_leaves": "vanilla/minecraft/blockstates/flowering_azalea_leaves",
   "pink_concrete": "vanilla/minecraft/blockstates/pink_concrete",
-  "horn_coral_block": "vanilla/minecraft/blockstates/horn_coral_block",
-  "potted_golden_dandelion": "vanilla/minecraft/blockstates/potted_golden_dandelion"
+  "horn_coral_block": "vanilla/minecraft/blockstates/horn_coral_block"
 }
