@@ -38,7 +38,7 @@ namespace Editor
         
         private struct AtlasConfig
         {
-            public string AtlasAssetPath;
+            public string AtlasAssetName;
             public string AtlasIndexName;
             public int Size;
             public bool ExtrudeEdges;
@@ -58,21 +58,19 @@ namespace Editor
         [MenuItem("Tools/Atlas/Generate Block Atlas")]
         public static async UniTaskVoid GenerateAtlasAndIndexing()
         {
-            await LoadLocationsAsync(s_blockTexturesTable, "block_textures_index");
+            await LoadLocationsAsync(s_blockTexturesTable, Constants.BLOCK_TEXTURES_INDEX);
             Debug.Log("Block locations loaded");
 
             AtlasConfig blockAtlasConfig = new()
             {
-                AtlasAssetPath = "Assets/Resources_moved/vanilla/minecraft/textures/block_atlas.asset",
-                AtlasIndexName = "block_atlas_index",
+                AtlasAssetName = Constants.BLOCK_ATLAS,
+                AtlasIndexName = Constants.BLOCK_ATLAS_INDEX,
                 Size = 2048,
                 ExtrudeEdges = true,
                 ExtrudeBorder = 16
             };
             
-            await GenerateAtlasAsync(
-                s_blockTexturesTable,
-                blockAtlasConfig);
+            await GenerateAtlasAsync(s_blockTexturesTable, blockAtlasConfig);
             
             Debug.Log("Block Atlas assets generated");
         }
@@ -80,22 +78,18 @@ namespace Editor
         [MenuItem("Tools/Atlas/Generate Block Entity Atlas")]
         public static async UniTaskVoid GenerateBlockEntityAtlas()
         {
-            await LoadLocationsAsync(
-                s_blockEntityTexturesTable,
-                "block_entity_textures_index");
+            await LoadLocationsAsync(s_blockEntityTexturesTable, Constants.BLOCK_ENTITY_TEXTURES_INDEX);
             Debug.Log("Block Entity locations loaded");
             
             AtlasConfig blockEntityAtlasConfig = new()
             {
-                AtlasAssetPath = "Assets/Resources_moved/vanilla/minecraft/textures/block_entity_atlas.asset",
-                AtlasIndexName = "block_entity_atlas_index",
+                AtlasAssetName = Constants.BLOCK_ENTITY_ATLAS,
+                AtlasIndexName = Constants.BLOCK_ENTITY_ATLAS_INDEX,
                 Size = 1024,
                 ExtrudeEdges = false
             };
             
-            await GenerateAtlasAsync(
-                s_blockEntityTexturesTable,
-                blockEntityAtlasConfig);
+            await GenerateAtlasAsync(s_blockEntityTexturesTable, blockEntityAtlasConfig);
             
             Debug.Log("Block Entity Atlas assets generated");
         }
@@ -477,10 +471,10 @@ namespace Editor
             atlasArray1.Apply(false, false);
 
             AtlasIndexHelper.Save(s_textureAtlasTable, atlasConfig.AtlasIndexName);
-            Save(atlasArray1, atlasConfig.AtlasAssetPath);
+            Save(atlasArray1, atlasConfig.AtlasAssetName);
         }
 
-        private static void Save(Texture2DArray array, string path)
+        private static void Save(Texture2DArray array, string name)
         {
             int sliceIndex = 0;
             Texture2D tex = new(array.width, array.height, array.format, array.mipmapCount, false)
@@ -489,11 +483,11 @@ namespace Editor
             };
             Graphics.CopyTexture(array, sliceIndex, tex, 0);
             tex.Apply();
-      
+
+            string path = $"{Constants.ATLAS_PATH}/{name}.asset";
             AssetDatabase.CreateAsset(tex, path);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            //Object.Destroy(tex);
         }
         
         private static Texture2D GetBlankTexture()

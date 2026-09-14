@@ -9,6 +9,7 @@ using Logic.Parser.Model;
 using Logic.Utils;
 using Newtonsoft.Json;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Core.AssetManagement
 {
@@ -18,27 +19,36 @@ namespace Core.AssetManagement
         private const string BLOCKSTATES_MANIFEST_ADDRESS = "blockstates_manifest_index";
         private const string COLOR_RULES_ADDRESS = "block_color_rules";
         
-        private static ResourcePackManager _resourcePackManager;
-        private static BlockStateLoader _blockStateLoader;
-        private static World _world;
-        private static TextAsset _colorRules;
+        private static ResourcePackManager s_resourcePackManager;
+        private static BlockStateLoader s_blockStateLoader;
+        private static World s_world;
+        private static TextAsset s_colorRules;
+        
+        private static readonly List<AssetHandle<TextAsset>> s_blockstateHandles = new();
 
         public static bool Loaded { get; private set; }
 
-        // init material manager here
-        // also release resources from this class
         public static async UniTask Init()
         {
             if (Loaded)
                 return;
 
-            _world = new World();
-            _resourcePackManager = ResourcePackManager.Instance;
-            _blockStateLoader = new BlockStateLoader(_resourcePackManager);
+            s_world = new World();
+            s_resourcePackManager = ResourcePackManager.Instance;
+            s_blockStateLoader = new BlockStateLoader(s_resourcePackManager);
+            s_colorRules = await AssetProvider.LoadByAddressAsync<TextAsset>(COLOR_RULES_ADDRESS);
 
-            _colorRules = await AssetProvider.LoadByAddressAsync<TextAsset>(COLOR_RULES_ADDRESS);
-            
             await PreloadResourcesAsync();
+            
+            MaterialManager materialManager = Object.FindFirstObjectByType<MaterialManager>();
+            materialManager.Initialize(s_resourcePackManager);
+            BlockMeshBuilder.InjectDependencies(materialManager);
+        }
+
+        public static void Release()
+        {
+            ReleaseBlockStateHandles();
+            AssetProvider.Release();
         }
 
         private static void UpdateStatus(string status, string progress) =>
@@ -48,8 +58,8 @@ namespace Core.AssetManagement
         {
             try
             {
-                await GatherResourcesAsync(_resourcePackManager);
-                await _resourcePackManager.LoadPacksAsync_Mod(UpdateStatus);
+                await GatherResourcesAsync(s_resourcePackManager);
+                await s_resourcePackManager.LoadPacksAsync(UpdateStatus);
                 await Resources.UnloadUnusedAssets();
                 Loaded = true;
             }
@@ -57,11 +67,9 @@ namespace Core.AssetManagement
             {
                 Loaded = false;
                 Debug.LogError($"Error loading resources: {e}");
-                AssetProvider.Release();
+                Release();
             }
         }
-
-        private static readonly List<AssetHandle<TextAsset>> s_blockstateHandles = new();
 
         public static void ReleaseBlockStateHandles()
         {
@@ -82,12 +90,12 @@ namespace Core.AssetManagement
             OffsetType offsetType = BlockStateHelper.GetOffsetType(blockStateId);
 
             s_blockstateHandles
-                .Add(await _blockStateLoader.LoadBlockStateModel(location, blockstateJson, renderType, offsetType));
+                .Add(await s_blockStateLoader.LoadBlockStateModel(location, blockstateJson, renderType, offsetType));
         }
 
         private static bool BlockStateExists(ResourceLocation location, out string blockstateJson)
         {
-            return _resourcePackManager
+            return s_resourcePackManager
                 .BlockStateFileTable
                 .TryGetValue(location, out blockstateJson);
         }
@@ -109,7 +117,7 @@ namespace Core.AssetManagement
                 }
             }
 
-            BlockRenderData blockRenderData = BlockMeshBuilder.BuildMeshData(ref meshData, currentState, blockPos, cullFlags, _world);
+            BlockRenderData blockRenderData = BlockMeshBuilder.BuildMeshData(ref meshData, currentState, blockPos, cullFlags, s_world);
             return blockRenderData;
         }
 
@@ -162,11 +170,11 @@ namespace Core.AssetManagement
         }
 
         public static void UpdateColorRules() => 
-            BlockStatePaletteAdapter.Instance.UpdateColorRules(_colorRules);
+            BlockStatePaletteAdapter.Instance.UpdateColorRules(s_colorRules);
 
         public static void ClearBlockStatePalette()
         {
-            _resourcePackManager.StateModelTable.Clear();
+            s_resourcePackManager.StateModelTable.Clear();
             BlockStatePaletteAdapter.Instance.ClearInjectedEntries();
         }
     }

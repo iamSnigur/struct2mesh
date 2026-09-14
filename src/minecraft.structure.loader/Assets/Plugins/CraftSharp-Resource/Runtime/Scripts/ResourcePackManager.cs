@@ -136,13 +136,13 @@ namespace CraftSharp.Resource
             return $" {Mathf.RoundToInt(curCount / (float)totalCount * 100)}%";
         }
 
-        public async UniTask LoadPacksAsync_Mod(Action<string, string> updateStatus)
+        public async UniTask LoadPacksAsync(Action<string, string> updateStatus)
         {
             updateStatus("resource.info.gather_resource", string.Empty);
             foreach (var pack in packs) pack.GatherResources(this);
 
-            updateStatus("resource.info.create_texture", string.Empty);
-            await LoadAtlas();
+            updateStatus("resource.info.load_atlas", string.Empty);
+            await LoadAtlases();
 
             // Load block models...
             updateStatus("resource.info.load_block_model", string.Empty);
@@ -272,16 +272,31 @@ namespace CraftSharp.Resource
             return tex;
         }
 
-        private async UniTask LoadAtlas()
+        private async UniTask LoadAtlases()
         {
-            // load two atlases
-            _blockAtlasTable.Clear();
-            await AtlasIndexHelper.LoadAsync(_blockAtlasTable, "block_atlas_index");
-            _blockAtlas = await AssetProvider.LoadByAddressAsync<Texture2D>("block_atlas");
+            UniTask<Texture2D> blockAtlas = InitAtlas(
+                _blockAtlasTable,
+                Constants.BLOCK_ATLAS_INDEX,
+                Constants.BLOCK_ATLAS).Preserve();
             
-            _blockEntityAtlasTable.Clear();
-            await AtlasIndexHelper.LoadAsync(_blockEntityAtlasTable, "block_entity_atlas_index");
-            _blockEntityAtlas = await AssetProvider.LoadByAddressAsync<Texture2D>("block_entity_atlas");
+            UniTask<Texture2D> blockEntityAtlas = InitAtlas(
+                _blockEntityAtlasTable,
+                Constants.BLOCK_ENTITY_ATLAS_INDEX,
+                Constants.BLOCK_ENTITY_ATLAS).Preserve();
+            
+            await UniTask.WhenAll(blockAtlas, blockEntityAtlas);
+            _blockAtlas = await blockAtlas;
+            _blockEntityAtlas = await blockEntityAtlas;
+        }
+
+        private async UniTask<Texture2D> InitAtlas(
+            Dictionary<ResourceLocation, TextureInfo> atlasIndex,
+            string indexAddress,
+            string atlasAddress)
+        {
+            atlasIndex.Clear();
+            await AtlasIndexHelper.LoadAsync(atlasIndex, indexAddress);
+            return await AssetProvider.LoadByAddressAsync<Texture2D>(atlasAddress);
         }
     }
 }

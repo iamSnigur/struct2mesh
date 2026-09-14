@@ -78,7 +78,7 @@ namespace CraftSharp.Resource
 
             string json = JsonConvert.SerializeObject(entries, Formatting.Indented);
             
-            File.WriteAllText($"Assets/Resources_moved/vanilla/minecraft/textures/{atlasName}.json", json);
+            File.WriteAllText($"{Constants.ATLAS_PATH}/{atlasName}.json", json);
 #if UNITY_EDITOR
             AssetDatabase.Refresh();
 #endif

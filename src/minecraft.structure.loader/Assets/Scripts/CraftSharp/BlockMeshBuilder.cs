@@ -1,5 +1,4 @@
-﻿#nullable enable
-using System;
+﻿using System;
 using System.Linq;
 using CraftSharp.Resource;
 using Logic;
@@ -7,19 +6,24 @@ using Logic.Utils;
 using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Rendering;
-using Object = UnityEngine.Object;
 
 namespace CraftSharp
 {
     public static class BlockMeshBuilder
     {
-        private static readonly MaterialManager s_materialManager;
+        private static MaterialManager s_materialManager;
         private static readonly Material s_fallbackMaterial;
 
+        public static void InjectDependencies(MaterialManager materialManager)
+        {
+            Assert.IsNotNull(materialManager);
+            s_materialManager = materialManager;
+        }
+        
         static BlockMeshBuilder()
         {
-            s_materialManager = Object.FindFirstObjectByType<MaterialManager>();
             s_fallbackMaterial = LoadFallbackMaterial();
         }
 
@@ -102,7 +106,7 @@ namespace CraftSharp
                 return blockRenderData;
             }
             
-            BlockGeometry? blockGeometry = stateModel.Geometries[0];
+            BlockGeometry blockGeometry = stateModel.Geometries[0];
 
             int color = BlockStatePaletteAdapter.Instance.GetBlockColor(stateId, world, BlockLoc.Zero);
             int waterColor = world.GetWaterColor(BlockLoc.Zero);
@@ -166,7 +170,7 @@ namespace CraftSharp
 
             if (state.InLiquid) // Build liquid here
             {
-                BlockNeighborCheck? liquidNeighborCheck = state.InWater ? BlockNeighborChecks.WATER_SURFACE : BlockNeighborChecks.LAVA_SURFACE;
+                BlockNeighborCheck liquidNeighborCheck = state.InWater ? BlockNeighborChecks.WATER_SURFACE : BlockNeighborChecks.LAVA_SURFACE;
                 int liquidCullFlags = getCullFlags((int)blockPos.x, (int)blockPos.y, (int)blockPos.z, state, liquidNeighborCheck);
 
                 if (liquidCullFlags != 0)
@@ -316,7 +320,7 @@ namespace CraftSharp
                 for (var ox = offsetX; ox <= offsetX + 1; ox++)
                     for (var oz = offsetZ; oz <= offsetZ + 1; oz++)
                     {
-                        BlockState? neighbor = StructureBuilder.StructureVolume[pos + new Vector3(ox, 0f, oz)];
+                        BlockState neighbor = StructureBuilder.StructureVolume[pos + new Vector3(ox, 0f, oz)];
 
                         if (IsSameLiquid(self, neighbor))
                         {

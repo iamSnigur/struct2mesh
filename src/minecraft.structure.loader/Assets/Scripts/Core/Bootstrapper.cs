@@ -1,11 +1,11 @@
 ﻿using System;
 using Core.AssetManagement;
-using Core.AssetManagement.External;
 using Cysharp.Threading.Tasks;
 using Logic;
 using UI;
 using UI.Views;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Core
 {
@@ -21,34 +21,38 @@ namespace Core
         {
             try
             {
-                DontDestroyOnLoad(this);
                 BindDependencies();
                 _loadingCurtainView.SetProgressText("Loading boot assets...");
                 _loadingCurtainView.Show();
                 await MinecraftAssetProvider.Init();
+                await UniTask.Delay(500);
+                _loadingCurtainView.Hide();
             }
             catch (Exception e)
             {
+                _loadingCurtainView.SetProgressText("Failed to load assets");
                 Debug.LogError(e);
-            }
-            finally
-            {
-                await UniTask.Delay(500);
-                _loadingCurtainView.Hide();
             }
         }
 
         private void OnDestroy()
         {
-            AssetProvider.Release();
+            MinecraftAssetProvider.Release();
         }
 
         private void BindDependencies()
         {
             _cameraController = GetOnScene<CameraController>();
+            Assert.IsNotNull(_cameraController);
+            
             _structureBuilder = GetOnScene<StructureBuilder>();
+            Assert.IsNotNull(_structureBuilder);
+            
             _fileReceiver = GetOnScene<FileReceiver>();
+            Assert.IsNotNull(_fileReceiver);
+            
             _uiRoot = GetOnScene<UIRoot>();
+            Assert.IsNotNull(_uiRoot);
             
             _uiRoot.InjectDependencies(
                 _cameraController,

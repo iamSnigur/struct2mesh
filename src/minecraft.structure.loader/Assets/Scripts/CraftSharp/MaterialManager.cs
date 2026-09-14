@@ -12,27 +12,26 @@ namespace CraftSharp
         
         [SerializeField] public Material AtlasSolid;
         [SerializeField] public Material AtlasCutout;
-        [SerializeField] public Material AtlasCutoutMipped;
         [SerializeField] public Material AtlasTranslucent;
 
         private readonly Dictionary<RenderType, Material> _blockAtlasMaterials = new();
         private readonly Dictionary<RenderType, Material> _blockEntityAtlasMaterials = new();
 
-        private bool _atlasInitialized = false;
+        public void Initialize(ResourcePackManager packManager)
+        {
+            InitBlockAtlasMaterials(packManager);
+            InitBlockEntityAtlasMaterials(packManager);
+        }
 
         public Material GetAtlasMaterial(RenderType renderType, ResourceLocation blockId)
         {
-            EnsureAtlasInitialized();
-
             return BlockEntityHelper.IsBlockEntity(blockId.Path) 
                 ? GetBlockEntityMaterial(renderType) 
                 : GetBlockMaterial(renderType);
         }
-        
+
         public Material GetBlockMaterial(RenderType renderType)
         {
-            EnsureAtlasInitialized();
-
             _blockAtlasMaterials.TryGetValue(renderType, out Material material);
             Assert.IsNotNull(
                 material,
@@ -40,30 +39,15 @@ namespace CraftSharp
 
             return material;
         }
-        
+
         public Material GetBlockEntityMaterial(RenderType renderType)
         {
-            EnsureAtlasInitialized();
-
             _blockEntityAtlasMaterials.TryGetValue(renderType, out Material material);
             Assert.IsNotNull(
                 material,
                 $"Material not exists for render type {renderType} in block entity table");
 
             return material;
-        }
-
-        private void EnsureAtlasInitialized()
-        {
-            if (!_atlasInitialized) Initialize();
-        }
-
-        private void Initialize()
-        {
-            var packManager = ResourcePackManager.Instance;
-            InitBlockAtlasMaterials(packManager);
-            InitBlockEntityAtlasMaterials(packManager);
-            _atlasInitialized = true;
         }
 
         private void InitBlockAtlasMaterials(ResourcePackManager packManager)
@@ -80,10 +64,6 @@ namespace CraftSharp
             var cutout = new Material(AtlasCutout!);
             cutout.SetTexture(s_baseMap, packManager.GetBlockAtlas());
             _blockAtlasMaterials.Add(RenderType.CUTOUT, cutout);
-
-            var cutoutMipped = new Material(AtlasCutoutMipped!);
-            cutoutMipped.SetTexture(s_baseMap, packManager.GetBlockAtlas());
-            _blockAtlasMaterials.Add(RenderType.CUTOUT_MIPPED, cutoutMipped);
 
             // Translucent
             var translucent = new Material(AtlasTranslucent!);
@@ -110,10 +90,6 @@ namespace CraftSharp
             var cutout = new Material(AtlasCutout!);
             cutout.SetTexture(s_baseMap, packManager.GetBlockEntityAtlas());
             _blockEntityAtlasMaterials.Add(RenderType.CUTOUT, cutout);
-
-            var cutoutMipped = new Material(AtlasCutoutMipped!);
-            cutoutMipped.SetTexture(s_baseMap, packManager.GetBlockEntityAtlas());
-            _blockEntityAtlasMaterials.Add(RenderType.CUTOUT_MIPPED, cutoutMipped);
 
             // Translucent
             var translucent = new Material(AtlasTranslucent!);
