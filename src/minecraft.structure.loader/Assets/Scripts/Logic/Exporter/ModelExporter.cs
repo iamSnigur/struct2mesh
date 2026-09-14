@@ -76,7 +76,11 @@ namespace Logic.Exporter
             foreach (Material material in renderer.sharedMaterials)
             {
                 Texture2D texture = material.mainTexture as Texture2D;
-                int id = texture!.GetInstanceID();
+                
+                if (texture is null)
+                    continue;
+                
+                int id = texture.GetInstanceID();
                 unique.TryAdd(id, texture);
             }
 
