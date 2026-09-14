@@ -6,10 +6,6 @@ namespace CraftSharp.Resource
     [Serializable]
     public struct TextureInfo
     {
-        // Workaround to fix texture bleeding issue on block edges
-        // Offset UVs inwards
-        private const float BLEEDING_OFFSET = 0.02f / ResourcePackManager.ATLAS_SIZE;
-        
         public Rect bounds;
         public int index;
 
@@ -24,11 +20,6 @@ namespace CraftSharp.Resource
         public TextureInfo(Rect bounds, int index, int fc = 1, float fs = 1, int fr = 1, bool itpl = false, float fi = 1)
         {
             this.bounds = bounds;
-            
-            this.bounds.xMin += BLEEDING_OFFSET;
-            this.bounds.yMin += BLEEDING_OFFSET;
-            this.bounds.xMax -= BLEEDING_OFFSET;
-            this.bounds.yMax -= BLEEDING_OFFSET;
             
             this.index = index;
             this.frameCount = fc;

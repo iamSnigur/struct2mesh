@@ -91,7 +91,7 @@ namespace Logic
             await UpdateStructureVolumeAsync(structure).RunWithMinDuration(250);
             
             MinecraftAssetProvider.ClearBlockStatePalette();
-            await MinecraftAssetProvider.UpdateBlockStatePalette(structure.Palette);
+            await MinecraftAssetProvider.UpdateBlockStatePaletteAsync(structure.Palette);
             MinecraftAssetProvider.UpdateColorRules();
             
             _loadingCurtainView.SetProgressText("Building...");

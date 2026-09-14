@@ -1,30 +1,33 @@
-﻿#nullable enable
-using System;
+﻿using System;
 using System.Linq;
-using Core;
 using CraftSharp.Resource;
 using Logic;
 using Logic.Utils;
 using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Rendering;
-using Object = UnityEngine.Object;
 
 namespace CraftSharp
 {
     public static class BlockMeshBuilder
     {
-        private static readonly MaterialManager s_materialManager;
+        private static MaterialManager s_materialManager;
         private static readonly Material s_fallbackMaterial;
 
+        public static void InjectDependencies(MaterialManager materialManager)
+        {
+            Assert.IsNotNull(materialManager);
+            s_materialManager = materialManager;
+        }
+        
         static BlockMeshBuilder()
         {
-            s_materialManager = Object.FindFirstObjectByType<MaterialManager>();
-            s_fallbackMaterial = CreateFallbackMaterial();
+            s_fallbackMaterial = LoadFallbackMaterial();
         }
 
-        private static Material CreateFallbackMaterial() => 
+        private static Material LoadFallbackMaterial() => 
             Resources.Load<Material>("FallbackMaterial");
 
         private static void CreateFallbackMesh(ref Mesh.MeshData meshData, float3 posOffset)
@@ -103,7 +106,7 @@ namespace CraftSharp
                 return blockRenderData;
             }
             
-            BlockGeometry? blockGeometry = stateModel.Geometries[0];
+            BlockGeometry blockGeometry = stateModel.Geometries[0];
 
             int color = BlockStatePaletteAdapter.Instance.GetBlockColor(stateId, world, BlockLoc.Zero);
             int waterColor = world.GetWaterColor(BlockLoc.Zero);
@@ -117,15 +120,15 @@ namespace CraftSharp
             {
                 blockRenderData.Materials = new [] 
                 {
-                    s_materialManager.GetAtlasMaterial(RenderType.WATER),
-                    s_materialManager.GetAtlasMaterial(stateModel.RenderType) 
+                    s_materialManager.GetBlockMaterial(RenderType.WATER),
+                    s_materialManager.GetAtlasMaterial(stateModel.RenderType, blockState.BlockId) 
                 };
             }
             else
             {
                 blockRenderData.Materials = new []
                 {
-                    s_materialManager.GetAtlasMaterial(stateModel.RenderType)
+                    s_materialManager.GetAtlasMaterial(stateModel.RenderType, blockState.BlockId)
                 };
             }
 
@@ -167,7 +170,7 @@ namespace CraftSharp
 
             if (state.InLiquid) // Build liquid here
             {
-                BlockNeighborCheck? liquidNeighborCheck = state.InWater ? BlockNeighborChecks.WATER_SURFACE : BlockNeighborChecks.LAVA_SURFACE;
+                BlockNeighborCheck liquidNeighborCheck = state.InWater ? BlockNeighborChecks.WATER_SURFACE : BlockNeighborChecks.LAVA_SURFACE;
                 int liquidCullFlags = getCullFlags((int)blockPos.x, (int)blockPos.y, (int)blockPos.z, state, liquidNeighborCheck);
 
                 if (liquidCullFlags != 0)
@@ -198,78 +201,6 @@ namespace CraftSharp
                         blockVertLight,
                         fluidColorInt);
                 }
-            }
-        
-            int getCullFlags(int x, int y, int z, BlockState self, BlockNeighborCheck check)
-            {
-                var cullFlags = 0;
-
-                if (check(self, StructureBuilder.StructureVolume[x, y + 1, z], Direction.Up)) // Up
-                    cullFlags |= 1 << 0;
-
-                if (check(self, StructureBuilder.StructureVolume[x, y - 1, z], Direction.Down)) // Down
-                    cullFlags |= 1 << 1;
-                    
-                if (check(self, StructureBuilder.StructureVolume[x + 1, y, z], Direction.South)) // South
-                    cullFlags |= 1 << 2;
-
-                if (check(self, StructureBuilder.StructureVolume[x - 1, y, z], Direction.North)) // North
-                    cullFlags |= 1 << 3;
-                    
-                if (check(self, StructureBuilder.StructureVolume[x, y, z + 1], Direction.East)) // East
-                    cullFlags |= 1 << 4;
-
-                if (check(self, StructureBuilder.StructureVolume[x, y, z - 1], Direction.West)) // West
-                    cullFlags |= 1 << 5;
-                    
-                return cullFlags;
-            }
-        
-            void getLiquidCornerHeights(BlockState self, Vector3 pos, Span<float> heights)
-            {
-                heights[0] = getLiquidCornerHeight(self, pos, -1, 0);  // NE
-                heights[1] = getLiquidCornerHeight(self, pos, 0, 0);   // SE
-                heights[2] = getLiquidCornerHeight(self, pos, -1, -1); // NW
-                heights[3] = getLiquidCornerHeight(self, pos, 0, -1);  // SW
-            }
-
-            float getLiquidCornerHeight(BlockState self, Vector3 pos, int offsetX, int offsetZ)
-            {
-                for (var ox = offsetX; ox <= offsetX + 1; ox++)
-                    for (var oz = offsetZ; oz <= offsetZ + 1; oz++)
-                        if (IsSameLiquid(self, StructureBuilder.StructureVolume[pos + new Vector3(ox, 1f, oz)]))
-                            return 1f;
-
-                float sumHeight = 0F;
-                int count = 0;
-
-                for (var ox = offsetX; ox <= offsetX + 1; ox++)
-                    for (var oz = offsetZ; oz <= offsetZ + 1; oz++)
-                    {
-                        BlockState? neighbor = StructureBuilder.StructureVolume[pos + new Vector3(ox, 0f, oz)];
-
-                        if (IsSameLiquid(self, neighbor))
-                        {
-                            var level = neighbor.LiquidLevel;
-                            if (level == 0) return 14F / 16F;
-
-                            sumHeight += GetLiquidBaseHeight(level);
-                            count++;
-                        }
-                        else if (!isLiquidBlockingBlock(neighbor))
-                        {
-                            count++;
-                        }
-                    }
-
-                if (sumHeight == 0F || count == 0) return 3F / 16F;
-
-                return sumHeight / count;
-            }
-        
-            bool isLiquidBlockingBlock(BlockState state)
-            {
-                return state is { FullShape: true, NoCollision: false };
             }
         
             geometry.Build(visualBuffer, ref vertexOffset, posOffset, cullFlags, 0, 0F, blockVertLight, colorInt);
@@ -341,6 +272,78 @@ namespace CraftSharp
                     bounds = bounds,
                     vertexCount = vertexCount
                 }, MeshUpdateFlags.DontRecalculateBounds);
+            }
+            
+            int getCullFlags(int x, int y, int z, BlockState self, BlockNeighborCheck check)
+            {
+                var cullFlags = 0;
+
+                if (check(self, StructureBuilder.StructureVolume[x, y + 1, z], Direction.Up)) // Up
+                    cullFlags |= 1 << 0;
+
+                if (check(self, StructureBuilder.StructureVolume[x, y - 1, z], Direction.Down)) // Down
+                    cullFlags |= 1 << 1;
+                    
+                if (check(self, StructureBuilder.StructureVolume[x + 1, y, z], Direction.South)) // South
+                    cullFlags |= 1 << 2;
+
+                if (check(self, StructureBuilder.StructureVolume[x - 1, y, z], Direction.North)) // North
+                    cullFlags |= 1 << 3;
+                    
+                if (check(self, StructureBuilder.StructureVolume[x, y, z + 1], Direction.East)) // East
+                    cullFlags |= 1 << 4;
+
+                if (check(self, StructureBuilder.StructureVolume[x, y, z - 1], Direction.West)) // West
+                    cullFlags |= 1 << 5;
+                    
+                return cullFlags;
+            }
+        
+            void getLiquidCornerHeights(BlockState self, Vector3 pos, Span<float> heights)
+            {
+                heights[0] = getLiquidCornerHeight(self, pos, -1, 0);  // NE
+                heights[1] = getLiquidCornerHeight(self, pos, 0, 0);   // SE
+                heights[2] = getLiquidCornerHeight(self, pos, -1, -1); // NW
+                heights[3] = getLiquidCornerHeight(self, pos, 0, -1);  // SW
+            }
+
+            float getLiquidCornerHeight(BlockState self, Vector3 pos, int offsetX, int offsetZ)
+            {
+                for (var ox = offsetX; ox <= offsetX + 1; ox++)
+                    for (var oz = offsetZ; oz <= offsetZ + 1; oz++)
+                        if (IsSameLiquid(self, StructureBuilder.StructureVolume[pos + new Vector3(ox, 1f, oz)]))
+                            return 1f;
+
+                float sumHeight = 0F;
+                int count = 0;
+
+                for (var ox = offsetX; ox <= offsetX + 1; ox++)
+                    for (var oz = offsetZ; oz <= offsetZ + 1; oz++)
+                    {
+                        BlockState neighbor = StructureBuilder.StructureVolume[pos + new Vector3(ox, 0f, oz)];
+
+                        if (IsSameLiquid(self, neighbor))
+                        {
+                            var level = neighbor.LiquidLevel;
+                            if (level == 0) return 14F / 16F;
+
+                            sumHeight += GetLiquidBaseHeight(level);
+                            count++;
+                        }
+                        else if (!isLiquidBlockingBlock(neighbor))
+                        {
+                            count++;
+                        }
+                    }
+
+                if (sumHeight == 0F || count == 0) return 3F / 16F;
+
+                return sumHeight / count;
+            }
+        
+            bool isLiquidBlockingBlock(BlockState state)
+            {
+                return state is { FullShape: true, NoCollision: false };
             }
         }
     
