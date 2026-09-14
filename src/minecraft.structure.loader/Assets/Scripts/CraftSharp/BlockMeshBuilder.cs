@@ -121,14 +121,14 @@ namespace CraftSharp
                 blockRenderData.Materials = new [] 
                 {
                     s_materialManager.GetBlockMaterial(RenderType.WATER),
-                    s_materialManager.GetAtlasMaterial(stateModel.RenderType, blockState.BlockId) 
+                    s_materialManager.GetMaterial(stateModel.RenderType, blockState.BlockId) 
                 };
             }
             else
             {
                 blockRenderData.Materials = new []
                 {
-                    s_materialManager.GetAtlasMaterial(stateModel.RenderType, blockState.BlockId)
+                    s_materialManager.GetMaterial(stateModel.RenderType, blockState.BlockId)
                 };
             }
 

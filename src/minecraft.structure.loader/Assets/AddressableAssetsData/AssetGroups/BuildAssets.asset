@@ -25,18 +25,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 20a8a868446b82e41b93e5cc55ef922d
+    m_Address: blockstates_index
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 28b14f72a7698154c90fd5bcc7514125
     m_Address: block_atlas
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 55bc4cb04ed8e1e448e0f3553a3fe695
-    m_Address: blockstates_manifest_index
+  - m_GUID: 624300da9811b264e9f75bd362477300
+    m_Address: block_textures_index
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 624300da9811b264e9f75bd362477300
-    m_Address: block_textures_index
+  - m_GUID: 9fe2375b2ee1fb24e9573148a08c4e32
+    m_Address: models_index
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -52,11 +57,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b737af0b174764c44a54d061f71d58e8
     m_Address: block_entity_atlas_index
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bd617faf44bc8df4e93ffc0f389f8717
-    m_Address: models_manifest_index
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

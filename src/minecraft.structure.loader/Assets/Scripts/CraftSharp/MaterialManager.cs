@@ -23,7 +23,7 @@ namespace CraftSharp
             InitBlockEntityAtlasMaterials(packManager);
         }
 
-        public Material GetAtlasMaterial(RenderType renderType, ResourceLocation blockId)
+        public Material GetMaterial(RenderType renderType, ResourceLocation blockId)
         {
             return BlockEntityHelper.IsBlockEntity(blockId.Path) 
                 ? GetBlockEntityMaterial(renderType) 

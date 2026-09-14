@@ -54,19 +54,10 @@ namespace Core.AssetManagement
 
         private static async UniTask PreloadResourcesAsync()
         {
-            try
-            {
-                await GatherResourcesAsync(s_resourcePackManager);
-                await s_resourcePackManager.LoadPacksAsync(UpdateStatus);
-                await Resources.UnloadUnusedAssets();
-                Loaded = true;
-            }
-            catch (Exception e)
-            {
-                Loaded = false;
-                Debug.LogError($"Error loading resources: {e}");
-                Release();
-            }
+            await GatherResourcesAsync(s_resourcePackManager);
+            await s_resourcePackManager.LoadPacksAsync(UpdateStatus);
+            await Resources.UnloadUnusedAssets();
+            Loaded = true;
         }
 
         public static void ReleaseBlockStateHandles()
