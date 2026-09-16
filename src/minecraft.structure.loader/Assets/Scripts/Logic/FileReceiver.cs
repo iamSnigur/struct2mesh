@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 namespace Logic
 {
@@ -10,15 +10,10 @@ namespace Logic
 
         private StructureBuilder _structureBuilder;
         
-        [DllImport("__Internal")]
-        private static extern void OpenUploadPanel();
-
-        public void Open() => 
-            OpenUploadPanel();
-
         public void InjectDependencies(StructureBuilder structureBuilder) =>
             _structureBuilder = structureBuilder;
 
+        [Preserve]
         public void OnFileLoaded(string jsonPayload)
         {
             Payload payload = JsonUtility.FromJson<Payload>(jsonPayload);

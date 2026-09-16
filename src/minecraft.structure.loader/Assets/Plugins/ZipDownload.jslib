@@ -1,6 +1,6 @@
 ﻿mergeInto(LibraryManager.library, {
 
-    DownloadFile: function(namePtr, dataPtr, length)
+    DownloadFileInternal: function(namePtr, dataPtr, length)
     {
         const fileName = UTF8ToString(namePtr);
 

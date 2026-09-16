@@ -1,20 +1,13 @@
-﻿using System.Runtime.InteropServices;
-using Logic;
+﻿using Logic;
 using Logic.Exporter;
 using UI.Components;
-using UnityEngine;
 using UnityEngine.UIElements;
+using WebBridges;
 
 namespace UI.Views
 {
     public class SidebarView : ViewComponent
     {
-        [DllImport("__Internal")]
-        private static extern void OpenUploadPanel();
-
-        [DllImport("__Internal")]
-        private static extern void CloseUploadPanel();
-        
         private readonly ExporterRegistry _exporterRegistry;
         private readonly StructureBuilder _structureBuilder;
         private readonly CameraController _cameraController;
@@ -70,10 +63,10 @@ namespace UI.Views
                 : Visibility.Hidden;
         
         public void OpenUploadOverlay() => 
-            OpenUploadPanel();
+            DragAndDropBridge.OpenUploadPanel();
         
         public void CloseUploadOverlay() => 
-            CloseUploadPanel();
+            DragAndDropBridge.CloseUploadPanel();
         
         private void OnExportClicked(ExportType exportType)
         {

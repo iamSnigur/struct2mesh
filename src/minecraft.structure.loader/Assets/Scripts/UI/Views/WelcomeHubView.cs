@@ -38,7 +38,6 @@ namespace UI.Views
             _githubLabel.RegisterCallback<ClickEvent>(_ => OpenLink(GITHUB_LINK));
             _supportLabel.RegisterCallback<ClickEvent>(_ => OpenLink(SUPPORT_LINK));
             _reportIssueLabel.RegisterCallback<ClickEvent>(_ => OpenLink(REPORT_ISSUE_LINK));
-
         }
 
         public override void Show()

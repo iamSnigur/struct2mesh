@@ -2,19 +2,13 @@
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Runtime.InteropServices;
 using UnityEngine;
+using WebBridges;
 
 namespace Logic.Exporter
 {
     public static class ModelExporter
     {
-        [DllImport("__Internal")]
-        private static extern void DownloadFile(
-            string filename,
-            byte[] data,
-            int length);
-        
         public static void ExportToZip(string structureName, GameObject root, IExporter exporter)
         {
             using MemoryStream zipMemory = new();
@@ -42,16 +36,7 @@ namespace Logic.Exporter
 
             string archivePath = $"{exporter.Extension}_{structureName}.zip";
             
-#if UNITY_WEBGL && !UNITY_EDITOR
-            DownloadFile(
-                archivePath,
-                zipBytes,
-                zipBytes.Length);
-#elif UNITY_EDITOR && UNITY_EDITOR_WIN
-            File.WriteAllBytes(
-                Path.Combine(Application.dataPath, $"../{archivePath}"), 
-                zipBytes);
-#endif
+            ZipDownloadBridge.DownloadFile(archivePath, zipBytes, zipBytes.Length);
         }
 
         private static void WriteTextures(ZipArchive archive, Renderer renderer)

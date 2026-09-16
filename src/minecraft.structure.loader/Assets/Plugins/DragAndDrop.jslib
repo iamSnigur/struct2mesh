@@ -1,11 +1,11 @@
 mergeInto(LibraryManager.library, {
 
-  CloseUploadPanel: function () {
+  CloseUploadPanelInternal: function () {
     const overlay = document.getElementById("uploadOverlay");
     overlay.style.display = "none";
   },
 
-  OpenUploadPanel: function () {
+  OpenUploadPanelInternal: function () {
     const dropContent = document.getElementById("dropContent");
     const uploadContent = document.getElementById("uploadContent");
     const progressBar = document.getElementById("progressBar");

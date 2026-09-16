@@ -11,6 +11,7 @@
     
     <ui:VisualElement name="ui-root" class="root" pickingMode="Ignore">
         <ui:Label name="version-label" class="version-label" text="/-/-/"/>
+        <ui:Label name="copied-toast" class="copied-toast" text="Copied!" pickingMode="Ignore"/>
         <ui:Label name="file-name-label" class="file-name-label" text="STRUCTURE.NBT"/>
         <ui:Button name="btn-welcome-hub" class="btn-welcome-hub" text="Welcome!">
             <ui:VisualElement class="creeper-face"/>

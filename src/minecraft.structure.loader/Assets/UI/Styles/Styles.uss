@@ -21,8 +21,6 @@
 .file-name-label {
     position: absolute;
     bottom: 0;
-    left: 0;
-    right: 0;
     color: white;
     font-size: 15px;
     letter-spacing: 1px;
@@ -41,6 +39,15 @@
     -unity-text-align: middle-center;
     text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
     align-self: flex-start;
+
+    transition-duration: 0.1s;
+    transition-timing-function: ease;
+}
+
+.version-label:hover {
+    color: white;
+    transition-duration: 0.1s;
+    transition-timing-function: ease;
 }
 
 .creeper-face {
@@ -90,4 +97,33 @@
     scale: 0.95;
     transition-duration: 0.8s;
     transition-timing-function: ease-out-elastic;
+}
+
+.copied-toast {
+    position: absolute;
+    bottom: 10px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background-color: rgba(20, 20, 20, 0.8);
+    color: white;
+    -unity-font-definition: var(--font-segoe-ui);
+    
+    opacity: 0;
+    scale: 0.8 0.8;
+    translate: 0 0;
+
+    transition-property: opacity, scale, translate;
+    transition-duration: 0.15s, 0.2s, 0.6s;
+    transition-timing-function: ease-out, ease-out-back, ease-out-cubic;
+}
+
+.copied-toast-shown {
+    opacity: 1;
+    scale: 1 1;
+    translate: 0 -24px;
+}
+
+.copied-toast-hidden {
+    opacity: 0;
+    translate: 0 -40px;
 }
