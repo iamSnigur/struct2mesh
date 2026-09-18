@@ -1,5 +1,6 @@
 ﻿using Core;
 using Logic;
+using Logic.PlayerPreview;
 using UI.Components;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -26,12 +27,14 @@ namespace UI.Views
             VisualElement root,
             StructureBuilder structureBuilder,
             FileReceiver fileReceiver,
-            CameraController cameraController) : base(root)
+            CameraController cameraController,
+            PlayerPuppet playerPuppet) : base(root)
         {
             Initialize();
             
             _overlayPopupView = new OverlayPopupView(
-                Query<VisualElement>(Selectors.POPUP_OVERLAY_ROOT));
+                Query<VisualElement>(Selectors.POPUP_OVERLAY_ROOT),
+                playerPuppet);
             _sidebarView = new SidebarView(
                 Query<VisualElement>(Selectors.SIDEBAR_ROOT),
                 _fileNameLabel,

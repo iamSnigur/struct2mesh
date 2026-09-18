@@ -1,4 +1,7 @@
-﻿using UI.Components;
+﻿using Core.AssetManagement.External;
+using Cysharp.Threading.Tasks;
+using Logic.PlayerPreview;
+using UI.Components;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,6 +14,7 @@ namespace UI.Views
         private const string REPORT_ISSUE_LINK = "https://forms.gle/Ujksc3g8e6U7pJHx6";
         
         private readonly VisualElement _overlayRoot;
+        private readonly PlayerPuppet _playerPuppet;
         
         private Label _githubLabel;
         private Label _supportLabel;
@@ -18,10 +22,22 @@ namespace UI.Views
         private VisualElement _parallaxMedia;
         private VisualElement _parallaxViewport;
         
-        public WelcomeHubView(VisualElement root, VisualElement overlayRoot) : base(root)
+        private RenderTexture _renderTexture;
+        
+        public WelcomeHubView(
+            VisualElement root,
+            VisualElement overlayRoot,
+            PlayerPuppet playerPuppet) : base(root)
         {
             _overlayRoot = overlayRoot;
+            _playerPuppet = playerPuppet;
             Initialize();
+            LoadTexture().Forget();   
+        }
+
+        private async UniTaskVoid LoadTexture()
+        {
+            _renderTexture = await AssetProvider.LoadByAddressAsync<RenderTexture>("player_preview");
         }
 
         protected override void QueryElements()
@@ -40,39 +56,39 @@ namespace UI.Views
             _reportIssueLabel.RegisterCallback<ClickEvent>(_ => OpenLink(REPORT_ISSUE_LINK));
         }
 
+        private static void OpenLink(string url) => 
+            Application.OpenURL(url);
+
+        public void ShowPuppet() => _playerPuppet.Show();
+        public void HidePuppet() => _playerPuppet.Hide();
+        
         public override void Show()
         {
             base.Show();
-            _overlayRoot.RegisterCallback<PointerMoveEvent>(ParallaxMedia);
+            _parallaxMedia.style.backgroundImage = new StyleBackground(Background.FromRenderTexture(_renderTexture));
+            _overlayRoot.RegisterCallback<PointerMoveEvent>(OnPointerMove);
+            _overlayRoot.RegisterCallback<ClickEvent>(OnPointerClick);
         }
 
         public override void Hide()
         {
             base.Hide();
-            _overlayRoot.UnregisterCallback<PointerMoveEvent>(ParallaxMedia);
+            _overlayRoot.UnregisterCallback<PointerMoveEvent>(OnPointerMove);
+            _overlayRoot.UnregisterCallback<ClickEvent>(OnPointerClick);
         }
 
-        private Vector2 _targetPosition;
-        private Vector2 _currentPosition;
-        
-        private const float MAX_MEDIA_OFFSET = 40f;
-        private const float LERP_SPEED = 4f;
-
-        private void ParallaxMedia(PointerMoveEvent evt)
+        private void OnPointerClick(ClickEvent evt)
         {
-            Vector2 offset = (Vector2)evt.position - _parallaxViewport.worldBound.center;
-
-            Vector2 contentSize = _parallaxViewport.contentRect.size * 1.5f;
-            Vector2 halfSize = contentSize * 0.5f;
-
-            offset = Vector2.Max(-halfSize, Vector2.Min(offset, halfSize));
-            _targetPosition = (offset / contentSize) * (-MAX_MEDIA_OFFSET * 2f);
-
-            _currentPosition = Vector2.Lerp(_currentPosition, _targetPosition, Time.deltaTime * LERP_SPEED);
-            _parallaxMedia.style.translate = new Translate(_currentPosition.x, _currentPosition.y);
+            _playerPuppet.Punch();
         }
 
-        private static void OpenLink(string url) => 
-            Application.OpenURL(url);
+        private void OnPointerMove(PointerMoveEvent evt)
+        {
+            Rect b = _parallaxViewport.worldBound;
+            Vector2 uv = new(
+                (evt.position.x - b.xMin) / b.width,
+                1f - (evt.position.y - b.yMin) / b.height);
+            _playerPuppet.LookAt(uv);
+        }
     }
 }

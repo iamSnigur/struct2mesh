@@ -2,6 +2,7 @@
 using Core.AssetManagement;
 using Cysharp.Threading.Tasks;
 using Logic;
+using Logic.PlayerPreview;
 using UI;
 using UI.Views;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Core
         private StructureBuilder _structureBuilder;
         private FileReceiver _fileReceiver;
         private LoadingCurtainView _loadingCurtainView;
+        private PlayerPuppet _playerPuppet;
         private UIRoot _uiRoot;
 
         private async void Awake()
@@ -22,6 +24,8 @@ namespace Core
             try
             {
                 BindDependencies();
+                SkinLoader skinLoader = new();
+                await skinLoader.Init();
                 _loadingCurtainView.SetProgressText("Loading boot assets...");
                 _loadingCurtainView.Show();
                 await MinecraftAssetProvider.Init();
@@ -50,6 +54,9 @@ namespace Core
             
             _fileReceiver = GetOnScene<FileReceiver>();
             Assert.IsNotNull(_fileReceiver);
+
+            _playerPuppet = GetOnScene<PlayerPuppet>();
+            Assert.IsNotNull(_playerPuppet);
             
             _uiRoot = GetOnScene<UIRoot>();
             Assert.IsNotNull(_uiRoot);
@@ -57,7 +64,8 @@ namespace Core
             _uiRoot.InjectDependencies(
                 _cameraController,
                 _fileReceiver,
-                _structureBuilder);
+                _structureBuilder,
+                _playerPuppet);
             
             _loadingCurtainView = _uiRoot.LoadingCurtainView;
             _fileReceiver.InjectDependencies(_structureBuilder);

@@ -24,7 +24,7 @@ namespace Logic.PlayerPreview
                 _skinMaterial = Resources.Load<Material>("Player/SkinMaterial");
                 _capeMaterial = Resources.Load<Material>("Player/CapeMaterial");
                 
-                _playerSkinData = await _mojangService.GetPlayerSkinDataAsync("SNIGUR");
+                _playerSkinData = await _mojangService.GetPlayerSkinDataAsync("snigur");
                 SetSkinTextures(_playerSkinData.SkinTexture, _playerSkinData.CapeTexture);
             }
             catch (Exception e)

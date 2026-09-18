@@ -1,4 +1,5 @@
-﻿using UI.Components;
+﻿using Logic.PlayerPreview;
+using UI.Components;
 using UnityEngine.UIElements;
 
 namespace UI.Views
@@ -11,11 +12,12 @@ namespace UI.Views
         private Button _showKnowledgeBaseButton;
         private Button _goBackButton;
         
-        public OverlayPopupView(VisualElement root) : base(root)
+        public OverlayPopupView(VisualElement root, PlayerPuppet playerPuppet) : base(root)
         {
             _welcomeHubView = new WelcomeHubView(
                 Query<VisualElement>(Selectors.WELCOME_HUB_ROOT), 
-                _root);
+                _root,
+                playerPuppet);
             _knowledgeBaseView = new KnowledgeBaseView(
                 Query<VisualElement>(Selectors.KNOWLEDGE_BASE_ROOT));
             
@@ -56,6 +58,7 @@ namespace UI.Views
         public override void Show()
         {
             ShowWelcomeHub();
+            _welcomeHubView.ShowPuppet();
             _root.pickingMode = PickingMode.Position;
             _root.RemoveFromClassList(Selectors.POPUP_OVERLAY_HIDDEN);
             _root.AddToClassList(Selectors.POPUP_OVERLAY_SHOWN);
@@ -63,6 +66,7 @@ namespace UI.Views
 
         public override void Hide()
         {
+            _welcomeHubView.HidePuppet();
             _root.RemoveFromClassList(Selectors.POPUP_OVERLAY_SHOWN);
             _root.AddToClassList(Selectors.POPUP_OVERLAY_HIDDEN);
         }

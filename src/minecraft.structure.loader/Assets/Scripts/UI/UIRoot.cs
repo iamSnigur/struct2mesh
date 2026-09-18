@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Core.AssetManagement;
 using Logic;
+using Logic.PlayerPreview;
 using UI.Views;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,21 +17,26 @@ namespace UI
         
         private UIDocument _document;
         private MainView _mainView;
-        private static IPanel _rootPanel;
+        private static IPanel s_rootPanel;
 
         public void InjectDependencies(
             CameraController cameraController,
             FileReceiver fileReceiver,
-            StructureBuilder structureBuilder)
+            StructureBuilder structureBuilder,
+            PlayerPuppet playerPuppet)
         {
             _document = GetComponent<UIDocument>();
-            _rootPanel = _document.rootVisualElement.Q<VisualElement>(Selectors.UI_ROOT).panel;
+            s_rootPanel = _document
+                .rootVisualElement
+                .Q<VisualElement>(Selectors.UI_ROOT)
+                .panel;
             
             _mainView = new MainView(
                 _document.rootVisualElement,
                 structureBuilder, 
                 fileReceiver,
-                cameraController);
+                cameraController,
+                playerPuppet);
             
             LoadingCurtainView = new LoadingCurtainView(
                 _document.rootVisualElement.Q<VisualElement>(Selectors.LOADING_CURTAIN_ROOT));
@@ -48,9 +54,9 @@ namespace UI
         {
             Vector2 mousePos = Mouse.current.position.ReadValue();
             mousePos.y = Screen.height - mousePos.y;
-            mousePos = RuntimePanelUtils.ScreenToPanel(_rootPanel, mousePos);
+            mousePos = RuntimePanelUtils.ScreenToPanel(s_rootPanel, mousePos);
             
-            return _rootPanel.Pick(mousePos) != null;
+            return s_rootPanel.Pick(mousePos) != null;
         }
     }
 }
