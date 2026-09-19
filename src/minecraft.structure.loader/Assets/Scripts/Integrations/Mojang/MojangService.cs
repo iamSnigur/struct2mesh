@@ -1,7 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using Integrations.Mojang.Internal;
-using Integrations.Utils;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -10,26 +9,33 @@ namespace Integrations.Mojang
 {
     public class MojangService
     {
-        private const string GET_PROFILE_ENDPOINT = "https://api.mojang.com/users/profiles/minecraft";
-
-        private const string GET_SKIN_PROPERTIES_ENDPOINT =
-            "https://sessionserver.mojang.com/session/minecraft/profile";
+        // Mojang api does not send "Access-Control-Allow-Origin" header
+        // So integration was done with third-party api
+        private const string GET_PLAYER_DATA_ENDPOINT = "https://playerdb.co/api/player/minecraft";
 
         public async UniTask<PlayerSkinData> GetPlayerSkinDataAsync(string playerName)
         {
-            ProfileData profileData = await GetProfileAsync(playerName);
-            SkinProperties skinProperties = await GetSkinPropertiesAsync(profileData);
+            PlayerDbResponse db = await GetPlayerDbResponseAsync(playerName);
 
-            string propertiesDecoded = Base64Utils.Decode(skinProperties.properties[0].value);
-            PropertiesData propertiesData = JsonConvert.DeserializeObject<PropertiesData>(propertiesDecoded);
-            
-            return await GetPlayerSkinAsync(propertiesData);
+            if (!db.Success)
+                throw new Exception();
+
+            return await GetPlayerSkinAsync(db);
         }
 
-        private async UniTask<PlayerSkinData> GetPlayerSkinAsync(PropertiesData propertiesData)
+        private async UniTask<PlayerDbResponse> GetPlayerDbResponseAsync(string name)
         {
-            Texture2D skinTexture = await GetTextureAsync(ToHttps(propertiesData.textures.SKIN.url));
-            Texture2D capeTexture = await GetTextureAsync(ToHttps(propertiesData.textures.CAPE.url));
+            string uri = $"{GET_PLAYER_DATA_ENDPOINT}/{name}";
+            string response = await GetStringAsync(uri);
+            PlayerDbResponse playerDbResponse = JsonConvert.DeserializeObject<PlayerDbResponse>(response);
+            return playerDbResponse;
+        }
+
+        private async UniTask<PlayerSkinData> GetPlayerSkinAsync(PlayerDbResponse playerDb)
+        {
+            Player player = playerDb.Data.Player;
+            Texture2D skinTexture = await GetTextureAsync(player.SkinTexture);
+            Texture2D capeTexture = await GetTextureAsync(player.CapeTexture);
             
             return new PlayerSkinData
             {
@@ -38,33 +44,11 @@ namespace Integrations.Mojang
             };
         }
 
-        private async UniTask<ProfileData> GetProfileAsync(string name)
-        {
-            string uri = $"{GET_PROFILE_ENDPOINT}/{name}";
-            string response = await GetStringAsync(uri);
-            ProfileData profileData = JsonConvert.DeserializeObject<ProfileData>(response);
-            return profileData;
-        }
-
-        private async UniTask<SkinProperties> GetSkinPropertiesAsync(ProfileData profileData)
-        {
-            string uri = $"{GET_SKIN_PROPERTIES_ENDPOINT}/{profileData.id}";
-            string response = await GetStringAsync(uri);
-            SkinProperties skinProperties = JsonConvert.DeserializeObject<SkinProperties>(response);
-            return skinProperties;
-        }
-
-        private static string ToHttps(string url)
-        {
-            if (url != null
-                && url.StartsWith("http://", StringComparison.OrdinalIgnoreCase))
-                return "https://" + url.Substring("http://".Length);
-
-            return url;
-        }
-
         private static async UniTask<Texture2D> GetTextureAsync(string uri, int timeout = 10)
         {
+            if (string.IsNullOrEmpty(uri))
+                return null;
+            
             byte[] textureBytes = await GetBytesAsync(uri, timeout);
             Texture2D texture = new(1, 1, TextureFormat.RGBA32, false);
             texture.LoadImage(textureBytes);
