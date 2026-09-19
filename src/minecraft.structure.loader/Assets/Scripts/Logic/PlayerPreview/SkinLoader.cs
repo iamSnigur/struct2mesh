@@ -15,16 +15,19 @@ namespace Logic.PlayerPreview
 
         private readonly MojangService _mojangService = new();
 
-        public async UniTask Init()
+        public void Init()
+        {
+            _defaultSkin = Resources.Load<Texture2D>("Player/default_skin");
+            _defaultCape = Resources.Load<Texture2D>("Player/default_cape");
+            _skinMaterial = Resources.Load<Material>("Player/SkinMaterial");
+            _capeMaterial = Resources.Load<Material>("Player/CapeMaterial");
+        }
+
+        public async UniTask LoadPlayerSkinAsync(string playerName)
         {
             try
             {
-                _defaultSkin = Resources.Load<Texture2D>("Player/default_skin");
-                _defaultCape = Resources.Load<Texture2D>("Player/default_cape");
-                _skinMaterial = Resources.Load<Material>("Player/SkinMaterial");
-                _capeMaterial = Resources.Load<Material>("Player/CapeMaterial");
-                
-                _playerSkinData = await _mojangService.GetPlayerSkinDataAsync("snigur");
+                _playerSkinData = await _mojangService.GetPlayerSkinDataAsync(playerName);
                 SetSkinTextures(_playerSkinData.SkinTexture, _playerSkinData.CapeTexture);
             }
             catch (Exception e)
@@ -33,7 +36,7 @@ namespace Logic.PlayerPreview
                 SetSkinTextures(_defaultSkin, _defaultCape);
             }
         }
-
+        
         private void SetSkinTextures(Texture2D skin, Texture2D cape)
         {
             _skinMaterial.mainTexture = skin;

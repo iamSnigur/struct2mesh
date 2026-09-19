@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
 using UnityEngine.Experimental.Rendering;
+using UnityEngine.Serialization;
 
 namespace Logic.PlayerPreview
 {
     public class PlayerPreviewController : MonoBehaviour
     {
+        private const string PLAYER_NAME = "SNIGUR";
+        
         public Camera PuppetCamera;
-        public PlayerPuppet PlayerPuppet;
-        //public SkinLoader SkinLoader;
+        [FormerlySerializedAs("PlayerPuppet")] public PlayerPuppet Puppet;
+        private readonly SkinLoader _skinLoader = new();
 
-        public RenderTexture PlayerPreviewTexture { get; private set; }
+        public RenderTexture RenderTexture { get; private set; }
 
         public void Init()
         {
-            PlayerPreviewTexture = new RenderTexture(
+            RenderTexture = new RenderTexture(
                 1024,
                 1024,
                 GraphicsFormat.R16G16B16A16_UNorm,
@@ -26,14 +29,30 @@ namespace Logic.PlayerPreview
                 useMipMap = false,
                 autoGenerateMips = false
             };
-            PlayerPreviewTexture.Create();
-            PuppetCamera.targetTexture = PlayerPreviewTexture;
+            RenderTexture.Create();
+            PuppetCamera.targetTexture = RenderTexture;
             
-            PlayerPuppet.Init(PuppetCamera);
-            // load skins
-            
-            // hide camera
-            // hide puppet
+            Puppet.Init(PuppetCamera);
+            _skinLoader.Init();
+            _skinLoader.LoadPlayerSkinAsync(PLAYER_NAME);
+
+            ToggleCamera(false);
+            Hide();
+        }
+
+        public void Show()
+        {
+            Puppet.Show();
+        }
+
+        public void Hide()
+        {
+            Puppet.Hide();
+        }
+
+        public void ToggleCamera(bool active)
+        {
+            PuppetCamera.gameObject.SetActive(active);
         }
     }
 }

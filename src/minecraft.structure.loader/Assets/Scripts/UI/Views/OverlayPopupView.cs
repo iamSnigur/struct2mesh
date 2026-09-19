@@ -45,7 +45,7 @@ namespace UI.Views
                 if (_root.ClassListContains(Selectors.POPUP_OVERLAY_HIDDEN))
                 {
                     _root.pickingMode = PickingMode.Ignore;
-                    //_welcomeHubView.TogglePuppet(false);
+                    _welcomeHubView.TogglePuppetCamera(false);
                 }
             });
 
@@ -61,7 +61,7 @@ namespace UI.Views
         public override void Show()
         {
             ShowWelcomeHub();
-            //_welcomeHubView.TogglePuppet(true);
+            _welcomeHubView.TogglePuppetCamera(true);
             _welcomeHubView.ShowPuppet();
             _root.pickingMode = PickingMode.Position;
             _root.RemoveFromClassList(Selectors.POPUP_OVERLAY_HIDDEN);

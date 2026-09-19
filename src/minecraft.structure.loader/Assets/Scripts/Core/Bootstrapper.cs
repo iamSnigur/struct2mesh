@@ -26,8 +26,6 @@ namespace Core
                 BindDependencies();
                 _loadingCurtainView.SetProgressText("Loading boot assets...");
                 _loadingCurtainView.Show();
-                SkinLoader skinLoader = new();
-                await skinLoader.Init();
                 await MinecraftAssetProvider.Init();
                 await UniTask.Delay(500);
                 _loadingCurtainView.Hide();

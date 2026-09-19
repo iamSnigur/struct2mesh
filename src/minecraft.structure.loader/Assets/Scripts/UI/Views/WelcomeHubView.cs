@@ -1,6 +1,4 @@
-﻿using Core.AssetManagement.External;
-using Cysharp.Threading.Tasks;
-using Logic.PlayerPreview;
+﻿using Logic.PlayerPreview;
 using UI.Components;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -14,7 +12,7 @@ namespace UI.Views
         private const string REPORT_ISSUE_LINK = "https://forms.gle/Ujksc3g8e6U7pJHx6";
         
         private readonly VisualElement _overlayRoot;
-        private readonly PlayerPreviewController _playerPuppet;
+        private readonly PlayerPreviewController _playerPreviewController;
         
         private Label _githubLabel;
         private Label _supportLabel;
@@ -25,12 +23,16 @@ namespace UI.Views
         public WelcomeHubView(
             VisualElement root,
             VisualElement overlayRoot,
-            PlayerPreviewController playerPuppet) : base(root)
+            PlayerPreviewController playerPreviewController) : base(root)
         {
             _overlayRoot = overlayRoot;
-            _playerPuppet = playerPuppet;
-            _playerPuppet.Init();
+            _playerPreviewController = playerPreviewController;
+            _playerPreviewController.Init();
             Initialize();
+
+            _parallaxMedia.style.backgroundImage =
+                new StyleBackground(
+                    Background.FromRenderTexture(_playerPreviewController.RenderTexture));
         }
 
         protected override void QueryElements()
@@ -52,17 +54,13 @@ namespace UI.Views
         private static void OpenLink(string url) => 
             Application.OpenURL(url);
 
-        public void TogglePuppet(bool enable) => _playerPuppet.gameObject.SetActive(enable);
-        
-        public void ShowPuppet() => _playerPuppet.PlayerPuppet.Show();
-        public void HidePuppet() => _playerPuppet.PlayerPuppet.Hide();
+        public void TogglePuppetCamera(bool active) => _playerPreviewController.ToggleCamera(active);
+        public void ShowPuppet() => _playerPreviewController.Show();
+        public void HidePuppet() => _playerPreviewController.Hide();
         
         public override void Show()
         {
             base.Show();
-            _parallaxMedia.style.backgroundImage = 
-                new StyleBackground(
-                    Background.FromRenderTexture(_playerPuppet.PlayerPreviewTexture));
             _overlayRoot.RegisterCallback<PointerMoveEvent>(OnPointerMove);
             _overlayRoot.RegisterCallback<ClickEvent>(OnPointerClick);
         }
@@ -76,7 +74,7 @@ namespace UI.Views
 
         private void OnPointerClick(ClickEvent evt)
         {
-            _playerPuppet.PlayerPuppet.Punch();
+            _playerPreviewController.Puppet.Punch();
         }
 
         private void OnPointerMove(PointerMoveEvent evt)
@@ -85,7 +83,7 @@ namespace UI.Views
             Vector2 uv = new(
                 (evt.position.x - b.xMin) / b.width,
                 1f - (evt.position.y - b.yMin) / b.height);
-            _playerPuppet.PlayerPuppet.LookAt(uv);
+            _playerPreviewController.Puppet.LookAt(uv);
         }
     }
 }
