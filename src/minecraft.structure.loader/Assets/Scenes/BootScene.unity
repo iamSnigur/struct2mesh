@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &44113196
 Transform:
   m_ObjectHideFlags: 0
@@ -262,8 +262,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
   m_RenderShadows: 0
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
+  m_RequiresDepthTextureOption: 0
+  m_RequiresOpaqueTextureOption: 0
   m_CameraType: 0
   m_Cameras: []
   m_RendererIndex: -1
@@ -334,11 +334,11 @@ Camera:
     serializedVersion: 2
     m_Bits: 64
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: ef4d6e30d226ba74a9a5d64524764414, type: 2}
+  m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
+  m_HDR: 0
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -782,6 +782,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 618433717}
+  - component: {fileID: 618433718}
   m_Layer: 0
   m_Name: PlayerPreview
   m_TagString: Untagged
@@ -808,6 +809,20 @@ Transform:
   - {fileID: 44113196}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &618433718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618433716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 901a9430659e4130af63a6af6df6a28d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: StructureLoader::Logic.PlayerPreview.PlayerPreview
+  PuppetCamera: {fileID: 256334008}
+  PlayerPuppet: {fileID: 1042645676}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,10 +923,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02e1109459a4bc2b160efa2f4047749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: StructureLoader::Logic.PlayerPreview.PlayerPuppet
-  PuppetCamera: {fileID: 256334008}
   PuppetRoot: {fileID: 1054236885}
-  Dummy: {fileID: 0}
   Head: {fileID: 4983513749538989845}
+  RightArm: {fileID: 8485248259072599992}
+  LeftLeg: {fileID: 9204947947043203610}
+  RightLeg: {fileID: 9196326915790988066}
+  Body: {fileID: 5790746746330952736}
 --- !u!1 &1054236883
 GameObject:
   m_ObjectHideFlags: 0

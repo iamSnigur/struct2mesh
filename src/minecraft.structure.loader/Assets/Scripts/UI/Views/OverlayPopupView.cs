@@ -12,7 +12,7 @@ namespace UI.Views
         private Button _showKnowledgeBaseButton;
         private Button _goBackButton;
         
-        public OverlayPopupView(VisualElement root, PlayerPuppet playerPuppet) : base(root)
+        public OverlayPopupView(VisualElement root, PlayerPreviewController playerPuppet) : base(root)
         {
             _welcomeHubView = new WelcomeHubView(
                 Query<VisualElement>(Selectors.WELCOME_HUB_ROOT), 
@@ -42,8 +42,11 @@ namespace UI.Views
                 if (evt.target != evt.currentTarget)
                     return;
 
-                if (_root.ClassListContains(Selectors.POPUP_OVERLAY_HIDDEN)) 
+                if (_root.ClassListContains(Selectors.POPUP_OVERLAY_HIDDEN))
+                {
                     _root.pickingMode = PickingMode.Ignore;
+                    //_welcomeHubView.TogglePuppet(false);
+                }
             });
 
             _root.RegisterCallback<ClickEvent>(evt =>
@@ -58,6 +61,7 @@ namespace UI.Views
         public override void Show()
         {
             ShowWelcomeHub();
+            //_welcomeHubView.TogglePuppet(true);
             _welcomeHubView.ShowPuppet();
             _root.pickingMode = PickingMode.Position;
             _root.RemoveFromClassList(Selectors.POPUP_OVERLAY_HIDDEN);

@@ -28,7 +28,7 @@ namespace UI.Views
             StructureBuilder structureBuilder,
             FileReceiver fileReceiver,
             CameraController cameraController,
-            PlayerPuppet playerPuppet) : base(root)
+            PlayerPreviewController playerPuppet) : base(root)
         {
             Initialize();
             

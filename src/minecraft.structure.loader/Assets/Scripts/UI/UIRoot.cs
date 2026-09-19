@@ -23,7 +23,7 @@ namespace UI
             CameraController cameraController,
             FileReceiver fileReceiver,
             StructureBuilder structureBuilder,
-            PlayerPuppet playerPuppet)
+            PlayerPreviewController playerPuppet)
         {
             _document = GetComponent<UIDocument>();
             s_rootPanel = _document

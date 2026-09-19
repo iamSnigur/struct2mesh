@@ -16,7 +16,7 @@ namespace Core
         private StructureBuilder _structureBuilder;
         private FileReceiver _fileReceiver;
         private LoadingCurtainView _loadingCurtainView;
-        private PlayerPuppet _playerPuppet;
+        private PlayerPreviewController _playerPuppet;
         private UIRoot _uiRoot;
 
         private async void Awake()
@@ -24,10 +24,10 @@ namespace Core
             try
             {
                 BindDependencies();
-                SkinLoader skinLoader = new();
-                await skinLoader.Init();
                 _loadingCurtainView.SetProgressText("Loading boot assets...");
                 _loadingCurtainView.Show();
+                SkinLoader skinLoader = new();
+                await skinLoader.Init();
                 await MinecraftAssetProvider.Init();
                 await UniTask.Delay(500);
                 _loadingCurtainView.Hide();
@@ -55,7 +55,7 @@ namespace Core
             _fileReceiver = GetOnScene<FileReceiver>();
             Assert.IsNotNull(_fileReceiver);
 
-            _playerPuppet = GetOnScene<PlayerPuppet>();
+            _playerPuppet = GetOnScene<PlayerPreviewController>();
             Assert.IsNotNull(_playerPuppet);
             
             _uiRoot = GetOnScene<UIRoot>();
