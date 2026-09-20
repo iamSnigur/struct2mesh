@@ -1,9 +1,15 @@
-﻿using UnityEngine;
+﻿using Integrations.Mojang;
+using UnityEngine;
 
 namespace Logic.PlayerPreview
 {
     public class PlayerPuppet : MonoBehaviour
     {
+        public Texture2D DefaultSkin;
+        public Texture2D DefaultCape;
+        public Material SkinMaterial;
+        public Material CapeMaterial;
+        
         public Transform PuppetRoot;
 
         [Space] 
@@ -17,11 +23,9 @@ namespace Logic.PlayerPreview
         
         private ConfigurableJoint _joint;
         private Vector3 _headForward;
-        private Camera _puppetCamera;
 
-        public void Init(Camera puppetCamera)
+        public void Awake()
         {
-            _puppetCamera = puppetCamera;
             PuppetRoot.localPosition = new Vector3(0f, 7f, 0f);
             _joint = Head.GetComponent<ConfigurableJoint>();
             _headForward = Head.forward;
@@ -48,13 +52,17 @@ namespace Logic.PlayerPreview
             //RightArm.AddTorque(force);
         }
 
-        public void LookAt(Vector2 screenPos)
+        public void LookAt(Vector3 target)
         {
-            Ray worldRay = _puppetCamera.ViewportPointToRay(screenPos);
-            Vector3 target = worldRay.GetPoint(1f);
-            target.x *= -1f;
             Vector3 to = target - Head.position;
             _joint.targetRotation = Quaternion.FromToRotation(_headForward, to);
+        }
+
+        // move to separate class
+        public void ApplySkin(PlayerSkinData skinData)
+        {
+            SkinMaterial.mainTexture = skinData?.SkinTexture ?? DefaultSkin;
+            CapeMaterial.mainTexture = skinData?.CapeTexture ?? DefaultCape;
         }
     }
 }

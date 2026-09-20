@@ -1,20 +1,17 @@
-﻿using UnityEngine;
+﻿using Integrations.Mojang;
+using UnityEngine;
 using UnityEngine.Experimental.Rendering;
-using UnityEngine.Serialization;
 
 namespace Logic.PlayerPreview
 {
-    public class PlayerPreviewController : MonoBehaviour
+    public class PlayerPreviewController : MonoBehaviour, IPlayerPreview
     {
-        private const string PLAYER_NAME = "SNIGUR";
-        
         public Camera PuppetCamera;
-        [FormerlySerializedAs("PlayerPuppet")] public PlayerPuppet Puppet;
-        private readonly SkinLoader _skinLoader = new();
-
+        public PlayerPuppet Puppet;
+        
         public RenderTexture RenderTexture { get; private set; }
 
-        public void Init()
+        private void Awake()
         {
             RenderTexture = new RenderTexture(
                 1024,
@@ -31,28 +28,41 @@ namespace Logic.PlayerPreview
             };
             RenderTexture.Create();
             PuppetCamera.targetTexture = RenderTexture;
-            
-            Puppet.Init(PuppetCamera);
-            _skinLoader.Init();
-            _skinLoader.LoadPlayerSkinAsync(PLAYER_NAME);
 
-            ToggleCamera(false);
+            SetCameraActive(false);
             Hide();
+            ApplySkin(null);
         }
 
-        public void Show()
+        private void OnDestroy()
         {
-            Puppet.Show();
+            RenderTexture.Release();
+            Destroy(RenderTexture);
         }
 
-        public void Hide()
-        {
-            Puppet.Hide();
-        }
+        public void ApplySkin(PlayerSkinData skinData) => Puppet.ApplySkin(skinData);
 
-        public void ToggleCamera(bool active)
-        {
+        public void Show() => Puppet.Show();
+
+        public void Hide() => Puppet.Hide();
+
+        public void Punch() => Puppet.Punch();
+
+        public void SetCameraActive(bool active) => 
             PuppetCamera.gameObject.SetActive(active);
+
+        public void LookAt(Vector2 screenPos)
+        {
+            Vector3 target = ScreenToWorld(screenPos);
+            Puppet.LookAt(target);
+        }
+
+        private Vector3 ScreenToWorld(Vector2 screenPos)
+        {
+            Ray worldRay = PuppetCamera.ViewportPointToRay(screenPos);
+            Vector3 target = worldRay.GetPoint(1f);
+            target.x *= -1f;
+            return target;
         }
     }
 }
