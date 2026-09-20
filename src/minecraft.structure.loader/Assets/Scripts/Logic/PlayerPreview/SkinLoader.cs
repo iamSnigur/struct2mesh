@@ -1,46 +1,37 @@
 ﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Integrations.Mojang;
+using VContainer;
 
 namespace Logic.PlayerPreview
 {
-    public class SkinLoader
+    public class SkinLoader // SkinService
     {
-        private Texture2D _defaultSkin;
-        private Texture2D _defaultCape;
-        private Material _skinMaterial;
-        private Material _capeMaterial;
         private PlayerSkinData _playerSkinData;
 
-        private readonly MojangService _mojangService = new();
+        private readonly MojangService _mojangService;
 
-        public void Init()
-        {
-            _defaultSkin = Resources.Load<Texture2D>("Player/default_skin");
-            _defaultCape = Resources.Load<Texture2D>("Player/default_cape");
-            _skinMaterial = Resources.Load<Material>("Player/SkinMaterial");
-            _capeMaterial = Resources.Load<Material>("Player/CapeMaterial");
-        }
+        [Inject]
+        public SkinLoader(MojangService mojangService) => 
+            _mojangService = mojangService;
 
-        public async UniTask LoadPlayerSkinAsync(string playerName)
+        public async UniTask<PlayerSkinData> LoadPlayerSkinAsync(string playerName, CancellationToken ct)
         {
+            if (string.IsNullOrEmpty(playerName))
+                return null;
+            
             try
             {
-                _playerSkinData = await _mojangService.GetPlayerSkinDataAsync(playerName);
-                SetSkinTextures(_playerSkinData.SkinTexture, _playerSkinData.CapeTexture);
+                _playerSkinData = await _mojangService.GetPlayerSkinDataAsync(playerName, ct);
+                return _playerSkinData;
             }
             catch (Exception e)
             {
                 Debug.LogError(e);
-                SetSkinTextures(_defaultSkin, _defaultCape);
+                return null;
             }
-        }
-        
-        private void SetSkinTextures(Texture2D skin, Texture2D cape)
-        {
-            _skinMaterial.mainTexture = skin;
-            _capeMaterial.mainTexture = cape;
         }
     }
 }

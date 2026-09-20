@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Integrations.Mojang.Internal;
 using Newtonsoft.Json;
@@ -13,29 +14,29 @@ namespace Integrations.Mojang
         // So integration was done with third-party api
         private const string GET_PLAYER_DATA_ENDPOINT = "https://playerdb.co/api/player/minecraft";
 
-        public async UniTask<PlayerSkinData> GetPlayerSkinDataAsync(string playerName)
+        public async UniTask<PlayerSkinData> GetPlayerSkinDataAsync(string playerName, CancellationToken ct)
         {
-            PlayerDbResponse db = await GetPlayerDbResponseAsync(playerName);
+            PlayerDbResponse response = await GetPlayerDbResponseAsync(playerName, ct);
 
-            if (!db.Success)
-                throw new Exception();
+            if (!response.Success)
+                throw new Exception(response.Code);
 
-            return await GetPlayerSkinAsync(db);
+            return await GetPlayerSkinAsync(response, ct);
         }
 
-        private async UniTask<PlayerDbResponse> GetPlayerDbResponseAsync(string name)
+        private async UniTask<PlayerDbResponse> GetPlayerDbResponseAsync(string name, CancellationToken ct)
         {
             string uri = $"{GET_PLAYER_DATA_ENDPOINT}/{name}";
-            string response = await GetStringAsync(uri);
+            string response = await GetStringAsync(uri, ct);
             PlayerDbResponse playerDbResponse = JsonConvert.DeserializeObject<PlayerDbResponse>(response);
             return playerDbResponse;
         }
 
-        private async UniTask<PlayerSkinData> GetPlayerSkinAsync(PlayerDbResponse playerDb)
+        private async UniTask<PlayerSkinData> GetPlayerSkinAsync(PlayerDbResponse playerDb, CancellationToken ct)
         {
             Player player = playerDb.Data.Player;
-            Texture2D skinTexture = await GetTextureAsync(player.SkinTexture);
-            Texture2D capeTexture = await GetTextureAsync(player.CapeTexture);
+            Texture2D skinTexture = await GetTextureAsync(player.SkinTexture, ct);
+            Texture2D capeTexture = await GetTextureAsync(player.CapeTexture, ct);
             
             return new PlayerSkinData
             {
@@ -44,12 +45,12 @@ namespace Integrations.Mojang
             };
         }
 
-        private static async UniTask<Texture2D> GetTextureAsync(string uri, int timeout = 10)
+        private static async UniTask<Texture2D> GetTextureAsync(string uri, CancellationToken ct, int timeout = 10)
         {
             if (string.IsNullOrEmpty(uri))
                 return null;
             
-            byte[] textureBytes = await GetBytesAsync(uri, timeout);
+            byte[] textureBytes = await GetBytesAsync(uri, ct, timeout);
             Texture2D texture = new(1, 1, TextureFormat.RGBA32, false);
             texture.LoadImage(textureBytes);
             texture.filterMode = FilterMode.Point;
@@ -58,20 +59,20 @@ namespace Integrations.Mojang
             return texture;
         }
 
-        private static async UniTask<byte[]> GetBytesAsync(string uri, int timeout = 10)
+        private static async UniTask<byte[]> GetBytesAsync(string uri, CancellationToken ct, int timeout = 10)
         {
-            UnityWebRequest request = UnityWebRequest.Get(uri);
+            using UnityWebRequest request = UnityWebRequest.Get(uri);
             request.timeout = timeout;
-            await request.SendWebRequest();
+            await request.SendWebRequest().WithCancellation(ct);
 
             return request.downloadHandler.data;
         }
 
-        private static async UniTask<string> GetStringAsync(string uri, int timeout = 10)
+        private static async UniTask<string> GetStringAsync(string uri, CancellationToken ct, int timeout = 10)
         {
-            UnityWebRequest request = UnityWebRequest.Get(uri);
+            using UnityWebRequest request = UnityWebRequest.Get(uri);
             request.timeout = timeout;
-            await request.SendWebRequest();
+            await request.SendWebRequest().WithCancellation(ct);
 
             return request.downloadHandler.text;
         }
