@@ -2,6 +2,7 @@
 using UI.Components;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VContainer;
 
 namespace UI.Views
 {
@@ -11,28 +12,30 @@ namespace UI.Views
         private const string SUPPORT_LINK = "https://buymeacoffee.com/iamsnigur";
         private const string REPORT_ISSUE_LINK = "https://forms.gle/Ujksc3g8e6U7pJHx6";
         
-        private readonly VisualElement _overlayRoot;
-        private readonly PlayerPreviewController _playerPreviewController;
+        private readonly IPlayerPreview _playerPreview;
         
+        private VisualElement _overlayRoot;
         private Label _githubLabel;
         private Label _supportLabel;
         private Label _reportIssueLabel;
         private VisualElement _parallaxMedia;
         private VisualElement _parallaxViewport;
         
+        [Inject]
         public WelcomeHubView(
-            VisualElement root,
-            VisualElement overlayRoot,
-            PlayerPreviewController playerPreviewController) : base(root)
+            IUIRoot ui,
+            IPlayerPreview playerPreview) 
+            : base(ui, Selectors.WELCOME_HUB_ROOT)
         {
-            _overlayRoot = overlayRoot;
-            _playerPreviewController = playerPreviewController;
-            _playerPreviewController.Init();
-            Initialize();
+            _playerPreview = playerPreview;
+        }
 
+        public override void Start()
+        {
+            _overlayRoot = _uiRoot.Root.Q(Selectors.POPUP_OVERLAY_ROOT);
+            base.Start();
             _parallaxMedia.style.backgroundImage =
-                new StyleBackground(
-                    Background.FromRenderTexture(_playerPreviewController.RenderTexture));
+                new StyleBackground(Background.FromRenderTexture(_playerPreview.RenderTexture));
         }
 
         protected override void QueryElements()
@@ -54,9 +57,9 @@ namespace UI.Views
         private static void OpenLink(string url) => 
             Application.OpenURL(url);
 
-        public void TogglePuppetCamera(bool active) => _playerPreviewController.ToggleCamera(active);
-        public void ShowPuppet() => _playerPreviewController.Show();
-        public void HidePuppet() => _playerPreviewController.Hide();
+        public void SetPuppetCameraActive(bool active) => _playerPreview.SetCameraActive(active);
+        public void ShowPuppet() => _playerPreview.Show();
+        public void HidePuppet() => _playerPreview.Hide();
         
         public override void Show()
         {
@@ -74,16 +77,17 @@ namespace UI.Views
 
         private void OnPointerClick(ClickEvent evt)
         {
-            _playerPreviewController.Puppet.Punch();
+            _playerPreview.Punch();
         }
 
         private void OnPointerMove(PointerMoveEvent evt)
         {
-            Rect b = _parallaxViewport.worldBound;
-            Vector2 uv = new(
-                (evt.position.x - b.xMin) / b.width,
-                1f - (evt.position.y - b.yMin) / b.height);
-            _playerPreviewController.Puppet.LookAt(uv);
+            Rect bound = _parallaxViewport.worldBound;
+            Vector2 screenPos = new(
+                (evt.position.x - bound.xMin) / bound.width,
+                1f - (evt.position.y - bound.yMin) / bound.height);
+            
+            _playerPreview.LookAt(screenPos);
         }
     }
 }

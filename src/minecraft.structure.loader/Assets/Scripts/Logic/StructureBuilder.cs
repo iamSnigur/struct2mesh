@@ -10,6 +10,7 @@ using Logic.Parser.Model;
 using Logic.Utils;
 using UI.Views;
 using UnityEngine;
+using VContainer;
 
 namespace Logic
 {
@@ -22,7 +23,7 @@ namespace Logic
         public static StructureVolume StructureVolume;
     
         private CameraController _cameraController;
-        private LoadingCurtainView _loadingCurtainView;
+        private ILoadingCurtain _loadingCurtain;
 
         private ParserRegistry _parserRegistry;
         private IMeshGenerator _meshGenerator;
@@ -31,11 +32,12 @@ namespace Logic
         private MeshFilter _meshFilter;
         private MeshRenderer _meshRenderer;
         
+        [Inject]
         public void InjectDependencies(
-            LoadingCurtainView loadingCurtainView,
+            ILoadingCurtain loadingCurtain,
             CameraController cameraController)
         {
-            _loadingCurtainView = loadingCurtainView;
+            _loadingCurtain = loadingCurtain;
             _cameraController = cameraController;
         }
         
@@ -63,9 +65,9 @@ namespace Logic
             IsStructureLoaded = false;
             Root.SetActive(false);
             
-            _loadingCurtainView.SetProgressText("Looking at your structure...");
-            _loadingCurtainView.SetProgressBar(0f);
-            _loadingCurtainView.Show();
+            _loadingCurtain.SetProgressText("Looking at your structure...");
+            _loadingCurtain.SetProgressValue(0f);
+            _loadingCurtain.Show();
             
             ParsedStructure structure;
             
@@ -85,8 +87,8 @@ namespace Logic
                 return;
             }
             
-            _loadingCurtainView.SetProgressText("Collecting resources...");
-            _loadingCurtainView.SetProgressBar(10f);
+            _loadingCurtain.SetProgressText("Collecting resources...");
+            _loadingCurtain.SetProgressValue(10f);
             
             await UpdateStructureVolumeAsync(structure).RunWithMinDuration(250);
             
@@ -94,19 +96,19 @@ namespace Logic
             await MinecraftAssetProvider.UpdateBlockStatePaletteAsync(structure.Palette);
             MinecraftAssetProvider.UpdateColorRules();
             
-            _loadingCurtainView.SetProgressText("Building...");
-            _loadingCurtainView.SetProgressBar(25f);
+            _loadingCurtain.SetProgressText("Building...");
+            _loadingCurtain.SetProgressValue(25f);
             await ConstructAsync(structure).RunWithMinDuration(1000);
             
-            _loadingCurtainView.SetProgressText("Done");
-            _loadingCurtainView.SetProgressBar(100f);
+            _loadingCurtain.SetProgressText("Done");
+            _loadingCurtain.SetProgressValue(100f);
 
             await UniTask.Delay(400);
 
             IsStructureLoaded = true;
             Root.SetActive(true);
-            _loadingCurtainView.SetProgressBar(0f);
-            _loadingCurtainView.Hide();
+            _loadingCurtain.SetProgressValue(0f);
+            _loadingCurtain.Hide();
             _cameraController
                 .DoOrbitAnimationAsync(
                     _meshRenderer.bounds,
@@ -118,9 +120,9 @@ namespace Logic
         private async UniTask ShowErrorAndHideCurtain(Exception e, string message)
         {
             Debug.LogError(e);
-            _loadingCurtainView.SetProgressText(message);
+            _loadingCurtain.SetProgressText(message);
             await UniTask.Delay(1500);
-            _loadingCurtainView.Hide();
+            _loadingCurtain.Hide();
         }
 
         private async UniTask UpdateStructureVolumeAsync(ParsedStructure structure)
@@ -183,8 +185,8 @@ namespace Logic
             
             MinecraftAssetProvider.ReleaseBlockStateHandles();
         
-            _loadingCurtainView.SetProgressText("Warming Up Block Geometries...");
-            _loadingCurtainView.SetProgressBar(60f);
+            _loadingCurtain.SetProgressText("Warming Up Block Geometries...");
+            _loadingCurtain.SetProgressValue(60f);
             List<UniTask> warmupTasks = new(structure.Palette.Count);
 
             foreach (PaletteEntry entry in structure.Palette)
@@ -195,8 +197,8 @@ namespace Logic
             
             await UniTask.WhenAll(warmupTasks);
             
-            _loadingCurtainView.SetProgressText("Generating Mesh...");
-            _loadingCurtainView.SetProgressBar(90f);
+            _loadingCurtain.SetProgressText("Generating Mesh...");
+            _loadingCurtain.SetProgressValue(90f);
             await _meshGenerator.GenerateMesh(_meshFilter, _meshRenderer, structure, StructureVolume);
             
             _cameraController.SetPivot(_meshRenderer.bounds.center);

@@ -2,6 +2,7 @@
 using Logic.Exporter;
 using UI.Components;
 using UnityEngine.UIElements;
+using VContainer;
 using WebBridges;
 
 namespace UI.Views
@@ -11,7 +12,8 @@ namespace UI.Views
         private readonly ExporterRegistry _exporterRegistry;
         private readonly StructureBuilder _structureBuilder;
         private readonly CameraController _cameraController;
-        private readonly Label _fileNameLabel;
+        
+        private Label _fileNameLabel;
         
         private Label _exportErrorLabel;
         private Button _exportFbxButton;
@@ -21,16 +23,22 @@ namespace UI.Views
         private Button _loadNewButton;
         private Button _cameraResetButton;
         
-        public SidebarView(VisualElement root,
-            Label fileNameLabel,
+        [Inject]
+        public SidebarView(
+            IUIRoot ui,
             StructureBuilder structureBuilder,
-            CameraController cameraController) : base(root)
+            CameraController cameraController) 
+            : base(ui, Selectors.SIDEBAR_ROOT)
         {
             _exporterRegistry = new ExporterRegistry();
-            _fileNameLabel = fileNameLabel;
             _structureBuilder = structureBuilder;
             _cameraController = cameraController;
-            Initialize();
+        }
+
+        public override void Start()
+        {
+            base.Start();
+            _fileNameLabel = _uiRoot.Root.Q<Label>(Selectors.FILE_NAME_LABEL);
         }
 
         protected override void QueryElements()

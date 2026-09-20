@@ -1,18 +1,23 @@
 ﻿using UI.Components;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VContainer;
 
 namespace UI.Views
 {
-    public class LoadingCurtainView : ViewComponent
+    public class LoadingCurtainView : ViewComponent, ILoadingCurtain
     {
         private VisualElement _progressBar;
         private Label _progressLabel;
 
-        public LoadingCurtainView(VisualElement root) : base(root)
+        [Inject]
+        public LoadingCurtainView(IUIRoot ui) : base(ui, Selectors.LOADING_CURTAIN_ROOT)
+        { }
+
+        public override void Start()
         {
-            Initialize();
-            SetProgressBar(0f);
+            base.Start();
+            SetProgressValue(0f);
         }
 
         protected override void QueryElements()
@@ -23,37 +28,37 @@ namespace UI.Views
 
         protected override void RegisterCallbacks()
         {
-            _root.RegisterCallback<TransitionEndEvent>(evt =>
+            _viewRoot.RegisterCallback<TransitionEndEvent>(evt =>
             {
                 if (evt.target != evt.currentTarget)
                     return;
 
-                if (_root.ClassListContains(Selectors.LOADER_HIDDEN)) 
-                    _root.pickingMode = PickingMode.Ignore;
+                if (_viewRoot.ClassListContains(Selectors.LOADER_HIDDEN)) 
+                    _viewRoot.pickingMode = PickingMode.Ignore;
             });
         }
 
         public void SetProgressText(string text) => 
             _progressLabel.text = text;
 
-        public void SetProgressBar(float progress)
+        public void SetProgressValue(float value)
         {
-            progress = Mathf.Clamp(progress, 0f, 100f);
-            _progressBar.style.width = Length.Percent(progress);
+            value = Mathf.Clamp(value, 0f, 100f);
+            _progressBar.style.width = Length.Percent(value);
         }
 
         public override void Show()
         {
-            _root.pickingMode = PickingMode.Position;
-            _root.style.display = DisplayStyle.Flex;
-            _root.RemoveFromClassList(Selectors.LOADER_HIDDEN);
-            _root.AddToClassList(Selectors.LOADER_SHOWN);
+            _viewRoot.pickingMode = PickingMode.Position;
+            _viewRoot.style.display = DisplayStyle.Flex;
+            _viewRoot.RemoveFromClassList(Selectors.LOADER_HIDDEN);
+            _viewRoot.AddToClassList(Selectors.LOADER_SHOWN);
         }
 
         public override void Hide()
         {
-            _root.RemoveFromClassList(Selectors.LOADER_SHOWN);
-            _root.AddToClassList(Selectors.LOADER_HIDDEN);
+            _viewRoot.RemoveFromClassList(Selectors.LOADER_SHOWN);
+            _viewRoot.AddToClassList(Selectors.LOADER_HIDDEN);
         }
     }
 }

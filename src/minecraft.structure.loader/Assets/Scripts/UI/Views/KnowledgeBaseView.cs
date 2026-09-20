@@ -1,13 +1,12 @@
 ﻿using UI.Components;
-using UnityEngine.UIElements;
+using VContainer;
 
 namespace UI.Views
 {
     public class KnowledgeBaseView : ViewComponent
     {
-        public KnowledgeBaseView(VisualElement root) : base(root)
-        {
-            Initialize();
-        }
+        [Inject]
+        public KnowledgeBaseView(IUIRoot ui) : base(ui, Selectors.KNOWLEDGE_BASE_ROOT)
+        { }
     }
 }

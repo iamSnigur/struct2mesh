@@ -1,9 +1,9 @@
 ﻿using Core;
 using Logic;
-using Logic.PlayerPreview;
 using UI.Components;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VContainer;
 using WebBridges;
 
 namespace UI.Views 
@@ -23,29 +23,29 @@ namespace UI.Views
         private IVisualElementScheduledItem _showItem;
         private IVisualElementScheduledItem _resetItem;
 
+        [Inject]
         public MainView(
-            VisualElement root,
-            StructureBuilder structureBuilder,
-            FileReceiver fileReceiver,
-            CameraController cameraController,
-            PlayerPreviewController playerPuppet) : base(root)
+            IUIRoot ui,
+            OverlayPopupView overlayPopupView,
+            SidebarView sidebarView,
+            DisclaimerView disclaimerView,
+            FileReceiver fileReceiver) 
+            : base(ui, Selectors.UI_ROOT)
         {
-            Initialize();
+            _overlayPopupView = overlayPopupView;
+            _sidebarView = sidebarView;
+            _disclaimerView = disclaimerView;
             
-            _overlayPopupView = new OverlayPopupView(
-                Query<VisualElement>(Selectors.POPUP_OVERLAY_ROOT),
-                playerPuppet);
-            _sidebarView = new SidebarView(
-                Query<VisualElement>(Selectors.SIDEBAR_ROOT),
-                _fileNameLabel,
-                structureBuilder,
-                cameraController);
+            fileReceiver.OnFileReceived += OnFileReceived;
+        }
+
+        public override void Start()
+        {
+            base.Start();
             
-            _disclaimerView = new DisclaimerView(Query<VisualElement>(Selectors.DISCLAIMER_ROOT));
-            
+            // move to separate service
             BuildInfo.Init();
             SetVersion(BuildInfo.FullInfo);
-            fileReceiver.OnFileReceived += OnFileReceived;
         }
 
         protected override void QueryElements()

@@ -1,6 +1,7 @@
 ﻿using System;
+using Newtonsoft.Json;
 using UnityEngine;
-using UnityEngine.Scripting;
+using VContainer;
 
 namespace Logic
 {
@@ -10,13 +11,14 @@ namespace Logic
 
         private StructureBuilder _structureBuilder;
         
+        [Inject]
         public void InjectDependencies(StructureBuilder structureBuilder) =>
             _structureBuilder = structureBuilder;
 
-        [Preserve]
+        [UnityEngine.Scripting.Preserve]
         public void OnFileLoaded(string jsonPayload)
         {
-            Payload payload = JsonUtility.FromJson<Payload>(jsonPayload);
+            Payload payload = JsonConvert.DeserializeObject<Payload>(jsonPayload);
             OnFileReceived?.Invoke(payload.FileName);
             byte[] rawContent = Convert.FromBase64String(payload.FileContent);
             _structureBuilder

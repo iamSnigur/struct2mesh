@@ -1,5 +1,6 @@
 ﻿using UI.Components;
 using UnityEngine.UIElements;
+using VContainer;
 
 namespace UI.Views
 {
@@ -7,10 +8,9 @@ namespace UI.Views
     {
         private Button _okButton;
 
-        public DisclaimerView(VisualElement root) : base(root)
-        {
-            Initialize();
-        }
+        [Inject]
+        public DisclaimerView(IUIRoot ui) : base(ui, Selectors.DISCLAIMER_ROOT)
+        { }
 
         protected override void QueryElements()
         {
@@ -21,27 +21,27 @@ namespace UI.Views
         {
             _okButton.clicked += Hide;
             
-            _root.RegisterCallback<TransitionEndEvent>(evt =>
+            _viewRoot.RegisterCallback<TransitionEndEvent>(evt =>
             {
                 if (evt.target != evt.currentTarget)
                     return;
                 
-                if (_root.ClassListContains(Selectors.DISCLAIMER_HIDDEN))
-                    _root.style.display = DisplayStyle.None;
+                if (_viewRoot.ClassListContains(Selectors.DISCLAIMER_HIDDEN))
+                    _viewRoot.style.display = DisplayStyle.None;
             });
         }
 
         public override void Show()
         {
-            _root.style.display = DisplayStyle.Flex;
-            _root.RemoveFromClassList(Selectors.DISCLAIMER_HIDDEN);
-            _root.AddToClassList(Selectors.DISCLAIMER_SHOWN);
+            _viewRoot.style.display = DisplayStyle.Flex;
+            _viewRoot.RemoveFromClassList(Selectors.DISCLAIMER_HIDDEN);
+            _viewRoot.AddToClassList(Selectors.DISCLAIMER_SHOWN);
         }
 
         public override void Hide()
         {
-            _root.RemoveFromClassList(Selectors.DISCLAIMER_SHOWN);
-            _root.AddToClassList(Selectors.DISCLAIMER_HIDDEN);
+            _viewRoot.RemoveFromClassList(Selectors.DISCLAIMER_SHOWN);
+            _viewRoot.AddToClassList(Selectors.DISCLAIMER_HIDDEN);
         }
     }
 }
