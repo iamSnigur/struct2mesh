@@ -24,21 +24,24 @@ namespace Logic.PlayerPreview
         private ConfigurableJoint _joint;
         private Vector3 _headForward;
 
+        private readonly Vector3 _hiddenPosition = new(0f, 5f, 0f);
+        private readonly Vector3 _shownPosition = new(0f, 1f, 0f);
+
         public void Awake()
         {
-            PuppetRoot.localPosition = new Vector3(0f, 7f, 0f);
+            PuppetRoot.localPosition = _hiddenPosition;
             _joint = Head.GetComponent<ConfigurableJoint>();
             _headForward = Head.forward;
         }
 
         public void Show()
         {
-            PuppetRoot.localPosition = new Vector3(0f, 1f, 0f);
+            PuppetRoot.localPosition = _shownPosition;
         }
 
         public void Hide()
         {
-            PuppetRoot.localPosition = new Vector3(0f, 7f, 0f);   
+            PuppetRoot.localPosition = _hiddenPosition;   
         }
 
         public void Punch()
