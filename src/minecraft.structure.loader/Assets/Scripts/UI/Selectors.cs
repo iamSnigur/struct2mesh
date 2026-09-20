@@ -35,8 +35,7 @@
         public const string POPUP_OVERLAY_SHOWN = "popup-overlay-shown";
         public const string POPUP_OVERLAY_ROOT = "popup-overlay-root";
         public const string WELCOME_HUB_ROOT = "welcome-hub-root";
-        public const string PARALLAX_VIEWPORT = "parallax-viewport";
-        public const string PARALLAX_MEDIA = "parallax-media";
+        public const string PLAYER_PREVIEW = "player-preview";
         public const string GITHUB_LINK = "github-link";
         public const string SUPPORT_LINK = "support-link";
         public const string REPORT_ISSUE_LINK = "feedback-link";

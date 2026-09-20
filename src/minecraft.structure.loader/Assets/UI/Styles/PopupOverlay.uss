@@ -100,7 +100,9 @@
 }
 
 .sponsor-card {
-    flex: 1 1 0;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
     padding: 12px;
     margin-bottom: 10px;
     background-image: url("../Icons/fancy_border1.png");
@@ -112,7 +114,9 @@
 
 .knowledge-base-card {
     padding: 12px;
-    flex: 1.2 1 0;
+    flex-grow: 1.2;
+    flex-shrink: 0;
+    flex-basis: auto;
     flex-direction: column;
 
     background-image: url("../Icons/button.png");
@@ -151,21 +155,11 @@
     font-size: 24px;
 }
 
-.parallax-viewport {
+.player-preview {
     flex: 1 1 0;
     border-radius: 35px;
-    overflow: hidden;
     margin-left: 24px;
-}
-
-.parallax-media {
-    background-image: url("../Images/parallax-media.jpg");
     -unity-background-scale-mode: scale-and-crop;
-    position: absolute;
-    left: -40px;
-    top: -40px;
-    right: -40px;
-    bottom: -40px;
 }
 
 .welcome-hub-footer-content {

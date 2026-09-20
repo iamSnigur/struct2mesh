@@ -18,8 +18,7 @@ namespace UI.Views
         private Label _githubLabel;
         private Label _supportLabel;
         private Label _reportIssueLabel;
-        private VisualElement _parallaxMedia;
-        private VisualElement _parallaxViewport;
+        private VisualElement _playerPreviewElement;
         
         [Inject]
         public WelcomeHubView(
@@ -34,14 +33,13 @@ namespace UI.Views
         {
             _overlayRoot = _uiRoot.Root.Q(Selectors.POPUP_OVERLAY_ROOT);
             base.Start();
-            _parallaxMedia.style.backgroundImage =
+            _playerPreviewElement.style.backgroundImage =
                 new StyleBackground(Background.FromRenderTexture(_playerPreview.RenderTexture));
         }
 
         protected override void QueryElements()
         {
-            _parallaxViewport = Query<VisualElement>(Selectors.PARALLAX_VIEWPORT);
-            _parallaxMedia = Query<VisualElement>(Selectors.PARALLAX_MEDIA);
+            _playerPreviewElement = Query<VisualElement>(Selectors.PLAYER_PREVIEW);
             _githubLabel = Query<Label>(Selectors.GITHUB_LINK);
             _supportLabel = Query<Label>(Selectors.SUPPORT_LINK);
             _reportIssueLabel = Query<Label>(Selectors.REPORT_ISSUE_LINK);
@@ -82,7 +80,7 @@ namespace UI.Views
 
         private void OnPointerMove(PointerMoveEvent evt)
         {
-            Rect bound = _parallaxViewport.worldBound;
+            Rect bound = _playerPreviewElement.worldBound;
             Vector2 screenPos = new(
                 (evt.position.x - bound.xMin) / bound.width,
                 1f - (evt.position.y - bound.yMin) / bound.height);

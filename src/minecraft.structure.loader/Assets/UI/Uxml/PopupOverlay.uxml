@@ -31,9 +31,7 @@
                             </ui:VisualElement>
                         </ui:VisualElement>
 
-                        <ui:VisualElement name="parallax-viewport" class="parallax-viewport">
-                            <ui:VisualElement name="parallax-media" class="parallax-media"/>
-                        </ui:VisualElement>
+                        <ui:VisualElement name="player-preview" class="player-preview" />
                     </ui:VisualElement>
                 </ui:VisualElement>
 
