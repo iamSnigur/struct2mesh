@@ -872,6 +872,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &849932942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 849932944}
+  - component: {fileID: 849932943}
+  m_Layer: 0
+  m_Name: BootstrapInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &849932943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849932942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3364a0da7ee14b70bf1d0915ea7d725c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Struct2Mesh::Core.ProjectScopeInstaller
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects: []
+--- !u!4 &849932944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849932942}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1042645674
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,6 +971,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02e1109459a4bc2b160efa2f4047749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: StructureLoader::Logic.PlayerPreview.PlayerPuppet
+  DefaultSkin: {fileID: 2800000, guid: 869c8cc1c2343e4448f5e5bdc47f1a9e, type: 3}
+  DefaultCape: {fileID: 2800000, guid: 25f8a6328df159241944ca4558f523ba, type: 3}
+  SkinMaterial: {fileID: 2100000, guid: 3e6098632a95b364c9dd2055e8918d38, type: 2}
+  CapeMaterial: {fileID: 2100000, guid: 0df289555efd3a94daf0cb1bfbe499e1, type: 2}
   PuppetRoot: {fileID: 1054236885}
   Head: {fileID: 4983513749538989845}
   RightArm: {fileID: 8485248259072599992}
@@ -1077,50 +1129,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1736746236
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1736746237}
-  - component: {fileID: 1736746238}
-  m_Layer: 0
-  m_Name: Bootstrapper
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1736746237
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1736746236}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1736746238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1736746236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b384eb08c5042eaba572e2f47bb1a13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: StructureLoader::Bootstrapper
 --- !u!1 &1798250374
 GameObject:
   m_ObjectHideFlags: 0
@@ -3670,7 +3678,7 @@ Rigidbody:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1736746237}
+  - {fileID: 849932944}
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 2101808731}
