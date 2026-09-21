@@ -55,7 +55,7 @@ namespace UI.Views
         private static void OpenLink(string url) => 
             Application.OpenURL(url);
 
-        public void SetPuppetCameraActive(bool active) => _playerPreview.SetCameraActive(active);
+        public void SetPlayerPreviewActive(bool active) => _playerPreview.SetPreviewActive(active);
         public void ShowPuppet() => _playerPreview.Show();
         public void HidePuppet() => _playerPreview.Hide();
         

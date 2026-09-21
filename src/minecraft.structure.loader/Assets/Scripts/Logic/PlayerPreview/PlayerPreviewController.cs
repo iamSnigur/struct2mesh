@@ -1,4 +1,5 @@
-﻿using Integrations.Mojang;
+﻿using System.Collections;
+using Integrations.Mojang;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 
@@ -6,6 +7,8 @@ namespace Logic.PlayerPreview
 {
     public class PlayerPreviewController : MonoBehaviour, IPlayerPreview
     {
+        private const int TEXTURE_SIZE = 512;
+        
         public Camera PuppetCamera;
         public PlayerPuppet Puppet;
         
@@ -14,8 +17,8 @@ namespace Logic.PlayerPreview
         private void Awake()
         {
             RenderTexture = new RenderTexture(
-                1024,
-                1024,
+                TEXTURE_SIZE,
+                TEXTURE_SIZE,
                 GraphicsFormat.R16G16B16A16_UNorm,
                 GraphicsFormat.D16_UNorm, 
                 0)
@@ -29,9 +32,15 @@ namespace Logic.PlayerPreview
             RenderTexture.Create();
             PuppetCamera.targetTexture = RenderTexture;
 
-            SetCameraActive(false);
             Hide();
             ApplySkin(null);
+        }
+
+        // Puts puppet's rigidbodies into sleep after physics initialized
+        private IEnumerator Start()
+        {
+            yield return new WaitForFixedUpdate();
+            SetPreviewActive(false);
         }
 
         private void OnDestroy()
@@ -48,8 +57,15 @@ namespace Logic.PlayerPreview
 
         public void Punch() => Puppet.Punch();
 
-        public void SetCameraActive(bool active) => 
+        public void SetPreviewActive(bool active)
+        {
             PuppetCamera.gameObject.SetActive(active);
+            
+            if (active)
+                Puppet.WakeUp();
+            else
+                Puppet.Sleep();
+        }
 
         public void LookAt(Vector2 screenPos)
         {
