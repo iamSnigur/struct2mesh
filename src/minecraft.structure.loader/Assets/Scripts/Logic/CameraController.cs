@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using WebBridges;
 
 namespace Logic
 {
@@ -137,22 +138,25 @@ namespace Logic
 
         private void HandleZoom()
         {
-            if (_mouse == null) return;
-            
             if (UIRoot.IsPointerOverUI()) return;
- 
-            float scroll = _mouse.scroll.ReadValue().y;
-            if (Mathf.Abs(scroll) < 0.0001f) return;
- 
-            // webgl scroll delta is bigger than desktop
-#if UNITY_WEBGL && !UNITY_EDITOR
-            scroll *= 0.001f;
-#else
-            scroll *= 0.01f;
-#endif
- 
+
+            float scroll = GetScroll();
+            if (Mathf.Abs(scroll) < float.Epsilon) return;
+
             _targetDistance -= scroll * zoomSensitivity * _currentDistance;
             _targetDistance  = Mathf.Clamp(_targetDistance, minZoomDistance, maxZoomDistance);
+        }
+
+        private float GetScroll()
+        {
+            float scroll;
+#if UNITY_WEBGL && !UNITY_EDITOR
+            scroll = ScrollWheelBridge.GetScrollDelta();
+#else
+            if (_mouse == null) return 0f;
+            scroll = _mouse.scroll.ReadValue().y;
+#endif
+            return scroll * 0.01f;
         }
  
         private void ApplyTransform()
