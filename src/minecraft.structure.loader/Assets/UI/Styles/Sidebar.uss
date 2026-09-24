@@ -45,10 +45,6 @@
     padding-right: 48px;
 }
 
-.btn-export:active {
-    font-size: 23px;
-}
-
 .btn-load-new-root {
     width: 100%;
     height: 60px;
@@ -58,16 +54,15 @@
     color: rgb(143, 31, 11);
     font-size: 28px;
     letter-spacing: 2px;
-    text-shadow: 0 3px 0 rgb(255, 169, 31);
-
+    text-shadow: 0 3px 0 rgb(253, 155, 7);
     -unity-background-image-tint-color: rgb(253, 155, 7);
 
     -unity-text-align: middle-center;
 }
 
 .btn-load-new:active {
-    font-size: 27px;
-    -unity-background-image-tint-color: rgb(228, 144, 8);
+    text-shadow: 0 3px 0 rgb(197, 122, 0);
+    -unity-background-image-tint-color: rgb(197, 122, 0);
 }
 
 .chevron-icon {

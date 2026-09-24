@@ -107,6 +107,7 @@
     background-color: rgba(20, 20, 20, 0.8);
     color: white;
     -unity-font-definition: var(--font-segoe-ui);
+    font-size: 12px;
     
     opacity: 0;
     scale: 0.8 0.8;
