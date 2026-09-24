@@ -22,11 +22,11 @@
                             <ui:VisualElement class="knowledge-base-card">
                                 <ui:Label class="card-title" text="Knowledge Base" />
                                 <ui:Label class="card-label" text="There might be answers to some of your questions or notes worth knowing." />
-                                <ui:Label class="card-label" text="Check them out!" />
+                                <ui:Label class="card-label" text="Check them out in knowledge base." />
                                 
                                 <ui:VisualElement class="btn-dungeons-root btn-show-knowledge-base-root">
                                     <ui:VisualElement class="btn-dungeons-outline" />
-                                    <ui:Button name="btn-show-knowledge-base" class="btn-dungeons btn-show-knowledge-base" text="Let's Acknowledge!" />
+                                    <ui:Button name="btn-show-knowledge-base" class="btn-dungeons btn-show-knowledge-base" text="Get some knowledge" />
                                 </ui:VisualElement>
                             </ui:VisualElement>
                         </ui:VisualElement>
@@ -50,12 +50,26 @@
                 </ui:VisualElement>
 
                 <ui:VisualElement class="popup-body">
-                    <ui:ScrollView class="scroll-view-root" scroll-deceleration-rate="0.8" >
+                    <ui:ScrollView class="scroll-view-root" scroll-deceleration-rate="0.5" >
                         <ui:VisualElement class="info-card-base">
                             <ui:VisualElement class="info-card-decor"/>
                             <ui:Label class="info-card-title" text="Supported Minecraft Version" />
-                            <ui:Label class="info-card-text" text="Struct2Mesh currently supports Minecraft Java Edition block states from 26.1." />
-                            <ui:Label class="info-card-text" text="Block states from older or newer versions are not recognized and will fallback to a placeholder block, making it still possible to load a structures from other version." />
+                            <ui:Label class="info-card-text" text="Struct2Mesh currently supports Minecraft Java blocks up to version 26.1.2." />
+                            <ui:Label class="info-card-text" text="Blocks that where added in newer versions and some blocks from older versions will be replaced with fallback block, so it's still possible to load structures from other versions." />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="info-card-base">
+                            <ui:VisualElement class="info-card-decor"/>
+                            <ui:Label class="info-card-title" text="Entity Support" />
+                            <ui:Label class="info-card-text" text="Entities are currently not supported, and support is not planned." />
+                            <ui:Label class="info-card-text" text="Structures containing entities will still load correctly, but all entities will be ignored during import." />
+                            <ui:Label class="info-card-text" text="Block entities are supported. However, visuals driven by NBT data — such as banner patterns or pottery patterns — are currently not supported." />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="info-card-base">
+                            <ui:VisualElement class="info-card-decor"/>
+                            <ui:Label class="info-card-title" text="Texture Animations" />
+                            <ui:Label class="info-card-text" text="Texture animations are fully supported inside Struct2Mesh with help of a custom shader." />
+                            <ui:Label class="info-card-text" text="Exported models contain static textures by default because standard 3D formats do not preserve Minecraft's texture animation system." />
+                            <ui:Label class="info-card-text" text="To restore animated textures, you'll need to implement a custom shader in your target engine or application." />
                         </ui:VisualElement>
                         <ui:VisualElement class="info-card-base">
                             <ui:VisualElement class="info-card-decor"/>
@@ -67,16 +81,22 @@
                         </ui:VisualElement>
                         <ui:VisualElement class="info-card-base">
                             <ui:VisualElement class="info-card-decor"/>
-                            <ui:Label class="info-card-title" text="Entity Support" />
-                            <ui:Label class="info-card-text" text="Entities are currently not supported, and support is not planned." />
-                            <ui:Label class="info-card-text" text="Structures containing entities will still load correctly, but all entities will be ignored during import." />
-                            <ui:Label class="info-card-text" text="Block entities are supported. However, visuals driven by NBT data — such as banner patterns or pottery patterns — are currently not supported." />
+                            <ui:Label class="info-card-title" text="Supported File Formats" />
+                            <ui:Label class="info-card-text" text="Struct2Mesh currently supports .nbt files." />
+                            <ui:Label class="info-card-text" text="Support for additional formats may be added in future releases." />
                         </ui:VisualElement>
                         <ui:VisualElement class="info-card-base">
                             <ui:VisualElement class="info-card-decor"/>
-                            <ui:Label class="info-card-title" text="Supported File Formats" />
-                            <ui:Label class="info-card-text" text="Struct2Mesh currently supports importing .nbt files." />
-                            <ui:Label class="info-card-text" text="Support for additional formats may be added in future releases." />
+                            <ui:Label class="info-card-title" text="Exporting Large Structures From Minecraft" />
+                            <ui:Label class="info-card-text" text="Minecraft Java Structure Blocks can save areas up to 48 × 48 × 48 blocks." />
+                            <ui:Label class="info-card-text" text="Struct2Mesh itself does not have this limitation. Larger .nbt files can be imported if they were generated using other tools." />
+                            <ui:Label class="info-card-text" text="If your build exceeds the Structure Block limit, you can convert formats such as .schematic to .nbt using a tool like Bloxelizer." />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="info-card-base">
+                            <ui:VisualElement class="info-card-decor"/>
+                            <ui:Label class="info-card-title" text="Structure size limits" />
+                            <ui:Label class="info-card-text" text="The current maximum structure size is 200,000 blocks in volume." />
+                            <ui:Label class="info-card-text" text="Loading very large structures can put a lot of pressure on your browser's memory. If imports start failing after opening several large structures, simply refresh the page and try again." />
                         </ui:VisualElement>
                         <ui:VisualElement class="info-card-base">
                             <ui:VisualElement class="info-card-decor"/>
@@ -86,26 +106,6 @@
                             <ui:Label class="info-card-text" text="If your rendering pipeline allows it, enabling ZWrite on transparent materials can improve the result in many cases." />
                             <ui:Label class="info-card-text" text="A more accurate solution requires sorting transparent geometry, which adds significant processing overhead and is currently outside the scope of this project." />
                             <ui:Label class="info-card-note" text="Note: Enabling `ZWrite` is not a universal solution and may introduce other transparency artifacts depending on the shader and rendering pipeline you use." />
-                        </ui:VisualElement>
-                        <ui:VisualElement class="info-card-base">
-                            <ui:VisualElement class="info-card-decor"/>
-                            <ui:Label class="info-card-title" text="Texture Animations" />
-                            <ui:Label class="info-card-text" text="Texture animations are fully supported inside Struct2Mesh with help of a custom shader." />
-                            <ui:Label class="info-card-text" text="Exported models contain static textures by default because standard 3D formats do not preserve Minecraft's texture animation system." />
-                            <ui:Label class="info-card-text" text="To restore animated textures, you'll need to implement a custom shader in your target engine or application." />
-                        </ui:VisualElement>
-                        <ui:VisualElement class="info-card-base">
-                            <ui:VisualElement class="info-card-decor"/>
-                            <ui:Label class="info-card-title" text="Exporting Large Structures From Minecraft" />
-                            <ui:Label class="info-card-text" text="Minecraft Java Edition Structure Blocks can save areas up to 48 × 48 × 48 blocks." />
-                            <ui:Label class="info-card-text" text="Struct2Mesh itself does not have this limitation. Larger .nbt files can be imported if they were generated using another tools." />
-                            <ui:Label class="info-card-text" text="If your build exceeds the Structure Block limit, you can convert formats such as .schematic to .nbt using tool like Bloxilize." />
-                        </ui:VisualElement>
-                        <ui:VisualElement class="info-card-base">
-                            <ui:VisualElement class="info-card-decor"/>
-                            <ui:Label class="info-card-title" text="Structure size limits" />
-                            <ui:Label class="info-card-text" text="The current maximum structure size is 200,000 blocks in volume." />
-                            <ui:Label class="info-card-text" text="Loading very large structures can put a lot of pressure on your browser's memory. If imports start failing after opening several large structures, simply refresh the page and try again." />
                         </ui:VisualElement>
                     </ui:ScrollView>
                 </ui:VisualElement>
