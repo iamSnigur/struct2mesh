@@ -137,10 +137,11 @@ namespace Logic
         }
 
         private void HandleZoom()
-        {
-            if (UIRoot.IsPointerOverUI()) return;
-
+        { 
+            // Drain accumulated scroll delta from web
             float scroll = GetScroll();
+            
+            if (UIRoot.IsPointerOverUI()) return;
             if (Mathf.Abs(scroll) < float.Epsilon) return;
 
             _targetDistance -= scroll * zoomSensitivity * _currentDistance;

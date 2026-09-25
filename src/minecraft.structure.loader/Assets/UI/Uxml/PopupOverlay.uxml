@@ -50,7 +50,7 @@
                 </ui:VisualElement>
 
                 <ui:VisualElement class="popup-body">
-                    <ui:ScrollView class="scroll-view-root" scroll-deceleration-rate="0.5" >
+                    <ui:ScrollView class="scroll-view-root" scroll-deceleration-rate="0.5" mouse-wheel-scroll-size="0.5">
                         <ui:VisualElement class="info-card-base">
                             <ui:VisualElement class="info-card-decor"/>
                             <ui:Label class="info-card-title" text="Supported Minecraft Version" />
@@ -62,7 +62,7 @@
                             <ui:Label class="info-card-title" text="Entity Support" />
                             <ui:Label class="info-card-text" text="Entities are currently not supported, and support is not planned." />
                             <ui:Label class="info-card-text" text="Structures containing entities will still load correctly, but all entities will be ignored during import." />
-                            <ui:Label class="info-card-text" text="Block entities are supported. However, visuals driven by NBT data — such as banner patterns or pottery patterns — are currently not supported." />
+                            <ui:Label class="info-card-text" text="Block entities are supported. However, visuals driven by NBT data - such as banner patterns or pottery patterns - are currently not supported." />
                         </ui:VisualElement>
                         <ui:VisualElement class="info-card-base">
                             <ui:VisualElement class="info-card-decor"/>
@@ -90,7 +90,7 @@
                             <ui:Label class="info-card-title" text="Exporting Large Structures From Minecraft" />
                             <ui:Label class="info-card-text" text="Minecraft Java Structure Blocks can save areas up to 48 × 48 × 48 blocks." />
                             <ui:Label class="info-card-text" text="Struct2Mesh itself does not have this limitation. Larger .nbt files can be imported if they were generated using other tools." />
-                            <ui:Label class="info-card-text" text="If your build exceeds the Structure Block limit, you can convert formats such as .schematic to .nbt using a tool like Bloxelizer." />
+                            <ui:Label class="info-card-text" text="If your build exceeds the Structure Block limit, you can export it in formats such as .schematic and convert it to .nbt using a tool like Bloxelizer." />
                         </ui:VisualElement>
                         <ui:VisualElement class="info-card-base">
                             <ui:VisualElement class="info-card-decor"/>
