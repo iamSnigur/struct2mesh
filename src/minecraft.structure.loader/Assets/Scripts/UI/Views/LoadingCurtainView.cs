@@ -38,8 +38,17 @@ namespace UI.Views
             });
         }
 
-        public void SetProgressText(string text) => 
+        public void SetInfoText(string text) => 
+            SetProgressText(text, Color.white);
+
+        public void SetErrorText(string text) => 
+            SetProgressText(text, Color.orangeRed);
+
+        private void SetProgressText(string text, Color c)
+        {
             _progressLabel.text = text;
+            _progressLabel.style.color = new StyleColor(c);
+        }
 
         public void SetProgressValue(float value)
         {

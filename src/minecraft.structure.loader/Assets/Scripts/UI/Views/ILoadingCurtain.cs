@@ -2,7 +2,8 @@
 {
     public interface ILoadingCurtain
     {
-        void SetProgressText(string text);
+        void SetInfoText(string text);
+        void SetErrorText(string text);
         void SetProgressValue(float value);
         void Show();
         void Hide();

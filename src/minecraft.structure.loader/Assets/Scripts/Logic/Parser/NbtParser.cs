@@ -13,21 +13,21 @@ namespace Logic.Parser
         // workaround to prevent OOM on web
         private const int BLOCK_COUNT_LIMIT = 200_000;
         
-        public async UniTask<ParsedStructure> Parse(byte[] fileContent)
+        public async UniTask<ParserResult> Parse(byte[] fileContent)
         {
             NbtFile nbtFile = GetNbtFile(fileContent);
 
             await UniTask.Yield();
-            
+
             if (!IsFileNbtStructure(nbtFile))
-                throw new ArgumentException();
+                return ParserResult.Failed("Structure format is not supported");
 
             if (IsBlockCountExceededLimits(nbtFile))
-                throw new OverflowException();
+                return ParserResult.Failed("Structure exceeded block limit");
 
-            ParsedStructure parsedStructure = await ParseNbtFile(nbtFile);
+            ParsedStructure structure = await ParseNbtFile(nbtFile);
 
-            return parsedStructure;
+            return ParserResult.Succeeded(structure);
         }
 
         private static NbtFile GetNbtFile(byte[] fileContent)

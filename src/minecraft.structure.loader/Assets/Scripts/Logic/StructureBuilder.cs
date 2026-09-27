@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Core.AssetManagement;
 using Core.Async;
 using CraftSharp;
@@ -65,29 +66,14 @@ namespace Logic
             IsStructureLoaded = false;
             Root.SetActive(false);
             
-            _loadingCurtain.SetProgressText("Looking at your structure...");
+            _loadingCurtain.SetInfoText("Looking at your structure...");
             _loadingCurtain.SetProgressValue(0f);
             _loadingCurtain.Show();
             
-            ParsedStructure structure;
-            
-            try
-            {
-                IParser parser = _parserRegistry.GetFor(fileType);
-                structure = await parser.Parse(rawBytes).Preserve().RunWithMinDuration(250);
-            }
-            catch (ArgumentException e)
-            {
-                await ShowErrorAndHideCurtain(e, "Structure format is not supported");
-                return;
-            }
-            catch (OverflowException e)
-            {
-                await ShowErrorAndHideCurtain(e, "Structure exceeded block limit");
-                return;
-            }
-            
-            _loadingCurtain.SetProgressText("Collecting resources...");
+            ParsedStructure structure = await ParseStructure(rawBytes, fileType);
+            if (structure is null) return;
+
+            _loadingCurtain.SetInfoText("Collecting resources...");
             _loadingCurtain.SetProgressValue(10f);
             
             await UpdateStructureVolumeAsync(structure).RunWithMinDuration(250);
@@ -96,11 +82,11 @@ namespace Logic
             await MinecraftAssetProvider.UpdateBlockStatePaletteAsync(structure.Palette);
             MinecraftAssetProvider.UpdateColorRules();
             
-            _loadingCurtain.SetProgressText("Building...");
+            _loadingCurtain.SetInfoText("Building...");
             _loadingCurtain.SetProgressValue(25f);
             await ConstructAsync(structure).RunWithMinDuration(1000);
             
-            _loadingCurtain.SetProgressText("Done");
+            _loadingCurtain.SetInfoText("Done");
             _loadingCurtain.SetProgressValue(100f);
 
             await UniTask.Delay(400);
@@ -117,11 +103,32 @@ namespace Logic
                 .Forget();
         }
 
-        private async UniTask ShowErrorAndHideCurtain(Exception e, string message)
+        private async Task<ParsedStructure> ParseStructure(byte[] rawBytes, string fileType)
         {
-            Debug.LogError(e);
-            _loadingCurtain.SetProgressText(message);
-            await UniTask.Delay(1500);
+            try
+            {
+                IParser parser = _parserRegistry.GetFor(fileType);
+                ParserResult parserResult = await parser.Parse(rawBytes).Preserve()
+                    .RunWithMinDuration(250);
+
+                if (parserResult.IsSuccess) 
+                    return parserResult.Structure;
+                
+                await ShowErrorAndHideCurtain(parserResult.Error);
+                return null;
+
+            }
+            catch (Exception e)
+            {
+                await ShowErrorAndHideCurtain($"Unhandled exception: {e.Message}");
+                return null;
+            }
+        }
+
+        private async UniTask ShowErrorAndHideCurtain(string message)
+        {
+            _loadingCurtain.SetErrorText(message);
+            await UniTask.Delay(2000);
             _loadingCurtain.Hide();
         }
 
@@ -185,8 +192,8 @@ namespace Logic
             
             MinecraftAssetProvider.ReleaseBlockStateHandles();
         
-            _loadingCurtain.SetProgressText("Warming Up Block Geometries...");
-            _loadingCurtain.SetProgressValue(60f);
+            _loadingCurtain.SetInfoText("Warming Up Block Geometries...");
+            _loadingCurtain.SetProgressValue(40f);
             List<UniTask> warmupTasks = new(structure.Palette.Count);
 
             foreach (PaletteEntry entry in structure.Palette)
@@ -197,8 +204,8 @@ namespace Logic
             
             await UniTask.WhenAll(warmupTasks);
             
-            _loadingCurtain.SetProgressText("Generating Mesh...");
-            _loadingCurtain.SetProgressValue(90f);
+            _loadingCurtain.SetInfoText("Generating Mesh...");
+            _loadingCurtain.SetProgressValue(75f);
             await _meshGenerator.GenerateMesh(_meshFilter, _meshRenderer, structure, StructureVolume);
             
             _cameraController.SetPivot(_meshRenderer.bounds.center);

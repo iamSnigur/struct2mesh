@@ -36,7 +36,7 @@ namespace Core.Bootstrap
         {
             try
             {
-                _loadingCurtain.SetProgressText("Loading boot assets...");
+                _loadingCurtain.SetInfoText("Loading boot assets...");
                 _loadingCurtain.Show();
                 
                 await MinecraftAssetProvider.Init();
@@ -50,7 +50,7 @@ namespace Core.Bootstrap
             }
             catch (Exception e)
             {
-                _loadingCurtain.SetProgressText("Failed to load assets");
+                _loadingCurtain.SetInfoText("Failed to load assets");
                 Debug.LogError(e);
             }
         }
