@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Core.AssetManagement;
 using Core.Async;
 using CraftSharp;
@@ -103,7 +102,7 @@ namespace Logic
                 .Forget();
         }
 
-        private async Task<ParsedStructure> ParseStructure(byte[] rawBytes, string fileType)
+        private async UniTask<ParsedStructure> ParseStructure(byte[] rawBytes, string fileType)
         {
             try
             {
@@ -120,7 +119,8 @@ namespace Logic
             }
             catch (Exception e)
             {
-                await ShowErrorAndHideCurtain($"Unhandled exception: {e.Message}");
+                Debug.LogError(e.Message);
+                await ShowErrorAndHideCurtain("Failed to parse structure");
                 return null;
             }
         }

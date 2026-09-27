@@ -15,7 +15,7 @@ namespace Core.Common
             if (_registry.TryGetValue(key, out TValue entry))
                 return entry;
 
-            throw new NotSupportedException($"No {nameof(TValue)} found for {key} key");
+            throw new NotSupportedException($"No '{typeof(TValue).Name}' found for '{key}' key");
         }
     }
 }

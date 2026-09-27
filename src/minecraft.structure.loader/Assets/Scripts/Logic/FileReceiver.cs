@@ -17,12 +17,13 @@ namespace Logic
 
         [UnityEngine.Scripting.Preserve]
         public void OnFileLoaded(string jsonPayload)
-        {
+        { 
+            // convert type to enum
             Payload payload = JsonConvert.DeserializeObject<Payload>(jsonPayload);
             OnFileReceived?.Invoke(payload.FileName);
             byte[] rawContent = Convert.FromBase64String(payload.FileContent);
             _structureBuilder
-                .BuildFromBytesAsync(rawContent, "nbt")
+                .BuildFromBytesAsync(rawContent, payload.FileType)
                 .Forget();
         }
 

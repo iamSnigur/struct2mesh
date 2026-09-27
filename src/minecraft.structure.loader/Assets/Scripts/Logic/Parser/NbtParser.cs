@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Core.Async;
 using Cysharp.Threading.Tasks;
 using fNbt;
@@ -20,7 +19,7 @@ namespace Logic.Parser
             await UniTask.Yield();
 
             if (!IsFileNbtStructure(nbtFile))
-                return ParserResult.Failed("Structure format is not supported");
+                return ParserResult.Failed("Nbt file is not a structure");
 
             if (IsBlockCountExceededLimits(nbtFile))
                 return ParserResult.Failed("Structure exceeded block limit");

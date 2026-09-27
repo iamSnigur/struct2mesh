@@ -108,7 +108,8 @@ mergeInto(LibraryManager.library, {
         reader.onload = function () {
           pendingPayload = JSON.stringify({
             FileName: file.name,
-            FileContent: arrayBufferToBase64(reader.result)
+            FileContent: arrayBufferToBase64(reader.result),
+            FileType: file.name.includes(".") ? file.name.split(".").pop().toLowerCase() : ""
           });
 
           fileLoaded = true;
