@@ -46,6 +46,9 @@ namespace UI.Views
             // move to separate service
             BuildInfo.Init();
             SetVersion(BuildInfo.FullInfo);
+#if UNITY_WEBGL && !UNITY_EDITOR
+            ClipboardBridge.AttachCopyOverlay(_versionLabel, BuildInfo.FullInfo);
+#endif
         }
 
         protected override void QueryElements()
@@ -86,6 +89,7 @@ namespace UI.Views
             PlayToastAnimation(evt);
         }
 
+        // remove toast logic from MainView to ToastComponent
         private void PlayToastAnimation(ClickEvent evt)
         {
             if (_isToastPlaying)
