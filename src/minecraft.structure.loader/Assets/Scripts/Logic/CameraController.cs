@@ -40,8 +40,9 @@ namespace Logic
         
         public bool InputDisabled;
         
+        private Vector3  _pivotOffset;       
         private Vector3  _resetPivotPosition;       
-        private Vector3  _pivotPosition;       // world-space centre of orbit
+        private Vector3  _pivotPosition;       // world-space center of orbit
         private float    _yaw;                 // horizontal angle (degrees)
         private float    _pitch;               // vertical angle   (degrees)
         private float    _targetDistance;      // desired camera ↔ pivot distance
@@ -81,7 +82,7 @@ namespace Logic
             Vector3 euler = transform.rotation.eulerAngles;
             _yaw   = euler.y;
             _pitch = euler.x;
-            // Normalise pitch to [-180, 180] so clamping works correctly
+            // Normalize pitch to [-180, 180] so clamping works correctly
             if (_pitch > 180f) _pitch -= 360f;
 
             _currentRotation = _targetRotation = Quaternion.Euler(_pitch, _yaw, 0f);
@@ -132,8 +133,9 @@ namespace Logic
             // Move pivot along the camera's local right and up axes
             Vector3 right = _currentRotation * Vector3.right;
             Vector3 up    = _currentRotation * Vector3.up;
- 
-            _pivotPosition += (right * deltaX + up * deltaY) * scale;
+
+            _pivotOffset += (right * deltaX + up * deltaY) * scale;
+            _pivotPosition = _resetPivotPosition + Vector3.ClampMagnitude(_pivotOffset, maxZoomDistance);
         }
 
         private void HandleZoom()
@@ -184,17 +186,21 @@ namespace Logic
             transform.rotation = _currentRotation;
         }
 
-        public void ResetPivot() =>
+        public void ResetPivot()
+        {
+            _pivotOffset = Vector3.zero;
             _pivotPosition = _resetPivotPosition;
-    
-        /// <summary>Instantly re-centre the pivot on a world-space position.</summary>
+        }
+
+        /// <summary>Instantly re-center the pivot on a world-space position.</summary>
         public void SetPivot(Vector3 worldPosition)
         {
+            _pivotOffset = Vector3.zero;
             _pivotPosition = worldPosition;
             _resetPivotPosition = worldPosition;
         }
 
-        /// <summary>Instantly re-centre the pivot on a Transform.</summary>
+        /// <summary>Instantly re-center the pivot on a Transform.</summary>
         public void SetPivot(Transform t) => SetPivot(t.position);
 
         /// <summary>Snap orbit angles without smoothing.</summary>

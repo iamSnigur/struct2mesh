@@ -90,6 +90,7 @@ namespace Logic
 
             await UniTask.Delay(400);
 
+            _cameraController.SetPivot(_meshRenderer.bounds.center);
             IsStructureLoaded = true;
             Root.SetActive(true);
             _loadingCurtain.SetProgressValue(0f);
@@ -207,8 +208,6 @@ namespace Logic
             _loadingCurtain.SetInfoText("Generating Mesh...");
             _loadingCurtain.SetProgressValue(75f);
             await _meshGenerator.GenerateMesh(_meshFilter, _meshRenderer, structure, StructureVolume);
-            
-            _cameraController.SetPivot(_meshRenderer.bounds.center);
         }
     }
 }
