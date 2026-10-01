@@ -4,26 +4,34 @@ mergeInto(LibraryManager.library, {
     if (window._scrollWheelInitialized) return;
     window._scrollWheelInitialized = true;
     window._accumulatedScroll = 0;
-
+  
+    var ua = navigator.userAgent;
+    var isMac = /Macintosh|Mac OS X/i.test(ua);
+    var isSafari = /Safari/i.test(ua) && !/Chrome|Chromium|CriOS|FxiOS|Edg|OPR|Android/i.test(ua);
+    var isFirefox = /Firefox/i.test(ua);
+  
+    // px of deltaY that count as one zoom step
+    // Chrome/Edge on Windows (baseline)
+    var pixelsPerStep = 100;               
+    if (isSafari)
+        pixelsPerStep = 50;
+    else if (isMac && !isFirefox) 
+        pixelsPerStep = 50; // Chrome/Edge on macOS
+    
+    // Firefox line mode: 3 lines per notch
+    var linesPerStep = 3;                  
+  
     var canvas = document.getElementById("unity-canvas") || document;
 
     canvas.addEventListener("wheel", function (e) {
-      var delta = e.deltaY;
-
+      var step;
       switch (e.deltaMode) {
-        case 1: // DOM_DELTA_LINE (The delta values are measured in lines)
-          delta *= 16;
-          break;
-        case 2: // DOM_DELTA_PAGE (The delta values are measured in pages)
-          delta *= window.innerHeight;
-          break;
-        default:
-          break; // DOM_DELTA_PIXEL (The delta values are measured in pixels)
+        case 1:  step = e.deltaY / linesPerStep; break; // lines
+        case 2:  step = e.deltaY; break;                // pages
+        default: step = e.deltaY / pixelsPerStep; break; // pixels
       }
-
-      var step = Math.sign(delta) * Math.min(Math.abs(delta) / 100, 1);
-      window._accumulatedScroll += step;
-
+  
+      window._accumulatedScroll += Math.max(-1, Math.min(1, step));
       e.preventDefault();
     }, { passive: false });
   },
