@@ -53,9 +53,10 @@ namespace Logic
         private Quaternion _targetRotation;
 
         private Mouse   _mouse;
-        private Vector2 _prevMousePos;
-
         private Camera _camera;
+        
+        private bool _startedLeftButtonDragOverUI;
+        private bool _isLeftButtonPressedLastFrame;
     
         private void Start()
         {
@@ -87,8 +88,19 @@ namespace Logic
 
             _currentRotation = _targetRotation = Quaternion.Euler(_pitch, _yaw, 0f);
         
-            _mouse        = Mouse.current;
-            _prevMousePos = _mouse != null ? _mouse.position.ReadValue() : Vector2.zero;
+            _mouse = Mouse.current;
+        }
+
+        private void Update()
+        {
+            if (InputDisabled) return;
+            
+            bool isLeftButtonPressed = _mouse != null && _mouse.leftButton.isPressed;
+
+            if (isLeftButtonPressed && !_isLeftButtonPressedLastFrame)
+                _startedLeftButtonDragOverUI = UIRoot.IsPointerOverUI();
+
+            _isLeftButtonPressedLastFrame = isLeftButtonPressed;
         }
 
         private void LateUpdate()
@@ -105,6 +117,7 @@ namespace Logic
 
         private void HandleOrbit()
         {
+            if (_startedLeftButtonDragOverUI) return;
             if (_mouse == null || !_mouse.leftButton.isPressed) return;
  
             Vector2 delta = _mouse.delta.ReadValue();
