@@ -153,9 +153,6 @@ namespace Logic.Utils
             "redstone_wire", "repeater",
             "comparator", "lever",
             "tripwire", "tripwire_hook",
-            "torch", "wall_torch",
-            "redstone_torch", "redstone_wall_torch",
-            "soul_torch", "soul_wall_torch",
 
             // Pressure plates
             "oak_pressure_plate", "spruce_pressure_plate",
@@ -200,6 +197,7 @@ namespace Logic.Utils
             "chorus_plant", "chorus_flower",
             "pointed_dripstone",
             "moss_carpet",
+            "pale_moss_carpet",
             "hanging_roots",
             "small_dripleaf", "big_dripleaf", "big_dripleaf_stem",
             "sculk_vein",
@@ -318,6 +316,15 @@ namespace Logic.Utils
             "waxed_weathered_copper_trapdoor",
             "oxidized_copper_trapdoor",
             "waxed_oxidized_copper_trapdoor",
+            
+            "copper_door",
+            "waxed_copper_door",
+            "exposed_copper_door",
+            "waxed_exposed_copper_door",
+            "weathered_copper_door",
+            "waxed_weathered_copper_door",
+            "oxidized_copper_door",
+            "waxed_oxidized_copper_door",
         
             "firefly_bush",
             "azalea",
@@ -636,6 +643,7 @@ namespace Logic.Utils
             "polished_blackstone_wall",
             "polished_blackstone_brick_wall",
             "end_stone_brick_wall",
+            "resin_brick_wall",
 
             // Bars / Panes
             "iron_bars",
@@ -742,6 +750,7 @@ namespace Logic.Utils
             "red_carpet",
             "black_carpet",
             "moss_carpet",
+            "pale_moss_carpet",
 
             // Skulls / Heads
             "skeleton_skull",
@@ -799,6 +808,8 @@ namespace Logic.Utils
             "soul_wall_torch",
             "redstone_torch",
             "redstone_wall_torch",
+            "copper_torch",
+            "copper_wall_torch",
             "lever",
             "tripwire_hook",
             "tripwire",
@@ -858,7 +869,6 @@ namespace Logic.Utils
             "brewing_stand",
             "flower_pot",
             "end_rod",
-            "lightning_rod",
             "conduit",
             "scaffolding",
             "honey_block",
@@ -925,6 +935,15 @@ namespace Logic.Utils
             "waxed_oxidized_copper_chest",
             "weathered_copper_chest",
             "waxed_weathered_copper_chest",
+            
+            "lightning_rod",
+            "waxed_lightning_rod",
+            "exposed_lightning_rod",
+            "waxed_exposed_lightning_rod",
+            "oxidized_lightning_rod",
+            "waxed_oxidized_lightning_rod",
+            "weathered_lightning_rod",
+            "waxed_weathered_lightning_rod",
             
             "dragon_egg",
             "dried_ghast",
