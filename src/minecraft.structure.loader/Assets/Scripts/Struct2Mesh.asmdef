@@ -1,0 +1,33 @@
+{
+    "name": "Struct2Mesh",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d8b63aba1907145bea998dd612889d6b",
+        "GUID:35221d0dd57f3f043a31179a0855b5d1",
+        "GUID:9b1c7c27e7709524ba61724f46a1ae53",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:593a5b492d29ac6448b1ebf7f035ef33",
+        "GUID:5c01796d064528144a599661eaab93a6",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:84651a3751eca9349aac36a66bba901b",
+        "GUID:9e24947de15b9834991c9d8411ea37cf",
+        "GUID:91daf03b9f38477f91ec2464cdb1313c",
+        "GUID:18d18f811ba286c49814567a3cfba688",
+        "GUID:40f39bff7bc9be34182ebe488fcf8228",
+        "GUID:65eb6574bb834fff9fe81ea2af6c853f",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "fNbt.dll",
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

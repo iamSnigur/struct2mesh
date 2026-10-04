@@ -86,10 +86,9 @@ namespace CraftSharp.Resource
             {
                 Rotations.RotateVertices(ref elemVerts, elem.pivot / MC_VERT_SCALE, elem.axis, -elem.rotAngle, elem.rescale);
             }
-            else if (math.all(elem.rotAngleXYZ != float3.zero)) // Apply rotation for multiple axes...
+            else if (math.any(elem.rotAngleXYZ != float3.zero)) // Apply rotation for multiple axes...
             {
-                // TODO: Implement
-                // Rotations.RotateVerticesXYZ(ref elemVerts, elem.pivot / MC_VERT_SCALE, -elem.rotAngleXYZ, elem.rescale);
+                Rotations.RotateVerticesXYZ(ref elemVerts, elem.pivot / MC_VERT_SCALE, -elem.rotAngleXYZ, elem.rescale);
             }
             
             bool stateRotated = zyRot.x != 0 || zyRot.y != 0;
@@ -97,6 +96,9 @@ namespace CraftSharp.Resource
             if (stateRotated) // Apply state rotation...
                 Rotations.RotateWrapper(ref elemVerts, zyRot);
 
+            // Since signs can have more than 4 rotations, so clamp value to 0-3 as it was before
+            zyRot.y /= 4;
+            
             foreach (var facePair in elem.faces)
             {
                 // Select the current face

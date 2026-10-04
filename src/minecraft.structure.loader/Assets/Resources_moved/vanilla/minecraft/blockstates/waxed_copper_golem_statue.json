@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "copper_golem_pose=standing": {
+      "model": "minecraft:block/copper_golem/copper_golem_statue"
+    },
+    "copper_golem_pose=sitting": {
+      "model": "minecraft:block/copper_golem/copper_golem_statue_sitting"
+    },
+    "copper_golem_pose=running": {
+      "model": "minecraft:block/copper_golem/copper_golem_statue_running"
+    },
+    "copper_golem_pose=star": {
+      "model": "minecraft:block/copper_golem/copper_golem_statue_star"
+    }
+  }
+}

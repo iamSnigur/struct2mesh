@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "minecraft:block/signs/hanging/spruce_hanging_wall_sign"
+    },
+    "facing=south": {
+      "model": "minecraft:block/signs/hanging/spruce_hanging_wall_sign",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "minecraft:block/signs/hanging/spruce_hanging_wall_sign",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "minecraft:block/signs/hanging/spruce_hanging_wall_sign",
+      "y": 270
+    }
+  }
+}

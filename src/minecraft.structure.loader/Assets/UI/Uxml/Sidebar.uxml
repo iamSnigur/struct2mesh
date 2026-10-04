@@ -1,0 +1,44 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="../Styles/Components.uss"/>
+    <Style src="../Styles/Sidebar.uss"/>
+    <ui:VisualElement name="export-section" class="export-section">
+        <ui:Label name="export-title" text="EXPORT AS:" class="export-title"/>
+                
+        <ui:VisualElement class="btn-dungeons-root btn-export-root">
+            <ui:VisualElement class="btn-dungeons-outline"/>
+            <ui:Button name="btn-export-ascii-fbx" text="ASCII FBX" class="btn-dungeons btn-export"/>
+            <ui:VisualElement class="chevron-icon"/>
+        </ui:VisualElement>
+                
+        <ui:VisualElement class="btn-dungeons-root btn-export-root">
+            <ui:VisualElement class="btn-dungeons-outline"/>
+            <ui:Button name="btn-export-glb" text="GLTF/GLB" class="btn-dungeons btn-export"/>
+            <ui:VisualElement class="chevron-icon"/>
+        </ui:VisualElement>
+                
+        <ui:VisualElement class="btn-dungeons-root btn-export-root">
+            <ui:VisualElement class="btn-dungeons-outline"/>
+            <ui:Button name="btn-export-obj" text="OBJ" class="btn-dungeons btn-export"/>
+            <ui:VisualElement class="chevron-icon"/>
+        </ui:VisualElement>
+                
+        <ui:VisualElement class="btn-dungeons-root btn-export-root">
+            <ui:VisualElement class="btn-dungeons-outline"/>
+            <ui:Button name="btn-export-ply" text="PLY" class="btn-dungeons btn-export"/>
+            <ui:VisualElement class="chevron-icon"/>
+        </ui:VisualElement>
+                
+        <ui:Label name="export-error" text="Failed to export" class="export-error"/>
+    </ui:VisualElement>
+            
+    <ui:VisualElement name="bottom-bar" class="bottom-bar">
+        <ui:VisualElement class="btn-dungeons-root btn-load-new-root">
+            <ui:VisualElement class="btn-dungeons-outline"/>
+            <ui:Button name="btn-load-new" text="LOAD NEW" class="btn-dungeons btn-load-new"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+            
+    <ui:Button name="btn-camera-reset" class="btn-camera-reset">
+        <ui:VisualElement name="camera-icon" class="camera-icon" picking-mode="Ignore"/>
+    </ui:Button>
+</ui:UXML>

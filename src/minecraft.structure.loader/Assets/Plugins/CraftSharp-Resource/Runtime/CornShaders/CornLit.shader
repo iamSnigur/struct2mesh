@@ -3,7 +3,7 @@ Shader "CornShader/Lit"
     // Keep properties of StandardSpecular shader for upgrade reasons.
     Properties
     {
-        [MainTexture] _BaseMap("Base Map (RGB) Smoothness / Alpha (A)", 2DArray) = "white" {}
+        [MainTexture] _BaseMap("Base Map (RGB) Smoothness / Alpha (A)", 2D) = "white" {}
         [MainColor]   _BaseColor("Base Color", Color) = (1, 1, 1, 1)
 
         _Cutoff("Alpha Clipping", Range(0.0, 1.0)) = 0.5
@@ -38,7 +38,7 @@ Shader "CornShader/Lit"
         _QueueOffset("Queue offset", Float) = 0.0
 
         // ObsoleteProperties
-        [HideInInspector] _MainTex("BaseMap", 2DArray) = "white" {}
+        [HideInInspector] _MainTex("BaseMap", 2D) = "white" {}
         [HideInInspector] _Color("Base Color", Color) = (1, 1, 1, 1)
         [HideInInspector] _Shininess("Smoothness", Float) = 0.0
         [HideInInspector] _GlossinessSource("GlossinessSource", Float) = 0.0
@@ -76,14 +76,10 @@ Shader "CornShader/Lit"
             Cull[_Cull]
             AlphaToMask[_AlphaToMask]
 
+            ZWrite On
+            
             HLSLPROGRAM
-            // to use texture arrays we need to target DX10/OpenGLES3 which
-            // is shader model 3.5 minimum
-            #pragma target 3.5
-
-            // texture arrays are not available everywhere,
-            // only compile shader on platforms where they are
-            #pragma require 2darray
+            #pragma target 2.0
 
             // -------------------------------------
             // Shader Stages
@@ -140,8 +136,8 @@ Shader "CornShader/Lit"
 
             // -------------------------------------
             // Includes
-            #include "Tex2DArrayLitInput.hlsl"
-            #include "Tex2DArrayLitForwardPass.hlsl"
+            #include "Tex2DLitInput.hlsl"
+            #include "Tex2DLitForwardPass.hlsl"
             ENDHLSL
         }
 
@@ -187,8 +183,8 @@ Shader "CornShader/Lit"
 
             // -------------------------------------
             // Includes
-            #include "Tex2DArrayLitInput.hlsl"
-            #include "Tex2DArrayShadowCasterPass.hlsl"
+            #include "Tex2DLitInput.hlsl"
+            #include "Tex2DShadowCasterPass.hlsl"
             ENDHLSL
         }
 
@@ -230,8 +226,8 @@ Shader "CornShader/Lit"
 
             // -------------------------------------
             // Includes
-            #include "Tex2DArrayLitInput.hlsl"
-            #include "Tex2DArrayDepthOnlyPass.hlsl"
+            #include "Tex2DLitInput.hlsl"
+            #include "Tex2DDepthOnlyPass.hlsl"
             ENDHLSL
         }
 
@@ -277,8 +273,8 @@ Shader "CornShader/Lit"
 
             // -------------------------------------
             // Includes
-            #include "Tex2DArrayLitInput.hlsl"
-            #include "Tex2DArrayLitDepthNormalsPass.hlsl"
+            #include "Tex2DLitInput.hlsl"
+            #include "Tex2DLitDepthNormalsPass.hlsl"
             ENDHLSL
         }
     }

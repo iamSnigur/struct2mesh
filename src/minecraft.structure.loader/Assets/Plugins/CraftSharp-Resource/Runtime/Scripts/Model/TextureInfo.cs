@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace CraftSharp.Resource
 {
+    [Serializable]
     public struct TextureInfo
     {
         public Rect bounds;
@@ -18,6 +20,7 @@ namespace CraftSharp.Resource
         public TextureInfo(Rect bounds, int index, int fc = 1, float fs = 1, int fr = 1, bool itpl = false, float fi = 1)
         {
             this.bounds = bounds;
+            
             this.index = index;
             this.frameCount = fc;
             this.frameSize = fs;

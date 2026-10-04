@@ -1,15 +1,57 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-US">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>{{{ PRODUCT_NAME }}}</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#292929">
+
+    <title>{{{ PRODUCT_NAME }}} – Minecraft Structure to 3D Model Converter</title>
+    <meta name="description" content="Convert Minecraft structures into 3D models. Upload a structure file, view and export.">
+    <link rel="canonical" href="https://struct2mesh.pages.dev/">
+
+    <meta name="author" content="@SNIGUR">
+    <meta name="keywords" content="Minecraft, Structure, Viewer, Converter, Datapack, Resource Pack, Mesh, Model, 3D, NBT, Schem, Litematic, Mcstructure, Schematic, FBX, GLB, GLTF, OBJ, PLY">
+    
+    <link rel="icon" href="TemplateData/favicon.ico">
+
     <link rel="stylesheet" href="TemplateData/style.css">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{{ PRODUCT_NAME }}}">
+    <meta property="og:url" content="https://struct2mesh.pages.dev/">
+    <meta property="og:title" content="{{{ PRODUCT_NAME }}} - Minecraft Structure to 3D Model Converter">
+
+    <meta property="og:description" content="Convert Minecraft structures into 3D models. Upload a structure file, view and export.">
+    <meta property="og:image" content="https://struct2mesh.pages.dev/TemplateData/og.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Struct2Mesh logo with the tagline: Turn Minecraft structures into 3D models">
+    <meta property="og:locale" content="en_US">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{{ PRODUCT_NAME }}} - Minecraft Structure to 3D Model Converter">
+    <meta name="twitter:description" content="Convert Minecraft structures into 3D models. Upload a structure file, view and export.">
+    <meta name="twitter:image" content="https://struct2mesh.pages.dev/TemplateData/og.png">
+    <meta name="twitter:image:alt" content="Struct2Mesh logo with the tagline: Turn Minecraft structures into 3D models">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "{{{ PRODUCT_NAME }}}",
+      "url": "https://struct2mesh.pages.dev/",
+      "description": "Convert Minecraft structures into 3D models. Upload a structure file, view and export.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any (web browser)",
+      "image": "https://struct2mesh.pages.dev/TemplateData/og.png"
+    }
+    </script>
   </head>
   <body style="overflow: hidden;">
     <div id="unity-container" style="width: 100%; height: 100%;">
       <canvas id="unity-canvas" width="auto" height="auto"></canvas>
+      <div id="unity-warning"></div>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -41,10 +83,7 @@
 
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}?v={{{ PRODUCT_VERSION }}}";
-      var config = {        
-        cacheControl: function (url) {
-          return "no-store";
-        },
+      var config = {
         dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}?v={{{ PRODUCT_VERSION }}}",
         frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}?v={{{ PRODUCT_VERSION }}}",
         codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}?v={{{ PRODUCT_VERSION }}}",
@@ -62,13 +101,9 @@
         document.getElementsByTagName('head')[0].appendChild(meta);
         document.querySelector("#unity-container").className = "unity-mobile";
         canvas.className = "unity-mobile";
-
-        // To lower canvas resolution on mobile devices to gain some
-        // performance, uncomment the following line:
-        // config.devicePixelRatio = 1;
-
-
-      } else {
+        config.devicePixelRatio = 1;
+      } 
+      else {
 
         canvas.style.width = "100%";
         canvas.style.height = "100%";
@@ -98,12 +133,23 @@
     <div id="uploadOverlay">
       <div id="uploadPanel">
         <div id="dropZone">
-          <div class="drop-content">
-            <div class="main">📁 Drag & drop file here</div>
+          
+          <div id="dropContent" class="drop-content">
+            <div class="main">Drag & drop file here</div>
             <div class="sub">or click to browse</div>
+            <div class="formats-content">
+              <div class="format">.nbt</div>
+            </div>
           </div>
+
+          <div id="uploadContent">
+            <div id="progressContainer">
+              <div id="progressBar"></div>
+            </div>
+            <div id="fileInfo"></div>
+          </div>
+                    
         </div>
-        <div id="fileInfo"></div>
       </div>
     </div>
   </body>

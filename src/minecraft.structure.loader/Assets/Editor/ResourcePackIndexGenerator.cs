@@ -1,0 +1,186 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Core.AssetManagement.External;
+using Unity.Plastic.Newtonsoft.Json;
+using UnityEditor;
+using UnityEditor.AddressableAssets;
+using UnityEditor.AddressableAssets.Settings;
+using UnityEngine;
+
+namespace Editor
+{
+    public static class ResourcePackIndexGenerator
+    {
+        private const string BLOCK_TEXTURES_GROUP_NAME = "BlockTextures";
+        private const string BLOCK_ENTITY_TEXTURES_GROUP_NAME = "BlockEntityTextures";
+        private const string MODELS_GROUP_NAME = "Models";
+        private const string BLOCKSTATES_GROUP_NAME = "Blockstates";
+
+        private const string OUTPUT_FOLDER = "Assets/Resources_moved";
+
+        [MenuItem("Tools/ResourcePack/Generate Textures Index")]
+        public static void GenerateTexturesIndex()
+        {
+            GenerateIndex(
+                BLOCK_TEXTURES_GROUP_NAME,
+                Constants.BLOCK_TEXTURES_INDEX,
+                entry =>
+            {
+                try
+                {
+                    var key = entry.address[entry.address.IndexOf("block/", StringComparison.Ordinal)..];
+                    return (key, entry.address);
+                }
+                catch
+                {
+                    Debug.Log($"Invalid asset in group: {entry.address}");
+                    throw;
+                }
+            });
+            
+            Debug.Log($"{BLOCK_TEXTURES_GROUP_NAME} Index generated");
+            
+            GenerateIndex(
+                BLOCK_ENTITY_TEXTURES_GROUP_NAME,
+                Constants.BLOCK_ENTITY_TEXTURES_INDEX,
+                entry =>
+            {
+                try
+                {
+                    var key = entry.address[entry.address.IndexOf("block/", StringComparison.Ordinal)..];
+                    return (key, entry.address);
+                }
+                catch
+                {
+                    Debug.Log($"Invalid asset in group: {entry.address}");
+                    throw;
+                }
+            });
+            
+            Debug.Log($"{BLOCK_ENTITY_TEXTURES_GROUP_NAME} Index generated");
+        }
+
+        [MenuItem("Tools/ResourcePack/Generate Blockstates Index")]
+        public static void GenerateBlockstatesIndex()
+        {
+            GenerateIndex(
+                BLOCKSTATES_GROUP_NAME,
+                Constants.BLOCKSTATE_INDEX,
+                entry => (
+                    key: Path.GetFileName(entry.address),
+                    value: entry.address
+                ));
+            
+            Debug.Log("Blockstates Index generated");
+        }
+
+        [MenuItem("Tools/ResourcePack/Generate All Indexes")]
+        public static void GenerateAllIndexes()
+        {
+            GenerateTexturesIndex();
+            GenerateModelsIndexWithJson();
+            GenerateBlockstatesIndex();
+        }
+
+        private static void GenerateIndex(
+            string groupName,
+            string outputFileName,
+            Func<AddressableAssetEntry, (string key, string value)> selector)
+        {
+            AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.Settings;
+            if (settings == null)
+            {
+                Debug.LogError("Addressables settings not found.");
+                return;
+            }
+
+            AddressableAssetGroup group = settings.FindGroup(groupName);
+            if (group == null)
+            {
+                Debug.LogError($"Addressables group '{groupName}' not found.");
+                return;
+            }
+
+            Dictionary<string, string> dict = new();
+
+            foreach (AddressableAssetEntry entry in group.entries)
+            {
+                if (entry.IsFolder) 
+                    continue;
+
+                (string key, string value) = selector(entry);
+                
+                if (!dict.TryAdd(key, value))
+                    Debug.LogWarning($"[{groupName}] Duplicate key '{key}' — skipping '{value}'");
+            }
+
+            string json = JsonConvert.SerializeObject(dict, Formatting.Indented);
+            string path = Path.Combine(OUTPUT_FOLDER, outputFileName + ".json");
+            File.WriteAllText(path, json);
+            
+            AssetDatabase.Refresh();
+        }
+        
+        [MenuItem("Tools/ResourcePack/Generate Models Index With Json")]
+        public static void GenerateModelsIndexWithJson()
+        {
+            GenerateModelsIndex(
+                MODELS_GROUP_NAME,
+                Constants.MODELS_INDEX,
+                entry => (
+                    key: entry.address[entry.address.IndexOf("block/", StringComparison.Ordinal)..],
+                    path: entry.AssetPath
+                ));
+            
+            Debug.Log("Models Index generated");
+        }
+
+        private static void GenerateModelsIndex(
+            string groupName,
+            string outputFileName,
+            Func<AddressableAssetEntry, (string key, string path)> selector)
+        {
+            AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.Settings;
+            if (settings == null)
+            {
+                Debug.LogError("Addressables settings not found.");
+                return;
+            }
+
+            AddressableAssetGroup group = settings.FindGroup(groupName);
+            if (group == null)
+            {
+                Debug.LogError($"Addressables group '{groupName}' not found.");
+                return;
+            }
+
+            Dictionary<string, string> dict = new();
+
+            foreach (AddressableAssetEntry entry in group.entries)
+            {
+                if (entry.IsFolder)
+                    continue;
+
+                (string key, string path) = selector(entry);
+
+                if (!File.Exists(path))
+                {
+                    Debug.LogWarning($"[{groupName}] File not found at path '{path}' — skipping '{key}'");
+                    continue;
+                }
+
+                string fileContent = File.ReadAllText(path);
+
+                if (!dict.TryAdd(key, fileContent))
+                    Debug.LogWarning($"[{groupName}] Duplicate key '{key}' — skipping '{path}'");
+            }
+
+            string json = JsonConvert.SerializeObject(dict, Formatting.Indented);
+            string savePath = Path.Combine(OUTPUT_FOLDER, outputFileName + ".json");
+            File.WriteAllText(savePath, json);
+            
+            AssetDatabase.Refresh();
+        }
+    }
+}

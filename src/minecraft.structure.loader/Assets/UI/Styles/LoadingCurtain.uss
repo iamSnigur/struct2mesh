@@ -1,0 +1,53 @@
+.loader-root {
+    position: absolute;
+    display: none;
+
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+
+    align-items: center;
+    justify-content: center;
+    
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+}
+
+.loader-shown {
+    opacity: 1;
+    transition-duration: 0.1s;
+    transition-timing-function: ease;
+}
+
+.loader-hidden {
+    opacity: 0;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+}
+
+.loader-label {
+    align-self: center;
+    color: rgba(255, 255, 255, 1);
+    -unity-font-definition: var(--font-troika);
+    font-size: 28px;
+    -unity-text-align: middle-center;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);    
+}
+
+.progress-bar-root {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20px;    
+}
+
+.progress-bar {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    
+    transition-timing-function: ease-out-cubic;
+    transition-duration: 0.3s;
+}

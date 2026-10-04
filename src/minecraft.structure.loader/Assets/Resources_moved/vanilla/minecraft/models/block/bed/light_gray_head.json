@@ -1,0 +1,6 @@
+{
+	"parent": "block/bed/bed_head",
+	"textures": {
+		"all": "block/bed/light_gray"
+	}
+}

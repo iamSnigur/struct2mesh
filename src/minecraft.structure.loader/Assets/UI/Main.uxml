@@ -1,0 +1,26 @@
+<ui:UXML 
+    xmlns:ui="UnityEngine.UIElements" 
+    noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd"
+    editor-extension-mode="False">
+    
+    <Style src="Styles/Styles.uss"/>
+    <ui:Template name="sidebar" src="Uxml/Sidebar.uxml"/>
+    <ui:Template name="disclaimer" src="Uxml/Disclaimer.uxml"/>
+    <ui:Template name="popup-overlay" src="Uxml/PopupOverlay.uxml"/>
+    <ui:Template name="loading-curtain" src="Uxml/LoadingCurtain.uxml"/>
+    
+    <ui:VisualElement name="ui-root" class="root" pickingMode="Ignore">
+        <ui:Label name="version-label" class="version-label" text="/-/-/"/>
+        <ui:Label name="copied-toast" class="copied-toast" text="Copied!" pickingMode="Ignore"/>
+        <ui:Label name="file-name-label" class="file-name-label" text="STRUCTURE.NBT"/>
+        <ui:Button name="btn-welcome-hub" class="btn-welcome-hub" text="Welcome!">
+            <ui:VisualElement class="creeper-face"/>
+        </ui:Button>
+
+        <ui:Instance template="sidebar" name="sidebar-root" class="sidebar"/>
+        <ui:Instance template="disclaimer" name="disclaimer-root" class="disclaimer-root disclaimer-hidden"/>
+        <ui:Instance template="popup-overlay" name="popup-overlay-root" class="popup-overlay popup-overlay-hidden"/>
+        
+        <ui:Instance template="loading-curtain" name="loading-curtain-root" class="loader-root"/>
+    </ui:VisualElement>
+</ui:UXML>

@@ -25,34 +25,40 @@ namespace CraftSharp.Resource.BedrockEntity
 
         private readonly Dictionary<string, Dictionary<string, string>> ExtraEntityModelTextures = new()
         {
-            ["chest"] = new()
+            ["chest"] = new Dictionary<string, string>
             {
                 ["normal"] = "textures/entity/chest/normal",
                 ["trapped"] = "textures/entity/chest/trapped",
                 ["ender"] = "textures/entity/chest/ender",
-                ["christmas"] = "textures/entity/chest/christmas"
+                ["christmas"] = "textures/entity/chest/christmas",
+                
+                ["copper"] = "textures/entity/chest/copper",
+                ["waxed_copper"] = "textures/entity/chest/copper",
+                ["copper_exposed"] = "textures/entity/chest/copper_exposed",
+                ["copper_oxidized"] = "textures/entity/chest/copper_oxidized",
+                ["copper_weathered"] = "textures/entity/chest/copper_weathered",
             },
-            ["chest_left"] = new()
+            ["chest_left"] = new Dictionary<string, string>
             {
                 ["normal"] = "textures/entity/chest/normal_left",
                 ["trapped"] = "textures/entity/chest/trapped_left",
                 ["christmas"] = "textures/entity/chest/christmas_left"
             },
-            ["chest_right"] = new()
+            ["chest_right"] = new Dictionary<string, string>
             {
                 ["normal"] = "textures/entity/chest/normal_right",
                 ["trapped"] = "textures/entity/chest/trapped_right",
                 ["christmas"] = "textures/entity/chest/christmas_right"
             },
-            ["banner"] = new()
+            ["banner"] = new Dictionary<string, string>
             {
                 ["banner_base"] = "textures/entity/banner/banner_base"
             },
-            ["wall_banner"] = new()
+            ["wall_banner"] = new Dictionary<string, string>
             {
                 ["banner_base"] = "textures/entity/banner/banner_base"
             },
-            ["sign"] = new()
+            ["sign"] = new Dictionary<string, string>
             {
                 ["acacia"] = "textures/entity/signs/acacia",
                 ["bamboo"] = "textures/entity/signs/bamboo",
@@ -66,7 +72,7 @@ namespace CraftSharp.Resource.BedrockEntity
                 ["spruce"] = "textures/entity/signs/spruce",
                 ["warped"] = "textures/entity/signs/warped"
             },
-            ["wall_sign"] = new()
+            ["wall_sign"] = new Dictionary<string, string>
             {
                 ["acacia"] = "textures/entity/signs/acacia",
                 ["bamboo"] = "textures/entity/signs/bamboo",
@@ -80,7 +86,7 @@ namespace CraftSharp.Resource.BedrockEntity
                 ["spruce"] = "textures/entity/signs/spruce",
                 ["warped"] = "textures/entity/signs/warped"
             },
-            ["hanging_sign"] = new()
+            ["hanging_sign"] = new Dictionary<string, string>
             {
                 ["acacia"] = "textures/entity/signs/hanging/acacia",
                 ["bamboo"] = "textures/entity/signs/hanging/bamboo",
@@ -94,7 +100,7 @@ namespace CraftSharp.Resource.BedrockEntity
                 ["spruce"] = "textures/entity/signs/hanging/spruce",
                 ["warped"] = "textures/entity/signs/hanging/warped"
             },
-            ["wall_hanging_sign"] = new()
+            ["wall_hanging_sign"] = new Dictionary<string, string>
             {
                 ["acacia"] = "textures/entity/signs/hanging/acacia",
                 ["bamboo"] = "textures/entity/signs/hanging/bamboo",
@@ -107,6 +113,26 @@ namespace CraftSharp.Resource.BedrockEntity
                 ["oak"] = "textures/entity/signs/hanging/oak",
                 ["spruce"] = "textures/entity/signs/hanging/spruce",
                 ["warped"] = "textures/entity/signs/hanging/warped"
+            },
+            ["shulker"] = new Dictionary<string, string>()
+            {
+                ["default"] = "textures/entity/shulker/shulker",
+                ["black"] = "textures/entity/shulker/shulker_black",
+                ["orange"] = "textures/entity/shulker/shulker_orange",
+                ["yellow"] = "textures/entity/shulker/shulker_yellow",
+                ["red"] = "textures/entity/shulker/shulker_red",
+                ["green"] = "textures/entity/shulker/shulker_green",
+                ["white"] = "textures/entity/shulker/shulker_white",
+                ["purple"] = "textures/entity/shulker/shulker_purple",
+                ["pink"] = "textures/entity/shulker/shulker_pink",
+                ["magenta"] = "textures/entity/shulker/shulker_magenta",
+                ["lime"] = "textures/entity/shulker/shulker_lime",
+                ["brown"] = "textures/entity/shulker/shulker_brown",
+                ["cyan"] = "textures/entity/shulker/shulker_cyan",
+                ["gray"] = "textures/entity/shulker/shulker_gray",
+                ["light_gray"] = "textures/entity/shulker/shulker_light_gray",
+                ["blue"] = "textures/entity/shulker/shulker_blue",
+                ["light_blue"] = "textures/entity/shulker/shulker_light_blue",
             }
         };
         
@@ -163,6 +189,84 @@ namespace CraftSharp.Resource.BedrockEntity
             return newVer > prevVer;
         }
 
+        public void LoadBlockEntityModelFolder(string geometryNamePrefix)
+        {
+            TextureFileTable.Clear();
+            EntityRenderDefinitions.Clear();
+            EntityGeometries.Clear();
+            MaterialRenderTypes.Clear();
+            
+            foreach (TextAsset? textAsset in Resources.LoadAll<TextAsset>("block_entity_models"))
+            {
+                Json.JSONData? data = Json.ParseJson(textAsset.text);
+                string geoName = string.Empty;
+
+                try
+                {
+                    Dictionary<string, EntityGeometry>? geometries = EntityGeometry.TableFromJson(data);
+                    if (geometries.Count > 1) // Only one geometry is expected
+                        Debug.LogWarning($"More than 1 geometries is found in file {textAsset.name}");
+
+                    geoName = $"geometry.{geometryNamePrefix}_{textAsset.name}";
+                    EntityGeometry? geometry = geometries.First().Value;
+
+                    EntityGeometries.Add(geoName, geometry);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning($"An error occurred when parsing {textAsset.name}: {e}");
+                }
+                    
+                Dictionary<string, string> texturePaths;
+                    
+                var dummyEntityIdentifier = new ResourceLocation(textAsset.name);
+                string defaultTexturePath = $"{textAsset.name}{SP}{textAsset.name}"; // extra_models/foo/foo.png
+
+                if (ExtraEntityModelTextures.TryGetValue(textAsset.name, out Dictionary<string, string>? textureList))
+                {
+                    texturePaths = textureList.ToDictionary(x => $"{textAsset.name}/{x.Key}",
+                        x => x.Value);
+                }
+                else
+                {
+                    texturePaths = new Dictionary<string, string> { [ $"{textAsset.name}/default" ] = defaultTexturePath };
+                }
+
+                foreach (var (textureName, texturePath) in texturePaths) 
+                    TextureFileTable[textureName] = texturePath;
+                    
+                EntityRenderDefinitions.Add(dummyEntityIdentifier, new EntityRenderDefinition(
+                    UNSPECIFIED_VERSION, UNSPECIFIED_VERSION, dummyEntityIdentifier, texturePaths,
+                    new Dictionary<string, string> { [ "default" ] = textAsset.name },
+                    new Dictionary<string, string> { [ "default" ] = geoName },
+                    new Dictionary<string, string>()
+                ));
+            }
+
+            TextAsset asset = Resources.Load<TextAsset>("entity_bedrock_model_render_type");
+            Dictionary<string, Json.JSONData>? matDictionary = Json.ParseJson(asset.text).Properties;
+            
+            foreach (var pair in matDictionary)
+            {
+                EntityRenderType renderType = pair.Value.StringValue switch
+                {
+                    "solid"          => EntityRenderType.SOLID,
+                    "cutout"         => EntityRenderType.CUTOUT,
+                    "cutout_culloff" => EntityRenderType.CUTOUT_CULLOFF,
+                    "translucent"    => EntityRenderType.TRANSLUCENT,
+
+                    "solid_emissive"          => EntityRenderType.SOLID_EMISSIVE,
+                    "cutout_emissive"         => EntityRenderType.CUTOUT_EMISSIVE,
+                    "cutout_culloff_emissive" => EntityRenderType.CUTOUT_CULLOFF_EMISSIVE,
+                    "translucent_emissive"    => EntityRenderType.TRANSLUCENT_EMISSIVE,
+
+                    _                => EntityRenderType.SOLID
+                };
+
+                MaterialRenderTypes.Add(pair.Key, renderType);
+            }
+        }
+        
         private void LoadExtraEntityModelFolder(string extraModelsPath, string geometryNamePrefix)
         {
             var extraModelFolderDir = new DirectoryInfo(extraModelsPath);
@@ -247,20 +351,9 @@ namespace CraftSharp.Resource.BedrockEntity
 
             var fileName = GetFullTexturePath(localTexturePath);
             
-            Debug.Log($"Expand local texture path {localTexturePath} to full path {fileName}");
-            
             // Load texture from file
-            var imageBytes = File.ReadAllBytes(fileName);
-            if (fileName.EndsWith(".tga")) // Read as tga image
-            {
-                texture = TGALoader.TextureFromTGA(imageBytes);
-            }
-            else // Read as png image
-            {
-                texture = new Texture2D(2, 2);
-                texture.LoadImage(imageBytes);
-            }
-
+            texture = Resources.Load<Texture2D>("vanilla/minecraft/" + localTexturePath);
+            
             texture.filterMode = FilterMode.Point;
             //Debug.Log($"Loaded texture from {fileName} ({texture.width}x{texture.height})");
 

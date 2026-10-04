@@ -1,0 +1,95 @@
+:root {
+    --yellow-color: rgb(253, 201, 34);
+    --gray-color: rgb(60, 60, 60);
+}
+
+.disclaimer-shown {
+    transition-duration: 0.8s;
+    transition-timing-function: ease-out-back;
+
+    translate: 0 0;
+    margin-top: 20px;
+}
+
+.disclaimer-hidden {
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-cubic;
+
+    translate: 0 -100%;
+    margin-top: 0;
+}
+
+.disclaimer-root {
+    width: 450px;
+    height: auto;
+
+    padding: 8px;
+    top: 0;
+    position: absolute;
+    align-self: center;
+
+    background-image: var(--img-btn-flat);
+    -unity-background-image-tint-color: var(--yellow-color);
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 5px;
+    border-color: transparent;
+}
+
+.disclaimer-border {
+    width: 100%;
+    height: 100%;
+    background-image: url("../Icons/fancy_border1.png");
+    -unity-background-image-tint-color: var(--gray-color);
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 3px;
+    border-color: transparent;
+    padding: 10px;
+}
+
+.disclaimer-label {
+    flex-grow: 1;
+
+    color: rgba(60, 60, 60, 1);
+    font-size: 14px;
+    letter-spacing: 3px;
+    -unity-font-definition: var(--font-segoe-ui);
+    -unity-font-style: bold;
+    -unity-text-align: upper-left;
+
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+.btn-ok {
+    margin: 10px 10px;
+    align-self: center;
+    width: 25%;
+    height: 40px;
+    color: var(--yellow-color);
+    font-size: 22px;
+    -unity-font-definition: var(--font-troika);
+    letter-spacing: 2px;
+
+    border-width: 3px;
+    border-radius: 20px;
+    background-color: var(--gray-color);
+    border-color: var(--gray-color);
+
+    transition-duration: 0.08s;
+    transition-timing-function: ease;
+    scale: 1 1;
+}
+
+.btn-ok:hover {
+    color: var(--gray-color);
+    background-color: var(--yellow-color);
+    transition-timing-function: ease;
+    transition-duration: 0.08s;
+}
+
+.btn-ok:active {
+    transition-timing-function: ease;
+    transition-duration: 0.03s;
+    scale: 0.95 0.95;
+}

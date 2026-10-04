@@ -1,0 +1,6 @@
+{
+  "parent": "block/signs/hanging/hanging_wall_sign",
+  "textures": {
+    "0": "block/signs/hanging/cherry"
+  }
+}
