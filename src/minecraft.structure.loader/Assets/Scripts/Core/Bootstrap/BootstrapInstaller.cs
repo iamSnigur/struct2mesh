@@ -1,7 +1,9 @@
 ﻿using Integrations.Mojang;
 using Logic;
+using Logic.BuildInfo;
 using Logic.PlayerPreview;
 using UI;
+using UI.Components;
 using UI.Views;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -27,9 +29,11 @@ namespace Core.Bootstrap
             builder.Register<DisclaimerView>(Lifetime.Scoped).AsSelf().As<IStartable>();
             builder.Register<WelcomeHubView>(Lifetime.Scoped).AsSelf().As<IStartable>();
             builder.Register<KnowledgeBaseView>(Lifetime.Scoped).AsSelf().As<IStartable>();
+            builder.Register<ToastComponent>(Lifetime.Scoped).AsSelf().As<IStartable>();
 
             builder.Register<MojangService>(Lifetime.Singleton);
             builder.Register<SkinLoader>(Lifetime.Singleton);
+            builder.Register<BuildInfoService>(Lifetime.Singleton).As<IBuildInfoService>();
 
             builder.RegisterEntryPoint<Bootstrapper>();
         }
