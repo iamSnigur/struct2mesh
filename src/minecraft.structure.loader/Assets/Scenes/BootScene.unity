@@ -265,12 +265,12 @@ MonoBehaviour:
   minPitch: -85
   maxPitch: 85
   invertY: 1
-  panSensitivity: 0.001
+  PanSensitivity: 0.001
   zoomSensitivity: 5
   minZoomDistance: 0.5
   maxZoomDistance: 120
-  zoomSmoothing: 8
-  rotationSmoothing: 10
+  ZoomSmoothing: 8
+  RotationSmoothing: 10
   SpinRotationCurve:
     serializedVersion: 2
     m_Curve:

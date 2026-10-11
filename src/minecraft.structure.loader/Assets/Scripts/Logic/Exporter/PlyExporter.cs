@@ -87,7 +87,6 @@ namespace Logic.Exporter
 
                 StringBuilder line = new();
 
-                // Same coordinate swap as your OBJ exporter
                 line.AppendFormat(
                     CultureInfo.InvariantCulture,
                     "{0} {1} {2}",
@@ -130,7 +129,6 @@ namespace Logic.Exporter
 
                 for (int i = 0; i < triangles.Length; i += 3)
                 {
-                    // Match your flipped winding order
                     int i0 = triangles[i + 0];
                     int i1 = triangles[i + 2];
                     int i2 = triangles[i + 1];

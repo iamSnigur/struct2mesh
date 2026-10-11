@@ -8,6 +8,10 @@ namespace Logic.Exporter
 {
     public class FbxExporter : IExporter
     {
+        private const long GEOMETRY_ID = 100_000_000L;
+        private const long MODEL_ID = 200_000_000L;
+        private const long MATERIAL_ID = 300_000_000L;
+        
         public string Extension => "fbx";
 
         public byte[] GetMeshBytes(GameObject root, string structureName)
@@ -42,53 +46,26 @@ namespace Logic.Exporter
             Vector2[] uvs = mesh.uv;
             Color[] colors = mesh.colors;
 
-            bool hasUVs = uvs != null && uvs.Length > 0;
-            bool hasNormals = normals != null && normals.Length > 0;
-            bool hasColors = colors != null && colors.Length > 0;
-
-            // Unity uses a left-handed Y-up coordinate system; FBX uses right-handed Y-up.
-            // Flip X to mirror across the YZ plane so the mesh doesn't appear mirrored in DCC tools.
-            static Vector3 ToFBX(Vector3 v) => new(-v.x, v.y, v.z);
+            bool hasUVs = uvs is { Length: > 0 };
+            bool hasNormals = normals is { Length: > 0 };
+            bool hasColors = colors is { Length: > 0 };
 
             using StreamWriter w = new(stream, new UTF8Encoding(false));
 
-            // ── FBX header ────────────────────────────────────────────────────────
             WriteHeader(w);
 
-            // ── Global settings ───────────────────────────────────────────────────
             WriteGlobalSettings(w);
 
-            // ── Geometry node ─────────────────────────────────────────────────────
-            long geometryId = 100_000_000L;
-            long modelId = 200_000_000L;
-            long materialId = 300_000_000L;
+            WriteObjectDefinitions(w, mesh);
 
-            w.WriteLine(";Object definitions");
-            w.WriteLine(";------------------------------------------------------------------");
-            w.WriteLine();
-            w.WriteLine("Definitions:  {");
-            w.WriteLine("\tVersion: 100");
-            w.WriteLine("\tCount: 3");
-            w.WriteLine("\tObjectType: \"Geometry\" {");
-            w.WriteLine("\t\tCount: 1");
-            w.WriteLine("\t}");
-            w.WriteLine("\tObjectType: \"Model\" {");
-            w.WriteLine("\t\tCount: 1");
-            w.WriteLine("\t}");
-            w.WriteLine("\tObjectType: \"Material\" {");
-            w.WriteLine($"\t\tCount: {mesh.subMeshCount}");
-            w.WriteLine("\t}");
-            w.WriteLine("}");
-            w.WriteLine();
-
-            // ── Objects section ───────────────────────────────────────────────────
+            // Objects section
             w.WriteLine("Objects:  {");
 
-            // ── Geometry ──────────────────────────────────────────────────────────
-            w.WriteLine($"\tGeometry: {geometryId}, \"{structureName}\", \"Mesh\" {{");
+            // Geometry
+            w.WriteLine($"\tGeometry: {GEOMETRY_ID}, \"{structureName}\", \"Mesh\" {{");
             w.WriteLine("\t\tVersion: 124");
 
-            // Vertices — FBX stores them flat: X,Y,Z,X,Y,Z,...
+            // Vertices
             w.WriteLine("\t\tVertices: *" + (vertices.Length * 3) + " {");
             w.Write("\t\t\ta: ");
             for (int i = 0; i < vertices.Length; i++)
@@ -121,7 +98,7 @@ namespace Logic.Exporter
                 {
                     if (!firstIdx) w.Write(",");
                     firstIdx = false;
-                    // Winding order: flip to compensate for X-axis flip
+                    // flip to compensate for X-axis flip
                     w.Write(string.Format(CultureInfo.InvariantCulture,
                         "{0},{1},{2}", tris[i + 0], tris[i + 2], ~tris[i + 1]));
                 }
@@ -313,8 +290,8 @@ namespace Logic.Exporter
             w.WriteLine("\t\t}");
             w.WriteLine("\t}"); // end Geometry
 
-            // ── Model node ────────────────────────────────────────────────────────
-            w.WriteLine($"\tModel: {modelId}, \"{structureName}\", \"Mesh\" {{");
+            // Model node
+            w.WriteLine($"\tModel: {MODEL_ID}, \"{structureName}\", \"Mesh\" {{");
             w.WriteLine("\t\tVersion: 232");
             w.WriteLine("\t\tProperties70:  {");
             w.WriteLine("\t\t\tP: \"RotationActive\", \"bool\", \"\", \"\",1");
@@ -326,14 +303,14 @@ namespace Logic.Exporter
             w.WriteLine("\t\tCulling: \"CullingOff\"");
             w.WriteLine("\t}"); // end Model
 
-            // ── Material nodes ────────────────────────────────────────────────────
+            // Material nodes
             for (int s = 0; s < mesh.subMeshCount; s++)
             {
                 string matName = (s < materials.Length && materials[s] != null)
                     ? materials[s].name
                     : "default";
 
-                long matId = materialId + s;
+                long matId = MATERIAL_ID + s;
                 w.WriteLine($"\tMaterial: {matId}, \"{matName}\", \"\" {{");
                 w.WriteLine("\t\tVersion: 102");
                 w.WriteLine("\t\tShadingModel: \"phong\"");
@@ -351,15 +328,40 @@ namespace Logic.Exporter
             w.WriteLine("}"); // end Objects
             w.WriteLine();
 
-            // ── Connections ───────────────────────────────────────────────────────
+            // Connections
             w.WriteLine("Connections:  {");
-            // Geometry -> Model
-            w.WriteLine($"\tC: \"OO\",{geometryId},{modelId}");
-            // Model -> root (scene)
-            w.WriteLine($"\tC: \"OO\",{modelId},0");
-            // Materials -> Model
+            // Geometry to Model
+            w.WriteLine($"\tC: \"OO\",{GEOMETRY_ID},{MODEL_ID}");
+            // Model to root (scene)
+            w.WriteLine($"\tC: \"OO\",{MODEL_ID},0");
+            // Materials to Model
             for (int s = 0; s < mesh.subMeshCount; s++)
-                w.WriteLine($"\tC: \"OO\",{materialId + s},{modelId}");
+                w.WriteLine($"\tC: \"OO\",{MATERIAL_ID + s},{MODEL_ID}");
+            w.WriteLine("}");
+            w.WriteLine();
+            return;
+
+            // Unity uses a left-handed Y-up coordinate system; FBX uses right-handed Y-up.
+            static Vector3 ToFBX(Vector3 v) => new(-v.x, v.y, v.z);
+        }
+
+        private static void WriteObjectDefinitions(StreamWriter w, Mesh mesh)
+        {
+            w.WriteLine(";Object definitions");
+            w.WriteLine(";------------------------------------------------------------------");
+            w.WriteLine();
+            w.WriteLine("Definitions:  {");
+            w.WriteLine("\tVersion: 100");
+            w.WriteLine("\tCount: 3");
+            w.WriteLine("\tObjectType: \"Geometry\" {");
+            w.WriteLine("\t\tCount: 1");
+            w.WriteLine("\t}");
+            w.WriteLine("\tObjectType: \"Model\" {");
+            w.WriteLine("\t\tCount: 1");
+            w.WriteLine("\t}");
+            w.WriteLine("\tObjectType: \"Material\" {");
+            w.WriteLine($"\t\tCount: {mesh.subMeshCount}");
+            w.WriteLine("\t}");
             w.WriteLine("}");
             w.WriteLine();
         }
@@ -367,7 +369,7 @@ namespace Logic.Exporter
         private static void WriteHeader(StreamWriter w)
         {
             w.WriteLine("; FBX 7.7.0 project file");
-            w.WriteLine("; Created by SNIGUR's FBXExporter tool");
+            w.WriteLine("; Created by Struct2Mesh FbxExporter tool");
             w.WriteLine("; ----------------------------------------------------");
             w.WriteLine();
             w.WriteLine("FBXHeaderExtension:  {");
@@ -383,7 +385,7 @@ namespace Logic.Exporter
             w.WriteLine($"\t\tSecond: {DateTime.Now.Second}");
             w.WriteLine("\t\tMillisecond: 0");
             w.WriteLine("\t}");
-            w.WriteLine("\tCreator: \"SNIGUR's FBXExporter\"");
+            w.WriteLine("\tCreator: \"SNIGUR\"");
             w.WriteLine("}");
             w.WriteLine();
         }
