@@ -5,7 +5,7 @@ Browser-based tool that converts Minecraft structure files (`.nbt`) into 3D mode
 ## Usage
 
 1. Open https://struct2mesh.pages.dev/
-2. Drag and drop a `.nbt` structure file onto the page.
+2. Drop or upload a `.nbt` structure file.
 3. Preview and export.
 
 ## Supported
@@ -27,10 +27,9 @@ Browser-based tool that converts Minecraft structure files (`.nbt`) into 3D mode
 | --- | --- |
 | Engine | Unity 6 (`6000.3.9f1`), URP, WebGL target |
 | UI | UI Toolkit (UXML / USS) |
-| Assets | Addressables (remote bundles for blockstates, models, textures) |
-| Export | FBX, OBJ, PLY (custom writers), GLB |
+| Assets | Addressables (temporary bundles are build as remote, so they are not included in the build) |
 | Browser interop | `.jslib` bridges: drag & drop, clipboard, scroll wheel, zip download |
-| Hosting | Cloudflare Pages, Brotli-compressed build |
+| Hosting | Cloudflare Pages |
 
 ## Dependencies
 
