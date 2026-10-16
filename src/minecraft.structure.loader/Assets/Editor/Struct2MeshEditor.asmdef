@@ -1,5 +1,5 @@
 {
-    "name": "StructureLoaderEditor",
+    "name": "Struct2MeshEditor",
     "rootNamespace": "",
     "references": [
         "GUID:df7bcd00d4a859240b3496fadeea0416",

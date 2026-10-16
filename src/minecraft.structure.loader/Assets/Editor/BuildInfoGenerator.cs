@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Logic.Utils;
+using Editor.Utils;
 using Unity.Plastic.Newtonsoft.Json;
 using UnityEditor;
 using UnityEditor.Build;
@@ -15,9 +15,9 @@ namespace Editor
         
         public void OnPreprocessBuild(BuildReport report)
         {
-            string branch = GitUtils.RunCommand("branch --show-current");
-            string commit = GitUtils.RunCommand("rev-parse --short HEAD");
-            string version = GetIncrementedVersion();
+            string branch = GetBranchName();
+            string commit = GetCommitHash();
+            string version = GetVersion();
 
             Debug.Log($"v{version}-{branch}-{commit}");
 
@@ -32,7 +32,37 @@ namespace Editor
             File.WriteAllText("Assets/Resources/build_info.json", json);
         }
 
-        private static string GetIncrementedVersion()
+        private static string GetCommitHash()
+        {
+            const string hashVar = "GITHUB_SHA";
+            if (EnvironmentUtils.TryGetVariable(hashVar, out string variableValue))
+                return variableValue[..6];
+                
+            return GitUtils.RunCommand("rev-parse --short HEAD");
+        }
+        
+        private static string GetBranchName()
+        {
+            const string branchVar = "GITHUB_REF";
+            if (EnvironmentUtils.TryGetVariable(branchVar, out string variableValue))
+            {
+                string[] components = variableValue.Split('/');
+                return components[^1];
+            }
+            
+            return GitUtils.RunCommand("branch --show-current");
+        }
+        
+        private static string GetVersion()
+        {
+            const string versionVar = "VERSION";
+            if (EnvironmentUtils.TryGetVariable(versionVar, out string variableValue))
+                return variableValue;
+            
+            return GetIncrementedBundleVersion();
+        }
+        
+        private static string GetIncrementedBundleVersion()
         {
             string version = PlayerSettings.bundleVersion;
 

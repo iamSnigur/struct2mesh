@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Logic.Utils
+namespace Editor.Utils
 {
     public static class GitUtils
     {

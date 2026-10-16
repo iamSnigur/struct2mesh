@@ -3,6 +3,9 @@ using Cysharp.Threading.Tasks;
 using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
+#if UNITY_WEBGL
+using WebBridges;
+#endif
 
 namespace Logic
 {
