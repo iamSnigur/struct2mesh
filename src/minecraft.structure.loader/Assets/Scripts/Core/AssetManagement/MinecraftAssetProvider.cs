@@ -48,13 +48,10 @@ namespace Core.AssetManagement
             AssetProvider.Release();
         }
 
-        private static void UpdateStatus(string status, string progress) =>
-            Debug.Log($"{status}: {progress}");
-
         private static async UniTask PreloadResourcesAsync()
         {
             await GatherResourcesAsync(s_resourcePackManager);
-            await s_resourcePackManager.LoadPacksAsync(UpdateStatus);
+            await s_resourcePackManager.LoadPacksAsync();
             await Resources.UnloadUnusedAssets();
             Loaded = true;
         }

@@ -6,6 +6,10 @@ namespace Logic.MeshGenerator
 {
     public interface IMeshGenerator
     {
-        UniTask GenerateMesh(MeshFilter meshFilter, MeshRenderer meshRenderer, ParsedStructure structure, StructureVolume structureVolume);
+        UniTask GenerateMesh(
+            MeshFilter meshFilter,
+            MeshRenderer meshRenderer,
+            ParsedStructure structure,
+            StructureVolume structureVolume);
     }
 }

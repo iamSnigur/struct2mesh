@@ -136,17 +136,13 @@ namespace CraftSharp.Resource
             return $" {Mathf.RoundToInt(curCount / (float)totalCount * 100)}%";
         }
 
-        public async UniTask LoadPacksAsync(Action<string, string> updateStatus)
+        public async UniTask LoadPacksAsync()
         {
-            updateStatus("resource.info.gather_resource", string.Empty);
             foreach (var pack in packs) pack.GatherResources(this);
 
-            updateStatus("resource.info.load_atlas", string.Empty);
             await LoadAtlases();
 
             // Load block models...
-            updateStatus("resource.info.load_block_model", string.Empty);
-
             foreach (ResourceLocation blockModelId in BlockModelFileTable.Keys)
             {
                 try
@@ -160,8 +156,6 @@ namespace CraftSharp.Resource
                     throw;
                 }
             }
-
-            updateStatus("resource.info.resource_loaded", string.Empty);
 
             Loaded = true;
         }

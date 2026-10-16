@@ -13,7 +13,7 @@
         public const string VERSION_LABEL = "version-label";
         public const string FILE_NAME_LABEL = "file-name-label";
         public const string BTN_WELCOME_HUB = "btn-welcome-hub";
-        public const string COPIED_TOAST = "copied-toast";
+        public const string COPIED_TOAST_ROOT = "copied-toast";
         public const string COPIED_TOAST_SHOWN = "copied-toast-shown";
         public const string COPIED_TOAST_HIDDEN = "copied-toast-hidden";
         

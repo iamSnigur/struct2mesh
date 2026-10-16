@@ -3,56 +3,53 @@ using Cysharp.Threading.Tasks;
 using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
+#if UNITY_WEBGL
 using WebBridges;
+#endif
 
 namespace Logic
 {
     public class CameraController : MonoBehaviour
     {
         [Header("Pivot")]
-        [Tooltip("Optional: assign a Transform to use as the initial pivot. " +
-                 "Leave empty to start with a pivot directly in front of the camera.")]
         public Transform Target;
 
         [Header("Orbit")]
-        public float orbitSensitivity = 0.5f;
-        [Tooltip("Clamp vertical (pitch) angle in degrees.")]
-        public float minPitch = -80f;
-        public float maxPitch =  80f;
-        public bool  invertY  = false;
+        public float OrbitSensitivity = 0.15f;
+        public float MinPitch = -85f;
+        public float MaxPitch =  85f;
+        public bool  InvertY  = true;
 
         [Header("Pan")]
-        public float panSensitivity = 0.01f;
+        public float PanSensitivity = 0.01f;
 
         [Header("Zoom")]
-        public float zoomSensitivity  = 2f;
-        public float minZoomDistance  = 0.5f;
-        public float maxZoomDistance  = 100f;
-        public float zoomSmoothing    = 8f;   // 0 = instant
+        public float ZoomSensitivity  = 5f;
+        public float MinZoomDistance  = 0.5f;
+        public float MaxZoomDistance  = 120f;
+        public float ZoomSmoothing    = 8f;
 
         [Header("Smoothing (orbit & pan)")]
-        [Tooltip("Set to 0 for instant response.")]
-        public float rotationSmoothing = 10f;
+        public float RotationSmoothing = 10f;
 
         [Header("Orbit animation params")]
         public AnimationCurve SpinRotationCurve;
         public float SpinAngle = 360f;
         
         public bool InputDisabled;
-        
-        private Vector3  _pivotOffset;       
-        private Vector3  _resetPivotPosition;       
-        private Vector3  _pivotPosition;       // world-space center of orbit
-        private float    _yaw;                 // horizontal angle (degrees)
-        private float    _pitch;               // vertical angle   (degrees)
-        private float    _targetDistance;      // desired camera ↔ pivot distance
-        private float    _currentDistance;     // smoothed distance
 
-        // smoothed rotation quaternion
+        private Vector3 _pivotOffset;
+        private Vector3 _resetPivotPosition;
+        private Vector3 _pivotPosition;
+        private float _yaw;
+        private float _pitch;
+        private float _targetDistance;
+        private float _currentDistance;
+
         private Quaternion _currentRotation;
         private Quaternion _targetRotation;
 
-        private Mouse   _mouse;
+        private Mouse _mouse;
         private Camera _camera;
         
         private bool _startedLeftButtonDragOverUI;
@@ -61,29 +58,21 @@ namespace Logic
         private void Start()
         {
             _camera = GetComponent<Camera>();
-            
-            // Derive initial pivot
-            if (Target != null)
-            {
-                _pivotPosition = Target.position;
-            }
-            else
-            {
-                // Place pivot 10 units in front of the camera
-                _pivotPosition = transform.position + transform.forward * 10f;
-            }
 
-            // Derive initial distance
+            if (Target != null)
+                _pivotPosition = Target.position;
+            else
+                _pivotPosition = transform.position + transform.forward * 10f;
+
             _currentDistance = _targetDistance =
                 Vector3.Distance(transform.position, _pivotPosition);
-            _currentDistance = Mathf.Clamp(_currentDistance, minZoomDistance, maxZoomDistance);
+            _currentDistance = Mathf.Clamp(_currentDistance, MinZoomDistance, MaxZoomDistance);
             _targetDistance  = _currentDistance;
 
-            // Decompose the camera's current rotation into yaw / pitch
             Vector3 euler = transform.rotation.eulerAngles;
             _yaw   = euler.y;
             _pitch = euler.x;
-            // Normalize pitch to [-180, 180] so clamping works correctly
+            
             if (_pitch > 180f) _pitch -= 360f;
 
             _currentRotation = _targetRotation = Quaternion.Euler(_pitch, _yaw, 0f);
@@ -122,11 +111,11 @@ namespace Logic
  
             Vector2 delta = _mouse.delta.ReadValue();
  
-            float deltaX =  delta.x * orbitSensitivity;
-            float deltaY = (delta.y * orbitSensitivity) * (invertY ? -1f : 1f);
+            float deltaX =  delta.x * OrbitSensitivity;
+            float deltaY = (delta.y * OrbitSensitivity) * (InvertY ? -1f : 1f);
  
             _yaw   += deltaX;
-            _pitch  = Mathf.Clamp(_pitch + deltaY, minPitch, maxPitch);
+            _pitch  = Mathf.Clamp(_pitch + deltaY, MinPitch, MaxPitch);
  
             _targetRotation = Quaternion.Euler(_pitch, _yaw, 0f);
         }
@@ -140,15 +129,13 @@ namespace Logic
             float deltaX = -delta.x;
             float deltaY = -delta.y;
  
-            // Scale pan speed with distance so it feels consistent at any zoom level
-            float scale = _currentDistance * panSensitivity;
+            float scale = _currentDistance * PanSensitivity;
  
-            // Move pivot along the camera's local right and up axes
             Vector3 right = _currentRotation * Vector3.right;
             Vector3 up    = _currentRotation * Vector3.up;
 
             _pivotOffset += (right * deltaX + up * deltaY) * scale;
-            _pivotPosition = _resetPivotPosition + Vector3.ClampMagnitude(_pivotOffset, maxZoomDistance);
+            _pivotPosition = _resetPivotPosition + Vector3.ClampMagnitude(_pivotOffset, MaxZoomDistance);
         }
 
         private void HandleZoom()
@@ -159,8 +146,8 @@ namespace Logic
             if (UIRoot.IsPointerOverUI()) return;
             if (Mathf.Abs(scroll) < float.Epsilon) return;
 
-            _targetDistance -= scroll * zoomSensitivity * _currentDistance;
-            _targetDistance  = Mathf.Clamp(_targetDistance, minZoomDistance, maxZoomDistance);
+            _targetDistance -= scroll * ZoomSensitivity * _currentDistance;
+            _targetDistance  = Mathf.Clamp(_targetDistance, MinZoomDistance, MaxZoomDistance);
         }
 
         private float GetScroll()
@@ -179,21 +166,18 @@ namespace Logic
         {
             float t = Time.deltaTime;
  
-            // Smooth rotation
-            if (rotationSmoothing > 0f)
+            if (RotationSmoothing > 0f)
                 _currentRotation = Quaternion.Slerp(
-                    _currentRotation, _targetRotation, t * rotationSmoothing);
+                    _currentRotation, _targetRotation, t * RotationSmoothing);
             else
                 _currentRotation = _targetRotation;
  
-            // Smooth zoom
-            if (zoomSmoothing > 0f)
+            if (ZoomSmoothing > 0f)
                 _currentDistance = Mathf.Lerp(
-                    _currentDistance, _targetDistance, t * zoomSmoothing);
+                    _currentDistance, _targetDistance, t * ZoomSmoothing);
             else
                 _currentDistance = _targetDistance;
  
-            // Position = pivot − forward * distance
             Vector3 offset = _currentRotation * new Vector3(0f, 0f, -_currentDistance);
             transform.position = _pivotPosition + offset;
             transform.rotation = _currentRotation;
@@ -205,7 +189,6 @@ namespace Logic
             _pivotPosition = _resetPivotPosition;
         }
 
-        /// <summary>Instantly re-center the pivot on a world-space position.</summary>
         public void SetPivot(Vector3 worldPosition)
         {
             _pivotOffset = Vector3.zero;
@@ -213,27 +196,20 @@ namespace Logic
             _resetPivotPosition = worldPosition;
         }
 
-        /// <summary>Instantly re-center the pivot on a Transform.</summary>
-        public void SetPivot(Transform t) => SetPivot(t.position);
-
-        /// <summary>Snap orbit angles without smoothing.</summary>
-        public void SetAngles(float yaw, float pitch)
+        private void SetAngles(float yaw, float pitch)
         {
             _yaw   = yaw;
-            _pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+            _pitch = Mathf.Clamp(pitch, MinPitch, MaxPitch);
             _targetRotation  = Quaternion.Euler(_pitch, _yaw, 0f);
             _currentRotation = _targetRotation;
         }
 
         public async UniTaskVoid DoOrbitAnimationAsync(Bounds structureBounds, float duration = 1f, Action onComplete = null)
         {
-            _pitch = 15f;
-            _yaw = 0f;
+            SetAngles(0f, 15f);
             _targetDistance = GetDistanceToFit(_camera, structureBounds);
             _currentDistance = _targetDistance;
-            maxZoomDistance = 1.5f * _targetDistance;
-            _targetRotation = Quaternion.Euler(_pitch, _yaw, 0f);
-            _currentRotation = _targetRotation;
+            MaxZoomDistance = 1.5f * _targetDistance;
             
             float elapsed = 0f;
 
