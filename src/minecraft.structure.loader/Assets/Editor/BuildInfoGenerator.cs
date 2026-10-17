@@ -55,7 +55,7 @@ namespace Editor
         {
             const string versionVar = "VERSION";
             if (EnvironmentUtils.TryGetVariable(versionVar, out string variableValue))
-                return variableValue;
+                return variableValue.Trim();
             
             return GetIncrementedBundleVersion();
         }
