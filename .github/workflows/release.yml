@@ -30,6 +30,13 @@ jobs:
         with:
           lfs: true
 
+      - name: Resolve branch name
+        id: branch
+        run: |
+          BASE="${{ github.event.base_ref }}"
+          BRANCH="${BASE#refs/heads/}"
+          echo "name=${BRANCH:-$GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+
       - name: Cache libraries
         uses: actions/cache@v4
         with:
@@ -39,17 +46,21 @@ jobs:
             Library-
 
       - name: Build Struct2Mesh
-        uses: game-ci/unity-builder@v4
+        uses: game-ci/unity-builder@v6
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          GAME_CI_DOCKER_ENV: |
+            GIT_BRANCH=${{ steps.branch.outputs.name }}
         with:
           projectPath: src/minecraft.structure.loader
           targetPlatform: WebGL
           buildsPath: artifacts
+          versioning: Tag
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
           name: Struct2Mesh
           path: artifacts
