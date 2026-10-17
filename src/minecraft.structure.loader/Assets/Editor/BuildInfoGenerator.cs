@@ -18,6 +18,7 @@ namespace Editor
             string branch = GetBranchName();
             string commit = GetCommitHash();
             string version = GetVersion();
+            PlayerSettings.bundleVersion = version;
 
             Debug.Log($"v{version}-{branch}-{commit}");
 
@@ -36,7 +37,7 @@ namespace Editor
         {
             const string hashVar = "GITHUB_SHA";
             if (EnvironmentUtils.TryGetVariable(hashVar, out string variableValue))
-                return variableValue[..6];
+                return variableValue[..7];
                 
             return GitUtils.RunCommand("rev-parse --short HEAD");
         }
@@ -75,8 +76,6 @@ namespace Editor
 
             version = string.Join(".", components);
 
-            PlayerSettings.bundleVersion = version;
-            
             return version;
         }
     }

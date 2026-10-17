@@ -44,6 +44,7 @@ Browser-based tool that converts Minecraft structure files (`.nbt`) into 3D mode
 1. Open `src/minecraft.structure.loader` in Unity `6000.3.9f1`.
 2. Open `Assets/Scenes/BootScene.unity` and press Play.
 3. You can open any structure file within Unity Editor by right-clicking it and selecting `Load NBT Structure` in menu. Check `Assets/Structures/` for test structures.
+> Unlike the browser-based version, local editor version does not apply block limit check, so you can load and export bigger structures
 
 ## License
 
