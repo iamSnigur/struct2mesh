@@ -1,0 +1,72 @@
+name: Struct2Mesh Issue Report
+description: Report an issue to help improve the tool and fix the problems you have found.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This will help me improve the tool and fix the issues you have found.
+ 
+        _Some issues may occur for specific OS/browser combinations._
+ 
+  - type: dropdown
+    id: os
+    attributes:
+      label: Which operating system (OS) are you using?
+      description: Some issues may occur for specific OS/browser combinations.
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - Other (please mention it in the issue description)
+    validations:
+      required: true
+ 
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Which web browser were you using?
+      description: Some issues may occur for specific OS/browser combinations.
+      options:
+        - Google Chrome
+        - Apple Safari
+        - Mozilla Firefox
+        - Microsoft Edge
+        - Brave
+        - Other (please mention it in the issue description)
+    validations:
+      required: true
+ 
+  - type: input
+    id: version
+    attributes:
+      label: What is the version of the tool?
+      description: |
+        It is displayed in the lower-left corner and looks like this: `v0.9.10-dev-1a681a5c-MCv26.1.1`
+        Click it to copy.
+      placeholder: version-branch-commit-MCversion
+    validations:
+      required: true
+ 
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the issue & steps to reproduce
+      description: |
+        Please describe what issue you encountered.
+        Ideally describe the steps that you took before encountering the issue.
+      placeholder: |
+        1. Open ...
+        2. Click ...
+        3. See the problem ...
+    validations:
+      required: true
+ 
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Attach screenshots
+      description: Drag and drop images into this field, or paste them from your clipboard. Optional.
+    validations:
+      required: false
