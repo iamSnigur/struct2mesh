@@ -44,12 +44,9 @@ namespace Editor
         
         private static string GetBranchName()
         {
-            const string branchVar = "GITHUB_REF";
+            const string branchVar = "GIT_BRANCH";
             if (EnvironmentUtils.TryGetVariable(branchVar, out string variableValue))
-            {
-                string[] components = variableValue.Split('/');
-                return components[^1];
-            }
+                return variableValue;
             
             return GitUtils.RunCommand("branch --show-current");
         }
