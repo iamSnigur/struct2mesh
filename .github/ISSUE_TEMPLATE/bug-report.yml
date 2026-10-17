@@ -8,8 +8,6 @@ body:
       value: |
         This will help me improve the tool and fix the issues you have found.
  
-        _Some issues may occur for specific OS/browser combinations._
- 
   - type: dropdown
     id: os
     attributes:
