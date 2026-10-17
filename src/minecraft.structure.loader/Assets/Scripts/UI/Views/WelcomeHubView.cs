@@ -10,7 +10,7 @@ namespace UI.Views
     {
         private const string GITHUB_LINK = "https://github.com/iamSnigur";
         private const string SUPPORT_LINK = "https://buymeacoffee.com/iamsnigur";
-        private const string REPORT_ISSUE_LINK = "https://forms.gle/Ujksc3g8e6U7pJHx6";
+        private const string REPORT_ISSUE_LINK = "https://github.com/iamSnigur/struct2mesh/issues";
         
         private readonly IPlayerPreview _playerPreview;
         

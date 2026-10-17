@@ -1,6 +1,6 @@
 # Struct2Mesh
 
-Browser-based tool that converts Minecraft structure files (`.nbt`) into 3D models. Drop a file, preview it, export a mesh.
+A browser-based tool that converts Minecraft structure files (`.nbt`) into 3D models. Drop a file, preview it, export a mesh.
 
 ## Usage
 
@@ -27,24 +27,25 @@ Browser-based tool that converts Minecraft structure files (`.nbt`) into 3D mode
 | --- | --- |
 | Engine | Unity 6 (`6000.3.9f1`), URP, WebGL target |
 | UI | UI Toolkit (UXML / USS) |
-| Assets | Addressables (temporary bundles are build as remote, so they are not included in the build) |
+| Assets | Addressables (temporary bundles are built as remote, so they are excluded from the build) |
 | Browser interop | `.jslib` bridges: drag & drop, clipboard, scroll wheel, zip download |
 | Hosting | Cloudflare Pages |
 
 ## Dependencies
 
-- [VContainer](https://github.com/hadashiA/VContainer) - DI framework package
-- [UniTask](https://github.com/Cysharp/UniTask) - Allocation-free async package
+- [VContainer](https://github.com/hadashiA/VContainer) - DI framework for Unity
+- [UniTask](https://github.com/Cysharp/UniTask) - Allocation-free async/await for Unity
 - [fNbt](https://www.nuget.org/packages/fNbt) - Package for reading `.nbt` files
-- [UnityGLTF](https://github.com/KhronosGroup/UnityGLTF) - Package for exporting `glb` models
-- [CraftSharp-Resource](https://github.com/DevBobcorn/CraftSharp-Resource) - Resource pack loading and block model building. This package is heavily modified for Struct2Mesh needs (CDDL-1.0)
+- [UnityGLTF](https://github.com/KhronosGroup/UnityGLTF) - Package for exporting `GLB` models
+- [CraftSharp-Resource](https://github.com/DevBobcorn/CraftSharp-Resource) - Resource pack loading and block model building. This package is heavily modified for Struct2Mesh's needs (CDDL-1.0)
 
 ## Running locally
 
 1. Open `src/minecraft.structure.loader` in Unity `6000.3.9f1`.
 2. Open `Assets/Scenes/BootScene.unity` and press Play.
-3. You can open any structure file within Unity Editor by right-clicking it and selecting `Load NBT Structure` in menu. Check `Assets/Structures/` for test structures.
-> Unlike the browser-based version, local editor version does not apply block limit check, so you can load and export bigger structures
+3. You can open any structure file within Unity Editor by right-clicking it and selecting `Load NBT Structure` in the menu. Check `Assets/Structures/` for test structures.
+
+> Unlike the browser-based version, the local editor version does not apply the block limit check, so you can load and export larger structures
 
 ## License
 
