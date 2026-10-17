@@ -9,7 +9,7 @@ namespace Logic.Parser
 {
     public class NbtParser : IParser
     {
-        // workaround to prevent OOM on web
+        // workaround to prevent OOM on web, but it's still happening
         private const int BLOCK_COUNT_LIMIT = 200_000;
         
         public async UniTask<ParserResult> Parse(byte[] fileContent)
@@ -19,10 +19,12 @@ namespace Logic.Parser
             await UniTask.Yield();
 
             if (!IsFileNbtStructure(nbtFile))
-                return ParserResult.Failed("Nbt file is not a structure");
+                return ParserResult.Failed("Nbt file is not a structure, or doesn't have a valid format");
 
-            if (IsBlockCountExceededLimits(nbtFile))
-                return ParserResult.Failed("Structure exceeded block limit");
+#if CHECK_BLOCK_LIMIT && !UNITY_EDITOR
+             if (IsBlockCountExceededLimits(nbtFile))
+                return ParserResult.Failed($"Structure exceeded the '{BLOCK_COUNT_LIMIT:N0}' block limit");
+#endif
 
             ParsedStructure structure = await ParseNbtFile(nbtFile);
 
