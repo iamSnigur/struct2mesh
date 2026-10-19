@@ -70,4 +70,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy artifacts/WebGL/WebGL --project-name=struct2mesh --branch=dev
+          command: pages deploy artifacts/WebGL/WebGL --project-name=struct2mesh --branch=main
